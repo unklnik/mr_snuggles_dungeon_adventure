@@ -6,7 +6,8 @@
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/E1E5YOJH1)
  
-This is the source code for the second game I made with Go. There is a free-to-play demo on Steam for Windows and also works on Steam via Proton on Linux https://store.steampowered.com/app/2968730/Mr_Snuggles_Dungeon_Adventure/  
+This is the source code for the second game I made with Go. There is a free-to-play demo on Steam for Windows and also works on Steam via Proton on Linux - Mr Snuggles Dungeon Adventure https://store.steampowered.com/app/2968730/Mr_Snuggles_Dungeon_Adventure/  
+
 
   
 Made with the Go bindings for raylib https://github.com/gen2brain/raylib-go 
