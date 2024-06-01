@@ -18,7 +18,8 @@ To compile from source you will need to install raylib-go and the required depen
 Installation instructions are on the raylib-go page https://github.com/gen2brain/raylib-go
 
 
-The source code for the first (not very good) game I made with raylib-go is also on GitHub https://github.com/unklnik/bitty_knight and is free-to-play on Steam https://store.steampowered.com/app/2751370/Bitty_Knight/
+The source code for the first game I made is also on GitHub https://github.com/unklnik/bitty_knight 
+and is free-to-play on Steam https://store.steampowered.com/app/2751370/Bitty_Knight/
 
 
 If you need help with raylib then Discord is the best choice https://discord.gg/raylib otherwise Reddit https://www.reddit.com/r/raylib
