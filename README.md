@@ -15,7 +15,7 @@ Made with the Go bindings for raylib https://github.com/gen2brain/raylib-go
 To compile from source you will need to install raylib-go and the required dependencies. 
 
 
-Installation instructions are on the raylib-go page https://github.com/gen2brain/raylib-go
+Installation instructions are on the raylib-go page https://github.com/gen2brain/raylib-go?tab=readme-ov-file#requirements
 
 
 The source code for the first game I made is also on GitHub https://github.com/unklnik/bitty_knight 
