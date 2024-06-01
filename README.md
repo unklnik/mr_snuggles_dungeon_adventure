@@ -8,6 +8,7 @@
  
 This is the source code for the second game I made with Go. There is a free-to-play demo on Steam for Windows and also works on Steam via Proton on Linux - Mr Snuggles Dungeon Adventure https://store.steampowered.com/app/2968730/Mr_Snuggles_Dungeon_Adventure/  
 
+Approximately 39,000 lines of code, 4 months in my spare time (350+ hours).
 
   
 Made with the Go bindings for raylib https://github.com/gen2brain/raylib-go 
