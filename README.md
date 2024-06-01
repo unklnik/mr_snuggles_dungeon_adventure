@@ -1,4 +1,4 @@
-# Mr Snuggles Dungeon Adventure Source Go
+# Mr Snuggles Dungeon Adventure Source Code Go (Golang) & raylib
 
 ![mr_snuggles_dungeon_adventure_logo2](https://github.com/unklnik/mr_snuggles_dungeon_adventure/assets/146096950/ac4c26c2-dca4-42af-8b1f-88e1265fb7f5)
 
