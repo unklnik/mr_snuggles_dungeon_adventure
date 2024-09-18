@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"math"
-	"math/rand"
 	"os"
 	"strconv"
 	"strings"
@@ -524,7 +523,7 @@ func drawload() { //MARK: DRAW LOAD
 	txlen := rl.MeasureText("load save", txs)
 	y := tx7
 	x := int32(cnt.X) - txlen/2
-	rl.DrawText("load save", x-5, y+5, txs, darkRed())
+	rl.DrawText("load save", x-5, y+5, txs, DarkRed())
 	rl.DrawText("load save", x-2, y+2, txs, rl.White)
 	rl.DrawText("load save", x, y, txs, rl.Black)
 
@@ -542,7 +541,7 @@ func drawload() { //MARK: DRAW LOAD
 	if savenum == 0 {
 		rl.DrawRectangleRec(rec2, rl.Black)
 		rl.DrawRectangleRec(rec2, rl.Fade(rl.Magenta, fadeblinkF))
-		rl.DrawText(txt, x-4, y+4, txs, brightPink())
+		rl.DrawText(txt, x-4, y+4, txs, BrightPink())
 		rl.DrawText(txt, x-2, y+2, txs, rl.Black)
 		rl.DrawText(txt, x, y, txs, rl.White)
 	} else {
@@ -575,7 +574,7 @@ func drawload() { //MARK: DRAW LOAD
 	if savenum == 1 {
 		rl.DrawRectangleRec(rec2, rl.Black)
 		rl.DrawRectangleRec(rec2, rl.Fade(rl.Magenta, fadeblinkF))
-		rl.DrawText(txt, x-4, y+4, txs, brightPink())
+		rl.DrawText(txt, x-4, y+4, txs, BrightPink())
 		rl.DrawText(txt, x-2, y+2, txs, rl.Black)
 		rl.DrawText(txt, x, y, txs, rl.White)
 	} else {
@@ -607,7 +606,7 @@ func drawload() { //MARK: DRAW LOAD
 	if savenum == 2 {
 		rl.DrawRectangleRec(rec2, rl.Black)
 		rl.DrawRectangleRec(rec2, rl.Fade(rl.Magenta, fadeblinkF))
-		rl.DrawText(txt, x-4, y+4, txs, brightPink())
+		rl.DrawText(txt, x-4, y+4, txs, BrightPink())
 		rl.DrawText(txt, x-2, y+2, txs, rl.Black)
 		rl.DrawText(txt, x, y, txs, rl.White)
 	} else {
@@ -641,7 +640,7 @@ func drawload() { //MARK: DRAW LOAD
 
 	if selSave != 0 {
 		currentSave = selSave
-		reset()
+		Reset()
 		for i := 0; i < len(storeItm); i++ {
 			storeItm[i] = xitm{}
 		}
@@ -703,7 +702,7 @@ func drawload() { //MARK: DRAW LOAD
 	v4 := v3
 	v4.X -= closerec.Width - 16
 	if rl.CheckCollisionPointRec(cursorV2camInven, closerec) {
-		rl.DrawRectangleRec(closerec, darkRed())
+		rl.DrawRectangleRec(closerec, DarkRed())
 		rl.DrawLineEx(v1, v3, 4, rl.Black)
 		rl.DrawLineEx(v2, v4, 4, rl.Black)
 		if inpL {
@@ -746,7 +745,7 @@ func drawOptions() { //MARK:DRAW OPTIONS
 			if bgpix[i].fd > 0 {
 				bgpix[i].fd -= 0.005
 			} else {
-				bgpix[i].fd = rF32(0.5, 1)
+				bgpix[i].fd = RandF32(0.5, 1)
 			}
 		}
 	}
@@ -778,7 +777,7 @@ func drawOptions() { //MARK:DRAW OPTIONS
 		v4 := v3
 		v4.X -= closerec.Width - 16
 		if rl.CheckCollisionPointRec(cursorV2camInven, closerec) {
-			rl.DrawRectangleRec(closerec, darkRed())
+			rl.DrawRectangleRec(closerec, DarkRed())
 			rl.DrawLineEx(v1, v3, 4, rl.Black)
 			rl.DrawLineEx(v2, v4, 4, rl.Black)
 			if inpL {
@@ -804,7 +803,7 @@ func drawOptions() { //MARK:DRAW OPTIONS
 		txlen := rl.MeasureText("options", tx10)
 		x := int32(cnt.X) - txlen/2
 		y := tx4
-		rl.DrawText("options", x-5, y+5, tx10, darkRed())
+		rl.DrawText("options", x-5, y+5, tx10, DarkRed())
 		rl.DrawText("options", x-1, y+1, tx10, rl.White)
 		rl.DrawText("options", x, y, tx10, rl.Black)
 		y += tx10
@@ -817,13 +816,13 @@ func drawOptions() { //MARK:DRAW OPTIONS
 
 		backrec := rl.NewRectangle(optionsRec.X+4, swchY-2, optionsRec.Width/2-12, b+bq)
 		if rl.CheckCollisionPointRec(cursorV2camInven, backrec) {
-			rl.DrawRectangleRec(backrec, ranCol())
+			rl.DrawRectangleRec(backrec, RandColor())
 			if inpL {
 				rl.PlaySound(audfx[44])
 				scanlines = !scanlines
 			}
 		}
-		rl.DrawText("scan lines", x-3, y+3, txs, darkRed())
+		rl.DrawText("scan lines", x-3, y+3, txs, DarkRed())
 		rl.DrawText("scan lines", x-1, y+1, txs, rl.Black)
 		rl.DrawText("scan lines", x, y, txs, rl.Black)
 		opswch(swchX, swchY, scanlines)
@@ -832,13 +831,13 @@ func drawOptions() { //MARK:DRAW OPTIONS
 		swchX = (optionsRec.X + optionsRec.Width) - b2
 		backrec.X = optionsRec.X + optionsRec.Width/2 - 2
 		if rl.CheckCollisionPointRec(cursorV2camInven, backrec) {
-			rl.DrawRectangleRec(backrec, ranCol())
+			rl.DrawRectangleRec(backrec, RandColor())
 			if inpL {
 				rl.PlaySound(audfx[44])
 				pixels = !pixels
 			}
 		}
-		rl.DrawText("pixl noise", x-3, y+3, txs, darkRed())
+		rl.DrawText("pixl noise", x-3, y+3, txs, DarkRed())
 		rl.DrawText("pixl noise", x-1, y+1, txs, rl.Black)
 		rl.DrawText("pixl noise", x, y, txs, rl.Black)
 		opswch(swchX, swchY, pixels)
@@ -850,13 +849,13 @@ func drawOptions() { //MARK:DRAW OPTIONS
 		swchX = (optionsRec.X + optionsRec.Width/2) - b2
 		backrec = rl.NewRectangle(optionsRec.X+4, swchY-2, optionsRec.Width/2-12, b+bq)
 		if rl.CheckCollisionPointRec(cursorV2camInven, backrec) {
-			rl.DrawRectangleRec(backrec, ranCol())
+			rl.DrawRectangleRec(backrec, RandColor())
 			if inpL {
 				rl.PlaySound(audfx[44])
 				musicon = !musicon
 			}
 		}
-		rl.DrawText("music on", x-3, y+3, txs, darkRed())
+		rl.DrawText("music on", x-3, y+3, txs, DarkRed())
 		rl.DrawText("music on", x-1, y+1, txs, rl.Black)
 		rl.DrawText("music on", x, y, txs, rl.Black)
 		opswch(swchX, swchY, musicon)
@@ -865,7 +864,7 @@ func drawOptions() { //MARK:DRAW OPTIONS
 		swchX = (optionsRec.X + optionsRec.Width) - b2
 		backrec.X = optionsRec.X + optionsRec.Width/2 - 2
 		if rl.CheckCollisionPointRec(cursorV2camInven, backrec) {
-			rl.DrawRectangleRec(backrec, ranCol())
+			rl.DrawRectangleRec(backrec, RandColor())
 			if rl.IsKeyPressed(rl.KeyA) || rl.IsKeyPressed(rl.KeyLeft) || rl.GetGamepadAxisMovement(0, 0) < 0 || rl.IsGamepadButtonPressed(0, 4) {
 				if volume > 0 {
 					volume--
@@ -877,7 +876,7 @@ func drawOptions() { //MARK:DRAW OPTIONS
 				}
 			}
 		}
-		rl.DrawText("volume", x-3, y+3, txs, darkRed())
+		rl.DrawText("volume", x-3, y+3, txs, DarkRed())
 		rl.DrawText("volume", x-1, y+1, txs, rl.Black)
 		rl.DrawText("volume", x, y, txs, rl.Black)
 		volume = opadj(volume, volumemax, swchX, swchY, false, 0)
@@ -894,7 +893,7 @@ func drawOptions() { //MARK:DRAW OPTIONS
 		swchY = float32(y)
 		backrec = rl.NewRectangle(optionsRec.X+4, swchY-2, optionsRec.Width/2+b3, b+bq)
 		if rl.CheckCollisionPointRec(cursorV2camInven, backrec) {
-			rl.DrawRectangleRec(backrec, ranCol())
+			rl.DrawRectangleRec(backrec, RandColor())
 			if rl.IsKeyPressed(rl.KeyA) || rl.IsKeyPressed(rl.KeyLeft) || rl.GetGamepadAxisMovement(0, 0) < 0 || rl.IsGamepadButtonPressed(0, 4) {
 				if dispMusic > 0 {
 					dispMusic--
@@ -906,7 +905,7 @@ func drawOptions() { //MARK:DRAW OPTIONS
 				}
 			}
 		}
-		rl.DrawText("music track", x-3, y+3, txs, darkRed())
+		rl.DrawText("music track", x-3, y+3, txs, DarkRed())
 		rl.DrawText("music track", x-1, y+1, txs, rl.Black)
 		rl.DrawText("music track", x, y, txs, rl.Black)
 		txlen = rl.MeasureText("music track", txs)
@@ -918,7 +917,7 @@ func drawOptions() { //MARK:DRAW OPTIONS
 			switch dispMusic {
 			case 0:
 				rl.StopMusicStream(music[currentMusic])
-				currentMusic = rInt(4, len(music))
+				currentMusic = RandInt(4, len(music))
 				rl.PlayMusicStream(music[currentMusic])
 			case 1:
 				rl.StopMusicStream(music[currentMusic])
@@ -936,19 +935,19 @@ func drawOptions() { //MARK:DRAW OPTIONS
 			prevMusic = dispMusic
 		}
 		if dispMusic == 0 {
-			rl.DrawText("random", x-3, y+3, txs, darkRed())
+			rl.DrawText("random", x-3, y+3, txs, DarkRed())
 			rl.DrawText("random", x-1, y+1, txs, rl.Black)
 			rl.DrawText("random", x, y, txs, rl.Black)
 		} else if dispMusic == 1 {
-			rl.DrawText("skool", x-3, y+3, txs, darkRed())
+			rl.DrawText("skool", x-3, y+3, txs, DarkRed())
 			rl.DrawText("skool", x-1, y+1, txs, rl.Black)
 			rl.DrawText("skool", x, y, txs, rl.Black)
 		} else if dispMusic == 2 {
-			rl.DrawText("raver", x-3, y+3, txs, darkRed())
+			rl.DrawText("raver", x-3, y+3, txs, DarkRed())
 			rl.DrawText("raver", x-1, y+1, txs, rl.Black)
 			rl.DrawText("raver", x, y, txs, rl.Black)
 		} else if dispMusic == 3 {
-			rl.DrawText("funky", x-3, y+3, txs, darkRed())
+			rl.DrawText("funky", x-3, y+3, txs, DarkRed())
 			rl.DrawText("funky", x-1, y+1, txs, rl.Black)
 			rl.DrawText("funky", x, y, txs, rl.Black)
 		}
@@ -961,7 +960,7 @@ func drawOptions() { //MARK:DRAW OPTIONS
 
 		backrec = rl.NewRectangle(optionsRec.X+4, swchY-2, optionsRec.Width-8, b+bq)
 		if rl.CheckCollisionPointRec(cursorV2camInven, backrec) {
-			rl.DrawRectangleRec(backrec, ranCol())
+			rl.DrawRectangleRec(backrec, RandColor())
 			if rl.IsKeyPressed(rl.KeyA) || rl.IsKeyPressed(rl.KeyLeft) || rl.GetGamepadAxisMovement(0, 0) < 0 || rl.IsGamepadButtonPressed(0, 4) {
 				if currentres > 0 {
 					currentres--
@@ -974,12 +973,12 @@ func drawOptions() { //MARK:DRAW OPTIONS
 			}
 		}
 
-		rl.DrawText("resolution >>", x-3, y+3, txs, darkRed())
+		rl.DrawText("resolution >>", x-3, y+3, txs, DarkRed())
 		rl.DrawText("resolution >>", x-1, y+1, txs, rl.Black)
 		rl.DrawText("resolution >>", x, y, txs, rl.Black)
 		x = int32(swchX)
 		x += txs
-		rl.DrawText(reslist[currentres], x-3, y+3, txs, darkRed())
+		rl.DrawText(reslist[currentres], x-3, y+3, txs, DarkRed())
 		rl.DrawText(reslist[currentres], x-1, y+1, txs, rl.Black)
 		rl.DrawText(reslist[currentres], x, y, txs, rl.Black)
 		swchX = (optionsRec.X + optionsRec.Width) - b2
@@ -1267,7 +1266,7 @@ func drawOptions() { //MARK:DRAW OPTIONS
 		swchX = (optionsRec.X + optionsRec.Width) - b2
 		backrec = rl.NewRectangle(optionsRec.X+4, swchY-2, optionsRec.Width-8, b+bq)
 		if rl.CheckCollisionPointRec(cursorV2camInven, backrec) {
-			rl.DrawRectangleRec(backrec, ranCol())
+			rl.DrawRectangleRec(backrec, RandColor())
 			if rl.IsKeyPressed(rl.KeyA) || rl.IsKeyPressed(rl.KeyLeft) || rl.GetGamepadAxisMovement(0, 0) < 0 || rl.IsGamepadButtonPressed(0, 4) {
 				if windowType == 1 {
 					windowType = 0
@@ -1283,18 +1282,18 @@ func drawOptions() { //MARK:DRAW OPTIONS
 				}
 			}
 		}
-		rl.DrawText("display >>", x-3, y+3, txs, darkRed())
+		rl.DrawText("display >>", x-3, y+3, txs, DarkRed())
 		rl.DrawText("display >>", x-1, y+1, txs, rl.Black)
 		rl.DrawText("display >>", x, y, txs, rl.Black)
 		txtlen := rl.MeasureText("display >>", txs)
 		x += txtlen + txs
 		switch windowType {
 		case 0:
-			rl.DrawText("fullscreen", x-3, y+3, txs, darkRed())
+			rl.DrawText("fullscreen", x-3, y+3, txs, DarkRed())
 			rl.DrawText("fullscreen", x-1, y+1, txs, rl.Black)
 			rl.DrawText("fullscreen", x, y, txs, rl.Black)
 		case 1:
-			rl.DrawText("window", x-3, y+3, txs, darkRed())
+			rl.DrawText("window", x-3, y+3, txs, DarkRed())
 			rl.DrawText("window", x-1, y+1, txs, rl.Black)
 			rl.DrawText("window", x, y, txs, rl.Black)
 		}
@@ -1344,7 +1343,7 @@ func drawOptions() { //MARK:DRAW OPTIONS
 
 		}
 		if rl.CheckCollisionPointRec(cursorV2camInven, backrec) {
-			rl.DrawRectangleRec(backrec, ranCol())
+			rl.DrawRectangleRec(backrec, RandColor())
 			if rl.IsKeyPressed(rl.KeyA) || rl.IsKeyPressed(rl.KeyLeft) || rl.GetGamepadAxisMovement(0, 0) < 0 || rl.IsGamepadButtonPressed(0, 4) {
 				if num2 > 0 {
 					rl.PlaySound(audfx[44])
@@ -1366,7 +1365,7 @@ func drawOptions() { //MARK:DRAW OPTIONS
 				}
 			}
 		}
-		rl.DrawText("cursor speed", x-3, y+3, txs, darkRed())
+		rl.DrawText("cursor speed", x-3, y+3, txs, DarkRed())
 		rl.DrawText("cursor speed", x-1, y+1, txs, rl.Black)
 		rl.DrawText("cursor speed", x, y, txs, rl.Black)
 
@@ -1385,7 +1384,7 @@ func drawOptions() { //MARK:DRAW OPTIONS
 
 		}
 		if rl.CheckCollisionPointRec(cursorV2camInven, backrec) {
-			rl.DrawRectangleRec(backrec, ranCol())
+			rl.DrawRectangleRec(backrec, RandColor())
 			if rl.IsKeyPressed(rl.KeyA) || rl.IsKeyPressed(rl.KeyLeft) || rl.GetGamepadAxisMovement(0, 0) < 0 || rl.IsGamepadButtonPressed(0, 4) {
 				if num2 > 0 {
 					rl.PlaySound(audfx[44])
@@ -1407,7 +1406,7 @@ func drawOptions() { //MARK:DRAW OPTIONS
 				}
 			}
 		}
-		rl.DrawText("dead zone", x-3, y+3, txs, darkRed())
+		rl.DrawText("dead zone", x-3, y+3, txs, DarkRed())
 		rl.DrawText("dead zone", x-1, y+1, txs, rl.Black)
 		rl.DrawText("dead zone", x, y, txs, rl.Black)
 		deadZDis = opadj(num2, 99, swchX, swchY, true, 2)
@@ -1417,7 +1416,7 @@ func drawOptions() { //MARK:DRAW OPTIONS
 		txt := ">> mouse+keyb recommended"
 		txlen = rl.MeasureText(txt, txs)
 		x = int32(cnt.X) - txlen/2
-		rl.DrawText(txt, x-3, y+3, txs, darkRed())
+		rl.DrawText(txt, x-3, y+3, txs, DarkRed())
 		rl.DrawText(txt, x-1, y+1, txs, rl.Black)
 		rl.DrawText(txt, x, y, txs, rl.Black)
 
@@ -1473,7 +1472,7 @@ func drawOptions() { //MARK:DRAW OPTIONS
 			rl.DrawRectangleRec(rec, rl.Pink)
 			if inpL {
 				rl.PlaySound(audfx[44])
-				readsaves()
+				ReadSaves()
 				savenum = 0
 				loadon = true
 			}
@@ -1494,7 +1493,7 @@ func drawOptions() { //MARK:DRAW OPTIONS
 			rl.DrawRectangleRec(rec, rl.Pink)
 			if inpL {
 				rl.PlaySound(audfx[44])
-				exitmsg = exitTxt[rInt(0, len(exitTxt))]
+				exitmsg = exitTxt[RandInt(0, len(exitTxt))]
 				exit = true
 			}
 		} else {
@@ -1514,9 +1513,9 @@ func drawOptions() { //MARK:DRAW OPTIONS
 			txt := "controller disconnected"
 			txlen = rl.MeasureText(txt, txs)
 			x = int32(cnt.X) - txlen/2
-			rl.DrawText(txt, x-3, ytx+3, txs, darkRed())
+			rl.DrawText(txt, x-3, ytx+3, txs, DarkRed())
 			rl.DrawText(txt, x-1, ytx+1, txs, rl.Black)
-			rl.DrawText(txt, x, ytx, txs, ranCol())
+			rl.DrawText(txt, x, ytx, txs, RandColor())
 			disconnectT--
 		}
 
@@ -1549,7 +1548,7 @@ func drawgameover() { //MARK:DRAW GAME OVER
 		}
 	} else {
 		if !gameoverreset {
-			reset()
+			Reset()
 			gameoverreset = true
 		}
 		baseon = true
@@ -1622,7 +1621,7 @@ func drawStartScreen() { //MARK:DRAW START SCREEN
 	}
 	rl.DrawText("select save", x-5, y+5, txs, rl.Magenta)
 	rl.DrawText("select save", x-2, y+2, txs, rl.Black)
-	rl.DrawText("select save", x, y, txs, ranCol())
+	rl.DrawText("select save", x, y, txs, RandColor())
 
 	W := b10 + b4
 	H := b3
@@ -1661,7 +1660,7 @@ func drawStartScreen() { //MARK:DRAW START SCREEN
 	txlen = rl.MeasureText(txt, txs)
 	x = int32(cnt.X) - txlen/2
 	y = rec2.ToInt32().Y + rec2.ToInt32().Height/2 - txs/2
-	rl.DrawText(txt, x-4, y+4, txs, brightPink())
+	rl.DrawText(txt, x-4, y+4, txs, BrightPink())
 	rl.DrawText(txt, x-2, y+2, txs, rl.Black)
 	rl.DrawText(txt, x, y, txs, rl.White)
 	if rl.CheckCollisionPointRec(cursorV2, rec2) {
@@ -1712,7 +1711,7 @@ func drawStartScreen() { //MARK:DRAW START SCREEN
 	txlen = rl.MeasureText(txt, txs)
 	x = int32(cnt.X) - txlen/2
 	y = rec2.ToInt32().Y + rec2.ToInt32().Height/2 - txs/2
-	rl.DrawText(txt, x-4, y+4, txs, brightPink())
+	rl.DrawText(txt, x-4, y+4, txs, BrightPink())
 	rl.DrawText(txt, x-2, y+2, txs, rl.Black)
 	rl.DrawText(txt, x, y, txs, rl.White)
 	if rl.CheckCollisionPointRec(cursorV2, rec2) {
@@ -1763,7 +1762,7 @@ func drawStartScreen() { //MARK:DRAW START SCREEN
 	txlen = rl.MeasureText(txt, txs)
 	x = int32(cnt.X) - txlen/2
 	y = rec2.ToInt32().Y + rec2.ToInt32().Height/2 - txs/2
-	rl.DrawText(txt, x-4, y+4, txs, brightPink())
+	rl.DrawText(txt, x-4, y+4, txs, BrightPink())
 	rl.DrawText(txt, x-2, y+2, txs, rl.Black)
 	rl.DrawText(txt, x, y, txs, rl.White)
 	if rl.CheckCollisionPointRec(cursorV2, rec2) {
@@ -1815,13 +1814,13 @@ func drawStartScreen() { //MARK:DRAW START SCREEN
 		}
 		txlen = rl.MeasureText(txt, txs)
 		x = int32(cnt.X) - txlen/2
-		rl.DrawText(txt, x-4, y+4, txs, brightPink())
+		rl.DrawText(txt, x-4, y+4, txs, BrightPink())
 		rl.DrawText(txt, x-2, y+2, txs, rl.Black)
 		rl.DrawText(txt, x, y, txs, rl.White)
 		y += txs + txs/4
 		txlen = rl.MeasureText(txt2, txs)
 		x = int32(cnt.X) - txlen/2
-		rl.DrawText(txt2, x-4, y+4, txs, brightPink())
+		rl.DrawText(txt2, x-4, y+4, txs, BrightPink())
 		rl.DrawText(txt2, x-2, y+2, txs, rl.Black)
 		rl.DrawText(txt2, x, y, txs, rl.White)
 	}
@@ -1861,9 +1860,9 @@ func drawStartScreen() { //MARK:DRAW START SCREEN
 				siz2 = b10 * 7
 			}
 			rec2 := rl.NewRectangle(cnt.X-siz2/2, cnt.Y-siz2/2, siz2, siz2)
-			rl.DrawTexturePro(imgs, introAnim, rec2, rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.5, 0.7)))
-			rl.DrawTexturePro(imgs, introAnim, brec(rec2, 7), rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.3, 0.5)))
-			rl.DrawTexturePro(imgs, introAnim, brec(rec2, 12), rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.1, 0.3)))
+			rl.DrawTexturePro(imgs, introAnim, rec2, rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.5, 0.7)))
+			rl.DrawTexturePro(imgs, introAnim, brec(rec2, 7), rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.3, 0.5)))
+			rl.DrawTexturePro(imgs, introAnim, brec(rec2, 12), rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.1, 0.3)))
 			if frames%3 == 0 {
 				introAnim.X += anm[204].W
 			}
@@ -2055,7 +2054,7 @@ func drawIntro() { //MARK:DRAW INTRO
 			if onoff15 {
 				rl.DrawText(txt, xtx, ytx, txs, rl.Magenta)
 			} else {
-				rl.DrawText(txt, xtx, ytx, txs, brightPink())
+				rl.DrawText(txt, xtx, ytx, txs, BrightPink())
 			}
 
 			//VERSION
@@ -2235,7 +2234,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		if bgpix[i].fd > 0 {
 			bgpix[i].fd -= 0.005
 		} else {
-			bgpix[i].fd = rF32(0.5, 1)
+			bgpix[i].fd = RandF32(0.5, 1)
 		}
 	}
 
@@ -2402,7 +2401,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 			rl.DrawRectangleRec(rec3, rl.Magenta)
 			rl.DrawRectangleRec(rec2, rl.Black)
 			if selnumWeap == i {
-				rl.DrawRectangleRec(rec2, rl.Fade(ranCol(), fadeblinkF))
+				rl.DrawRectangleRec(rec2, rl.Fade(RandColor(), fadeblinkF))
 			} else {
 				if rl.CheckCollisionPointRec(cursorV2Strucs, rec) {
 					if inpL {
@@ -2637,7 +2636,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		xtx = int32(cnt.X) - txlen/2
 		bgrec2 := rl.NewRectangle(storeRec.X, float32(ytx-4), storeRec.Width, float32(txs+8))
 		if rl.CheckCollisionPointRec(cursorV2Strucs, bgrec2) {
-			rl.DrawRectangleRec(bgrec2, ranCol())
+			rl.DrawRectangleRec(bgrec2, RandColor())
 			if inpL {
 				if leadnum >= leadcost {
 					upWeapon(selnumWeap, 2)
@@ -2657,7 +2656,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		} else {
 			rl.DrawText(txt, xtx-2, ytx+2, txs, rl.White)
 			rl.DrawText(txt, xtx-1, ytx+1, txs, rl.Black)
-			rl.DrawText(txt, xtx, ytx, txs, darkRed2())
+			rl.DrawText(txt, xtx, ytx, txs, DarkRed2())
 		}
 		ytx += linespc
 		bgrec2.Y += float32(linespc)
@@ -2665,7 +2664,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		txlen = rl.MeasureText(txt, txs)
 		xtx = int32(cnt.X) - txlen/2
 		if rl.CheckCollisionPointRec(cursorV2Strucs, bgrec2) {
-			rl.DrawRectangleRec(bgrec2, ranCol())
+			rl.DrawRectangleRec(bgrec2, RandColor())
 			if inpL {
 				if bronzenum >= bronzecost {
 					upWeapon(selnumWeap, 3)
@@ -2685,7 +2684,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		} else {
 			rl.DrawText(txt, xtx-2, ytx+2, txs, rl.White)
 			rl.DrawText(txt, xtx-1, ytx+1, txs, rl.Black)
-			rl.DrawText(txt, xtx, ytx, txs, darkRed2())
+			rl.DrawText(txt, xtx, ytx, txs, DarkRed2())
 		}
 		ytx += linespc
 		bgrec2.Y += float32(linespc)
@@ -2693,7 +2692,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		txlen = rl.MeasureText(txt, txs)
 		xtx = int32(cnt.X) - txlen/2
 		if rl.CheckCollisionPointRec(cursorV2Strucs, bgrec2) {
-			rl.DrawRectangleRec(bgrec2, ranCol())
+			rl.DrawRectangleRec(bgrec2, RandColor())
 			if inpL {
 				if silvernum >= silvercost && levStruc >= 2 {
 					upWeapon(selnumWeap, 4)
@@ -2718,7 +2717,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		} else {
 			rl.DrawText(txt, xtx-2, ytx+2, txs, rl.White)
 			rl.DrawText(txt, xtx-1, ytx+1, txs, rl.Black)
-			rl.DrawText(txt, xtx, ytx, txs, darkRed2())
+			rl.DrawText(txt, xtx, ytx, txs, DarkRed2())
 		}
 		ytx += linespc
 		bgrec2.Y += float32(linespc)
@@ -2726,7 +2725,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		txlen = rl.MeasureText(txt, txs)
 		xtx = int32(cnt.X) - txlen/2
 		if rl.CheckCollisionPointRec(cursorV2Strucs, bgrec2) {
-			rl.DrawRectangleRec(bgrec2, ranCol())
+			rl.DrawRectangleRec(bgrec2, RandColor())
 			if inpL {
 				if goldnum >= goldcost && levStruc >= 2 {
 					upWeapon(selnumWeap, 5)
@@ -2751,7 +2750,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		} else {
 			rl.DrawText(txt, xtx-2, ytx+2, txs, rl.White)
 			rl.DrawText(txt, xtx-1, ytx+1, txs, rl.Black)
-			rl.DrawText(txt, xtx, ytx, txs, darkRed2())
+			rl.DrawText(txt, xtx, ytx, txs, DarkRed2())
 		}
 		ytx += linespc
 		bgrec2.Y += float32(linespc)
@@ -2759,7 +2758,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		txlen = rl.MeasureText(txt, txs)
 		xtx = int32(cnt.X) - txlen/2
 		if rl.CheckCollisionPointRec(cursorV2Strucs, bgrec2) {
-			rl.DrawRectangleRec(bgrec2, ranCol())
+			rl.DrawRectangleRec(bgrec2, RandColor())
 			if inpL {
 				if platinumnum >= platinumcost && levStruc == 3 {
 					upWeapon(selnumWeap, 6)
@@ -2784,7 +2783,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		} else {
 			rl.DrawText(txt, xtx-2, ytx+2, txs, rl.White)
 			rl.DrawText(txt, xtx-1, ytx+1, txs, rl.Black)
-			rl.DrawText(txt, xtx, ytx, txs, darkRed2())
+			rl.DrawText(txt, xtx, ytx, txs, DarkRed2())
 		}
 	} else if selweaplev == 2 { //LEVEL 2
 		txt = "level 3 > " + fmt.Sprint(bronzecost) + " bronze > +2 dmg"
@@ -2792,7 +2791,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		xtx = int32(cnt.X) - txlen/2
 		bgrec2 := rl.NewRectangle(storeRec.X, float32(ytx-4), storeRec.Width, float32(txs+8))
 		if rl.CheckCollisionPointRec(cursorV2Strucs, bgrec2) {
-			rl.DrawRectangleRec(bgrec2, ranCol())
+			rl.DrawRectangleRec(bgrec2, RandColor())
 			if inpL {
 				if bronzenum >= bronzecost {
 					upWeapon(selnumWeap, 3)
@@ -2812,7 +2811,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		} else {
 			rl.DrawText(txt, xtx-2, ytx+2, txs, rl.White)
 			rl.DrawText(txt, xtx-1, ytx+1, txs, rl.Black)
-			rl.DrawText(txt, xtx, ytx, txs, darkRed2())
+			rl.DrawText(txt, xtx, ytx, txs, DarkRed2())
 		}
 		ytx += linespc
 		bgrec2.Y += float32(linespc)
@@ -2820,7 +2819,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		txlen = rl.MeasureText(txt, txs)
 		xtx = int32(cnt.X) - txlen/2
 		if rl.CheckCollisionPointRec(cursorV2Strucs, bgrec2) {
-			rl.DrawRectangleRec(bgrec2, ranCol())
+			rl.DrawRectangleRec(bgrec2, RandColor())
 			if inpL {
 				if silvernum >= silvercost && levStruc >= 2 {
 					upWeapon(selnumWeap, 4)
@@ -2845,7 +2844,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		} else {
 			rl.DrawText(txt, xtx-2, ytx+2, txs, rl.White)
 			rl.DrawText(txt, xtx-1, ytx+1, txs, rl.Black)
-			rl.DrawText(txt, xtx, ytx, txs, darkRed2())
+			rl.DrawText(txt, xtx, ytx, txs, DarkRed2())
 		}
 		ytx += linespc
 		bgrec2.Y += float32(linespc)
@@ -2853,7 +2852,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		txlen = rl.MeasureText(txt, txs)
 		xtx = int32(cnt.X) - txlen/2
 		if rl.CheckCollisionPointRec(cursorV2Strucs, bgrec2) {
-			rl.DrawRectangleRec(bgrec2, ranCol())
+			rl.DrawRectangleRec(bgrec2, RandColor())
 			if inpL {
 				if goldnum >= goldcost && levStruc >= 2 {
 					upWeapon(selnumWeap, 5)
@@ -2878,7 +2877,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		} else {
 			rl.DrawText(txt, xtx-2, ytx+2, txs, rl.White)
 			rl.DrawText(txt, xtx-1, ytx+1, txs, rl.Black)
-			rl.DrawText(txt, xtx, ytx, txs, darkRed2())
+			rl.DrawText(txt, xtx, ytx, txs, DarkRed2())
 		}
 		ytx += linespc
 		bgrec2.Y += float32(linespc)
@@ -2886,7 +2885,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		txlen = rl.MeasureText(txt, txs)
 		xtx = int32(cnt.X) - txlen/2
 		if rl.CheckCollisionPointRec(cursorV2Strucs, bgrec2) {
-			rl.DrawRectangleRec(bgrec2, ranCol())
+			rl.DrawRectangleRec(bgrec2, RandColor())
 			if inpL {
 				if platinumnum >= platinumcost && levStruc == 3 {
 					upWeapon(selnumWeap, 6)
@@ -2911,7 +2910,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		} else {
 			rl.DrawText(txt, xtx-2, ytx+2, txs, rl.White)
 			rl.DrawText(txt, xtx-1, ytx+1, txs, rl.Black)
-			rl.DrawText(txt, xtx, ytx, txs, darkRed2())
+			rl.DrawText(txt, xtx, ytx, txs, DarkRed2())
 		}
 	} else if selweaplev == 3 { //LEVEL 3
 		txt = "level 4 > " + fmt.Sprint(silvercost) + " silver > +3 dmg +1 hp"
@@ -2919,7 +2918,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		xtx = int32(cnt.X) - txlen/2
 		bgrec2 := rl.NewRectangle(storeRec.X, float32(ytx-4), storeRec.Width, float32(txs+8))
 		if rl.CheckCollisionPointRec(cursorV2Strucs, bgrec2) {
-			rl.DrawRectangleRec(bgrec2, ranCol())
+			rl.DrawRectangleRec(bgrec2, RandColor())
 			if inpL {
 				if silvernum >= silvercost && levStruc >= 2 {
 					upWeapon(selnumWeap, 4)
@@ -2944,7 +2943,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		} else {
 			rl.DrawText(txt, xtx-2, ytx+2, txs, rl.White)
 			rl.DrawText(txt, xtx-1, ytx+1, txs, rl.Black)
-			rl.DrawText(txt, xtx, ytx, txs, darkRed2())
+			rl.DrawText(txt, xtx, ytx, txs, DarkRed2())
 		}
 		ytx += linespc
 		bgrec2.Y += float32(linespc)
@@ -2952,7 +2951,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		txlen = rl.MeasureText(txt, txs)
 		xtx = int32(cnt.X) - txlen/2
 		if rl.CheckCollisionPointRec(cursorV2Strucs, bgrec2) {
-			rl.DrawRectangleRec(bgrec2, ranCol())
+			rl.DrawRectangleRec(bgrec2, RandColor())
 			if inpL {
 				if goldnum >= goldcost && levStruc >= 2 {
 					upWeapon(selnumWeap, 5)
@@ -2977,7 +2976,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		} else {
 			rl.DrawText(txt, xtx-2, ytx+2, txs, rl.White)
 			rl.DrawText(txt, xtx-1, ytx+1, txs, rl.Black)
-			rl.DrawText(txt, xtx, ytx, txs, darkRed2())
+			rl.DrawText(txt, xtx, ytx, txs, DarkRed2())
 		}
 		ytx += linespc
 		bgrec2.Y += float32(linespc)
@@ -2985,7 +2984,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		txlen = rl.MeasureText(txt, txs)
 		xtx = int32(cnt.X) - txlen/2
 		if rl.CheckCollisionPointRec(cursorV2Strucs, bgrec2) {
-			rl.DrawRectangleRec(bgrec2, ranCol())
+			rl.DrawRectangleRec(bgrec2, RandColor())
 			if inpL {
 				if platinumnum >= platinumcost && levStruc == 3 {
 					upWeapon(selnumWeap, 6)
@@ -3010,7 +3009,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		} else {
 			rl.DrawText(txt, xtx-2, ytx+2, txs, rl.White)
 			rl.DrawText(txt, xtx-1, ytx+1, txs, rl.Black)
-			rl.DrawText(txt, xtx, ytx, txs, darkRed2())
+			rl.DrawText(txt, xtx, ytx, txs, DarkRed2())
 		}
 	} else if selweaplev == 4 { //LEVEL 4
 		txt = "level 5 > " + fmt.Sprint(goldcost) + " gold > +3 dmg +1 random bonus"
@@ -3018,7 +3017,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		xtx = int32(cnt.X) - txlen/2
 		bgrec2 := rl.NewRectangle(storeRec.X, float32(ytx-4), storeRec.Width, float32(txs+8))
 		if rl.CheckCollisionPointRec(cursorV2Strucs, bgrec2) {
-			rl.DrawRectangleRec(bgrec2, ranCol())
+			rl.DrawRectangleRec(bgrec2, RandColor())
 			if inpL {
 				if goldnum >= goldcost && levStruc >= 2 {
 					upWeapon(selnumWeap, 5)
@@ -3043,7 +3042,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		} else {
 			rl.DrawText(txt, xtx-2, ytx+2, txs, rl.White)
 			rl.DrawText(txt, xtx-1, ytx+1, txs, rl.Black)
-			rl.DrawText(txt, xtx, ytx, txs, darkRed2())
+			rl.DrawText(txt, xtx, ytx, txs, DarkRed2())
 		}
 		ytx += linespc
 		bgrec2.Y += float32(linespc)
@@ -3051,7 +3050,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		txlen = rl.MeasureText(txt, txs)
 		xtx = int32(cnt.X) - txlen/2
 		if rl.CheckCollisionPointRec(cursorV2Strucs, bgrec2) {
-			rl.DrawRectangleRec(bgrec2, ranCol())
+			rl.DrawRectangleRec(bgrec2, RandColor())
 			if inpL {
 				if platinumnum >= platinumcost && levStruc == 3 {
 					upWeapon(selnumWeap, 6)
@@ -3076,7 +3075,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		} else {
 			rl.DrawText(txt, xtx-2, ytx+2, txs, rl.White)
 			rl.DrawText(txt, xtx-1, ytx+1, txs, rl.Black)
-			rl.DrawText(txt, xtx, ytx, txs, darkRed2())
+			rl.DrawText(txt, xtx, ytx, txs, DarkRed2())
 		}
 	} else if selweaplev == 5 { //LEVEL 5
 		txt = "level 6 > " + fmt.Sprint(platinumcost) + " platinum > +3 dmg +2 random bonus"
@@ -3084,7 +3083,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		xtx = int32(cnt.X) - txlen/2
 		bgrec2 := rl.NewRectangle(storeRec.X, float32(ytx-4), storeRec.Width, float32(txs+8))
 		if rl.CheckCollisionPointRec(cursorV2Strucs, bgrec2) {
-			rl.DrawRectangleRec(bgrec2, ranCol())
+			rl.DrawRectangleRec(bgrec2, RandColor())
 			if inpL {
 				if platinumnum >= platinumcost && levStruc == 3 {
 					upWeapon(selnumWeap, 6)
@@ -3109,7 +3108,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 		} else {
 			rl.DrawText(txt, xtx-2, ytx+2, txs, rl.White)
 			rl.DrawText(txt, xtx-1, ytx+1, txs, rl.Black)
-			rl.DrawText(txt, xtx, ytx, txs, darkRed2())
+			rl.DrawText(txt, xtx, ytx, txs, DarkRed2())
 		}
 	} else if selweaplev == 6 {
 		txt = "weapon is max level > no further upgrades"
@@ -3160,7 +3159,7 @@ func drawWeaponShed() { //MARK:DRAW WEAPON SHED
 	v4 := v3
 	v4.X -= closerec.Width - 16
 	if rl.CheckCollisionPointRec(cursorV2Strucs, closerec) {
-		rl.DrawRectangleRec(closerec, darkRed())
+		rl.DrawRectangleRec(closerec, DarkRed())
 		rl.DrawLineEx(v1, v3, 4, rl.Black)
 		rl.DrawLineEx(v2, v4, 4, rl.Black)
 		if inpL {
@@ -3205,7 +3204,7 @@ func drawApoth() { //MARK:DRAW APOTHECARY
 		if bgpix[i].fd > 0 {
 			bgpix[i].fd -= 0.005
 		} else {
-			bgpix[i].fd = rF32(0.5, 1)
+			bgpix[i].fd = RandF32(0.5, 1)
 		}
 	}
 	rl.BeginMode2D(camStrucs)
@@ -3349,7 +3348,7 @@ func drawApoth() { //MARK:DRAW APOTHECARY
 		rec := rl.NewRectangle(x, y, siz, siz)
 		if rl.CheckCollisionPointRec(cursorV2Strucs, rec) {
 			txt = potionList[i].nm
-			rl.DrawRectangleRec(rec, rl.Fade(ranCol(), 0.5))
+			rl.DrawRectangleRec(rec, rl.Fade(RandColor(), 0.5))
 			for j := 0; j < len(potionList[i].costPotion); j++ {
 				if potionList[i].costPotion[j] != 0 {
 					switch j {
@@ -3527,7 +3526,7 @@ func drawApoth() { //MARK:DRAW APOTHECARY
 		if rl.CheckCollisionPointRec(cursorV2Strucs, rec) {
 			txt = scrollList[i].nm
 			txt2 = fmt.Sprint(scrollList[i].costScroll[0]) + " paper " + fmt.Sprint(scrollList[i].costScroll[1]) + " ink"
-			rl.DrawRectangleRec(rec, rl.Fade(ranCol(), 0.5))
+			rl.DrawRectangleRec(rec, rl.Fade(RandColor(), 0.5))
 			if inpL && clickT == 0 {
 				canmake := true
 				for j := 0; j < len(scrollList[i].costScroll); j++ {
@@ -3618,7 +3617,7 @@ func drawApoth() { //MARK:DRAW APOTHECARY
 	v4 := v3
 	v4.X -= closerec.Width - 16
 	if rl.CheckCollisionPointRec(cursorV2Strucs, closerec) {
-		rl.DrawRectangleRec(closerec, darkRed())
+		rl.DrawRectangleRec(closerec, DarkRed())
 		rl.DrawLineEx(v1, v3, 4, rl.Black)
 		rl.DrawLineEx(v2, v4, 4, rl.Black)
 		if inpL {
@@ -3844,7 +3843,7 @@ func drawBook() { //MARK:DRAW BOOK
 		if bgpix[i].fd > 0 {
 			bgpix[i].fd -= 0.005
 		} else {
-			bgpix[i].fd = rF32(0.5, 1)
+			bgpix[i].fd = RandF32(0.5, 1)
 		}
 	}
 
@@ -3898,7 +3897,7 @@ func drawBook() { //MARK:DRAW BOOK
 	v4 := v3
 	v4.X -= closerec.Width - 16
 	if rl.CheckCollisionPointRec(cursorV2, closerec) {
-		rl.DrawRectangleRec(closerec, darkRed())
+		rl.DrawRectangleRec(closerec, DarkRed())
 		rl.DrawLineEx(v1, v3, 4, rl.Black)
 		rl.DrawLineEx(v2, v4, 4, rl.Black)
 		if inpL {
@@ -4126,9 +4125,9 @@ func drawBook() { //MARK:DRAW BOOK
 					foundLowerPrice = true
 					rec = rl.NewRectangle(x, y, siz, siz)
 					if med {
-						rl.DrawRectangleLinesEx(rec, 4, ranCol())
+						rl.DrawRectangleLinesEx(rec, 4, RandColor())
 					} else {
-						rl.DrawRectangleLinesEx(rec, 8, ranCol())
+						rl.DrawRectangleLinesEx(rec, 8, RandColor())
 					}
 
 					rl.DrawTexturePro(imgs, itmlist[i].img, rec, rl.Vector2Zero(), 0, rl.White)
@@ -4137,9 +4136,9 @@ func drawBook() { //MARK:DRAW BOOK
 					if foundCookbook && itmlist[i].cost <= 100 {
 						rec = rl.NewRectangle(x, y, siz, siz)
 						if med {
-							rl.DrawRectangleLinesEx(rec, 4, ranCol())
+							rl.DrawRectangleLinesEx(rec, 4, RandColor())
 						} else {
-							rl.DrawRectangleLinesEx(rec, 8, ranCol())
+							rl.DrawRectangleLinesEx(rec, 8, RandColor())
 						}
 						rl.DrawTexturePro(imgs, itmlist[i].img, rec, rl.Vector2Zero(), 0, rl.White)
 						rl.DrawRectangleRec(rec, rl.Fade(rl.Black, 0.3))
@@ -4290,7 +4289,7 @@ func drawBook() { //MARK:DRAW BOOK
 		txt = "not enough xp to unlock > kill some enemies..."
 		txtlen = rl.MeasureText(txt, txs)
 		xtx = int32(cntr.X) - txtlen/2
-		rl.DrawText(txt, xtx, ytx, txs, darkRed())
+		rl.DrawText(txt, xtx, ytx, txs, DarkRed())
 	} else {
 		txt = "unlocked items will drop from crates"
 		txtlen = rl.MeasureText(txt, txs)
@@ -4334,7 +4333,7 @@ func drawStore() { //MARK:DRAW STORE ROOM
 		if bgpix[i].fd > 0 {
 			bgpix[i].fd -= 0.005
 		} else {
-			bgpix[i].fd = rF32(0.5, 1)
+			bgpix[i].fd = RandF32(0.5, 1)
 		}
 	}
 	rl.BeginMode2D(camStrucs)
@@ -4522,7 +4521,7 @@ func drawStore() { //MARK:DRAW STORE ROOM
 		v4 := v3
 		v4.X -= closerec.Width - 16
 		if rl.CheckCollisionPointRec(cursorV2camInven, closerec) {
-			rl.DrawRectangleRec(closerec, darkRed())
+			rl.DrawRectangleRec(closerec, DarkRed())
 			rl.DrawLineEx(v1, v3, 4, rl.Black)
 			rl.DrawLineEx(v2, v4, 4, rl.Black)
 			if clickT == 0 {
@@ -4566,7 +4565,7 @@ func drawStore() { //MARK:DRAW STORE ROOM
 		v4 := v3
 		v4.X -= closerec.Width - 16
 		if rl.CheckCollisionPointRec(cursorV2Strucs, closerec) {
-			rl.DrawRectangleRec(closerec, darkRed())
+			rl.DrawRectangleRec(closerec, DarkRed())
 			rl.DrawLineEx(v1, v3, 4, rl.Black)
 			rl.DrawLineEx(v2, v4, 4, rl.Black)
 			if invInfoT == 0 {
@@ -4594,7 +4593,7 @@ func drawStore() { //MARK:DRAW STORE ROOM
 		for i := 0; i < len(pl.invn); i++ {
 			rec := rl.NewRectangle(x, y, siz, siz)
 			if rl.CheckCollisionPointRec(cursorV2Strucs, rec) {
-				rl.DrawRectangleRec(rec, rl.Fade(ranCol(), 0.7))
+				rl.DrawRectangleRec(rec, rl.Fade(RandColor(), 0.7))
 				if pl.invn[i].nm != "" {
 					storetxT = fps * 2
 					txt = pl.invn[i].nm
@@ -4674,7 +4673,7 @@ func drawStore() { //MARK:DRAW STORE ROOM
 		for i := 0; i < len(pl.quik); i++ {
 			rec := rl.NewRectangle(x, y, siz, siz)
 			if rl.CheckCollisionPointRec(cursorV2Strucs, rec) {
-				rl.DrawRectangleRec(rec, rl.Fade(ranCol(), 0.7))
+				rl.DrawRectangleRec(rec, rl.Fade(RandColor(), 0.7))
 				if pl.quik[i].nm != "" {
 					storetxT = fps * 2
 					txt = pl.quik[i].nm
@@ -4740,7 +4739,7 @@ func drawStore() { //MARK:DRAW STORE ROOM
 		x = storeRec.X + storeRec.Width - W2 - b
 		rec3 := rl.NewRectangle(x, y+b/2, W2, b+b/2)
 		if rl.CheckCollisionPointRec(cursorV2Strucs, rec3) {
-			rl.DrawRectangleRec(rec3, darkRed())
+			rl.DrawRectangleRec(rec3, DarkRed())
 			rl.DrawRectangleLinesEx(rec3, 4, rl.Black)
 			xtx = ((rec3.ToInt32().X + rec3.ToInt32().Width/2) - txlen/2)
 			ytx = rec3.ToInt32().Y + rec3.ToInt32().Height/2 - tx3/2
@@ -4803,7 +4802,7 @@ func drawStore() { //MARK:DRAW STORE ROOM
 			}
 			rec := rl.NewRectangle(x, y, siz, siz)
 			if rl.CheckCollisionPointRec(cursorV2Strucs, rec) {
-				rl.DrawRectangleRec(rec, rl.Fade(ranCol(), 0.7))
+				rl.DrawRectangleRec(rec, rl.Fade(RandColor(), 0.7))
 				if storeItm[i].nm != "" {
 					storetxT = fps * 2
 					txt = storeItm[i].nm
@@ -4863,7 +4862,7 @@ func drawStore() { //MARK:DRAW STORE ROOM
 		siz = b4
 		rec2 := rl.NewRectangle(storeRec.X+storeRec.Width-((siz*2)+b+b/4), y, b4, b+b/2)
 		if rl.CheckCollisionPointRec(cursorV2Strucs, rec2) {
-			rl.DrawRectangleRec(rec2, darkRed())
+			rl.DrawRectangleRec(rec2, DarkRed())
 			rl.DrawRectangleLinesEx(rec2, 4, rl.Black)
 			txt := "stack"
 			txs := tx3
@@ -4892,7 +4891,7 @@ func drawStore() { //MARK:DRAW STORE ROOM
 		//PACK
 		rec2.X += rec2.Width + b/4
 		if rl.CheckCollisionPointRec(cursorV2Strucs, rec2) {
-			rl.DrawRectangleRec(rec2, darkRed())
+			rl.DrawRectangleRec(rec2, DarkRed())
 			rl.DrawRectangleLinesEx(rec2, 4, rl.Black)
 			txt := "pack"
 			txs := tx3
@@ -4951,7 +4950,7 @@ func drawStore() { //MARK:DRAW STORE ROOM
 				for i := 0; i < 3; i++ {
 					txrec := rl.NewRectangle(inMenuRec.X, txrecy, inMenuRec.Width, float32(txs)+4)
 					if rl.CheckCollisionPointRec(cursorV2Strucs, txrec) {
-						rl.DrawRectangleRec(txrec, ranCol())
+						rl.DrawRectangleRec(txrec, RandColor())
 						if inpL {
 							switch i {
 							case 0: //INFO
@@ -5014,7 +5013,7 @@ func drawStore() { //MARK:DRAW STORE ROOM
 				for i := 0; i < 2; i++ {
 					txrec := rl.NewRectangle(inMenuRec.X, txrecy, inMenuRec.Width, float32(txs)+4)
 					if rl.CheckCollisionPointRec(cursorV2Strucs, txrec) {
-						rl.DrawRectangleRec(txrec, ranCol())
+						rl.DrawRectangleRec(txrec, RandColor())
 						if inpL {
 							switch i {
 							case 0: //INFO
@@ -5081,7 +5080,7 @@ func drawStore() { //MARK:DRAW STORE ROOM
 				for i := 0; i < 3; i++ {
 					txrec := rl.NewRectangle(inMenuRec.X, txrecy, inMenuRec.Width, float32(txs)+4)
 					if rl.CheckCollisionPointRec(cursorV2Strucs, txrec) {
-						rl.DrawRectangleRec(txrec, ranCol())
+						rl.DrawRectangleRec(txrec, RandColor())
 						if inpL {
 							switch i {
 							case 0: //INFO
@@ -5144,7 +5143,7 @@ func drawStore() { //MARK:DRAW STORE ROOM
 				for i := 0; i < 2; i++ {
 					txrec := rl.NewRectangle(inMenuRec.X, txrecy, inMenuRec.Width, float32(txs)+4)
 					if rl.CheckCollisionPointRec(cursorV2Strucs, txrec) {
-						rl.DrawRectangleRec(txrec, ranCol())
+						rl.DrawRectangleRec(txrec, RandColor())
 						if inpL {
 							switch i {
 							case 0: //INFO
@@ -5239,8 +5238,8 @@ func drawBase() { //MARK:DRAW BASE
 			base.mouse.rec.X += base.mouse.dirX
 			base.mouse.rec.Y += base.mouse.dirY
 		} else {
-			base.mouse.dirX = rF32(-base.mouse.spd, base.mouse.spd)
-			base.mouse.dirY = rF32(-base.mouse.spd, base.mouse.spd)
+			base.mouse.dirX = RandF32(-base.mouse.spd, base.mouse.spd)
+			base.mouse.dirY = RandF32(-base.mouse.spd, base.mouse.spd)
 		}
 		if frames%4 == 0 {
 			if base.mouse.onoff {
@@ -5255,7 +5254,7 @@ func drawBase() { //MARK:DRAW BASE
 				}
 			}
 		}
-		if getabs(base.mouse.dirX) > getabs(base.mouse.dirY) {
+		if Abs(base.mouse.dirX) > Abs(base.mouse.dirY) {
 			if base.mouse.dirX < 0 {
 				base.mouse.img.Y = 0
 			} else {
@@ -5276,7 +5275,7 @@ func drawBase() { //MARK:DRAW BASE
 					rl.DrawTexturePro(imgs, base.img[i], shrec(base.rec[i], 4), rl.Vector2Zero(), 0, shcol())
 					if base.nm[i] == "mushroom patch" && mushroomTimer == mushroomTimerMax {
 						if frames%10 == 0 {
-							mushCol = ranCol()
+							mushCol = RandColor()
 						}
 						rl.DrawTexturePro(imgs, base.img[i], base.rec[i], rl.Vector2Zero(), 0, mushCol)
 					} else if base.nm[i] == "boss key 1" && bosskey1 {
@@ -5297,7 +5296,7 @@ func drawBase() { //MARK:DRAW BASE
 							}
 						} else {
 							rl.DrawTexturePro(imgs, base.img[i], base.rec[i], rl.Vector2Zero(), 0, rl.Black)
-							rl.DrawTexturePro(imgs, base.img[i], base.rec[i], rl.Vector2Zero(), 0, rl.Fade(ranRed(), fadeblinkF2))
+							rl.DrawTexturePro(imgs, base.img[i], base.rec[i], rl.Vector2Zero(), 0, rl.Fade(RandRed(), fadeblinkF2))
 							if base.fd[i] < 1 {
 								base.fd[i] += 0.02
 							}
@@ -5324,7 +5323,7 @@ func drawBase() { //MARK:DRAW BASE
 					if base.nm[i] == "weapon stand" && weapstandon {
 						toptx = toptx + " > 1 random weapon change per run"
 						if inpL {
-							choose := rInt(1, 6)
+							choose := RandInt(1, 6)
 							switch choose {
 							case 1:
 								rl.PlaySound(audfx[124])
@@ -5339,7 +5338,7 @@ func drawBase() { //MARK:DRAW BASE
 							}
 							weapchangedT = fps * 2
 							for {
-								choose := weap[rInt(0, len(weap))]
+								choose := weap[RandInt(0, len(weap))]
 								if pl.wp1 != choose {
 									pl.wp1 = choose
 									break
@@ -5391,7 +5390,7 @@ func drawBase() { //MARK:DRAW BASE
 						y2 := base.rec[i].Y - siz/4
 						rec3 := rl.NewRectangle(x2, y2, siz, siz)
 						rl.DrawTexturePro(imgs, anm[187].rec, rec3, rl.Vector2Zero(), 0, rl.White)
-						//rl.DrawRectangleRec(rec3, ranCol())
+						//rl.DrawRectangleRec(rec3, RandColor())
 						if frames%5 == 0 {
 							anm[187].rec.X += anm[187].W
 							if anm[187].rec.X > anm[187].X+anm[187].frames*anm[187].W {
@@ -5493,13 +5492,13 @@ func drawBase() { //MARK:DRAW BASE
 				if !exiting {
 					if base.nm[i] == "boss key 1" {
 						rl.DrawTexturePro(imgs, base.img[i], shrec(base.rec[i], 4), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, base.img[i], base.rec[i], rl.Vector2Zero(), 0, darkRed())
+						rl.DrawTexturePro(imgs, base.img[i], base.rec[i], rl.Vector2Zero(), 0, DarkRed())
 					} else if base.nm[i] == "boss key 2" {
 						rl.DrawTexturePro(imgs, base.img[i], shrec(base.rec[i], 4), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, base.img[i], base.rec[i], rl.Vector2Zero(), 0, darkRed())
+						rl.DrawTexturePro(imgs, base.img[i], base.rec[i], rl.Vector2Zero(), 0, DarkRed())
 					} else if base.nm[i] == "boss key 3" {
 						rl.DrawTexturePro(imgs, base.img[i], shrec(base.rec[i], 4), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, base.img[i], base.rec[i], rl.Vector2Zero(), 0, darkRed())
+						rl.DrawTexturePro(imgs, base.img[i], base.rec[i], rl.Vector2Zero(), 0, DarkRed())
 					} else {
 						rl.DrawTexturePro(imgs, base.img[i], base.rec[i], rl.Vector2Zero(), 0, rl.Fade(rl.Black, 0.8))
 						cntr := rl.NewVector2(base.rec[i].X+base.rec[i].Width/2, base.rec[i].Y+base.rec[i].Height/2)
@@ -5606,7 +5605,7 @@ func drawBase() { //MARK:DRAW BASE
 							var newMush []xitm
 							div := num / 10
 							for div > 0 {
-								choose := rInt(1, 7)
+								choose := RandInt(1, 7)
 								switch choose {
 								case 1:
 									zitm := itmlist[105]
@@ -5689,7 +5688,7 @@ func drawBase() { //MARK:DRAW BASE
 						upplayerrec()
 					}
 				case "book of unlock things":
-					choose := rInt(1, 9)
+					choose := RandInt(1, 9)
 					switch choose {
 					case 1:
 						rl.PlaySound(audfx[58])
@@ -5724,7 +5723,7 @@ func drawBase() { //MARK:DRAW BASE
 		//EXIT ANIMATION
 		if exitcollis {
 			if !exiting {
-				choose := rInt(1, 9)
+				choose := RandInt(1, 9)
 				switch choose {
 				case 1:
 					rl.PlaySound(audfx[50])
@@ -5754,9 +5753,9 @@ func drawBase() { //MARK:DRAW BASE
 					siz2 = b10 * 4
 				}
 				rec2 := rl.NewRectangle(cnt.X-siz2/2, cnt.Y-siz2/2, siz2, siz2)
-				rl.DrawTexturePro(imgs, introAnim, rec2, rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.5, 0.7)))
-				rl.DrawTexturePro(imgs, introAnim, brec(rec2, 7), rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.3, 0.5)))
-				rl.DrawTexturePro(imgs, introAnim, brec(rec2, 12), rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.1, 0.3)))
+				rl.DrawTexturePro(imgs, introAnim, rec2, rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.5, 0.7)))
+				rl.DrawTexturePro(imgs, introAnim, brec(rec2, 7), rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.3, 0.5)))
+				rl.DrawTexturePro(imgs, introAnim, brec(rec2, 12), rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.1, 0.3)))
 				if frames%3 == 0 {
 					introAnim.X += anm[204].W
 				}
@@ -5786,7 +5785,7 @@ func drawBase() { //MARK:DRAW BASE
 					switch dispMusic {
 					case 0:
 						rl.StopMusicStream(music[currentMusic])
-						currentMusic = rInt(4, len(music))
+						currentMusic = RandInt(4, len(music))
 						rl.PlayMusicStream(music[currentMusic])
 					case 1:
 						rl.StopMusicStream(music[currentMusic])
@@ -5815,8 +5814,8 @@ func drawBase() { //MARK:DRAW BASE
 			for i := 0; i < len(campfxrecs); i++ {
 				rl.DrawTexturePro(imgs, campfximgrecs[i], shrec(campfxrecs[i], 30), rl.Vector2Zero(), 0, shcol())
 				rl.DrawTexturePro(imgs, campfximgrecs[i], campfxrecs[i], rl.Vector2Zero(), 0, rl.White)
-				rl.DrawTexturePro(imgs, campfximgrecs[i], brec(campfxrecs[i], 7), rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.3, 0.5)))
-				rl.DrawTexturePro(imgs, campfximgrecs[i], brec(campfxrecs[i], 12), rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.1, 0.3)))
+				rl.DrawTexturePro(imgs, campfximgrecs[i], brec(campfxrecs[i], 7), rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.3, 0.5)))
+				rl.DrawTexturePro(imgs, campfximgrecs[i], brec(campfxrecs[i], 12), rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.1, 0.3)))
 				if frames%3 == 0 {
 					if campfximgrecs[i].X < anm[199].X+anm[199].frames*anm[199].W {
 						campfximgrecs[i].X += anm[199].W
@@ -5827,8 +5826,8 @@ func drawBase() { //MARK:DRAW BASE
 				}
 			}
 			if clear {
-				campfxrecs = remrec(campfxrecs, num)
-				campfximgrecs = remrec(campfximgrecs, num)
+				campfxrecs = RemoveRectangle(campfxrecs, num)
+				campfximgrecs = RemoveRectangle(campfximgrecs, num)
 			}
 		}
 		if len(campfxrecs2) > 0 {
@@ -5837,8 +5836,8 @@ func drawBase() { //MARK:DRAW BASE
 			for i := 0; i < len(campfxrecs2); i++ {
 				rl.DrawTexturePro(imgs, campfximgrecs2[i], shrec(campfxrecs2[i], 30), rl.Vector2Zero(), 0, shcol())
 				rl.DrawTexturePro(imgs, campfximgrecs2[i], campfxrecs2[i], rl.Vector2Zero(), 0, rl.White)
-				rl.DrawTexturePro(imgs, campfximgrecs2[i], brec(campfxrecs2[i], 7), rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.3, 0.5)))
-				rl.DrawTexturePro(imgs, campfximgrecs2[i], brec(campfximgrecs2[i], 12), rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.1, 0.3)))
+				rl.DrawTexturePro(imgs, campfximgrecs2[i], brec(campfxrecs2[i], 7), rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.3, 0.5)))
+				rl.DrawTexturePro(imgs, campfximgrecs2[i], brec(campfximgrecs2[i], 12), rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.1, 0.3)))
 				if frames%3 == 0 {
 					if campfximgrecs2[i].X < anm[200].X+anm[200].frames*anm[200].W {
 						campfximgrecs2[i].X += anm[200].W
@@ -5849,8 +5848,8 @@ func drawBase() { //MARK:DRAW BASE
 				}
 			}
 			if clear {
-				campfxrecs2 = remrec(campfxrecs2, num)
-				campfximgrecs2 = remrec(campfximgrecs2, num)
+				campfxrecs2 = RemoveRectangle(campfxrecs2, num)
+				campfximgrecs2 = RemoveRectangle(campfximgrecs2, num)
 			}
 		}
 		//DRAW ROLLO COMPANION
@@ -5927,7 +5926,7 @@ func drawBase() { //MARK:DRAW BASE
 				xtx := int32(cnt.X) - txlen/2
 				ytx := int32(cnt.Y) - txs/8
 				ytx += pl.rec.ToInt32().Height
-				rl.DrawText(txt, xtx, ytx, txs, rl.Fade(ranCol(), 0.2))
+				rl.DrawText(txt, xtx, ytx, txs, rl.Fade(RandColor(), 0.2))
 				loadedT--
 			}
 			if notenoughscrapT > 0 {
@@ -5937,7 +5936,7 @@ func drawBase() { //MARK:DRAW BASE
 				xtx := int32(cnt.X) - txlen/2
 				ytx := int32(cnt.Y) - txs/8
 				ytx += pl.rec.ToInt32().Height
-				rl.DrawText(txt, xtx, ytx, txs, rl.Fade(ranCol(), 0.2))
+				rl.DrawText(txt, xtx, ytx, txs, rl.Fade(RandColor(), 0.2))
 				notenoughscrapT--
 			}
 			if weapchangedT > 0 {
@@ -5947,7 +5946,7 @@ func drawBase() { //MARK:DRAW BASE
 				xtx := int32(cnt.X) - txlen/2
 				ytx := int32(cnt.Y) - txs/8
 				ytx += pl.rec.ToInt32().Height
-				rl.DrawText(txt, xtx, ytx, txs, rl.Fade(ranCol(), 0.2))
+				rl.DrawText(txt, xtx, ytx, txs, rl.Fade(RandColor(), 0.2))
 				weapchangedT--
 			}
 
@@ -5995,21 +5994,21 @@ func drawBase() { //MARK:DRAW BASE
 						base.pigeon.img.X += anm[73].W
 						if base.pigeon.img.X > anm[73].X+anm[73].frames*anm[73].W {
 							base.pigeon.img.X = anm[73].X
-							base.pigeonT = fps * rI32(5, 11)
+							base.pigeonT = fps * RandInt32(5, 11)
 						}
 					}
 				}
 				base.pigeon.rec.X += base.pigeon.dirX
 				if base.pigeon.rec.X > baseBordRec.X+baseBordRec.Width+base.pigeon.rec.Width {
 					base.pigeon.dirX = -base.pigeon.dirX
-					base.pigeon.rec.Y = rF32(baseBordRec.Y+b/4, baseBordRec.Y+baseBordRec.Height/2)
+					base.pigeon.rec.Y = RandF32(baseBordRec.Y+b/4, baseBordRec.Y+baseBordRec.Height/2)
 					base.pigeonoff = true
 				}
 				if base.pigeon.rec.X < baseBordRec.X-base.pigeon.rec.Width*2 {
-					base.pigeon.dirX = getabs(base.pigeon.dirX)
-					base.pigeon.rec.Y = rF32(baseBordRec.Y+b/4, baseBordRec.Y+baseBordRec.Height/2)
+					base.pigeon.dirX = Abs(base.pigeon.dirX)
+					base.pigeon.rec.Y = RandF32(baseBordRec.Y+b/4, baseBordRec.Y+baseBordRec.Height/2)
 					base.pigeonoff = true
-					base.pigeonT = fps * rI32(5, 11)
+					base.pigeonT = fps * RandInt32(5, 11)
 				}
 			}
 		}
@@ -6017,7 +6016,7 @@ func drawBase() { //MARK:DRAW BASE
 		if debug {
 			rl.DrawRectangleLinesEx(pl2.rec, 1, rl.Magenta)
 			rl.DrawRectangleLinesEx(pl2.crec, 1, rl.Red)
-			rl.DrawCircleV(pl2.cnt, 2, ranCol())
+			rl.DrawCircleV(pl2.cnt, 2, RandColor())
 			rl.DrawRectangleLinesEx(baseBordRec, 2, rl.Yellow)
 		}
 		plWorldScreenV2 := rl.GetWorldToScreen2D(pl2.cnt, camBase)
@@ -6195,8 +6194,8 @@ func drawcam() { //MARK:DRAW CAM
 					switch fx[i].nm {
 					case "sludgegeyser":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 5), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.5, 0.7)))
-						rl.DrawTexturePro(imgs, fx[i].img, brec(fx[i].rec, 5), rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.3, 0.5)))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.5, 0.7)))
+						rl.DrawTexturePro(imgs, fx[i].img, brec(fx[i].rec, 5), rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.3, 0.5)))
 						if frames%5 == 0 {
 							if fx[i].img.X < anm[203].X+anm[203].frames*anm[203].W {
 								fx[i].img.X += anm[203].W
@@ -6223,11 +6222,11 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "hotsoup":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 5), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(darkRed(), fx[i].fade))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(DarkRed(), fx[i].fade))
 						rec3 := fx[i].rec
-						rec3.X += rF32(-4, 4)
-						rec3.Y += rF32(-4, 4)
-						rl.DrawTexturePro(imgs, fx[i].img, rec3, rl.Vector2Zero(), 0, rl.Fade(darkRed(), rF32(0.05, 0.15)))
+						rec3.X += RandF32(-4, 4)
+						rec3.Y += RandF32(-4, 4)
+						rl.DrawTexturePro(imgs, fx[i].img, rec3, rl.Vector2Zero(), 0, rl.Fade(DarkRed(), RandF32(0.05, 0.15)))
 						fx[i].fade -= 0.005
 						if fx[i].fade <= 0 {
 							fx[i].off = true
@@ -6261,9 +6260,9 @@ func drawcam() { //MARK:DRAW CAM
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 5), rl.Vector2Zero(), 0, shcol())
 						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(rl.Black, fx[i].fade))
 						rec3 := fx[i].rec
-						rec3.X += rF32(-4, 4)
-						rec3.Y += rF32(-4, 4)
-						rl.DrawTexturePro(imgs, fx[i].img, rec3, rl.Vector2Zero(), 0, rl.Fade(ranBlue(), rF32(0.05, 0.15)))
+						rec3.X += RandF32(-4, 4)
+						rec3.Y += RandF32(-4, 4)
+						rl.DrawTexturePro(imgs, fx[i].img, rec3, rl.Vector2Zero(), 0, rl.Fade(RandBlue(), RandF32(0.05, 0.15)))
 						fx[i].fade -= 0.005
 						if fx[i].fade <= 0 {
 							fx[i].off = true
@@ -6295,11 +6294,11 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "icecream":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 5), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(ranBlue(), rF32(0.1, 0.3)))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(RandBlue(), RandF32(0.1, 0.3)))
 						rec3 := fx[i].rec
-						rec3.X += rF32(-4, 4)
-						rec3.Y += rF32(-4, 4)
-						rl.DrawTexturePro(imgs, fx[i].img, rec3, rl.Vector2Zero(), 0, rl.Fade(ranBlue(), rF32(0.05, 0.15)))
+						rec3.X += RandF32(-4, 4)
+						rec3.Y += RandF32(-4, 4)
+						rl.DrawTexturePro(imgs, fx[i].img, rec3, rl.Vector2Zero(), 0, rl.Fade(RandBlue(), RandF32(0.05, 0.15)))
 						fx[i].fade -= 0.005
 						if fx[i].fade <= 0 {
 							fx[i].off = true
@@ -6339,7 +6338,7 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "mrfrisbeenear":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 20), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(ranYellow(), rF32(0.4, 0.7)))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(RandYellow(), RandF32(0.4, 0.7)))
 						if frames%3 == 0 {
 							if fx[i].img.X < anm[117].X+anm[117].frames*anm[117].W {
 								fx[i].img.X += anm[117].W
@@ -6383,7 +6382,7 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "chickenEgg":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 5), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.4, 0.7)))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.4, 0.7)))
 						fx[i].T--
 						if fx[i].T == 0 {
 							zfx := xfx{}
@@ -6407,8 +6406,8 @@ func drawcam() { //MARK:DRAW CAM
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 5), rl.Vector2Zero(), 0, shcol())
 						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(rl.White, fx[i].fade))
 						rec3 := fx[i].rec
-						rec3.X += rF32(-4, 4)
-						rec3.Y += rF32(-4, 4)
+						rec3.X += RandF32(-4, 4)
+						rec3.Y += RandF32(-4, 4)
 						rl.DrawTexturePro(imgs, fx[i].img, rec3, rl.Vector2Zero(), 0, rl.Fade(rl.White, 0.2))
 						if frames%4 == 0 {
 							fx[i].img.X += anm[98].W
@@ -6444,11 +6443,11 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "toxic":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 5), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(ranGreen(), fx[i].fade))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(RandGreen(), fx[i].fade))
 						rec3 := fx[i].rec
-						rec3.X += rF32(-4, 4)
-						rec3.Y += rF32(-4, 4)
-						rl.DrawTexturePro(imgs, fx[i].img, rec3, rl.Vector2Zero(), 0, rl.Fade(ranGreen(), 0.1))
+						rec3.X += RandF32(-4, 4)
+						rec3.Y += RandF32(-4, 4)
+						rl.DrawTexturePro(imgs, fx[i].img, rec3, rl.Vector2Zero(), 0, rl.Fade(RandGreen(), 0.1))
 						fx[i].fade -= 0.005
 						if fx[i].fade <= 0 {
 							fx[i].off = true
@@ -6479,7 +6478,7 @@ func drawcam() { //MARK:DRAW CAM
 				}
 			}
 			if clear {
-				rem(1)
+				Remove(1)
 			}
 		}
 		//MARK: DRAW ETC LAYER BELOW
@@ -6498,7 +6497,7 @@ func drawcam() { //MARK:DRAW CAM
 						xtx += 2
 						ytx := etc2[i].rec.ToInt32().Y + etc2[i].rec.ToInt32().Height - (txs + 1)
 						rl.DrawText(txt, xtx-2, ytx+2, txs, rl.Black)
-						rl.DrawText(txt, xtx, ytx, txs, ranCol())
+						rl.DrawText(txt, xtx, ytx, txs, RandColor())
 						if rl.CheckCollisionRecs(pl.crec, etc2[i].rec) {
 							exitPauseT--
 							xtx := int32(etc2[i].rec.X+etc2[i].rec.Width/2) - tx/4
@@ -6511,7 +6510,7 @@ func drawcam() { //MARK:DRAW CAM
 								rl.DrawText("1", xtx, ytx, tx2, rl.Yellow)
 							}
 							if exitPauseT == 0 {
-								choose := rInt(1, 6)
+								choose := RandInt(1, 6)
 								switch choose {
 								case 1:
 									rl.PlaySound(audfx[124])
@@ -6573,7 +6572,7 @@ func drawcam() { //MARK:DRAW CAM
 							case 6: //ORE
 								rl.PlaySound(audfx[114])
 								zitm := xitm{}
-								choose2 := rInt(1, 6)
+								choose2 := RandInt(1, 6)
 								switch choose2 {
 								case 1:
 									zitm = itmlist[38]
@@ -6686,7 +6685,7 @@ func drawcam() { //MARK:DRAW CAM
 								found := false
 								countbreak := 100
 								for {
-									choose := rInt(1, 9)
+									choose := RandInt(1, 9)
 									switch choose {
 									case 1:
 										if lollipopT == 0 {
@@ -6766,13 +6765,13 @@ func drawcam() { //MARK:DRAW CAM
 									rl.PlaySound(audfx[116])
 									for j := 0; j < 3; j++ {
 										zenm := enmlist[10] //BLACKDOT
-										zenm.numMax = rInt(4, 11)
+										zenm.numMax = RandInt(4, 11)
 										zenm.atkT = fps
 										zenm.cnt = findRanCntinRoom(levels[levNum].recs[etc2[i].room])
 										zenm.rec = rl.NewRectangle(zenm.cnt.X-zenm.rec.Width/2, zenm.cnt.Y-zenm.rec.Height/2, zenm.rec.Width, zenm.rec.Height)
 										zenm.crec = zenm.rec
-										zenm.dirX = rF32(-zenm.spd, zenm.spd)
-										zenm.dirY = rF32(-zenm.spd, zenm.spd)
+										zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+										zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 										levels[levNum].enm = append(levels[levNum].enm, zenm)
 										levels[levNum].enNum++
 									}
@@ -6784,8 +6783,8 @@ func drawcam() { //MARK:DRAW CAM
 										zenm := enmlist[3] //GHOST
 										zenm.cnt = findRanCntinRoom(levels[levNum].recs[etc2[i].room])
 										zenm.rec = rl.NewRectangle(zenm.cnt.X-zenm.rec.Width/2, zenm.cnt.Y-zenm.rec.Height/2, zenm.rec.Width, zenm.rec.Height)
-										zenm.dirX = rF32(-zenm.spd, zenm.spd)
-										zenm.dirY = rF32(-zenm.spd, zenm.spd)
+										zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+										zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 										zenm.crec.X += zenm.crec.Width / 8
 										zenm.crec.Y += zenm.crec.Height / 8
 										zenm.crec.Width -= zenm.crec.Width / 4
@@ -6838,7 +6837,7 @@ func drawcam() { //MARK:DRAW CAM
 							} else {
 								if pl.burnT == 0 && pl.dampT == 0 && icelollyT == 0 && pl.resFireT == 0 {
 									if ovenglovenum > 0 {
-										if roll6() <= ovenglovenum {
+										if Roll6() <= ovenglovenum {
 											admsg("oven glove saves burn", rl.Green)
 										} else {
 											admsg("burning...", rl.Orange)
@@ -6887,7 +6886,7 @@ func drawcam() { //MARK:DRAW CAM
 							} else {
 								pl.enCollisT = fps
 								if stats.dex > 1 {
-									if roll12() <= stats.dex {
+									if Roll12() <= stats.dex {
 										if msgT == 0 {
 											admsg("dodged > dexterity", rl.Magenta)
 											msgT = fps
@@ -6922,7 +6921,7 @@ func drawcam() { //MARK:DRAW CAM
 						rec2.Y += b / 8
 						rec2.Width -= b / 4
 						rec2.Height -= b / 4
-						rl.DrawTexturePro(imgs, etc2[i].img, rec2, rl.Vector2Zero(), 0, rl.Fade(rl.SkyBlue, rF32(0.2, 0.7)))
+						rl.DrawTexturePro(imgs, etc2[i].img, rec2, rl.Vector2Zero(), 0, rl.Fade(rl.SkyBlue, RandF32(0.2, 0.7)))
 						if frames%3 == 0 {
 							etc2[i].img.X += anm[0].W
 							if etc2[i].img.X > anm[0].X+anm[0].W*anm[0].frames {
@@ -6984,7 +6983,7 @@ func drawcam() { //MARK:DRAW CAM
 					clear = true
 				}
 				if clear {
-					rem(2)
+					Remove(2)
 				}
 			}
 		}
@@ -7019,10 +7018,10 @@ func drawcam() { //MARK:DRAW CAM
 					switch projEn[i].nm {
 					case "reddevilFlame":
 						rl.DrawTexturePro(imgs, projEn[i].img, shrec(drec(projEn[i].rec), 3), orgn(projEn[i].rec), projEn[i].ro, shcol())
-						col := ranOrange()
+						col := RandOrange()
 						rl.DrawTexturePro(imgs, projEn[i].img, drec(projEn[i].rec), orgn(projEn[i].rec), projEn[i].ro, rl.Fade(col, projEn[i].fd))
 						//BLUR
-						rl.DrawTexturePro(imgs, projEn[i].img, brec(drec(projEn[i].rec), 3), orgn(projEn[i].rec), projEn[i].ro, rl.Fade(col, rF32(0.5, 0.25)))
+						rl.DrawTexturePro(imgs, projEn[i].img, brec(drec(projEn[i].rec), 3), orgn(projEn[i].rec), projEn[i].ro, rl.Fade(col, RandF32(0.5, 0.25)))
 						projEn[i].fd -= 0.005
 						if projEn[i].fd <= 0 {
 							projEn[i].off = true
@@ -7043,7 +7042,7 @@ func drawcam() { //MARK:DRAW CAM
 							cntr := projEn[i].cnt
 							cntr.Y -= 2
 							rl.DrawCircleV(cntr, 1, rl.Red)
-							rl.DrawCircleGradient(int32(cntr.X), int32(cntr.Y), 8, darkRed(), rl.Blank)
+							rl.DrawCircleGradient(int32(cntr.X), int32(cntr.Y), 8, DarkRed(), rl.Blank)
 						}
 						if rl.CheckCollisionRecs(pl.crec, projEn[i].crec) {
 							zfx := xfx{}
@@ -7069,7 +7068,7 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "zomboSlime":
 						rl.DrawTexturePro(imgs, projEn[i].img, shrec(drec(projEn[i].rec), 3), orgn(projEn[i].rec), projEn[i].ro, shcol())
-						rl.DrawTexturePro(imgs, projEn[i].img, drec(projEn[i].rec), orgn(projEn[i].rec), projEn[i].ro, rl.Fade(ranGreen(), projEn[i].fd))
+						rl.DrawTexturePro(imgs, projEn[i].img, drec(projEn[i].rec), orgn(projEn[i].rec), projEn[i].ro, rl.Fade(RandGreen(), projEn[i].fd))
 						projEn[i].fd -= 0.003
 						if projEn[i].fd <= 0 {
 							projEn[i].off = true
@@ -7102,7 +7101,7 @@ func drawcam() { //MARK:DRAW CAM
 		if lightbulbnum > 0 && !pl.gameover {
 			rad := float32(b2)
 			rad += float32(lightbulbnum) * b / 3
-			rl.DrawCircleGradient(int32(pl.cnt.X), int32(pl.cnt.Y), rad, rl.Fade(rl.SkyBlue, rF32(0.3, 0.5)), rl.Blank)
+			rl.DrawCircleGradient(int32(pl.cnt.X), int32(pl.cnt.Y), rad, rl.Fade(rl.SkyBlue, RandF32(0.3, 0.5)), rl.Blank)
 			for j := 0; j < len(levels[levNum].enm); j++ {
 				if rl.CheckCollisionPointCircle(levels[levNum].enm[j].cnt, pl.cnt, rad-rad/4) && levels[levNum].enm[j].stunT == 0 {
 					levels[levNum].enm[j].stunT = fps * 2
@@ -7201,7 +7200,7 @@ func drawcam() { //MARK:DRAW CAM
 							cntr := etc2[i].cnt
 							cntr.Y -= 2
 							rl.DrawCircleV(cntr, 1, rl.Red)
-							rl.DrawCircleGradient(int32(cntr.X), int32(cntr.Y), 8, darkRed(), rl.Blank)
+							rl.DrawCircleGradient(int32(cntr.X), int32(cntr.Y), 8, DarkRed(), rl.Blank)
 						}
 					}
 					//DEBUG ETC
@@ -7238,9 +7237,9 @@ func drawcam() { //MARK:DRAW CAM
 						rl.DrawTexturePro(imgs, etc2[i].img, shrec(etc2[i].rec, 5), rl.Vector2Zero(), 0, shcol())
 						if etc2[i].hpT > 0 {
 							if etc2[i].img == etc[2] { //HIT IMG OLD CRATE
-								rl.DrawTexturePro(imgs, etc[6], etc2[i].rec, rl.Vector2Zero(), 0, ranCol())
+								rl.DrawTexturePro(imgs, etc[6], etc2[i].rec, rl.Vector2Zero(), 0, RandColor())
 							} else { //HIT IMG NEW CRATE
-								rl.DrawTexturePro(imgs, etc[5], etc2[i].rec, rl.Vector2Zero(), 0, ranCol())
+								rl.DrawTexturePro(imgs, etc[5], etc2[i].rec, rl.Vector2Zero(), 0, RandColor())
 							}
 						} else { //CRATE IMG
 							rl.DrawTexturePro(imgs, etc2[i].img, etc2[i].rec, rl.Vector2Zero(), 0, rl.Fade(etc2[i].color, etc2[i].fade))
@@ -7326,7 +7325,7 @@ func drawcam() { //MARK:DRAW CAM
 					clear = true
 				}
 				if clear {
-					rem(2)
+					Remove(2)
 				}
 			}
 		}
@@ -7389,7 +7388,7 @@ func drawcam() { //MARK:DRAW CAM
 							if stats.per > 1 {
 								if rl.CheckCollisionRecs(pl.perrec, itm[i].rec) {
 									if frames%int(fps*3) == 0 {
-										if roll6() <= stats.per {
+										if Roll6() <= stats.per {
 											itm[i].invis = false
 											zfx := xfx{}
 											zfx.img = anm[108].rec
@@ -7403,9 +7402,9 @@ func drawcam() { //MARK:DRAW CAM
 											admsg("invisible loot revealed > perception", rl.Magenta)
 											//LUK
 											if stats.luk > 1 {
-												if roll6() <= stats.luk {
+												if Roll6() <= stats.luk {
 													zitm := xitm{}
-													zitm = crateitm[rInt(0, len(crateitm))]
+													zitm = crateitm[RandInt(0, len(crateitm))]
 													zitm.rec = rl.NewRectangle(itm[i].cnt.X-zitm.rec.Width/2, itm[i].cnt.Y-zitm.rec.Height/2, zitm.rec.Width, zitm.rec.Height)
 													zitm.rec = finddropside(zitm.rec, 1)
 													if zitm.rec != blankRec {
@@ -7418,7 +7417,7 @@ func drawcam() { //MARK:DRAW CAM
 								}
 							}
 							if debug {
-								rl.DrawCircleV(itm[i].cnt, 20, rl.Fade(ranCol(), 0.4))
+								rl.DrawCircleV(itm[i].cnt, 20, rl.Fade(RandColor(), 0.4))
 								rl.DrawTexturePro(imgs, itm[i].img, itm[i].rec, rl.Vector2Zero(), 0, rl.White)
 							}
 						} else { //VISIBLE ITEMS
@@ -7460,8 +7459,8 @@ func drawcam() { //MARK:DRAW CAM
 								cntr := makecnt(itm[i].rec)
 								dirX := float32(0)
 								dirY := float32(0)
-								xdiff := absdiff(cntr.X, pl.cnt.X)
-								ydiff := absdiff(cntr.Y, pl.cnt.Y)
+								xdiff := AbsDiff(cntr.X, pl.cnt.X)
+								ydiff := AbsDiff(cntr.Y, pl.cnt.Y)
 								if xdiff > ydiff {
 									dirX = spd
 									dirY = ydiff / (xdiff / dirX)
@@ -7514,7 +7513,7 @@ func drawcam() { //MARK:DRAW CAM
 			//MARK:REMOVE ITEMS
 			for i := 0; i < len(levels[levNum].itm); i++ {
 				if levels[levNum].itm[i].off {
-					levels[levNum].itm = remitm(levels[levNum].itm, i)
+					levels[levNum].itm = RemoveItem(levels[levNum].itm, i)
 				}
 			}
 		}
@@ -7665,13 +7664,13 @@ func drawcam() { //MARK:DRAW CAM
 							rec.Y += 7
 							rec.X -= 2
 							rl.DrawTexturePro(imgs, anm[172].rec, shrec(drec(rec), 5), orgn(rec), enm[i].ro2, shcol())
-							rl.DrawTexturePro(imgs, anm[172].rec, drec(rec), orgn(rec), enm[i].ro2, rl.Fade(ranGreen(), 0.15))
+							rl.DrawTexturePro(imgs, anm[172].rec, drec(rec), orgn(rec), enm[i].ro2, rl.Fade(RandGreen(), 0.15))
 							enm[i].ro2 += 5
 							if frames%3 == 0 {
 								anm[172].rec.X += anm[172].W
 								if anm[172].rec.X > anm[172].X+anm[172].frames*anm[172].W {
 									enm[i].onoff = false
-									enm[i].atkT = int32(rInt(int(fps), int(fps*3)))
+									enm[i].atkT = int32(RandInt(int(fps), int(fps*3)))
 									anm[172].rec.X = anm[172].X
 								}
 							}
@@ -7701,7 +7700,7 @@ func drawcam() { //MARK:DRAW CAM
 								anm[168].rec.X += anm[168].W
 								if anm[168].rec.X > anm[168].X+anm[168].frames*anm[168].W {
 									enm[i].onoff = false
-									enm[i].atkT = int32(rInt(int(fps), int(fps*3)))
+									enm[i].atkT = int32(RandInt(int(fps), int(fps*3)))
 									anm[168].rec.X = anm[168].X
 								}
 							}
@@ -7737,13 +7736,13 @@ func drawcam() { //MARK:DRAW CAM
 							siz := be3
 							rec := rl.NewRectangle(enm[i].cnt.X-siz/2, enm[i].crec.Y+enm[i].crec.Height+4, siz, siz)
 							rl.DrawTexturePro(imgs, etc[79], shrec(rec, 5), rl.Vector2Zero(), 0, shcol())
-							rl.DrawTexturePro(imgs, etc[79], rec, rl.Vector2Zero(), 0, ranOrange())
+							rl.DrawTexturePro(imgs, etc[79], rec, rl.Vector2Zero(), 0, RandOrange())
 						} else if enm[i].burnT > 0 && enm[i].bleedT > 0 && enm[i].poisonT == 0 {
 							siz := be3
 							rec := rl.NewRectangle(enm[i].cnt.X-siz/2, enm[i].crec.Y+enm[i].crec.Height+4, siz, siz)
 							rec.X -= siz
 							rl.DrawTexturePro(imgs, etc[79], shrec(rec, 5), rl.Vector2Zero(), 0, shcol())
-							rl.DrawTexturePro(imgs, etc[79], rec, rl.Vector2Zero(), 0, ranOrange())
+							rl.DrawTexturePro(imgs, etc[79], rec, rl.Vector2Zero(), 0, RandOrange())
 							rec.X += siz
 							rl.DrawTexturePro(imgs, etc[80], shrec(rec, 5), rl.Vector2Zero(), 0, shcol())
 							rl.DrawTexturePro(imgs, etc[80], rec, rl.Vector2Zero(), 0, rl.White)
@@ -7762,7 +7761,7 @@ func drawcam() { //MARK:DRAW CAM
 							rec := rl.NewRectangle(enm[i].cnt.X-siz/2, enm[i].crec.Y+enm[i].crec.Height+4, siz, siz)
 							rec.X -= siz + siz/2
 							rl.DrawTexturePro(imgs, etc[79], shrec(rec, 5), rl.Vector2Zero(), 0, shcol())
-							rl.DrawTexturePro(imgs, etc[79], rec, rl.Vector2Zero(), 0, ranOrange())
+							rl.DrawTexturePro(imgs, etc[79], rec, rl.Vector2Zero(), 0, RandOrange())
 							rec.X += siz
 							rl.DrawTexturePro(imgs, etc[80], shrec(rec, 5), rl.Vector2Zero(), 0, shcol())
 							rl.DrawTexturePro(imgs, etc[80], rec, rl.Vector2Zero(), 0, rl.White)
@@ -7774,7 +7773,7 @@ func drawcam() { //MARK:DRAW CAM
 							rec := rl.NewRectangle(enm[i].cnt.X-siz/2, enm[i].crec.Y+enm[i].crec.Height+4, siz, siz)
 							rec.X -= siz
 							rl.DrawTexturePro(imgs, etc[79], shrec(rec, 5), rl.Vector2Zero(), 0, shcol())
-							rl.DrawTexturePro(imgs, etc[79], rec, rl.Vector2Zero(), 0, ranOrange())
+							rl.DrawTexturePro(imgs, etc[79], rec, rl.Vector2Zero(), 0, RandOrange())
 							rec.X += siz
 							rl.DrawTexturePro(imgs, etc[81], shrec(rec, 5), rl.Vector2Zero(), 0, shcol())
 							rl.DrawTexturePro(imgs, etc[81], rec, rl.Vector2Zero(), 0, rl.White)
@@ -7783,7 +7782,7 @@ func drawcam() { //MARK:DRAW CAM
 							rec := rl.NewRectangle(enm[i].cnt.X-siz/2, enm[i].crec.Y+enm[i].crec.Height+4, siz, siz)
 							rec.X -= siz
 							rl.DrawTexturePro(imgs, etc[80], shrec(rec, 5), rl.Vector2Zero(), 0, shcol())
-							rl.DrawTexturePro(imgs, etc[80], rec, rl.Vector2Zero(), 0, ranOrange())
+							rl.DrawTexturePro(imgs, etc[80], rec, rl.Vector2Zero(), 0, RandOrange())
 							rec.X += siz
 							rl.DrawTexturePro(imgs, etc[81], shrec(rec, 5), rl.Vector2Zero(), 0, shcol())
 							rl.DrawTexturePro(imgs, etc[81], rec, rl.Vector2Zero(), 0, rl.White)
@@ -7794,10 +7793,10 @@ func drawcam() { //MARK:DRAW CAM
 							default:
 								rl.DrawTexturePro(imgs, enm[i].img, shrec(drec(enm[i].rec), 5), orgn(enm[i].rec), enm[i].ro, shcol())
 								if icecreamT > 0 || enm[i].freezeT > 0 || enm[i].oilT > 0 {
-									rl.DrawTexturePro(imgs, enm[i].img, drec(enm[i].rec), orgn(enm[i].rec), enm[i].ro, ranCyan())
+									rl.DrawTexturePro(imgs, enm[i].img, drec(enm[i].rec), orgn(enm[i].rec), enm[i].ro, RandCyan())
 								} else {
 									if enm[i].hpT > 0 {
-										rl.DrawTexturePro(imgs, enm[i].img, drec(enm[i].rec), orgn(enm[i].rec), enm[i].ro, ranPink())
+										rl.DrawTexturePro(imgs, enm[i].img, drec(enm[i].rec), orgn(enm[i].rec), enm[i].ro, RandPink())
 									} else {
 										rl.DrawTexturePro(imgs, enm[i].img, drec(enm[i].rec), orgn(enm[i].rec), enm[i].ro, rl.White)
 									}
@@ -7805,10 +7804,10 @@ func drawcam() { //MARK:DRAW CAM
 							case "blackdot":
 								rl.DrawTexturePro(imgs, enm[i].img, shrec(drec(enm[i].rec), 4), orgn(enm[i].rec), enm[i].ro, shcol())
 								if icecreamT > 0 || enm[i].freezeT > 0 || enm[i].oilT > 0 {
-									rl.DrawTexturePro(imgs, enm[i].img, drec(enm[i].rec), orgn(enm[i].rec), enm[i].ro, ranCyan())
+									rl.DrawTexturePro(imgs, enm[i].img, drec(enm[i].rec), orgn(enm[i].rec), enm[i].ro, RandCyan())
 								} else {
 									if enm[i].hpT > 0 {
-										rl.DrawTexturePro(imgs, enm[i].img, drec(enm[i].rec), orgn(enm[i].rec), enm[i].ro, ranCol())
+										rl.DrawTexturePro(imgs, enm[i].img, drec(enm[i].rec), orgn(enm[i].rec), enm[i].ro, RandColor())
 									} else {
 										rl.DrawTexturePro(imgs, enm[i].img, drec(enm[i].rec), orgn(enm[i].rec), enm[i].ro, rl.White)
 									}
@@ -7816,10 +7815,10 @@ func drawcam() { //MARK:DRAW CAM
 							case "balloon", "fly", "flamehead", "greenpig":
 								rl.DrawTexturePro(imgs, enm[i].img, shrec(drec(enm[i].rec), 12), orgn(enm[i].rec), enm[i].ro, shcol())
 								if icecreamT > 0 || enm[i].freezeT > 0 {
-									rl.DrawTexturePro(imgs, enm[i].img, drec(enm[i].rec), orgn(enm[i].rec), enm[i].ro, ranCyan())
+									rl.DrawTexturePro(imgs, enm[i].img, drec(enm[i].rec), orgn(enm[i].rec), enm[i].ro, RandCyan())
 								} else {
 									if enm[i].hpT > 0 {
-										rl.DrawTexturePro(imgs, enm[i].img, drec(enm[i].rec), orgn(enm[i].rec), enm[i].ro, ranCol())
+										rl.DrawTexturePro(imgs, enm[i].img, drec(enm[i].rec), orgn(enm[i].rec), enm[i].ro, RandColor())
 									} else {
 										rl.DrawTexturePro(imgs, enm[i].img, drec(enm[i].rec), orgn(enm[i].rec), enm[i].ro, rl.White)
 									}
@@ -7827,12 +7826,12 @@ func drawcam() { //MARK:DRAW CAM
 							case "ghost":
 								rl.DrawTexturePro(imgs, enm[i].img, shrec(drec(enm[i].rec), 12), orgn(enm[i].rec), enm[i].ro, shcol())
 								if icecreamT > 0 || enm[i].freezeT > 0 {
-									rl.DrawTexturePro(imgs, enm[i].img, drec(enm[i].rec), orgn(enm[i].rec), enm[i].ro, rl.Fade(ranCyan(), rF32(0.2, 0.5)))
+									rl.DrawTexturePro(imgs, enm[i].img, drec(enm[i].rec), orgn(enm[i].rec), enm[i].ro, rl.Fade(RandCyan(), RandF32(0.2, 0.5)))
 								} else {
 									if enm[i].hpT > 0 {
-										rl.DrawTexturePro(imgs, enm[i].img, drec(enm[i].rec), orgn(enm[i].rec), enm[i].ro, rl.Fade(ranCol(), rF32(0.2, 0.5)))
+										rl.DrawTexturePro(imgs, enm[i].img, drec(enm[i].rec), orgn(enm[i].rec), enm[i].ro, rl.Fade(RandColor(), RandF32(0.2, 0.5)))
 									} else {
-										rl.DrawTexturePro(imgs, enm[i].img, drec(enm[i].rec), orgn(enm[i].rec), enm[i].ro, rl.Fade(rl.White, rF32(0.2, 0.5)))
+										rl.DrawTexturePro(imgs, enm[i].img, drec(enm[i].rec), orgn(enm[i].rec), enm[i].ro, rl.Fade(rl.White, RandF32(0.2, 0.5)))
 									}
 								}
 							}
@@ -8195,7 +8194,7 @@ func drawcam() { //MARK:DRAW CAM
 												enm[i].img.X = anm[36].X
 											}
 										}
-										enm[i].animFrameT = rI32(12, 25)
+										enm[i].animFrameT = RandInt32(12, 25)
 									}
 								case "redantenna":
 									if enm[i].hpT > 0 {
@@ -8316,7 +8315,7 @@ func drawcam() { //MARK:DRAW CAM
 					}
 				}
 				if clear {
-					rem(4)
+					Remove(4)
 				}
 			}
 		}
@@ -8328,22 +8327,22 @@ func drawcam() { //MARK:DRAW CAM
 					cnt1 := makecnt(levels[levNum].enm[lightningEnm[i]].crec)
 					cnt2 := makecnt(levels[levNum].enm[lightningEnm[i+1]].crec)
 					//rl.DrawLineV(cnt1,cnt2,rl.Blue)
-					rl.DrawLineEx(cnt1, cnt2, rF32(2, 5), rl.Fade(ranBlue(), rF32(0.1, 0.4)))
-					cnt1.X += rF32(-5, 5)
-					cnt1.Y += rF32(-5, 5)
-					cnt2.X += rF32(-5, 5)
-					cnt2.Y += rF32(-5, 5)
-					rl.DrawLineEx(cnt1, cnt2, rF32(3, 7), rl.Fade(ranBlue(), rF32(0.1, 0.4)))
-					cnt1.X += rF32(-5, 5)
-					cnt1.Y += rF32(-5, 5)
-					cnt2.X += rF32(-5, 5)
-					cnt2.Y += rF32(-5, 5)
-					rl.DrawLineEx(cnt1, cnt2, rF32(1, 3), rl.Fade(ranBlue(), rF32(0.3, 0.7)))
-					cnt1.X += rF32(-5, 5)
-					cnt1.Y += rF32(-5, 5)
-					cnt2.X += rF32(-5, 5)
-					cnt2.Y += rF32(-5, 5)
-					rl.DrawLineEx(cnt1, cnt2, rF32(1, 3), rl.Fade(ranBlue(), rF32(0.2, 0.5)))
+					rl.DrawLineEx(cnt1, cnt2, RandF32(2, 5), rl.Fade(RandBlue(), RandF32(0.1, 0.4)))
+					cnt1.X += RandF32(-5, 5)
+					cnt1.Y += RandF32(-5, 5)
+					cnt2.X += RandF32(-5, 5)
+					cnt2.Y += RandF32(-5, 5)
+					rl.DrawLineEx(cnt1, cnt2, RandF32(3, 7), rl.Fade(RandBlue(), RandF32(0.1, 0.4)))
+					cnt1.X += RandF32(-5, 5)
+					cnt1.Y += RandF32(-5, 5)
+					cnt2.X += RandF32(-5, 5)
+					cnt2.Y += RandF32(-5, 5)
+					rl.DrawLineEx(cnt1, cnt2, RandF32(1, 3), rl.Fade(RandBlue(), RandF32(0.3, 0.7)))
+					cnt1.X += RandF32(-5, 5)
+					cnt1.Y += RandF32(-5, 5)
+					cnt2.X += RandF32(-5, 5)
+					cnt2.Y += RandF32(-5, 5)
+					rl.DrawLineEx(cnt1, cnt2, RandF32(1, 3), rl.Fade(RandBlue(), RandF32(0.2, 0.5)))
 
 				}
 				lightningCount--
@@ -8409,9 +8408,9 @@ func drawcam() { //MARK:DRAW CAM
 							}
 						case "rolloProj":
 							rl.DrawTexturePro(imgs, projEn[i].img, shrec(drec(projEn[i].rec), 12), orgn(projEn[i].rec), projEn[i].ro, shcol())
-							rl.DrawTexturePro(imgs, projEn[i].img, drec(projEn[i].rec), orgn(projEn[i].rec), projEn[i].ro, rl.Fade(rl.White, rF32(0.2, 0.5)))
+							rl.DrawTexturePro(imgs, projEn[i].img, drec(projEn[i].rec), orgn(projEn[i].rec), projEn[i].ro, rl.Fade(rl.White, RandF32(0.2, 0.5)))
 							//BLUR
-							rl.DrawTexturePro(imgs, projEn[i].img, brec(drec(projEn[i].rec), 7), orgn(projEn[i].rec), projEn[i].ro, rl.Fade(rl.White, rF32(0.05, 0.2)))
+							rl.DrawTexturePro(imgs, projEn[i].img, brec(drec(projEn[i].rec), 7), orgn(projEn[i].rec), projEn[i].ro, rl.Fade(rl.White, RandF32(0.05, 0.2)))
 							if frames%2 == 0 {
 								projEn[i].img.X += anm[155].W
 								if projEn[i].img.X > anm[155].X+anm[155].frames*anm[155].W {
@@ -8421,7 +8420,7 @@ func drawcam() { //MARK:DRAW CAM
 							projEn[i].ro += 4
 						case "mushbossProj":
 							rl.DrawTexturePro(imgs, projEn[i].img, shrec(drec(projEn[i].rec), 12), orgn(projEn[i].rec), projEn[i].ro, shcol())
-							rl.DrawTexturePro(imgs, projEn[i].img, drec(projEn[i].rec), orgn(projEn[i].rec), projEn[i].ro, rl.Fade(rl.White, rF32(0.4, 0.7)))
+							rl.DrawTexturePro(imgs, projEn[i].img, drec(projEn[i].rec), orgn(projEn[i].rec), projEn[i].ro, rl.Fade(rl.White, RandF32(0.4, 0.7)))
 							if frames%2 == 0 {
 								projEn[i].img.X += anm[152].W
 								if projEn[i].img.X > anm[152].X+anm[152].frames*anm[152].W {
@@ -8429,11 +8428,11 @@ func drawcam() { //MARK:DRAW CAM
 								}
 							}
 						case "battyProj":
-							col := ranCol()
+							col := RandColor()
 							rl.DrawTexturePro(imgs, projEn[i].img, shrec(drec(projEn[i].rec), 3), orgn(projEn[i].rec), projEn[i].ro, shcol())
 							rl.DrawTexturePro(imgs, projEn[i].img, drec(projEn[i].rec), orgn(projEn[i].rec), projEn[i].ro, col)
 							//BLUR
-							rl.DrawTexturePro(imgs, projEn[i].img, brec(drec(projEn[i].rec), 12), orgn(projEn[i].rec), projEn[i].ro, rl.Fade(col, rF32(0.05, 0.2)))
+							rl.DrawTexturePro(imgs, projEn[i].img, brec(drec(projEn[i].rec), 12), orgn(projEn[i].rec), projEn[i].ro, rl.Fade(col, RandF32(0.05, 0.2)))
 							if frames%2 == 0 {
 								projEn[i].img.X += anm[147].W
 								if projEn[i].img.X > anm[147].X+anm[147].frames*anm[147].W {
@@ -8442,9 +8441,9 @@ func drawcam() { //MARK:DRAW CAM
 							}
 						case "zomboProj":
 							rl.DrawTexturePro(imgs, projEn[i].img, shrec(drec(projEn[i].rec), 12), orgn(projEn[i].rec), projEn[i].ro, shcol())
-							rl.DrawTexturePro(imgs, projEn[i].img, drec(projEn[i].rec), orgn(projEn[i].rec), projEn[i].ro, rl.Fade(rl.White, rF32(0.2, 0.5)))
+							rl.DrawTexturePro(imgs, projEn[i].img, drec(projEn[i].rec), orgn(projEn[i].rec), projEn[i].ro, rl.Fade(rl.White, RandF32(0.2, 0.5)))
 							//BLUR
-							rl.DrawTexturePro(imgs, projEn[i].img, brec(drec(projEn[i].rec), 4), orgn(projEn[i].rec), projEn[i].ro, rl.Fade(rl.White, rF32(0.05, 0.2)))
+							rl.DrawTexturePro(imgs, projEn[i].img, brec(drec(projEn[i].rec), 4), orgn(projEn[i].rec), projEn[i].ro, rl.Fade(rl.White, RandF32(0.05, 0.2)))
 							if frames%3 == 0 {
 								projEn[i].img.X += anm[140].W
 								if projEn[i].img.X > anm[140].X+anm[140].frames*anm[140].W {
@@ -8463,7 +8462,7 @@ func drawcam() { //MARK:DRAW CAM
 							projEn[i].ro += 4
 						case "pigProj":
 							rl.DrawTexturePro(imgs, projEn[i].img, shrec(drec(projEn[i].rec), 12), orgn(projEn[i].rec), projEn[i].ro, shcol())
-							rl.DrawTexturePro(imgs, projEn[i].img, drec(projEn[i].rec), orgn(projEn[i].rec), projEn[i].ro, rl.Fade(rl.White, rF32(0.4, 0.7)))
+							rl.DrawTexturePro(imgs, projEn[i].img, drec(projEn[i].rec), orgn(projEn[i].rec), projEn[i].ro, rl.Fade(rl.White, RandF32(0.4, 0.7)))
 							if frames%3 == 0 {
 								projEn[i].img.X += anm[135].W
 								if projEn[i].img.X > anm[135].X+anm[135].frames*anm[135].W {
@@ -8472,9 +8471,9 @@ func drawcam() { //MARK:DRAW CAM
 							}
 						case "spacemanProj":
 							rl.DrawTexturePro(imgs, projEn[i].img, shrec(drec(projEn[i].rec), 12), orgn(projEn[i].rec), projEn[i].ro, shcol())
-							rl.DrawTexturePro(imgs, projEn[i].img, drec(projEn[i].rec), orgn(projEn[i].rec), projEn[i].ro, rl.Fade(rl.White, rF32(0.4, 0.7)))
+							rl.DrawTexturePro(imgs, projEn[i].img, drec(projEn[i].rec), orgn(projEn[i].rec), projEn[i].ro, rl.Fade(rl.White, RandF32(0.4, 0.7)))
 							//BLUR
-							rl.DrawTexturePro(imgs, projEn[i].img, brec(drec(projEn[i].rec), 4), orgn(projEn[i].rec), projEn[i].ro, rl.Fade(rl.White, rF32(0.1, 0.3)))
+							rl.DrawTexturePro(imgs, projEn[i].img, brec(drec(projEn[i].rec), 4), orgn(projEn[i].rec), projEn[i].ro, rl.Fade(rl.White, RandF32(0.1, 0.3)))
 							if frames%3 == 0 {
 								projEn[i].img.X += anm[131].W
 								if projEn[i].img.X > anm[131].X+anm[131].frames*anm[131].W {
@@ -8484,17 +8483,17 @@ func drawcam() { //MARK:DRAW CAM
 							projEn[i].ro += 4
 						case "spinnaProj":
 							rl.DrawTexturePro(imgs, projEn[i].img, shrec(projEn[i].rec, 12), rl.Vector2Zero(), 0, shcol())
-							rl.DrawTexturePro(imgs, projEn[i].img, projEn[i].rec, rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.4, 0.7)))
+							rl.DrawTexturePro(imgs, projEn[i].img, projEn[i].rec, rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.4, 0.7)))
 							//BLUR
-							rl.DrawTexturePro(imgs, projEn[i].img, brec(projEn[i].rec, 12), rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.1, 0.3)))
-							rl.DrawTexturePro(imgs, projEn[i].img, brec(projEn[i].rec, 24), rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.1, 0.3)))
+							rl.DrawTexturePro(imgs, projEn[i].img, brec(projEn[i].rec, 12), rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.1, 0.3)))
+							rl.DrawTexturePro(imgs, projEn[i].img, brec(projEn[i].rec, 24), rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.1, 0.3)))
 							projEn[i].img.X += anm[123].W
 							if projEn[i].img.X > anm[123].X+anm[123].frames*anm[123].W {
 								projEn[i].img.X = anm[123].X
 							}
 						case "mrfrisbeeProj":
 							rl.DrawTexturePro(imgs, projEn[i].img, shrec(drec(projEn[i].rec), 12), orgn(projEn[i].rec), projEn[i].ro, shcol())
-							rl.DrawTexturePro(imgs, projEn[i].img, drec(projEn[i].rec), orgn(projEn[i].rec), projEn[i].ro, ranYellow())
+							rl.DrawTexturePro(imgs, projEn[i].img, drec(projEn[i].rec), orgn(projEn[i].rec), projEn[i].ro, RandYellow())
 							if frames%2 == 0 {
 								projEn[i].img.X += anm[116].W
 								if projEn[i].img.X > anm[116].X+anm[116].frames*anm[116].W {
@@ -8525,7 +8524,7 @@ func drawcam() { //MARK:DRAW CAM
 							}
 						case "pinkcartbull":
 							rl.DrawTexturePro(imgs, projEn[i].img, shrec(drec(projEn[i].rec), 12), orgn(projEn[i].rec), projEn[i].ro, shcol())
-							rl.DrawTexturePro(imgs, projEn[i].img, drec(projEn[i].rec), orgn(projEn[i].rec), projEn[i].ro, rl.Fade(projEn[i].col, rF32(0.4, 0.7)))
+							rl.DrawTexturePro(imgs, projEn[i].img, drec(projEn[i].rec), orgn(projEn[i].rec), projEn[i].ro, rl.Fade(projEn[i].col, RandF32(0.4, 0.7)))
 							if frames%3 == 0 {
 								projEn[i].img.X += anm[60].W
 								if projEn[i].img.X > anm[60].X+anm[60].frames*anm[60].W {
@@ -8562,9 +8561,9 @@ func drawcam() { //MARK:DRAW CAM
 						switch projPL[i].nm {
 						case "rolloProj":
 							rl.DrawTexturePro(imgs, projPL[i].img, shrec(drec(projPL[i].rec), 12), orgn(projPL[i].rec), projPL[i].ro, shcol())
-							rl.DrawTexturePro(imgs, projPL[i].img, drec(projPL[i].rec), orgn(projPL[i].rec), projPL[i].ro, rl.Fade(rl.White, rF32(0.2, 0.5)))
+							rl.DrawTexturePro(imgs, projPL[i].img, drec(projPL[i].rec), orgn(projPL[i].rec), projPL[i].ro, rl.Fade(rl.White, RandF32(0.2, 0.5)))
 							//BLUR
-							rl.DrawTexturePro(imgs, projPL[i].img, brec(drec(projPL[i].rec), 7), orgn(projPL[i].rec), projPL[i].ro, rl.Fade(rl.White, rF32(0.05, 0.2)))
+							rl.DrawTexturePro(imgs, projPL[i].img, brec(drec(projPL[i].rec), 7), orgn(projPL[i].rec), projPL[i].ro, rl.Fade(rl.White, RandF32(0.05, 0.2)))
 							if frames%2 == 0 {
 								projPL[i].img.X += anm[155].W
 								if projPL[i].img.X > anm[155].X+anm[155].frames*anm[155].W {
@@ -8573,11 +8572,11 @@ func drawcam() { //MARK:DRAW CAM
 							}
 							projPL[i].ro += 4
 						case "battyProj":
-							col := ranCol()
+							col := RandColor()
 							rl.DrawTexturePro(imgs, projPL[i].img, shrec(drec(projPL[i].rec), 3), orgn(projPL[i].rec), projPL[i].ro, shcol())
 							rl.DrawTexturePro(imgs, projPL[i].img, drec(projPL[i].rec), orgn(projPL[i].rec), projPL[i].ro, col)
 							//BLUR
-							rl.DrawTexturePro(imgs, projPL[i].img, brec(drec(projPL[i].rec), 12), orgn(projPL[i].rec), projPL[i].ro, rl.Fade(col, rF32(0.05, 0.2)))
+							rl.DrawTexturePro(imgs, projPL[i].img, brec(drec(projPL[i].rec), 12), orgn(projPL[i].rec), projPL[i].ro, rl.Fade(col, RandF32(0.05, 0.2)))
 							if frames%2 == 0 {
 								projPL[i].img.X += anm[147].W
 								if projPL[i].img.X > anm[147].X+anm[147].frames*anm[147].W {
@@ -8586,7 +8585,7 @@ func drawcam() { //MARK:DRAW CAM
 							}
 						case "pigProj":
 							rl.DrawTexturePro(imgs, projPL[i].img, shrec(drec(projPL[i].rec), 12), orgn(projPL[i].rec), projPL[i].ro, shcol())
-							rl.DrawTexturePro(imgs, projPL[i].img, drec(projPL[i].rec), orgn(projPL[i].rec), projPL[i].ro, rl.Fade(rl.White, rF32(0.4, 0.7)))
+							rl.DrawTexturePro(imgs, projPL[i].img, drec(projPL[i].rec), orgn(projPL[i].rec), projPL[i].ro, rl.Fade(rl.White, RandF32(0.4, 0.7)))
 							if frames%3 == 0 {
 								projPL[i].img.X += anm[135].W
 								if projPL[i].img.X > anm[135].X+anm[135].frames*anm[135].W {
@@ -8595,7 +8594,7 @@ func drawcam() { //MARK:DRAW CAM
 							}
 						case "mrfrisbeeProj":
 							rl.DrawTexturePro(imgs, projPL[i].img, shrec(drec(projPL[i].rec), 12), orgn(projPL[i].rec), projPL[i].ro, shcol())
-							rl.DrawTexturePro(imgs, projPL[i].img, drec(projPL[i].rec), orgn(projPL[i].rec), projPL[i].ro, ranYellow())
+							rl.DrawTexturePro(imgs, projPL[i].img, drec(projPL[i].rec), orgn(projPL[i].rec), projPL[i].ro, RandYellow())
 							if frames%2 == 0 {
 								projPL[i].img.X += anm[116].W
 								if projPL[i].img.X > anm[116].X+anm[116].frames*anm[116].W {
@@ -8605,11 +8604,11 @@ func drawcam() { //MARK:DRAW CAM
 							projPL[i].ro += 4
 						case "fartfire":
 							rl.DrawTexturePro(imgs, projPL[i].img, shrec(drec(projPL[i].rec), 12), orgn(projPL[i].rec), projPL[i].ro, shcol())
-							rl.DrawTexturePro(imgs, projPL[i].img, drec(projPL[i].rec), orgn(projPL[i].rec), projPL[i].ro, rl.Fade(rl.White, rF32(0.5, 0.7)))
-							rl.DrawTexturePro(imgs, projPL[i].img, brec(drec(projPL[i].rec), 5), orgn(projPL[i].rec), projPL[i].ro, rl.Fade(rl.White, rF32(0.1, 0.3)))
+							rl.DrawTexturePro(imgs, projPL[i].img, drec(projPL[i].rec), orgn(projPL[i].rec), projPL[i].ro, rl.Fade(rl.White, RandF32(0.5, 0.7)))
+							rl.DrawTexturePro(imgs, projPL[i].img, brec(drec(projPL[i].rec), 5), orgn(projPL[i].rec), projPL[i].ro, rl.Fade(rl.White, RandF32(0.1, 0.3)))
 						case "mustard":
 							rl.DrawTexturePro(imgs, projPL[i].img, shrec(drec(projPL[i].rec), 12), orgn(projPL[i].rec), projPL[i].ro, shcol())
-							rl.DrawTexturePro(imgs, projPL[i].img, drec(projPL[i].rec), orgn(projPL[i].rec), projPL[i].ro, rl.Fade(rl.Orange, rF32(0.4, 0.7)))
+							rl.DrawTexturePro(imgs, projPL[i].img, drec(projPL[i].rec), orgn(projPL[i].rec), projPL[i].ro, rl.Fade(rl.Orange, RandF32(0.4, 0.7)))
 						case "popcornProj":
 							rl.DrawTexturePro(imgs, projPL[i].img, drec(projPL[i].rec), orgn(projPL[i].rec), projPL[i].ro, shcol())
 							rl.DrawTexturePro(imgs, projPL[i].img, drec(projPL[i].rec), orgn(projPL[i].rec), projPL[i].ro, rl.White)
@@ -8676,8 +8675,8 @@ func drawcam() { //MARK:DRAW CAM
 							rl.DrawTexturePro(imgs, projPL[i].img, drec(projPL[i].rec), orgn(projPL[i].rec), projPL[i].ro, rl.Fade(projPL[i].col, projPL[i].fd))
 							//WINDOW CLEANER
 							if projPL[i].nm == "window cleaner" {
-								rl.DrawTexturePro(imgs, projPL[i].img, brec(drec(projPL[i].rec), 10), orgn(projPL[i].rec), projPL[i].ro, rl.Fade(projPL[i].col, rF32(0.5, 0.7)))
-								rl.DrawTexturePro(imgs, projPL[i].img, brec(drec(projPL[i].rec), 20), orgn(projPL[i].rec), projPL[i].ro, rl.Fade(projPL[i].col, rF32(0.2, 0.5)))
+								rl.DrawTexturePro(imgs, projPL[i].img, brec(drec(projPL[i].rec), 10), orgn(projPL[i].rec), projPL[i].ro, rl.Fade(projPL[i].col, RandF32(0.5, 0.7)))
+								rl.DrawTexturePro(imgs, projPL[i].img, brec(drec(projPL[i].rec), 20), orgn(projPL[i].rec), projPL[i].ro, rl.Fade(projPL[i].col, RandF32(0.2, 0.5)))
 							}
 							//FIREWORK
 							if projPL[i].nm == "firework" {
@@ -8745,37 +8744,37 @@ func drawcam() { //MARK:DRAW CAM
 					zproj.spd = 4
 					zproj.dmg = 1
 					zproj.fd = 1
-					zproj.rospd = rF32(5, 11)
-					if flipcoin() {
+					zproj.rospd = RandF32(5, 11)
+					if FlipCoin() {
 						zproj.rospd = -zproj.rospd
 					}
 					zproj.rec = rl.NewRectangle(etc2[i].cnt.X-siz/2, etc2[i].cnt.Y-siz/2, siz, siz)
 					zproj.crec = zproj.rec
 					zproj.img = etc[131]
-					zproj.dirX = rF32(-zproj.spd/2, zproj.spd/2)
+					zproj.dirX = RandF32(-zproj.spd/2, zproj.spd/2)
 					zproj.dirY = -zproj.spd
 					zproj.bounce = 2
-					if flipcoin() {
+					if FlipCoin() {
 						zproj.bounce = 3
 					}
 					zproj.nm = "popcornProj"
 					projPL = append(projPL, zproj)
-					zproj.dirX = rF32(-zproj.spd/2, zproj.spd/2)
+					zproj.dirX = RandF32(-zproj.spd/2, zproj.spd/2)
 					projPL = append(projPL, zproj)
-					zproj.dirX = rF32(-zproj.spd/2, zproj.spd/2)
+					zproj.dirX = RandF32(-zproj.spd/2, zproj.spd/2)
 					projPL = append(projPL, zproj)
 					if rl.CheckCollisionRecs(etc2[i].rec, drawRec) {
 						rl.PlaySound(audfx[86])
 					}
-					if flipcoin() {
-						zproj.dirX = rF32(-zproj.spd/2, zproj.spd/2)
+					if FlipCoin() {
+						zproj.dirX = RandF32(-zproj.spd/2, zproj.spd/2)
 						projPL = append(projPL, zproj)
 						if rl.CheckCollisionRecs(etc2[i].rec, drawRec) {
 							rl.PlaySound(audfx[86])
 						}
 					}
-					if flipcoin() {
-						zproj.dirX = rF32(-zproj.spd/2, zproj.spd/2)
+					if FlipCoin() {
+						zproj.dirX = RandF32(-zproj.spd/2, zproj.spd/2)
 						projPL = append(projPL, zproj)
 						if rl.CheckCollisionRecs(etc2[i].rec, drawRec) {
 							rl.PlaySound(audfx[86])
@@ -8804,8 +8803,8 @@ func drawcam() { //MARK:DRAW CAM
 					zproj.dmg = 1
 					zproj.fd = 1
 					zproj.rec = rl.NewRectangle(etc2[i].cnt.X-siz/2, etc2[i].cnt.Y-siz/2, siz, siz)
-					xdiff := absdiff(etc2[i].cnt.X, etc2[i].v2.X)
-					ydiff := absdiff(etc2[i].cnt.Y, etc2[i].v2.Y)
+					xdiff := AbsDiff(etc2[i].cnt.X, etc2[i].v2.X)
+					ydiff := AbsDiff(etc2[i].cnt.Y, etc2[i].v2.Y)
 					if xdiff > ydiff {
 						zproj.dirX = zproj.spd
 						zproj.dirY = ydiff / (xdiff / zproj.dirX)
@@ -8822,7 +8821,7 @@ func drawcam() { //MARK:DRAW CAM
 					zproj.crec = zproj.rec
 					zproj.img = anm[97].rec
 					zproj.bounce = 2
-					if flipcoin() {
+					if FlipCoin() {
 						zproj.bounce = 3
 					}
 					zproj.nm = "ladybugproj"
@@ -8849,7 +8848,7 @@ func drawcam() { //MARK:DRAW CAM
 				if rl.CheckCollisionRecs(projPL[i].rec, drawRec) {
 					if projPL[i].nm == "poisongas" {
 						rl.DrawTexturePro(imgs, projPL[i].img, shrec(drec(projPL[i].rec), 12), orgn(projPL[i].rec), projPL[i].ro, shcol())
-						rl.DrawTexturePro(imgs, projPL[i].img, drec(projPL[i].rec), orgn(projPL[i].rec), projPL[i].ro, rl.Fade(ranGreen(), rF32(0.7, 1.1)))
+						rl.DrawTexturePro(imgs, projPL[i].img, drec(projPL[i].rec), orgn(projPL[i].rec), projPL[i].ro, rl.Fade(RandGreen(), RandF32(0.7, 1.1)))
 						if debug {
 							rl.DrawRectangleLinesEx(projPL[i].rec, 1, rl.Red)
 							rl.DrawRectangleLinesEx(projPL[i].crec, 1, rl.White)
@@ -8962,7 +8961,7 @@ func drawcam() { //MARK:DRAW CAM
 							} else {
 								pl.enCollisT = fps
 								if stats.dex > 1 {
-									if roll12() <= stats.dex {
+									if Roll12() <= stats.dex {
 										if msgT == 0 {
 											admsg("dodged > dexterity", rl.Magenta)
 											msgT = fps
@@ -9028,7 +9027,7 @@ func drawcam() { //MARK:DRAW CAM
 					switch fx[i].nm {
 					case "redWeapEnd":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 20), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(ranRed(), rF32(0.3, 0.5)))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(RandRed(), RandF32(0.3, 0.5)))
 						if frames%3 == 0 {
 							if fx[i].img.X < anm[179].X+anm[179].frames*anm[179].W {
 								fx[i].img.X += anm[179].W
@@ -9042,7 +9041,7 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "greenWeapEnd":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 20), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(ranGreen(), rF32(0.3, 0.5)))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(RandGreen(), RandF32(0.3, 0.5)))
 						if frames%3 == 0 {
 							if fx[i].img.X < anm[179].X+anm[179].frames*anm[179].W {
 								fx[i].img.X += anm[179].W
@@ -9056,7 +9055,7 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "brownWeapEnd":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 20), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(ranBrown(), rF32(0.3, 0.5)))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(RandBrown(), RandF32(0.3, 0.5)))
 						if frames%3 == 0 {
 							if fx[i].img.X < anm[179].X+anm[179].frames*anm[179].W {
 								fx[i].img.X += anm[179].W
@@ -9070,7 +9069,7 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "blueWeapEnd":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 20), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(ranBlue(), rF32(0.3, 0.5)))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(RandBlue(), RandF32(0.3, 0.5)))
 						if frames%3 == 0 {
 							if fx[i].img.X < anm[179].X+anm[179].frames*anm[179].W {
 								fx[i].img.X += anm[179].W
@@ -9084,7 +9083,7 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "orangeWeapEnd":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 20), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(ranOrange(), rF32(0.3, 0.5)))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(RandOrange(), RandF32(0.3, 0.5)))
 						if frames%3 == 0 {
 							if fx[i].img.X < anm[179].X+anm[179].frames*anm[179].W {
 								fx[i].img.X += anm[179].W
@@ -9098,7 +9097,7 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "greyWeapEnd":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 20), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(ranGrey(), rF32(0.3, 0.5)))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(RandGrey(), RandF32(0.3, 0.5)))
 						if frames%3 == 0 {
 							if fx[i].img.X < anm[179].X+anm[179].frames*anm[179].W {
 								fx[i].img.X += anm[179].W
@@ -9112,7 +9111,7 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "pinkWeapEnd":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 20), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(ranPink(), rF32(0.3, 0.5)))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(RandPink(), RandF32(0.3, 0.5)))
 						if frames%3 == 0 {
 							if fx[i].img.X < anm[179].X+anm[179].frames*anm[179].W {
 								fx[i].img.X += anm[179].W
@@ -9126,7 +9125,7 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "yellowWeapEnd":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 20), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(ranYellow(), rF32(0.3, 0.5)))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(RandYellow(), RandF32(0.3, 0.5)))
 						if frames%3 == 0 {
 							if fx[i].img.X < anm[179].X+anm[179].frames*anm[179].W {
 								fx[i].img.X += anm[179].W
@@ -9140,9 +9139,9 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "ringoffire":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(drec(fx[i].rec), 20), orgn(fx[i].rec), fx[i].ro, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, drec(fx[i].rec), orgn(fx[i].rec), fx[i].ro, rl.Fade(rl.White, rF32(0.5, 0.7)))
-						rl.DrawTexturePro(imgs, fx[i].img, brec(drec(fx[i].rec), 5), orgn(fx[i].rec), fx[i].ro, rl.Fade(rl.White, rF32(0.3, 0.5)))
-						rl.DrawTexturePro(imgs, fx[i].img, brec(drec(fx[i].rec), 12), orgn(fx[i].rec), fx[i].ro, rl.Fade(rl.White, rF32(0.1, 0.3)))
+						rl.DrawTexturePro(imgs, fx[i].img, drec(fx[i].rec), orgn(fx[i].rec), fx[i].ro, rl.Fade(rl.White, RandF32(0.5, 0.7)))
+						rl.DrawTexturePro(imgs, fx[i].img, brec(drec(fx[i].rec), 5), orgn(fx[i].rec), fx[i].ro, rl.Fade(rl.White, RandF32(0.3, 0.5)))
+						rl.DrawTexturePro(imgs, fx[i].img, brec(drec(fx[i].rec), 12), orgn(fx[i].rec), fx[i].ro, rl.Fade(rl.White, RandF32(0.1, 0.3)))
 						if frames%2 == 0 {
 							if fx[i].img.X < anm[202].X+anm[202].frames*anm[202].W {
 								fx[i].img.X += anm[202].W
@@ -9182,7 +9181,7 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "icecrystal":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(drec(fx[i].rec), 20), orgn(fx[i].rec), fx[i].ro, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, drec(fx[i].rec), orgn(fx[i].rec), fx[i].ro, rl.Fade(ranBlue(), rF32(0.1, 0.2)))
+						rl.DrawTexturePro(imgs, fx[i].img, drec(fx[i].rec), orgn(fx[i].rec), fx[i].ro, rl.Fade(RandBlue(), RandF32(0.1, 0.2)))
 						fx[i].ro += 12
 						if frames%3 == 0 {
 							if fx[i].rec.Width < b10 {
@@ -9210,9 +9209,9 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "rollodthfx":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 20), rl.Vector2Zero(), 0, shcol())
-						col := ranYellow()
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(col, rF32(0.2, 0.5)))
-						rl.DrawTexturePro(imgs, fx[i].img, brec(fx[i].rec, 7), rl.Vector2Zero(), 0, rl.Fade(col, rF32(0.1, 0.25)))
+						col := RandYellow()
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(col, RandF32(0.2, 0.5)))
+						rl.DrawTexturePro(imgs, fx[i].img, brec(fx[i].rec, 7), rl.Vector2Zero(), 0, rl.Fade(col, RandF32(0.1, 0.25)))
 
 						if frames%2 == 0 {
 							if fx[i].img.X < anm[197].X+anm[197].frames*anm[197].W {
@@ -9227,9 +9226,9 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "musheedthfx":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 20), rl.Vector2Zero(), 0, shcol())
-						col := ranRed()
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(col, rF32(0.5, 0.7)))
-						rl.DrawTexturePro(imgs, fx[i].img, brec(fx[i].rec, 7), rl.Vector2Zero(), 0, rl.Fade(col, rF32(0.1, 0.25)))
+						col := RandRed()
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(col, RandF32(0.5, 0.7)))
+						rl.DrawTexturePro(imgs, fx[i].img, brec(fx[i].rec, 7), rl.Vector2Zero(), 0, rl.Fade(col, RandF32(0.1, 0.25)))
 
 						if frames%2 == 0 {
 							if fx[i].img.X < anm[196].X+anm[196].frames*anm[196].W {
@@ -9244,9 +9243,9 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "battydthfx":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 20), rl.Vector2Zero(), 0, shcol())
-						col := ranRed()
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(col, rF32(0.5, 0.7)))
-						rl.DrawTexturePro(imgs, fx[i].img, brec(fx[i].rec, 7), rl.Vector2Zero(), 0, rl.Fade(col, rF32(0.1, 0.25)))
+						col := RandRed()
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(col, RandF32(0.5, 0.7)))
+						rl.DrawTexturePro(imgs, fx[i].img, brec(fx[i].rec, 7), rl.Vector2Zero(), 0, rl.Fade(col, RandF32(0.1, 0.25)))
 
 						if frames%2 == 0 {
 							if fx[i].img.X < anm[195].X+anm[195].frames*anm[195].W {
@@ -9261,9 +9260,9 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "zombodthfx":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 20), rl.Vector2Zero(), 0, shcol())
-						col := ranGreen()
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(col, rF32(0.5, 0.7)))
-						rl.DrawTexturePro(imgs, fx[i].img, brec(fx[i].rec, 7), rl.Vector2Zero(), 0, rl.Fade(col, rF32(0.1, 0.25)))
+						col := RandGreen()
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(col, RandF32(0.5, 0.7)))
+						rl.DrawTexturePro(imgs, fx[i].img, brec(fx[i].rec, 7), rl.Vector2Zero(), 0, rl.Fade(col, RandF32(0.1, 0.25)))
 						if frames%2 == 0 {
 							if fx[i].img.X < anm[194].X+anm[194].frames*anm[194].W {
 								fx[i].img.X += anm[194].W
@@ -9277,9 +9276,9 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "pyrodthfx":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 20), rl.Vector2Zero(), 0, shcol())
-						col := ranOrange()
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(col, rF32(0.5, 0.7)))
-						rl.DrawTexturePro(imgs, fx[i].img, brec(fx[i].rec, 7), rl.Vector2Zero(), 0, rl.Fade(col, rF32(0.1, 0.25)))
+						col := RandOrange()
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(col, RandF32(0.5, 0.7)))
+						rl.DrawTexturePro(imgs, fx[i].img, brec(fx[i].rec, 7), rl.Vector2Zero(), 0, rl.Fade(col, RandF32(0.1, 0.25)))
 						if frames%2 == 0 {
 							if fx[i].img.X < anm[193].X+anm[193].frames*anm[193].W {
 								fx[i].img.X += anm[193].W
@@ -9293,9 +9292,9 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "spzmandthfx":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 20), rl.Vector2Zero(), 0, shcol())
-						col := ranCol()
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(col, rF32(0.5, 0.7)))
-						rl.DrawTexturePro(imgs, fx[i].img, brec(fx[i].rec, 7), rl.Vector2Zero(), 0, rl.Fade(col, rF32(0.1, 0.25)))
+						col := RandColor()
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(col, RandF32(0.5, 0.7)))
+						rl.DrawTexturePro(imgs, fx[i].img, brec(fx[i].rec, 7), rl.Vector2Zero(), 0, rl.Fade(col, RandF32(0.1, 0.25)))
 						if frames%2 == 0 {
 							if fx[i].img.X < anm[192].X+anm[192].frames*anm[192].W {
 								fx[i].img.X += anm[192].W
@@ -9309,9 +9308,9 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "spinnadthfx":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 20), rl.Vector2Zero(), 0, shcol())
-						col := ranCol()
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(col, rF32(0.5, 0.7)))
-						rl.DrawTexturePro(imgs, fx[i].img, brec(fx[i].rec, 7), rl.Vector2Zero(), 0, rl.Fade(col, rF32(0.1, 0.25)))
+						col := RandColor()
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(col, RandF32(0.5, 0.7)))
+						rl.DrawTexturePro(imgs, fx[i].img, brec(fx[i].rec, 7), rl.Vector2Zero(), 0, rl.Fade(col, RandF32(0.1, 0.25)))
 						if frames%2 == 0 {
 							if fx[i].img.X < anm[191].X+anm[191].frames*anm[191].W {
 								fx[i].img.X += anm[191].W
@@ -9325,9 +9324,9 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "frisbeedthfx":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 20), rl.Vector2Zero(), 0, shcol())
-						col := ranYellow()
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(col, rF32(0.2, 0.5)))
-						rl.DrawTexturePro(imgs, fx[i].img, brec(fx[i].rec, 7), rl.Vector2Zero(), 0, rl.Fade(col, rF32(0.1, 0.25)))
+						col := RandYellow()
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(col, RandF32(0.2, 0.5)))
+						rl.DrawTexturePro(imgs, fx[i].img, brec(fx[i].rec, 7), rl.Vector2Zero(), 0, rl.Fade(col, RandF32(0.1, 0.25)))
 						if frames%2 == 0 {
 							if fx[i].img.X < anm[190].X+anm[190].frames*anm[190].W {
 								fx[i].img.X += anm[190].W
@@ -9341,9 +9340,9 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "icedthfx":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 20), rl.Vector2Zero(), 0, shcol())
-						col := ranBlue()
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(col, rF32(0.2, 0.5)))
-						rl.DrawTexturePro(imgs, fx[i].img, brec(fx[i].rec, 7), rl.Vector2Zero(), 0, rl.Fade(col, rF32(0.1, 0.25)))
+						col := RandBlue()
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(col, RandF32(0.2, 0.5)))
+						rl.DrawTexturePro(imgs, fx[i].img, brec(fx[i].rec, 7), rl.Vector2Zero(), 0, rl.Fade(col, RandF32(0.1, 0.25)))
 						if frames%2 == 0 {
 							if fx[i].img.X < anm[189].X+anm[189].frames*anm[189].W {
 								fx[i].img.X += anm[189].W
@@ -9357,7 +9356,7 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "potionfx":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 20), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(ranCol(), rF32(0.5, 0.7)))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(RandColor(), RandF32(0.5, 0.7)))
 						if frames%3 == 0 {
 							if fx[i].img.X < anm[188].X+anm[188].frames*anm[188].W {
 								fx[i].img.X += anm[188].W
@@ -9371,7 +9370,7 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "scrollfx":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 20), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(ranCol(), rF32(0.5, 0.7)))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(RandColor(), RandF32(0.5, 0.7)))
 						if frames%3 == 0 {
 							if fx[i].img.X < anm[186].X+anm[186].frames*anm[186].W {
 								fx[i].img.X += anm[186].W
@@ -9385,7 +9384,7 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "weaponcrate":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 20), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(ranOrange(), rF32(0.4, 0.7)))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(RandOrange(), RandF32(0.4, 0.7)))
 						if frames%5 == 0 {
 							if fx[i].img.X < anm[181].X+anm[181].frames*anm[181].W {
 								fx[i].img.X += anm[181].W
@@ -9396,7 +9395,7 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "switchfx":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 20), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(ranCol(), rF32(0.3, 0.5)))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(RandColor(), RandF32(0.3, 0.5)))
 						if frames%3 == 0 {
 							if fx[i].img.X < anm[180].X+anm[180].frames*anm[180].W {
 								fx[i].img.X += anm[180].W
@@ -9411,7 +9410,7 @@ func drawcam() { //MARK:DRAW CAM
 
 					case "fryingShock":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 20), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(ranCol(), rF32(0.2, 0.4)))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(RandColor(), RandF32(0.2, 0.4)))
 						if frames%3 == 0 {
 							if fx[i].img.X < anm[178].X+anm[178].frames*anm[178].W {
 								fx[i].img.X += anm[178].W
@@ -9440,7 +9439,7 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "landmineExplod":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 20), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.4, 0.7)))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.4, 0.7)))
 						if frames%3 == 0 {
 							if fx[i].img.X < anm[57].X+anm[57].frames*anm[57].W {
 								fx[i].img.X += anm[57].W
@@ -9451,7 +9450,7 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "icemanchange":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 20), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.2, 0.5)))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.2, 0.5)))
 						if frames%3 == 0 {
 							if fx[i].img.X < anm[109].X+anm[109].frames*anm[109].W {
 								fx[i].img.X += anm[109].W
@@ -9470,7 +9469,7 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "summonitem":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 5), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.4, 0.7)))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.4, 0.7)))
 						if frames%4 == 0 {
 							if fx[i].img.X < anm[108].X+anm[108].frames*anm[108].W {
 								fx[i].img.X += anm[108].W
@@ -9481,7 +9480,7 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "bombExplode":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 12), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(ranOrange(), rF32(0.4, 0.7)))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(RandOrange(), RandF32(0.4, 0.7)))
 						if frames%2 == 0 {
 							if fx[i].img.X < anm[106].X+anm[106].frames*anm[106].W {
 								fx[i].img.X += anm[106].W
@@ -9531,7 +9530,7 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "chickenExplode":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 12), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.2, 0.5)))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.2, 0.5)))
 						if frames%4 == 0 {
 							if fx[i].img.X < anm[104].X+anm[104].frames*anm[104].W {
 								fx[i].img.X += anm[104].W
@@ -9584,7 +9583,7 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "shockwave":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 12), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.2, 0.5)))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.2, 0.5)))
 						if frames%4 == 0 {
 							if fx[i].img.X < anm[99].X+anm[99].frames*anm[99].W {
 								fx[i].img.X += anm[99].W
@@ -9630,7 +9629,7 @@ func drawcam() { //MARK:DRAW CAM
 					case "cloaksparks":
 						for j := 0; j < len(fx[i].recs2); j++ {
 							rl.DrawTexturePro(imgs, fx[i].img, fx[i].recs2[j], rl.Vector2Zero(), 0, shcol())
-							rl.DrawTexturePro(imgs, fx[i].img, fx[i].recs2[j], rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.2, 0.4)))
+							rl.DrawTexturePro(imgs, fx[i].img, fx[i].recs2[j], rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.2, 0.4)))
 							if debug {
 								rl.DrawRectangleLinesEx(fx[i].recs2[j], 2, rl.Yellow)
 								rl.DrawRectangleLinesEx(fx[i].crecs[j], 2, rl.Magenta)
@@ -9676,7 +9675,7 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "beetrootExplode":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 12), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(ranRed(), rF32(0.4, 0.7)))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(RandRed(), RandF32(0.4, 0.7)))
 						if frames%4 == 0 {
 							if fx[i].img.X < anm[95].X+anm[95].frames*anm[95].W {
 								fx[i].img.X += anm[95].W
@@ -9796,7 +9795,7 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "frisbee":
 						rl.DrawTexturePro(imgs, fx[i].img, drec(shrec(fx[i].rec, 18)), orgn(fx[i].rec), fx[i].ro, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, drec(fx[i].rec), orgn(fx[i].rec), fx[i].ro, rl.Fade(ranCol(), rF32(0.7, 0.9)))
+						rl.DrawTexturePro(imgs, fx[i].img, drec(fx[i].rec), orgn(fx[i].rec), fx[i].ro, rl.Fade(RandColor(), RandF32(0.7, 0.9)))
 						if frames%4 == 0 {
 							fx[i].img.X += anm[93].W
 							if fx[i].img.X > anm[93].X+anm[93].frames*anm[93].W {
@@ -9822,9 +9821,9 @@ func drawcam() { //MARK:DRAW CAM
 						} else {
 							countbreak := 100
 							for {
-								fx[i].dirX = rF32(-fx[i].spd, fx[i].spd)
-								fx[i].dirY = rF32(-fx[i].spd, fx[i].spd)
-								if getabs(fx[i].dirX) > 2 || getabs(fx[i].dirY) > 2 {
+								fx[i].dirX = RandF32(-fx[i].spd, fx[i].spd)
+								fx[i].dirY = RandF32(-fx[i].spd, fx[i].spd)
+								if Abs(fx[i].dirX) > 2 || Abs(fx[i].dirY) > 2 {
 									break
 								}
 								countbreak--
@@ -9870,7 +9869,7 @@ func drawcam() { //MARK:DRAW CAM
 					case "purplerain":
 						for j := 0; j < len(fx[i].recs2); j++ {
 							rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].recs2[j], 5), rl.Vector2Zero(), 0, shcol())
-							rl.DrawTexturePro(imgs, fx[i].img, fx[i].recs2[j], rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.5, 0.7)))
+							rl.DrawTexturePro(imgs, fx[i].img, fx[i].recs2[j], rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.5, 0.7)))
 							if debug {
 								rl.DrawRectangleLinesEx(fx[i].recs2[j], 2, rl.Magenta)
 							}
@@ -9915,7 +9914,7 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "tesla":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 18), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.1, 0.3)))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.1, 0.3)))
 						if frames%4 == 0 {
 							fx[i].img.X += anm[91].W
 							if fx[i].img.X > anm[91].X+anm[91].frames*anm[91].W {
@@ -9962,7 +9961,7 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "tornado":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 18), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.2, 0.4)))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.2, 0.4)))
 						if frames%4 == 0 {
 							fx[i].img.X += anm[90].W
 							if fx[i].img.X > anm[90].X+anm[90].frames*anm[90].W {
@@ -9985,9 +9984,9 @@ func drawcam() { //MARK:DRAW CAM
 						} else {
 							countbreak := 100
 							for {
-								fx[i].dirX = rF32(-fx[i].spd, fx[i].spd)
-								fx[i].dirY = rF32(-fx[i].spd, fx[i].spd)
-								if getabs(fx[i].dirX) > 1 || getabs(fx[i].dirY) > 1 {
+								fx[i].dirX = RandF32(-fx[i].spd, fx[i].spd)
+								fx[i].dirY = RandF32(-fx[i].spd, fx[i].spd)
+								if Abs(fx[i].dirX) > 1 || Abs(fx[i].dirY) > 1 {
 									break
 								}
 								countbreak--
@@ -10010,7 +10009,7 @@ func drawcam() { //MARK:DRAW CAM
 						}
 					case "thorns":
 						rl.DrawTexturePro(imgs, fx[i].img, shrec(fx[i].rec, 12), rl.Vector2Zero(), 0, shcol())
-						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(ranRed(), 0.4))
+						rl.DrawTexturePro(imgs, fx[i].img, fx[i].rec, rl.Vector2Zero(), 0, rl.Fade(RandRed(), 0.4))
 						if frames%4 == 0 {
 							if fx[i].img.X < anm[89].X+anm[89].frames*anm[89].W {
 								fx[i].img.X += anm[89].W
@@ -10086,7 +10085,7 @@ func drawcam() { //MARK:DRAW CAM
 							hitPL(2)
 							if pl.burnT == 0 && pl.dampT == 0 && icelollyT == 0 && pl.resFireT == 0 {
 								if ovenglovenum > 0 {
-									if roll6() <= ovenglovenum {
+									if Roll6() <= ovenglovenum {
 										admsg("oven glove saves burn", rl.Green)
 									} else {
 										admsg("burning...", rl.Orange)
@@ -10149,7 +10148,7 @@ func drawcam() { //MARK:DRAW CAM
 				}
 			}
 			if clear {
-				rem(1)
+				Remove(1)
 			}
 		}
 		if debug && !bosson {
@@ -10217,21 +10216,21 @@ func drawcam() { //MARK:DRAW CAM
 					if boss.hpT == 0 {
 						rl.DrawTexturePro(imgs, boss.img, boss.rec, rl.Vector2Zero(), 0, rl.White)
 					} else {
-						rl.DrawTexturePro(imgs, boss.img, boss.rec, rl.Vector2Zero(), 0, rl.Fade(ranCol(), rF32(0.5, 0.7)))
+						rl.DrawTexturePro(imgs, boss.img, boss.rec, rl.Vector2Zero(), 0, rl.Fade(RandColor(), RandF32(0.5, 0.7)))
 					}
 				case 5, 7: //PYRO PIG BATTY
 					rl.DrawTexturePro(imgs, boss.img, shrec(boss.rec, 17), rl.Vector2Zero(), 0, shcol())
 					if boss.hpT == 0 {
 						rl.DrawTexturePro(imgs, boss.img, boss.rec, rl.Vector2Zero(), 0, rl.White)
 					} else {
-						rl.DrawTexturePro(imgs, boss.img, boss.rec, rl.Vector2Zero(), 0, rl.Fade(ranCol(), rF32(0.5, 0.7)))
+						rl.DrawTexturePro(imgs, boss.img, boss.rec, rl.Vector2Zero(), 0, rl.Fade(RandColor(), RandF32(0.5, 0.7)))
 					}
 				case 2, 3, 4, 6, 8: //MR FRISBEE SPINNA SPACEMAN ZOMBO MUSHEE
 					rl.DrawTexturePro(imgs, boss.img, shrec(boss.rec, 7), rl.Vector2Zero(), 0, shcol())
 					if boss.hpT == 0 {
 						rl.DrawTexturePro(imgs, boss.img, boss.rec, rl.Vector2Zero(), 0, rl.White)
 					} else {
-						rl.DrawTexturePro(imgs, boss.img, boss.rec, rl.Vector2Zero(), 0, rl.Fade(ranCol(), rF32(0.5, 0.7)))
+						rl.DrawTexturePro(imgs, boss.img, boss.rec, rl.Vector2Zero(), 0, rl.Fade(RandColor(), RandF32(0.5, 0.7)))
 					}
 				case 1: //ICEMAN
 					switch boss.state {
@@ -10240,28 +10239,28 @@ func drawcam() { //MARK:DRAW CAM
 						if boss.hpT == 0 {
 							rl.DrawTexturePro(bossWALKL, boss.img, boss.rec, rl.Vector2Zero(), 0, rl.White)
 						} else {
-							rl.DrawTexturePro(bossWALKL, boss.img, boss.rec, rl.Vector2Zero(), 0, rl.Fade(ranCol(), rF32(0.5, 0.7)))
+							rl.DrawTexturePro(bossWALKL, boss.img, boss.rec, rl.Vector2Zero(), 0, rl.Fade(RandColor(), RandF32(0.5, 0.7)))
 						}
 					case 2: //WALK R
 						rl.DrawTexturePro(bossWALKR, boss.img, shrec(boss.rec, 7), rl.Vector2Zero(), 0, shcol())
 						if boss.hpT == 0 {
 							rl.DrawTexturePro(bossWALKR, boss.img, boss.rec, rl.Vector2Zero(), 0, rl.White)
 						} else {
-							rl.DrawTexturePro(bossWALKR, boss.img, boss.rec, rl.Vector2Zero(), 0, rl.Fade(ranCol(), rF32(0.5, 0.7)))
+							rl.DrawTexturePro(bossWALKR, boss.img, boss.rec, rl.Vector2Zero(), 0, rl.Fade(RandColor(), RandF32(0.5, 0.7)))
 						}
 					case 1: //ATK
 						rl.DrawTexturePro(bossATK, boss.img, shrec(boss.rec, 7), rl.Vector2Zero(), 0, shcol())
 						if boss.hpT == 0 {
 							rl.DrawTexturePro(bossATK, boss.img, boss.rec, rl.Vector2Zero(), 0, rl.White)
 						} else {
-							rl.DrawTexturePro(bossATK, boss.img, boss.rec, rl.Vector2Zero(), 0, rl.Fade(ranCol(), rF32(0.5, 0.7)))
+							rl.DrawTexturePro(bossATK, boss.img, boss.rec, rl.Vector2Zero(), 0, rl.Fade(RandColor(), RandF32(0.5, 0.7)))
 						}
 					case 0: //IDLE
 						rl.DrawTexturePro(bossIDL, boss.img, shrec(boss.rec, 7), rl.Vector2Zero(), 0, shcol())
 						if boss.hpT == 0 {
 							rl.DrawTexturePro(bossIDL, boss.img, boss.rec, rl.Vector2Zero(), 0, rl.White)
 						} else {
-							rl.DrawTexturePro(bossIDL, boss.img, boss.rec, rl.Vector2Zero(), 0, rl.Fade(ranCol(), rF32(0.5, 0.7)))
+							rl.DrawTexturePro(bossIDL, boss.img, boss.rec, rl.Vector2Zero(), 0, rl.Fade(RandColor(), RandF32(0.5, 0.7)))
 						}
 					}
 				}
@@ -10282,9 +10281,9 @@ func drawcam() { //MARK:DRAW CAM
 				siz := b5
 				rec := rl.NewRectangle(pl.cnt.X-siz/2, pl.cnt.Y-siz/2, siz, siz)
 				rl.DrawTexturePro(imgs, pl.bosseffectrec, shrec(rec, 12), rl.Vector2Zero(), 0, shcol())
-				rl.DrawTexturePro(imgs, pl.bosseffectrec, rec, rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.2, 0.4)))
-				rl.DrawTexturePro(imgs, pl.bosseffectrec, brec(rec, 12), rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.05, 0.1)))
-				rl.DrawTexturePro(imgs, pl.bosseffectrec, brec(rec, 24), rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.05, 0.1)))
+				rl.DrawTexturePro(imgs, pl.bosseffectrec, rec, rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.2, 0.4)))
+				rl.DrawTexturePro(imgs, pl.bosseffectrec, brec(rec, 12), rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.05, 0.1)))
+				rl.DrawTexturePro(imgs, pl.bosseffectrec, brec(rec, 24), rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.05, 0.1)))
 				if frames%3 == 0 {
 					pl.bosseffectrec.X += anm[123].W
 					if pl.bosseffectrec.X > anm[123].X+anm[123].frames*anm[123].W {
@@ -10463,7 +10462,7 @@ func drawcam() { //MARK:DRAW CAM
 				rec2.Y -= b2
 				rec2.Width += b4
 				rec2.Height += b4
-				rl.DrawTexturePro(imgs, anm[85].rec, rec2, rl.Vector2Zero(), 0, rl.Fade(ranCol(), 0.7))
+				rl.DrawTexturePro(imgs, anm[85].rec, rec2, rl.Vector2Zero(), 0, rl.Fade(RandColor(), 0.7))
 				if frames%6 == 0 {
 					anm[85].rec.X += anm[85].W
 					if anm[85].rec.X > anm[85].X+anm[85].frames*anm[85].W {
@@ -10508,7 +10507,7 @@ func drawcam() { //MARK:DRAW CAM
 					rec3.Width += b2
 					rec3.Height += b2
 					rl.DrawTexturePro(imgs, anm[84].rec, shrec(rec3, 5), rl.Vector2Zero(), 0, shcol())
-					rl.DrawTexturePro(imgs, anm[84].rec, rec3, rl.Vector2Zero(), 0, rl.Fade(ranRed(), 0.7))
+					rl.DrawTexturePro(imgs, anm[84].rec, rec3, rl.Vector2Zero(), 0, rl.Fade(RandRed(), 0.7))
 					if frames%6 == 0 {
 						anm[84].rec.X += anm[84].W
 						if anm[84].rec.X > anm[84].X+anm[84].frames*anm[84].W {
@@ -10584,7 +10583,7 @@ func drawcam() { //MARK:DRAW CAM
 					} else {
 						rec3.X -= 1
 					}
-					rl.DrawTexturePro(imgs, anm[174].rec, rec3, rl.Vector2Zero(), 0, rl.Fade(ranGreen(), 0.5))
+					rl.DrawTexturePro(imgs, anm[174].rec, rec3, rl.Vector2Zero(), 0, rl.Fade(RandGreen(), 0.5))
 					if frames%3 == 0 {
 						anm[174].rec.X += anm[174].W
 						if anm[174].rec.X > anm[174].X+anm[174].frames*anm[173].W {
@@ -10623,15 +10622,15 @@ func drawcam() { //MARK:DRAW CAM
 					rl.DrawTexturePro(imgs, pl.anim[planimnum2].rec, rec4, rl.Vector2Zero(), 0, rl.Fade(rl.White, 0.2))
 				}
 				if pl.burnT > 0 {
-					rl.DrawTexturePro(imgs, pl.anim[pl.aninum].rec, rec2, rl.Vector2Zero(), 0, ranOrange())
+					rl.DrawTexturePro(imgs, pl.anim[pl.aninum].rec, rec2, rl.Vector2Zero(), 0, RandOrange())
 				} else if pl.poisonT > 0 {
 					rl.DrawTexturePro(imgs, pl.anim[pl.aninum].rec, rec2, rl.Vector2Zero(), 0, rl.Lime)
 				} else if pl.hpT > 0 {
-					rl.DrawTexturePro(imgs, pl.anim[pl.aninum].rec, rec2, rl.Vector2Zero(), 0, ranCol())
+					rl.DrawTexturePro(imgs, pl.anim[pl.aninum].rec, rec2, rl.Vector2Zero(), 0, RandColor())
 				} else if pl.dampT > 0 {
-					rl.DrawTexturePro(imgs, pl.anim[pl.aninum].rec, rec2, rl.Vector2Zero(), 0, ranCyan())
+					rl.DrawTexturePro(imgs, pl.anim[pl.aninum].rec, rec2, rl.Vector2Zero(), 0, RandCyan())
 				} else if pl.invisT > 0 {
-					rl.DrawTexturePro(imgs, pl.anim[pl.aninum].rec, rec2, rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.2, 0.4)))
+					rl.DrawTexturePro(imgs, pl.anim[pl.aninum].rec, rec2, rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.2, 0.4)))
 				} else {
 					rl.DrawTexturePro(imgs, pl.anim[pl.aninum].rec, rec2, rl.Vector2Zero(), 0, rl.White)
 				}
@@ -10642,11 +10641,11 @@ func drawcam() { //MARK:DRAW CAM
 					rec3.Y -= b / 2
 					rec3.Width += b
 					rec3.Height += b
-					rl.DrawTexturePro(imgs, etc[149], rec3, rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.1, 0.2)))
+					rl.DrawTexturePro(imgs, etc[149], rec3, rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.1, 0.2)))
 					blurrec := rec3
-					blurrec.X += rF32(-4, 4)
-					blurrec.Y += rF32(-4, 4)
-					rl.DrawTexturePro(imgs, etc[149], blurrec, rl.Vector2Zero(), 0, rl.Fade(rl.White, rF32(0.05, 0.1)))
+					blurrec.X += RandF32(-4, 4)
+					blurrec.Y += RandF32(-4, 4)
+					rl.DrawTexturePro(imgs, etc[149], blurrec, rl.Vector2Zero(), 0, rl.Fade(rl.White, RandF32(0.05, 0.1)))
 				}
 				//DEBUG
 				if debug {
@@ -10654,7 +10653,7 @@ func drawcam() { //MARK:DRAW CAM
 					rl.DrawRectangleLinesEx(pl.crec, 1, rl.Magenta)
 					rl.DrawRectangleLinesEx(pl.carec, 1, rl.Green)
 					rl.DrawRectangleLinesEx(pl.perrec, 1, rl.Blue)
-					rl.DrawCircleV(pl.cnt, 2, ranCol())
+					rl.DrawCircleV(pl.cnt, 2, RandColor())
 				}
 				if frames%7 == 0 { //IDLE ANIM
 					pl.anim[0].rec.X += pl.anim[0].W
@@ -10753,7 +10752,7 @@ func drawcam() { //MARK:DRAW CAM
 							rec := rl.NewRectangle(x, y, siz, siz)
 							//MOUSE INP
 							if rl.CheckCollisionPointRec(cursorV2cam, rec) {
-								rl.DrawRectangleRec(rec, rl.Fade(ranCol(), 0.7))
+								rl.DrawRectangleRec(rec, rl.Fade(RandColor(), 0.7))
 								if chests[i].itm[j].nm != "" {
 									toptx = chests[i].itm[j].nm
 									toptxT = fps
@@ -10826,7 +10825,7 @@ func drawquickslots() { //MARK:DRAW QUICK SLOTS
 		//BG REC
 		rec := rl.NewRectangle(x, y, siz, siz)
 		if rl.CheckCollisionPointRec(cursorV2, rec) {
-			rl.DrawRectangleRec(rec, rl.Fade(ranCol(), 0.3))
+			rl.DrawRectangleRec(rec, rl.Fade(RandColor(), 0.3))
 			if pl.quik[i].nm != "" {
 				//TXT
 				if charscr {
@@ -10888,7 +10887,7 @@ func drawquickslots() { //MARK:DRAW QUICK SLOTS
 		if pl.quik[i].nm != "" {
 			rl.DrawTexturePro(imgs, pl.quik[i].img, rec, rl.Vector2Zero(), 0, rl.White)
 			if pl.quik[i].coolT > 0 {
-				rl.DrawRectangleRec(rec, rl.Fade(ranRed(), 0.3))
+				rl.DrawRectangleRec(rec, rl.Fade(RandRed(), 0.3))
 			}
 			if pl.quik[i].numof > 1 {
 				txlen := rl.MeasureText(fmt.Sprint(pl.quik[i].numof), txs)
@@ -10957,7 +10956,7 @@ func drawweapslots() { //MARK:DRAW WEAPON SLOTS XP
 		rec := rl.NewRectangle(x, y, siz, siz)
 
 		if rl.CheckCollisionPointRec(cursorV2, rec) {
-			rl.DrawRectangleRec(rec, rl.Fade(ranCol(), 0.3))
+			rl.DrawRectangleRec(rec, rl.Fade(RandColor(), 0.3))
 			if i == 0 {
 				if pl.wp1.nm != "" {
 					toptx = pl.wp1.nm
@@ -11303,7 +11302,7 @@ func drawnocam() { //MARK:DRAW NO CAM
 			}
 			rec = rl.NewRectangle(x2, y2, siz, heig)
 			for i := 0; i < levels[levNum].enm[0].hp; i++ {
-				rl.DrawRectangleRec(rec, rl.Fade(darkRed(), 0.7))
+				rl.DrawRectangleRec(rec, rl.Fade(DarkRed(), 0.7))
 				rec.X += siz + spc
 			}
 		}
@@ -11414,7 +11413,7 @@ func drawnocam() { //MARK:DRAW NO CAM
 		}
 		if gasT > 0 {
 			rl.DrawTexturePro(imgs, etc[79], shrec(rec, 5), rl.Vector2Zero(), 0, shcol())
-			rl.DrawTexturePro(imgs, etc[79], rec, rl.Vector2Zero(), 0, ranOrange())
+			rl.DrawTexturePro(imgs, etc[79], rec, rl.Vector2Zero(), 0, RandOrange())
 			if rl.CheckCollisionPointRec(cursorV2, rec) {
 				txt := "inflict burn > " + fmt.Sprint(gasT/fps) + "s remaining"
 				txlen := rl.MeasureText(txt, txs)
@@ -11554,7 +11553,7 @@ func drawnocam() { //MARK:DRAW NO CAM
 		}
 		if pl.resFireT > 0 {
 			rl.DrawTexturePro(imgs, etc[84], shrec(rec, 5), rl.Vector2Zero(), 0, shcol())
-			rl.DrawTexturePro(imgs, etc[84], rec, rl.Vector2Zero(), 0, ranOrange())
+			rl.DrawTexturePro(imgs, etc[84], rec, rl.Vector2Zero(), 0, RandOrange())
 			if rl.CheckCollisionPointRec(cursorV2, rec) {
 				txt := "resist fire > " + fmt.Sprint(pl.resFireT/fps) + "s remaining"
 				txlen := rl.MeasureText(txt, txs)
@@ -11574,7 +11573,7 @@ func drawnocam() { //MARK:DRAW NO CAM
 		}
 		if pl.resPoisT > 0 {
 			rl.DrawTexturePro(imgs, etc[85], shrec(rec, 5), rl.Vector2Zero(), 0, shcol())
-			rl.DrawTexturePro(imgs, etc[85], rec, rl.Vector2Zero(), 0, ranGreen())
+			rl.DrawTexturePro(imgs, etc[85], rec, rl.Vector2Zero(), 0, RandGreen())
 			if rl.CheckCollisionPointRec(cursorV2, rec) {
 				txt := "resist poison > " + fmt.Sprint(pl.resPoisT/fps) + "s remaining"
 				txlen := rl.MeasureText(txt, txs)
@@ -11594,7 +11593,7 @@ func drawnocam() { //MARK:DRAW NO CAM
 		}
 		if pl.invisT > 0 {
 			rl.DrawTexturePro(imgs, etc[86], shrec(rec, 5), rl.Vector2Zero(), 0, shcol())
-			rl.DrawTexturePro(imgs, etc[86], rec, rl.Vector2Zero(), 0, ranCyan())
+			rl.DrawTexturePro(imgs, etc[86], rec, rl.Vector2Zero(), 0, RandCyan())
 			if rl.CheckCollisionPointRec(cursorV2, rec) {
 				txt := "invisible > " + fmt.Sprint(pl.invisT/fps) + "s remaining"
 				txlen := rl.MeasureText(txt, txs)
@@ -11614,7 +11613,7 @@ func drawnocam() { //MARK:DRAW NO CAM
 		}
 		if pl.armorT > 0 {
 			rl.DrawTexturePro(imgs, etc[87], shrec(rec, 5), rl.Vector2Zero(), 0, shcol())
-			rl.DrawTexturePro(imgs, etc[87], rec, rl.Vector2Zero(), 0, ranCyan())
+			rl.DrawTexturePro(imgs, etc[87], rec, rl.Vector2Zero(), 0, RandCyan())
 			if rl.CheckCollisionPointRec(cursorV2, rec) {
 				txt := "armor > " + fmt.Sprint(pl.armorT/fps) + "s remaining"
 				txlen := rl.MeasureText(txt, txs)
@@ -11634,7 +11633,7 @@ func drawnocam() { //MARK:DRAW NO CAM
 		}
 		if intangibleT > 0 {
 			rl.DrawTexturePro(imgs, etc[88], shrec(rec, 5), rl.Vector2Zero(), 0, shcol())
-			rl.DrawTexturePro(imgs, etc[88], rec, rl.Vector2Zero(), 0, ranCol())
+			rl.DrawTexturePro(imgs, etc[88], rec, rl.Vector2Zero(), 0, RandColor())
 			if rl.CheckCollisionPointRec(cursorV2, rec) {
 				txt := "intangible > " + fmt.Sprint(intangibleT/fps) + "s remaining"
 				txlen := rl.MeasureText(txt, txs)
@@ -11839,7 +11838,7 @@ func drawnocam() { //MARK:DRAW NO CAM
 		x2 = xorig
 		for i := 0; i < pl.hp; i++ {
 			rec := rl.NewRectangle(x2, y2, siz, siz)
-			rl.DrawTexturePro(imgs, etc[32], rec, rl.Vector2Zero(), 0, rl.Fade(brightYellow(), rF32(0.8, 1.1)))
+			rl.DrawTexturePro(imgs, etc[32], rec, rl.Vector2Zero(), 0, rl.Fade(BrightYellow(), RandF32(0.8, 1.1)))
 			x2 += siz + spc
 		}
 		//MANA
@@ -11862,7 +11861,7 @@ func drawnocam() { //MARK:DRAW NO CAM
 			} else {
 				rl.DrawTexturePro(imgs, etc[83], shrec(rec, 5), rl.Vector2Zero(), 0, rl.Fade(rl.DarkBlue, 0.7))
 			}
-			rl.DrawTexturePro(imgs, etc[83], rec, rl.Vector2Zero(), 0, rl.Fade(ranCyan(), rF32(0.8, 1.1)))
+			rl.DrawTexturePro(imgs, etc[83], rec, rl.Vector2Zero(), 0, rl.Fade(RandCyan(), RandF32(0.8, 1.1)))
 			x3 += siz + spc
 		}
 		//ARTIFACTS
@@ -11916,7 +11915,7 @@ func drawnocam() { //MARK:DRAW NO CAM
 			xtx := int32(cnt.X) - txlen/2
 			ytx := int32(cnt.Y)
 			ytx += pl.rec.ToInt32().Height
-			rl.DrawText(txt, xtx, ytx, siz, rl.Fade(ranCol(), 0.2))
+			rl.DrawText(txt, xtx, ytx, siz, rl.Fade(RandColor(), 0.2))
 		}
 	}
 	//CURSOR
@@ -11932,7 +11931,7 @@ func drawnocam() { //MARK:DRAW NO CAM
 		}
 		cursorRec := rl.NewRectangle(cursorV2.X-siz/2, cursorV2.Y-siz/2, siz, siz)
 		rl.DrawTexturePro(imgs, etc[7], shrec(drec(cursorRec), 17), orgn(cursorRec), curRo, shcol())
-		rl.DrawTexturePro(imgs, etc[7], drec(cursorRec), orgn(cursorRec), curRo, ranCol())
+		rl.DrawTexturePro(imgs, etc[7], drec(cursorRec), orgn(cursorRec), curRo, RandColor())
 		curRo++
 	}
 	//PIXELS
@@ -11949,8 +11948,8 @@ func drawnocam() { //MARK:DRAW NO CAM
 			min = 3
 		}
 		for num > 0 {
-			siz := rF32(min, max)
-			rec := rl.NewRectangle(rF32(0, scrWF32), rF32(0, scrHF32), siz, siz)
+			siz := RandF32(min, max)
+			rec := rl.NewRectangle(RandF32(0, scrWF32), RandF32(0, scrHF32), siz, siz)
 			rl.DrawRectangleRec(rec, rl.Black)
 			num--
 		}
@@ -12095,7 +12094,7 @@ func drawsidebar() { //MARK:DRAW SIDE BAR MESSAGES DRAW TIMER
 	txlen := rl.MeasureText(txt, txs)
 	x := scrW32 - (txlen + txs)
 	rl.DrawText(txt, x-2, y+2, txs, rl.Black)
-	rl.DrawText(txt, x, y, txs, ranCol())
+	rl.DrawText(txt, x, y, txs, RandColor())
 	y += txs + tx
 	sideY = float32(y) + b2 + b/2
 	//ENEMIES REMAIN
@@ -12112,7 +12111,7 @@ func drawsidebar() { //MARK:DRAW SIDE BAR MESSAGES DRAW TIMER
 		txlen = rl.MeasureText(txt, txs)
 		x = scrW32 - (txlen + txs)
 		rl.DrawText(txt, x-2, y+2, txs, rl.Black)
-		rl.DrawText(txt, x, y, txs, ranCol())
+		rl.DrawText(txt, x, y, txs, RandColor())
 	}
 	//XP
 	ytx := y + (txs + tx/2) + 2
@@ -12127,7 +12126,7 @@ func drawsidebar() { //MARK:DRAW SIDE BAR MESSAGES DRAW TIMER
 	txtlen := rl.MeasureText(txt, txs*2)
 	xtx -= txtlen + txs
 	rl.DrawText(txt, xtx-2, ytx+2, txs*2, rl.Black)
-	rl.DrawText(txt, xtx, ytx, txs*2, ranCol())
+	rl.DrawText(txt, xtx, ytx, txs*2, RandColor())
 
 }
 
@@ -12155,7 +12154,7 @@ func drawcharscr() { //MARK:DRAW INVENTORY CHARACTER SCREEN
 		if bgpix[i].fd > 0 {
 			bgpix[i].fd -= 0.005
 		} else {
-			bgpix[i].fd = rF32(0.5, 1)
+			bgpix[i].fd = RandF32(0.5, 1)
 		}
 	}
 	if cantmoveT > 0 {
@@ -12194,7 +12193,7 @@ func drawcharscr() { //MARK:DRAW INVENTORY CHARACTER SCREEN
 	v4 := v3
 	v4.X -= closerec.Width - 16
 	if rl.CheckCollisionPointRec(cursorV2camInven, closerec) {
-		rl.DrawRectangleRec(closerec, darkRed())
+		rl.DrawRectangleRec(closerec, DarkRed())
 		rl.DrawLineEx(v1, v3, 4, rl.Black)
 		rl.DrawLineEx(v2, v4, 4, rl.Black)
 		if invInfoT == 0 {
@@ -12240,7 +12239,7 @@ func drawcharscr() { //MARK:DRAW INVENTORY CHARACTER SCREEN
 
 		rec := rl.NewRectangle(x, y, siz, siz)
 		if rl.CheckCollisionPointRec(cursorV2camInven, rec) {
-			rl.DrawRectangleRec(rec, rl.Fade(ranCol(), 0.7))
+			rl.DrawRectangleRec(rec, rl.Fade(RandColor(), 0.7))
 		} else {
 			rl.DrawRectangleRec(rec, rl.Fade(rl.Black, 0.7))
 		}
@@ -12332,7 +12331,7 @@ func drawcharscr() { //MARK:DRAW INVENTORY CHARACTER SCREEN
 	for i := 0; i < len(pl.weaps); i++ {
 		rec := rl.NewRectangle(x, y, siz, siz)
 		if rl.CheckCollisionPointRec(cursorV2camInven, rec) {
-			rl.DrawRectangleRec(rec, rl.Fade(ranCol(), 0.7))
+			rl.DrawRectangleRec(rec, rl.Fade(RandColor(), 0.7))
 			if pl.weaps[i].nm != "" {
 				disTxt1 = pl.weaps[i].nm + " > level " + fmt.Sprint(pl.weaps[i].level)
 				disTxt2 = "right click for menu"
@@ -12409,7 +12408,7 @@ func drawcharscr() { //MARK:DRAW INVENTORY CHARACTER SCREEN
 	y += siz + be5
 	rec2 := rl.NewRectangle(cnt.X-(b4+b/8), y, b4, b+b/2)
 	if rl.CheckCollisionPointRec(cursorV2camInven, rec2) {
-		rl.DrawRectangleRec(rec2, darkRed())
+		rl.DrawRectangleRec(rec2, DarkRed())
 		rl.DrawRectangleLinesEx(rec2, 4, rl.Black)
 		txt := "stack"
 		txs := tx3
@@ -12438,7 +12437,7 @@ func drawcharscr() { //MARK:DRAW INVENTORY CHARACTER SCREEN
 	//PACK
 	rec2.X += rec2.Width + b/4
 	if rl.CheckCollisionPointRec(cursorV2camInven, rec2) {
-		rl.DrawRectangleRec(rec2, darkRed())
+		rl.DrawRectangleRec(rec2, DarkRed())
 		rl.DrawRectangleLinesEx(rec2, 4, rl.Black)
 		txt := "pack"
 		txs := tx3
@@ -12544,7 +12543,7 @@ func drawcharscr() { //MARK:DRAW INVENTORY CHARACTER SCREEN
 		for i := 0; i < 4; i++ {
 			txrec := rl.NewRectangle(inMenuRec.X, txrecy, inMenuRec.Width, float32(txs)+4)
 			if rl.CheckCollisionPointRec(cursorV2camInven, txrec) {
-				rl.DrawRectangleRec(txrec, ranCol())
+				rl.DrawRectangleRec(txrec, RandColor())
 				if inpL {
 					switch i {
 					case 0: //MOVE TO SLOT 1
@@ -12631,7 +12630,7 @@ func drawcharscr() { //MARK:DRAW INVENTORY CHARACTER SCREEN
 				for i := 0; i < checkNum; i++ {
 					txrec := rl.NewRectangle(inMenuRec.X, txrecy, inMenuRec.Width, float32(txs)+4)
 					if rl.CheckCollisionPointRec(cursorV2camInven, txrec) {
-						rl.DrawRectangleRec(txrec, ranCol())
+						rl.DrawRectangleRec(txrec, RandColor())
 						if inpL {
 							switch i {
 							case 0: //DROP
@@ -12740,7 +12739,7 @@ func drawcharscr() { //MARK:DRAW INVENTORY CHARACTER SCREEN
 				for i := 0; i < checkNum; i++ {
 					txrec := rl.NewRectangle(inMenuRec.X, txrecy, inMenuRec.Width, float32(txs)+4)
 					if rl.CheckCollisionPointRec(cursorV2camInven, txrec) {
-						rl.DrawRectangleRec(txrec, ranCol())
+						rl.DrawRectangleRec(txrec, RandColor())
 						if inpL {
 							switch i {
 							case 0: //DROP
@@ -12828,7 +12827,7 @@ func drawcharscr() { //MARK:DRAW INVENTORY CHARACTER SCREEN
 				for i := 0; i < checkNum; i++ {
 					txrec := rl.NewRectangle(inMenuRec.X, txrecy, inMenuRec.Width, float32(txs)+4)
 					if rl.CheckCollisionPointRec(cursorV2camInven, txrec) {
-						rl.DrawRectangleRec(txrec, ranCol())
+						rl.DrawRectangleRec(txrec, RandColor())
 						if inpL {
 							switch i {
 							case 0: //USE
@@ -12968,7 +12967,7 @@ func drawcharscr() { //MARK:DRAW INVENTORY CHARACTER SCREEN
 				for i := 0; i < checkNum; i++ {
 					txrec := rl.NewRectangle(inMenuRec.X, txrecy, inMenuRec.Width, float32(txs)+4)
 					if rl.CheckCollisionPointRec(cursorV2camInven, txrec) {
-						rl.DrawRectangleRec(txrec, ranCol())
+						rl.DrawRectangleRec(txrec, RandColor())
 						if inpL {
 							switch i {
 							case 0: //USE
@@ -13315,7 +13314,7 @@ func drawcharscr() { //MARK:DRAW INVENTORY CHARACTER SCREEN
 		v4 := v3
 		v4.X -= closerec.Width - 16
 		if rl.CheckCollisionPointRec(cursorV2camInven, closerec) {
-			rl.DrawRectangleRec(closerec, darkRed())
+			rl.DrawRectangleRec(closerec, DarkRed())
 			rl.DrawLineEx(v1, v3, 4, rl.Black)
 			rl.DrawLineEx(v2, v4, 4, rl.Black)
 			if clickT == 0 {
@@ -13348,7 +13347,7 @@ func drawcharscr() { //MARK:DRAW INVENTORY CHARACTER SCREEN
 }
 func drawDebug() { //MARK:DRAW DEBUG
 	siderec := rl.NewRectangle(0, 0, 300, scrHF32)
-	rl.DrawRectangleRec(siderec, rl.Fade(darkRed(), 0.3))
+	rl.DrawRectangleRec(siderec, rl.Fade(DarkRed(), 0.3))
 	txtX, txtY := tx, tx
 	rl.DrawText("levels[levNum].enm[0].dirX"+" "+fmt.Sprint(levels[levNum].enm[0].dirX), txtX, txtY, tx, rl.White)
 	txtY += tx
@@ -13393,7 +13392,7 @@ func drawDebug() { //MARK:DRAW DEBUG
 
 	rl.DrawFPS(int32(b/4), scrH32-int32(b))
 
-	rl.DrawCircleV(cnt, 8, ranCol())
+	rl.DrawCircleV(cnt, 8, RandColor())
 }
 
 // MARK: CHECK CHECK CHECK CHECK CHECK CHECK CHECK CHECK CHECK CHECK CHECK CHECK CHECK CHECK
@@ -13870,14 +13869,14 @@ func findranrecpos(rec rl.Rectangle) (rl.Rectangle, bool) { //MARK: FIND RANDOM 
 	found := false
 	countbreak := 100
 	for {
-		choose := levels[levNum].recs[rInt(0, len(levels[levNum].recs))]
+		choose := levels[levNum].recs[RandInt(0, len(levels[levNum].recs))]
 		x := choose.X + b/2
 		y := choose.Y + b/2
 		x2 := (x + choose.Width) - (b + rec.Width)
 		y2 := (y + choose.Height) - (b + rec.Height)
 
-		x = rF32(x, x2)
-		y = rF32(y, y2)
+		x = RandF32(x, x2)
+		y = RandF32(y, y2)
 
 		rec.X = x
 		rec.Y = y
@@ -13968,8 +13967,8 @@ func findRanCntinRoom(rec rl.Rectangle) rl.Vector2 { //MARK: FIND RANDOM CENTER 
 	for {
 		x := rec.X + b/2
 		y := rec.Y + b/2
-		x += rF32(0, rec.Width-b)
-		y += rF32(0, rec.Height-b)
+		x += RandF32(0, rec.Width-b)
+		y += RandF32(0, rec.Height-b)
 		cntr = rl.NewVector2(x, y)
 		if checkV2Walls(cntr) {
 			break
@@ -13983,13 +13982,13 @@ func findRanCntinRoom(rec rl.Rectangle) rl.Vector2 { //MARK: FIND RANDOM CENTER 
 }
 func findRanCnt() rl.Vector2 { //MARK: FIND RANDOM CENTER
 	cntr := rl.Vector2{}
-	choose := rInt(0, len(levels[levNum].recs))
+	choose := RandInt(0, len(levels[levNum].recs))
 	countbreak := 1000
 	for {
 		x := levels[levNum].recs[choose].X + b
 		y := levels[levNum].recs[choose].Y + b
-		x += rF32(0, levels[levNum].recs[choose].Width-b2)
-		y += rF32(0, levels[levNum].recs[choose].Height-b2)
+		x += RandF32(0, levels[levNum].recs[choose].Width-b2)
+		y += RandF32(0, levels[levNum].recs[choose].Height-b2)
 		cntr = rl.NewVector2(x, y)
 		if checkV2Walls(cntr) {
 			break
@@ -14003,13 +14002,13 @@ func findRanCnt() rl.Vector2 { //MARK: FIND RANDOM CENTER
 }
 func findRanCntLev(lev x1scr) rl.Vector2 { //MARK: FIND RANDOM CENTER X1SCR LEV
 	cntr := rl.Vector2{}
-	choose := rInt(0, len(lev.recs))
+	choose := RandInt(0, len(lev.recs))
 	countbreak := 1000
 	for {
 		x := lev.recs[choose].X + b
 		y := lev.recs[choose].Y + b
-		x += rF32(0, lev.recs[choose].Width-b2)
-		y += rF32(0, lev.recs[choose].Height-b2)
+		x += RandF32(0, lev.recs[choose].Width-b2)
+		y += RandF32(0, lev.recs[choose].Height-b2)
 		cntr = rl.NewVector2(x, y)
 		if checkV2WallsLev(cntr, lev) {
 			break
@@ -14023,16 +14022,16 @@ func findRanCntLev(lev x1scr) rl.Vector2 { //MARK: FIND RANDOM CENTER X1SCR LEV
 }
 func findRanCntLevTreasureRoom(lev x1scr) rl.Vector2 { //MARK: FIND RANDOM CENTER TREASURE ROOM
 	cntr := rl.Vector2{}
-	choose := rInt(0, len(lev.recs))
-	if roll6() > 3 {
+	choose := RandInt(0, len(lev.recs))
+	if Roll6() > 3 {
 		choose = 0
 	}
 	countbreak := 1000
 	for {
 		x := lev.recs[choose].X + b
 		y := lev.recs[choose].Y + b
-		x += rF32(0, lev.recs[choose].Width-b2)
-		y += rF32(0, lev.recs[choose].Height-b2)
+		x += RandF32(0, lev.recs[choose].Width-b2)
+		y += RandF32(0, lev.recs[choose].Height-b2)
 		cntr = rl.NewVector2(x, y)
 		if checkV2WallsLev(cntr, lev) {
 			break
@@ -14045,8 +14044,8 @@ func findRanCntLevTreasureRoom(lev x1scr) rl.Vector2 { //MARK: FIND RANDOM CENTE
 	return cntr
 }
 func findSpdXY(startV2, destV2 rl.Vector2, spd float32) (x, y float32) { //MARK: FIND DIRX DIRY FOR 2X V2
-	xdiff := absdiff(destV2.X, startV2.X)
-	ydiff := absdiff(destV2.Y, startV2.Y)
+	xdiff := AbsDiff(destV2.X, startV2.X)
+	ydiff := AbsDiff(destV2.Y, startV2.Y)
 	if xdiff > ydiff {
 		x = spd
 		y = ydiff / (xdiff / x)
@@ -14107,7 +14106,7 @@ func pushcrate(num, direc int) { //MARK: PUSH CRATE
 		}
 	}
 }
-func reset() { //MARK: NEW GAME RESET
+func Reset() { //MARK: NEW GAME RESET
 
 	levNumDis = 0
 
@@ -14332,7 +14331,7 @@ func savestore() { //MARK: SAVE STORE ROOM
 	}
 
 }
-func readsaves() { //MARK: READ SAVES
+func ReadSaves() { //MARK: READ SAVES
 
 	contents, err := os.ReadFile("save/1s.ave")
 	if err != nil {
@@ -14450,13 +14449,13 @@ func projEnmCollis(num, enNum int) { //MARK: PLAYER PROJ ENEMY COLLIS
 			} else {
 				levels[levNum].enm[enNum].hp -= projPL[num].dmg + (stats.str - 1)
 				if cleavernum > 0 && projPL[num].nm != "splinter" {
-					if roll6() <= cleavernum {
+					if Roll6() <= cleavernum {
 						zproj := projPL[num]
 						countbreak := 20
 						for {
-							zproj.dirX = rF32(-zproj.spd, zproj.spd)
-							zproj.dirY = rF32(-zproj.spd, zproj.spd)
-							if getabs(zproj.dirX) > zproj.spd/2 || getabs(zproj.dirY) > zproj.spd/2 {
+							zproj.dirX = RandF32(-zproj.spd, zproj.spd)
+							zproj.dirY = RandF32(-zproj.spd, zproj.spd)
+							if Abs(zproj.dirX) > zproj.spd/2 || Abs(zproj.dirY) > zproj.spd/2 {
 								//CHANGE RO
 								if projPL[num].nm == "bunch of carrots" || projPL[num].nm == "drawing pin" || projPL[num].nm == "fork" || projPL[num].nm == "french fries" {
 									cntr := makecnt(projPL[num].rec)
@@ -14464,9 +14463,9 @@ func projEnmCollis(num, enNum int) { //MARK: PLAYER PROJ ENEMY COLLIS
 									cntr2.X += zproj.dirX * 5
 									cntr2.Y += zproj.dirY * 5
 									if projPL[num].nm == "bunch of carrots" || projPL[num].nm == "french fries" {
-										zproj.ro = angl2points(cntr, cntr2) - 90
+										zproj.ro = AngleBetweenTwoPoints(cntr, cntr2) - 90
 									} else {
-										zproj.ro = angl2points(cntr, cntr2) + 45
+										zproj.ro = AngleBetweenTwoPoints(cntr, cntr2) + 45
 									}
 								}
 								break
@@ -14482,9 +14481,9 @@ func projEnmCollis(num, enNum int) { //MARK: PLAYER PROJ ENEMY COLLIS
 						zproj = projPL[num]
 						countbreak = 20
 						for {
-							zproj.dirX = rF32(-zproj.spd, zproj.spd)
-							zproj.dirY = rF32(-zproj.spd, zproj.spd)
-							if getabs(zproj.dirX) > zproj.spd/2 || getabs(zproj.dirY) > zproj.spd/2 {
+							zproj.dirX = RandF32(-zproj.spd, zproj.spd)
+							zproj.dirY = RandF32(-zproj.spd, zproj.spd)
+							if Abs(zproj.dirX) > zproj.spd/2 || Abs(zproj.dirY) > zproj.spd/2 {
 								//CHANGE RO
 								if projPL[num].nm == "bunch of carrots" || projPL[num].nm == "drawing pin" || projPL[num].nm == "fork" || projPL[num].nm == "french fries" {
 									cntr := makecnt(projPL[num].rec)
@@ -14492,9 +14491,9 @@ func projEnmCollis(num, enNum int) { //MARK: PLAYER PROJ ENEMY COLLIS
 									cntr2.X += zproj.dirX * 5
 									cntr2.Y += zproj.dirY * 5
 									if projPL[num].nm == "bunch of carrots" || projPL[num].nm == "french fries" {
-										zproj.ro = angl2points(cntr, cntr2) - 90
+										zproj.ro = AngleBetweenTwoPoints(cntr, cntr2) - 90
 									} else {
-										zproj.ro = angl2points(cntr, cntr2) + 45
+										zproj.ro = AngleBetweenTwoPoints(cntr, cntr2) + 45
 									}
 								}
 								break
@@ -14534,12 +14533,12 @@ func projEnmCollis(num, enNum int) { //MARK: PLAYER PROJ ENEMY COLLIS
 				}
 				//CHILLI FLAME
 				if projPL[num].nm == "chilli" {
-					num2 := rInt(3, 7)
+					num2 := RandInt(3, 7)
 					countbreak := 100
 					for num2 > 0 {
 						cntr := makecnt(projPL[num].rec)
-						cntr.X += rF32(-b2, b2)
-						cntr.Y += rF32(-b2, b2)
+						cntr.X += RandF32(-b2, b2)
+						cntr.Y += RandF32(-b2, b2)
 						if checkV2Walls(cntr) && checkV2inRooms(cntr) {
 							rl.PlaySound(audfx[120])
 							zfx := xfx{}
@@ -14568,7 +14567,7 @@ func projEnmCollis(num, enNum int) { //MARK: PLAYER PROJ ENEMY COLLIS
 				if projPL[num].nm == "mint ice cream" {
 					siz := b5
 					zfx := xfx{}
-					zfx.img = splat[rInt(0, len(splat))]
+					zfx.img = splat[RandInt(0, len(splat))]
 					zfx.nm = "icecream"
 					zfx.cnt = levels[levNum].enm[enNum].cnt
 					zfx.rec = rl.NewRectangle(zfx.cnt.X-siz/2, zfx.cnt.Y-siz/2, siz, siz)
@@ -14583,7 +14582,7 @@ func projEnmCollis(num, enNum int) { //MARK: PLAYER PROJ ENEMY COLLIS
 				}
 				//STUN
 				if tenderisernum > 0 && levels[levNum].enm[enNum].stunT == 0 {
-					if roll6() <= tenderisernum {
+					if Roll6() <= tenderisernum {
 						levels[levNum].enm[enNum].stunT = fps
 						levels[levNum].enm[enNum].stunF = 0.9
 						levels[levNum].enm[enNum].stunY = levels[levNum].enm[enNum].cnt.Y
@@ -14592,7 +14591,7 @@ func projEnmCollis(num, enNum int) { //MARK: PLAYER PROJ ENEMY COLLIS
 				}
 				//POISON GAS
 				if broccolinum > 0 {
-					if roll6() <= broccolinum {
+					if Roll6() <= broccolinum {
 						zproj := xweap{}
 						zproj.T = fps * 5
 						siz := b4
@@ -14606,14 +14605,14 @@ func projEnmCollis(num, enNum int) { //MARK: PLAYER PROJ ENEMY COLLIS
 						zproj.cnt = makecnt(zproj.rec)
 						zproj.fd = 1
 						zproj.col = rl.White
-						zproj.rospd = rF32(2, 4)
-						if flipcoin() {
+						zproj.rospd = RandF32(2, 4)
+						if FlipCoin() {
 							zproj.rospd = -zproj.rospd
 						}
 						zproj.dmg = 1
 						zproj.spd = 4
-						zproj.dirX = rF32(-zproj.spd, zproj.spd)
-						zproj.dirY = rF32(-zproj.spd, zproj.spd)
+						zproj.dirX = RandF32(-zproj.spd, zproj.spd)
+						zproj.dirY = RandF32(-zproj.spd, zproj.spd)
 						zproj.nm = "poisongas"
 						projPL = append(projPL, zproj)
 					}
@@ -14643,7 +14642,7 @@ func projEnmCollis(num, enNum int) { //MARK: PLAYER PROJ ENEMY COLLIS
 				}
 				//CRIT
 				if stats.crit > 0 {
-					if roll6() <= stats.crit {
+					if Roll6() <= stats.crit {
 						levels[levNum].enm[enNum].hp -= projPL[num].dmg + (stats.str - 1)
 						if msgT == 0 {
 							admsg("critical hit x2 damage", rl.Magenta)
@@ -14739,9 +14738,9 @@ func projEnmCollis(num, enNum int) { //MARK: PLAYER PROJ ENEMY COLLIS
 					projPL[num].collisT = fps / 8
 					countbreak := 100
 					for {
-						projPL[num].dirX = rF32(-projPL[num].spd, projPL[num].spd)
-						projPL[num].dirY = rF32(-projPL[num].spd, projPL[num].spd)
-						if getabs(projPL[num].dirX) > projPL[num].spd/2 && getabs(projPL[num].dirY) > projPL[num].dirY/2 {
+						projPL[num].dirX = RandF32(-projPL[num].spd, projPL[num].spd)
+						projPL[num].dirY = RandF32(-projPL[num].spd, projPL[num].spd)
+						if Abs(projPL[num].dirX) > projPL[num].spd/2 && Abs(projPL[num].dirY) > projPL[num].dirY/2 {
 							break
 						}
 						countbreak--
@@ -14772,7 +14771,7 @@ func projEnmCollis(num, enNum int) { //MARK: PLAYER PROJ ENEMY COLLIS
 			if projPL[num].nm == "hot soup" {
 				siz := b8
 				zfx := xfx{}
-				zfx.img = splat[rInt(0, len(splat))]
+				zfx.img = splat[RandInt(0, len(splat))]
 				zfx.nm = "hotsoup"
 				zfx.cnt = levels[levNum].enm[enNum].cnt
 				zfx.rec = rl.NewRectangle(zfx.cnt.X-siz/2, zfx.cnt.Y-siz/2, siz, siz)
@@ -14789,7 +14788,7 @@ func projEnmCollis(num, enNum int) { //MARK: PLAYER PROJ ENEMY COLLIS
 			if projPL[num].nm == "french fries" {
 				siz := b7
 				zfx := xfx{}
-				zfx.img = splat[rInt(0, len(splat))]
+				zfx.img = splat[RandInt(0, len(splat))]
 				zfx.nm = "frenchfries"
 				zfx.cnt = levels[levNum].enm[enNum].cnt
 				zfx.rec = rl.NewRectangle(zfx.cnt.X-siz/2, zfx.cnt.Y-siz/2, siz, siz)
@@ -14805,14 +14804,14 @@ func projEnmCollis(num, enNum int) { //MARK: PLAYER PROJ ENEMY COLLIS
 
 			//SLUDGE GEYSER
 			if projPL[num].sludgegeyser {
-				if roll12() > 9 {
+				if Roll12() > 9 {
 					rl.PlaySound(audfx[113])
 					siz := b3
 					zfx := xfx{}
 					zfx.below = true
 					zfx.nm = "sludgegeyser"
 					zfx.img = anm[203].rec
-					num := rInt(15, 21)
+					num := RandInt(15, 21)
 					for num > 0 {
 						cntr := findRanCnt()
 						zfx.rec = rl.NewRectangle(cntr.X-siz/2, cntr.Y-siz/2, siz, siz)
@@ -14823,7 +14822,7 @@ func projEnmCollis(num, enNum int) { //MARK: PLAYER PROJ ENEMY COLLIS
 			}
 			//RING OF FIRE
 			if projPL[num].ringoffire {
-				if roll12() > 9 {
+				if Roll12() > 9 {
 					rl.PlaySound(audfx[112])
 					siz := b2
 					zfx := xfx{}
@@ -14835,9 +14834,9 @@ func projEnmCollis(num, enNum int) { //MARK: PLAYER PROJ ENEMY COLLIS
 			}
 			//POTION
 			if projPL[num].potion {
-				if roll12() > 9 {
+				if Roll12() > 9 {
 					rl.PlaySound(audfx[110])
-					zitm := itmlist[rInt(0, 18)]
+					zitm := itmlist[RandInt(0, 18)]
 					siz := zitm.rec.Width
 					zitm.rec = rl.NewRectangle(levels[levNum].enm[enNum].cnt.X-siz/2, levels[levNum].enm[enNum].cnt.Y-siz/2, siz, siz)
 					levels[levNum].itm = append(levels[levNum].itm, zitm)
@@ -14845,7 +14844,7 @@ func projEnmCollis(num, enNum int) { //MARK: PLAYER PROJ ENEMY COLLIS
 			}
 			//BOMB
 			if projPL[num].bomb {
-				if roll12() > 9 {
+				if Roll12() > 9 {
 					rl.PlaySound(audfx[110])
 					siz := bq3
 					zfx := xfx{}
@@ -14859,9 +14858,9 @@ func projEnmCollis(num, enNum int) { //MARK: PLAYER PROJ ENEMY COLLIS
 			}
 			//TURRET
 			if projPL[num].turret {
-				if roll12() > 9 {
+				if Roll12() > 9 {
 					rl.PlaySound(audfx[110])
-					if flipcoin() {
+					if FlipCoin() {
 						siz := bq3
 						ztile := xtile{}
 						ztile.img = etc[112]
@@ -14925,7 +14924,7 @@ func oplr(num, nummax int, x, y float32) int { //MARK: OPTIONS LEFT RIGHT
 	rec := rl.NewRectangle(x, y, siz, siz)
 	rec.X -= siz
 	if rl.CheckCollisionPointRec(cursorV2camInven, rec) {
-		rl.DrawRectangleRec(rec, ranCol())
+		rl.DrawRectangleRec(rec, RandColor())
 	} else {
 		rl.DrawRectangleRec(rec, rl.Blue)
 	}
@@ -14949,7 +14948,7 @@ func oplr(num, nummax int, x, y float32) int { //MARK: OPTIONS LEFT RIGHT
 	}
 	rec.X += siz
 	if rl.CheckCollisionPointRec(cursorV2camInven, rec) {
-		rl.DrawRectangleRec(rec, ranCol())
+		rl.DrawRectangleRec(rec, RandColor())
 	} else {
 		rl.DrawRectangleRec(rec, rl.Blue)
 	}
@@ -14982,7 +14981,7 @@ func opadj(num, nummax int, x, y float32, xl bool, numtype int) int { //MARK: OP
 		rec.X -= siz / 4
 	}
 	if rl.CheckCollisionPointRec(cursorV2camInven, rec) {
-		rl.DrawRectangleRec(rec, ranCol())
+		rl.DrawRectangleRec(rec, RandColor())
 	} else {
 		rl.DrawRectangleRec(rec, rl.Blue)
 	}
@@ -15032,7 +15031,7 @@ func opadj(num, nummax int, x, y float32, xl bool, numtype int) int { //MARK: OP
 		rec.Width -= siz / 2
 	}
 	if rl.CheckCollisionPointRec(cursorV2camInven, rec) {
-		rl.DrawRectangleRec(rec, ranCol())
+		rl.DrawRectangleRec(rec, RandColor())
 	} else {
 		rl.DrawRectangleRec(rec, rl.Blue)
 	}
@@ -15076,7 +15075,7 @@ func opswch(x, y float32, opt bool) { //MARK: OPTIONS SWITCH
 	rec.Width -= 14
 	rec.Height -= 14
 	if opt {
-		rl.DrawRectangleRec(rec, darkRed())
+		rl.DrawRectangleRec(rec, DarkRed())
 	} else {
 		rl.DrawRectangleRec(rec, rl.Black)
 	}
@@ -16437,8 +16436,8 @@ func useitm(num, inven0quik1 int) { //MARK: USE ITEM
 			zproj.col = rl.White
 			zproj.dmg = 0
 			zproj.spd = 2
-			zproj.dirX = rF32(-zproj.spd, zproj.spd)
-			zproj.dirY = rF32(-zproj.spd, zproj.spd)
+			zproj.dirX = RandF32(-zproj.spd, zproj.spd)
+			zproj.dirY = RandF32(-zproj.spd, zproj.spd)
 			zproj.nm = "chickenProj"
 			projPL = append(projPL, zproj)
 		} else {
@@ -16462,8 +16461,8 @@ func useitm(num, inven0quik1 int) { //MARK: USE ITEM
 			zproj.col = rl.White
 			zproj.dmg = 5
 			zproj.spd = 2
-			zproj.dirX = rF32(-zproj.spd, zproj.spd)
-			zproj.dirY = rF32(-zproj.spd, zproj.spd)
+			zproj.dirX = RandF32(-zproj.spd, zproj.spd)
+			zproj.dirY = RandF32(-zproj.spd, zproj.spd)
 			zproj.nm = "beeProj"
 			for i := 0; i < 20; i++ {
 				projPL = append(projPL, zproj)
@@ -16528,8 +16527,8 @@ func useitm(num, inven0quik1 int) { //MARK: USE ITEM
 			siz := b4
 			for num2 > 0 {
 				v2 := pl.cnt
-				v2.X += rF32(-b10, b10)
-				v2.Y += rF32(-b10, b10)
+				v2.X += RandF32(-b10, b10)
+				v2.Y += RandF32(-b10, b10)
 				if checkV2inRooms(v2) {
 					zfx.v2 = append(zfx.v2, v2)
 					zfx.recs2 = append(zfx.recs2, rl.NewRectangle(v2.X-siz/2, v2.Y-siz/2, siz, siz))
@@ -16568,9 +16567,9 @@ func useitm(num, inven0quik1 int) { //MARK: USE ITEM
 			zfx.spd = 3
 			countbreak := 100
 			for {
-				zfx.dirX = rF32(-zfx.spd, zfx.spd)
-				zfx.dirY = rF32(-zfx.spd, zfx.spd)
-				if getabs(zfx.dirX) > 1 || getabs(zfx.dirY) > 1 {
+				zfx.dirX = RandF32(-zfx.spd, zfx.spd)
+				zfx.dirY = RandF32(-zfx.spd, zfx.spd)
+				if Abs(zfx.dirX) > 1 || Abs(zfx.dirY) > 1 {
 					break
 				}
 				countbreak--
@@ -16912,20 +16911,20 @@ func useitm(num, inven0quik1 int) { //MARK: USE ITEM
 			zproj.cnt = makecnt(zproj.rec)
 			zproj.fd = 1
 			zproj.col = rl.White
-			zproj.rospd = rF32(2, 4)
-			if flipcoin() {
+			zproj.rospd = RandF32(2, 4)
+			if FlipCoin() {
 				zproj.rospd = -zproj.rospd
 			}
 			zproj.dmg = 1
 			zproj.spd = 4
-			zproj.dirX = rF32(-zproj.spd, zproj.spd)
-			zproj.dirY = rF32(-zproj.spd, zproj.spd)
+			zproj.dirX = RandF32(-zproj.spd, zproj.spd)
+			zproj.dirY = RandF32(-zproj.spd, zproj.spd)
 			zproj.nm = "poisongas"
 			projPL = append(projPL, zproj)
 			if stats.int > 1 {
 				for i := 1; i < stats.int; i++ {
-					zproj.dirX = rF32(-zproj.spd, zproj.spd)
-					zproj.dirY = rF32(-zproj.spd, zproj.spd)
+					zproj.dirX = RandF32(-zproj.spd, zproj.spd)
+					zproj.dirY = RandF32(-zproj.spd, zproj.spd)
 					projPL = append(projPL, zproj)
 				}
 				admsg("spell improved > intelligence", rl.Magenta)
@@ -17405,8 +17404,8 @@ func useitm(num, inven0quik1 int) { //MARK: USE ITEM
 	}
 }
 func brec(rec rl.Rectangle, dist float32) rl.Rectangle { //MARK: MAKE BLUR REC
-	rec.X += rF32(-dist, dist)
-	rec.Y += rF32(-dist, dist)
+	rec.X += RandF32(-dist, dist)
+	rec.Y += RandF32(-dist, dist)
 	return rec
 }
 func packStore() { //MARK: PACK STORE
@@ -17531,7 +17530,7 @@ func cleardoorblocks(lev x1scr) x1scr { //MARK: CLEAR DOOR BLOCKS
 	if clear {
 		for i := 0; i < len(lev.walls); i++ {
 			if lev.walls[i].off {
-				lev.walls = remtile(lev.walls, i)
+				lev.walls = RemoveTile(lev.walls, i)
 			}
 		}
 	}
@@ -17551,7 +17550,7 @@ func collectfromchest(chestnum, itemnum int) { //MARK: COLLECT FROM CHEST
 	didnotadd := false
 	if levels[levNum].chst[0].itm[itemnum].nm == "xp update" {
 		rl.PlaySound(audfx[103])
-		num4 := rInt(200, 401)
+		num4 := RandInt(200, 401)
 		pl.xp += num4
 		levels[levNum].chst[0].itm[itemnum] = xitm{}
 		levels[levNum].chst[0].itm[itemnum].off = true
@@ -19416,7 +19415,7 @@ func collectinvn(num int) { //MARK: COLLECT INVENTORY QUICK SLOTS
 
 	if levels[levNum].itm[num].nm == "xp update" {
 		rl.PlaySound(audfx[103])
-		num4 := rInt(200, 401)
+		num4 := RandInt(200, 401)
 		pl.xp += num4
 		levels[levNum].itm[num] = xitm{}
 		levels[levNum].itm[num].off = true
@@ -21193,13 +21192,13 @@ func dropitm(num, inven0quik1 int) { //MARK: DROP ITEM
 func destroycrate(num int) { //MARK: DESTROY CRATE
 	//ITEMS
 	if levels[levNum].etc[num].img == etc[2] { //OLD CRATE
-		if roll6() > 3 {
+		if Roll6() > 3 {
 			zitm := itmlist[43]
 			zitm.rec = rl.NewRectangle(levels[levNum].etc[num].cnt.X-zitm.rec.Width/2, levels[levNum].etc[num].cnt.Y-zitm.rec.Height/2, zitm.rec.Width, zitm.rec.Height)
 			levels[levNum].itm = append(levels[levNum].itm, zitm)
 		}
 		if toiletpapernum > 0 {
-			if roll6() <= toiletpapernum {
+			if Roll6() <= toiletpapernum {
 				zitm := itmlist[43]
 				zitm.rec = rl.NewRectangle(levels[levNum].etc[num].cnt.X-zitm.rec.Width/2, levels[levNum].etc[num].cnt.Y-zitm.rec.Height/2, zitm.rec.Width, zitm.rec.Height)
 				levels[levNum].itm = append(levels[levNum].itm, zitm)
@@ -21209,35 +21208,35 @@ func destroycrate(num int) { //MARK: DESTROY CRATE
 		zitm := itmlist[43]
 		zitm.rec = rl.NewRectangle(levels[levNum].etc[num].cnt.X-zitm.rec.Width/2, levels[levNum].etc[num].cnt.Y-zitm.rec.Height/2, zitm.rec.Width, zitm.rec.Height)
 		levels[levNum].itm = append(levels[levNum].itm, zitm)
-		if roll6() > 3 {
+		if Roll6() > 3 {
 			zitm := itmlist[43]
 			zitm.rec = rl.NewRectangle(levels[levNum].etc[num].cnt.X-zitm.rec.Width/2, levels[levNum].etc[num].cnt.Y-zitm.rec.Height/2, zitm.rec.Width, zitm.rec.Height)
 			levels[levNum].itm = append(levels[levNum].itm, zitm)
 		}
 		if toiletpapernum > 0 {
-			if roll6() <= toiletpapernum {
+			if Roll6() <= toiletpapernum {
 				zitm := itmlist[43]
 				zitm.rec = rl.NewRectangle(levels[levNum].etc[num].cnt.X-zitm.rec.Width/2, levels[levNum].etc[num].cnt.Y-zitm.rec.Height/2, zitm.rec.Width, zitm.rec.Height)
 				levels[levNum].itm = append(levels[levNum].itm, zitm)
 			}
 		}
 	} else if levels[levNum].etc[num].img == etc[1] { //PINK CRATE
-		zitm := crateitm[rInt(0, len(crateitm))]
+		zitm := crateitm[RandInt(0, len(crateitm))]
 		zitm.rec = rl.NewRectangle(levels[levNum].etc[num].cnt.X-zitm.rec.Width/2, levels[levNum].etc[num].cnt.Y-zitm.rec.Height/2, zitm.rec.Width, zitm.rec.Height)
 		if zitm.nm == "lead" || zitm.nm == "bronze" || zitm.nm == "silver" || zitm.nm == "gold" || zitm.nm == "platinum" {
-			zitm.numof = rInt(10, 21)
+			zitm.numof = RandInt(10, 21)
 		}
 		levels[levNum].itm = append(levels[levNum].itm, zitm)
 		//LUK
 		if stats.luk > 1 {
-			if roll6() <= stats.luk {
+			if Roll6() <= stats.luk {
 				zitm = xitm{}
-				zitm = crateitm[rInt(0, len(crateitm))]
+				zitm = crateitm[RandInt(0, len(crateitm))]
 				zitm.rec = rl.NewRectangle(levels[levNum].etc[num].cnt.X-zitm.rec.Width/2, levels[levNum].etc[num].cnt.Y-zitm.rec.Height/2, zitm.rec.Width, zitm.rec.Height)
 				zitm.rec = finddropside(zitm.rec, 1)
 				if zitm.rec != blankRec {
 					if zitm.nm == "lead" || zitm.nm == "bronze" || zitm.nm == "silver" || zitm.nm == "gold" || zitm.nm == "platinum" {
-						zitm.numof = rInt(10, 21)
+						zitm.numof = RandInt(10, 21)
 					}
 					levels[levNum].itm = append(levels[levNum].itm, zitm)
 				}
@@ -21245,22 +21244,22 @@ func destroycrate(num int) { //MARK: DESTROY CRATE
 		}
 
 	} else if levels[levNum].etc[num].img == etc[3] { //BLUE CRATE
-		zitm := crateitm[rInt(0, len(crateitm))]
+		zitm := crateitm[RandInt(0, len(crateitm))]
 		zitm.rec = rl.NewRectangle(levels[levNum].etc[num].cnt.X-zitm.rec.Width/2, levels[levNum].etc[num].cnt.Y-zitm.rec.Height/2, zitm.rec.Width, zitm.rec.Height)
 		if zitm.nm == "lead" || zitm.nm == "bronze" || zitm.nm == "silver" || zitm.nm == "gold" || zitm.nm == "platinum" {
-			zitm.numof = rInt(10, 21)
+			zitm.numof = RandInt(10, 21)
 		}
 		levels[levNum].itm = append(levels[levNum].itm, zitm)
 		//LUK
 		if stats.luk > 1 {
-			if roll6() <= stats.luk {
+			if Roll6() <= stats.luk {
 				zitm = xitm{}
-				zitm = crateitm[rInt(0, len(crateitm))]
+				zitm = crateitm[RandInt(0, len(crateitm))]
 				zitm.rec = rl.NewRectangle(levels[levNum].etc[num].cnt.X-zitm.rec.Width/2, levels[levNum].etc[num].cnt.Y-zitm.rec.Height/2, zitm.rec.Width, zitm.rec.Height)
 				zitm.rec = finddropside(zitm.rec, 1)
 				if zitm.rec != blankRec {
 					if zitm.nm == "lead" || zitm.nm == "bronze" || zitm.nm == "silver" || zitm.nm == "gold" || zitm.nm == "platinum" {
-						zitm.numof = rInt(10, 21)
+						zitm.numof = RandInt(10, 21)
 					}
 					levels[levNum].itm = append(levels[levNum].itm, zitm)
 				}
@@ -21272,22 +21271,22 @@ func destroycrate(num int) { //MARK: DESTROY CRATE
 	zfx.nm = "desCrate"
 	zfx.T = fps / 2
 	cntr := levels[levNum].etc[num].cnt
-	num2 := rInt(40, 51)
+	num2 := RandInt(40, 51)
 	for num2 > 0 {
-		siz := rF32(b/8, b/2)
+		siz := RandF32(b/8, b/2)
 		zrec := xrec{}
 		if levels[levNum].etc[num].img == etc[2] || levels[levNum].etc[num].img == etc[4] {
-			zrec.col = ranBrown()
+			zrec.col = RandBrown()
 		} else if levels[levNum].etc[num].img == etc[1] {
-			zrec.col = ranPink()
+			zrec.col = RandPink()
 		} else if levels[levNum].etc[num].img == etc[3] {
-			zrec.col = ranCyan()
+			zrec.col = RandCyan()
 		}
-		zrec.fd = rF32(0.3, 0.7)
+		zrec.fd = RandF32(0.3, 0.7)
 		zrec.rec = rl.NewRectangle(cntr.X-siz/2, cntr.Y-siz/2, siz, siz)
 		zrec.spd = b / 2
-		zrec.dirX = rF32(-zrec.spd, zrec.spd)
-		zrec.dirY = rF32(-zrec.spd, zrec.spd)
+		zrec.dirX = RandF32(-zrec.spd, zrec.spd)
+		zrec.dirY = RandF32(-zrec.spd, zrec.spd)
 		zfx.recs = append(zfx.recs, zrec)
 		num2--
 	}
@@ -21350,32 +21349,32 @@ func admsg(txt string, col rl.Color) { //MARK:ADD MSG
 	zmsg.col = col
 	msg = append(msg, zmsg)
 }
-func rem(num int) { //MARK:REMOVE FROM SLICE
+func Remove(num int) { //MARK:REMOVE FROM SLICE
 	switch num {
 	case 4: //ENEMIES
 		if len(fx) == 0 {
 			for i := 0; i < len(levels[levNum].enm); i++ {
 				if levels[levNum].enm[i].off {
-					levels[levNum].enm = remenm(levels[levNum].enm, i)
+					levels[levNum].enm = RemoveEnemy(levels[levNum].enm, i)
 				}
 			}
 		}
 	case 3: //ITEM
 		for i := 0; i < len(levels[levNum].itm); i++ {
 			if levels[levNum].itm[i].off {
-				levels[levNum].itm = remitm(levels[levNum].itm, i)
+				levels[levNum].itm = RemoveItem(levels[levNum].itm, i)
 			}
 		}
 	case 2: //ETC TILE
 		for i := 0; i < len(levels[levNum].etc); i++ {
 			if levels[levNum].etc[i].off {
-				levels[levNum].etc = remtile(levels[levNum].etc, i)
+				levels[levNum].etc = RemoveTile(levels[levNum].etc, i)
 			}
 		}
 	case 1: //FX
 		for i := 0; i < len(fx); i++ {
 			if fx[i].off {
-				fx = remfx(fx, i)
+				fx = RemoveFx(fx, i)
 			}
 		}
 	}
@@ -21478,7 +21477,7 @@ func hitPLEnProj(num int) { //MARK:HIT PLAYER ENEMY PROJECTILE SEE ALSO HIT PLAY
 					if projEn[num].nm == "yellowdinobull" || projEn[num].nm == "reddevilFlame" {
 						if pl.burnT == 0 && pl.dampT == 0 && icelollyT == 0 && pl.resFireT == 0 {
 							if ovenglovenum > 0 {
-								if roll6() <= ovenglovenum {
+								if Roll6() <= ovenglovenum {
 									admsg("oven glove saves burn", rl.Green)
 								} else {
 									admsg("burning...", rl.Orange)
@@ -21502,8 +21501,8 @@ func hitPLEnProj(num int) { //MARK:HIT PLAYER ENEMY PROJECTILE SEE ALSO HIT PLAY
 					//FX
 					zfx := xfx{}
 					zfx.nm = "plblood"
-					zfx.img = splat[rInt(0, len(splat))]
-					zfx.col = ranRed()
+					zfx.img = splat[RandInt(0, len(splat))]
+					zfx.col = RandRed()
 					zfx.fade = 0.8
 					zfx.rec = pl.rec
 					zfx.rec.X -= b
@@ -21527,8 +21526,8 @@ func hitPLEnProj(num int) { //MARK:HIT PLAYER ENEMY PROJECTILE SEE ALSO HIT PLAY
 					countbreak := 100
 					for num > 0 {
 						v2 := pl.cnt
-						v2.X += rF32(-b8, b8)
-						v2.Y += rF32(-b8, b8)
+						v2.X += RandF32(-b8, b8)
+						v2.Y += RandF32(-b8, b8)
 						if checkV2inRooms(v2) {
 							num--
 							rec := rl.NewRectangle(v2.X-siz/2, v2.Y-siz/2, siz, siz)
@@ -21617,8 +21616,8 @@ func hitPL(num int) { //MARK:HIT PLAYER SEE ALSO HIT PLAYER ENEMY PROJECTILE ABO
 						admsg("-1 dmg", rl.Red)
 						zfx := xfx{}
 						zfx.nm = "plblood"
-						zfx.img = splat[rInt(0, len(splat))]
-						zfx.col = ranRed()
+						zfx.img = splat[RandInt(0, len(splat))]
+						zfx.col = RandRed()
 						zfx.fade = 0.8
 						zfx.rec = pl.rec
 						zfx.rec.X -= b
@@ -21644,8 +21643,8 @@ func hitPL(num int) { //MARK:HIT PLAYER SEE ALSO HIT PLAYER ENEMY PROJECTILE ABO
 				countbreak := 100
 				for num > 0 {
 					v2 := pl.cnt
-					v2.X += rF32(-b5, b5)
-					v2.Y += rF32(-b5, b5)
+					v2.X += RandF32(-b5, b5)
+					v2.Y += RandF32(-b5, b5)
 					if checkV2inRooms(v2) {
 						num--
 						rec := rl.NewRectangle(v2.X-siz/2, v2.Y-siz/2, siz, siz)
@@ -21721,8 +21720,8 @@ func shrec(rec rl.Rectangle, amount float32) rl.Rectangle { //MARK:SHADOW REC
 	return rec
 }
 func blrec(rec rl.Rectangle, amount float32) rl.Rectangle { //MARK:BLUR REC
-	rec.X += rF32(-amount, amount)
-	rec.Y += rF32(-amount, amount)
+	rec.X += RandF32(-amount, amount)
+	rec.Y += RandF32(-amount, amount)
 	return rec
 }
 func orgn(rec rl.Rectangle) rl.Vector2 { //MARK:ORIGIN
@@ -21843,23 +21842,23 @@ func upprojPL() { //MARK:UP PROJ PLAYER
 						if projPL[i].nm == "rubber duck" {
 
 							if projPL[i].dirY > 0 {
-								projPL[i].dirY = rF32(projPL[i].spd/4, projPL[i].spd)
+								projPL[i].dirY = RandF32(projPL[i].spd/4, projPL[i].spd)
 							} else {
-								projPL[i].dirY = rF32(-projPL[i].spd, -projPL[i].spd/4)
+								projPL[i].dirY = RandF32(-projPL[i].spd, -projPL[i].spd/4)
 							}
 
 							if projPL[i].dirX > 0 {
-								projPL[i].dirX = rF32(projPL[i].spd/4, projPL[i].spd)
+								projPL[i].dirX = RandF32(projPL[i].spd/4, projPL[i].spd)
 							} else {
-								projPL[i].dirX = rF32(-projPL[i].spd, -projPL[i].spd/4)
+								projPL[i].dirX = RandF32(-projPL[i].spd, -projPL[i].spd/4)
 							}
 
 						}
 						if len(projPL) < 50 {
 							if projPL[i].nm == "raspberry" {
 								zproj := projPL[i]
-								zproj.dirX += rF32(-2, 2)
-								zproj.dirY += rF32(-2, 2)
+								zproj.dirX += RandF32(-2, 2)
+								zproj.dirY += RandF32(-2, 2)
 								projPL = append(projPL, zproj)
 							}
 						}
@@ -22003,14 +22002,14 @@ func upprojPL() { //MARK:UP PROJ PLAYER
 				if canmove {
 					projPL[i].rec = checkrec
 				} else {
-					projPL[i].dirX = rF32(-projPL[i].spd, projPL[i].spd)
-					projPL[i].dirY = rF32(-projPL[i].spd, projPL[i].spd)
+					projPL[i].dirX = RandF32(-projPL[i].spd, projPL[i].spd)
+					projPL[i].dirY = RandF32(-projPL[i].spd, projPL[i].spd)
 				}
 				projPL[i].moveT--
 				if projPL[i].moveT == 0 {
 					projPL[i].moveT = fps * 2
-					projPL[i].dirX = rF32(-projPL[i].spd, projPL[i].spd)
-					projPL[i].dirY = rF32(-projPL[i].spd, projPL[i].spd)
+					projPL[i].dirX = RandF32(-projPL[i].spd, projPL[i].spd)
+					projPL[i].dirY = RandF32(-projPL[i].spd, projPL[i].spd)
 					zfx := xfx{}
 					zfx.img = etc[130]
 					zfx.rec = projPL[i].rec
@@ -22046,8 +22045,8 @@ func upprojPL() { //MARK:UP PROJ PLAYER
 					projPL[i].crec.Width = projPL[i].crec.Width / 2
 					projPL[i].crec.Height = projPL[i].crec.Height / 2
 				} else {
-					projPL[i].dirX = rF32(-projPL[i].spd, projPL[i].spd)
-					projPL[i].dirY = rF32(-projPL[i].spd, projPL[i].spd)
+					projPL[i].dirX = RandF32(-projPL[i].spd, projPL[i].spd)
+					projPL[i].dirY = RandF32(-projPL[i].spd, projPL[i].spd)
 				}
 			case "frogProj":
 				//FROG TIMERS
@@ -22064,8 +22063,8 @@ func upprojPL() { //MARK:UP PROJ PLAYER
 				}
 				projPL[i].moveT--
 				if projPL[i].moveT <= 0 {
-					projPL[i].moveT = fps * rI32(1, 2)
-					if getabs(projPL[i].dirX) > 0 || getabs(projPL[i].dirY) > 0 {
+					projPL[i].moveT = fps * RandInt32(1, 2)
+					if Abs(projPL[i].dirX) > 0 || Abs(projPL[i].dirY) > 0 {
 						projPL[i].dirX = 0
 						projPL[i].dirY = 0
 						projPL[i].img = anm[79].rec
@@ -22073,14 +22072,14 @@ func upprojPL() { //MARK:UP PROJ PLAYER
 							projPL[i].img = anm[78].rec
 						}
 					} else if projPL[i].dirX == 0 && projPL[i].dirY == 0 {
-						if flipcoin() {
+						if FlipCoin() {
 							projPL[i].dirX = projPL[i].spd
-							if flipcoin() {
+							if FlipCoin() {
 								projPL[i].dirX = -projPL[i].spd
 							}
 						} else {
 							projPL[i].dirY = projPL[i].spd
-							if flipcoin() {
+							if FlipCoin() {
 								projPL[i].dirY = -projPL[i].spd
 							}
 						}
@@ -22097,7 +22096,7 @@ func upprojPL() { //MARK:UP PROJ PLAYER
 				}
 				//FROG ANIM
 				if frames%4 == 0 {
-					if getabs(projPL[i].dirX) > 0 || getabs(projPL[i].dirY) > 0 {
+					if Abs(projPL[i].dirX) > 0 || Abs(projPL[i].dirY) > 0 {
 						if projPL[i].lr {
 							projPL[i].img.X -= anm[81].W
 							if projPL[i].img.X < anm[81].X-anm[81].frames*anm[81].W {
@@ -22160,14 +22159,14 @@ func upprojPL() { //MARK:UP PROJ PLAYER
 					projPL[i].rec = rl.NewRectangle(projPL[i].cnt.X-projPL[i].rec.Width/2, projPL[i].cnt.Y-projPL[i].rec.Height/2, projPL[i].rec.Width, projPL[i].rec.Height)
 					projPL[i].crec = projPL[i].rec
 				} else {
-					projPL[i].dirX = rF32(-projPL[i].spd, projPL[i].spd)
-					projPL[i].dirY = rF32(-projPL[i].spd, projPL[i].spd)
+					projPL[i].dirX = RandF32(-projPL[i].spd, projPL[i].spd)
+					projPL[i].dirY = RandF32(-projPL[i].spd, projPL[i].spd)
 				}
 				projPL[i].moveT--
 				if projPL[i].moveT == 0 {
 					projPL[i].moveT = fps / 2
-					projPL[i].dirX = rF32(-projPL[i].spd, projPL[i].spd)
-					projPL[i].dirY = rF32(-projPL[i].spd, projPL[i].spd)
+					projPL[i].dirX = RandF32(-projPL[i].spd, projPL[i].spd)
+					projPL[i].dirY = RandF32(-projPL[i].spd, projPL[i].spd)
 				}
 				if projPL[i].dirX > 0 {
 					projPL[i].direc = true
@@ -22182,7 +22181,7 @@ func upprojPL() { //MARK:UP PROJ PLAYER
 	if clear {
 		for i := 0; i < len(projPL); i++ {
 			if projPL[i].off {
-				projPL = remweap(projPL, i)
+				projPL = RemoveWeapon(projPL, i)
 			}
 		}
 	}
@@ -22205,7 +22204,7 @@ func upprojEn() { //MARK:UP PROJ ENEMY
 			if rl.CheckCollisionRecs(pl.crec, projEn[i].crec) && pl.hpT == 0 && pl.enCollisT == 0 {
 				pl.enCollisT = fps
 				if stats.dex > 1 {
-					if roll12() <= stats.dex {
+					if Roll12() <= stats.dex {
 						if msgT == 0 {
 							admsg("dodged > dexterity", rl.Green)
 							msgT = fps
@@ -22282,14 +22281,14 @@ func upprojEn() { //MARK:UP PROJ ENEMY
 					canmove = true
 				} else if projEn[i].nm == "mushbossProj" && projEn[i].bounce > 0 {
 					if projEn[i].dirX > 0 {
-						projEn[i].dirX = rF32(-boss.spd, -boss.spd/4)
+						projEn[i].dirX = RandF32(-boss.spd, -boss.spd/4)
 					} else {
-						projEn[i].dirX = rF32(boss.spd/4, boss.spd)
+						projEn[i].dirX = RandF32(boss.spd/4, boss.spd)
 					}
 					if projEn[i].dirY > 0 {
-						projEn[i].dirY = rF32(-boss.spd, -boss.spd/4)
+						projEn[i].dirY = RandF32(-boss.spd, -boss.spd/4)
 					} else {
-						projEn[i].dirY = rF32(boss.spd/4, boss.spd)
+						projEn[i].dirY = RandF32(boss.spd/4, boss.spd)
 					}
 					projEn[i].bounce--
 					canmove = true
@@ -22309,10 +22308,10 @@ func upprojEn() { //MARK:UP PROJ ENEMY
 					projEn[i].bounce--
 					canmove = true
 				} else if projEn[i].nm == "mrfrisbeeProj" && projEn[i].bounce > 0 {
-					if flipcoin() {
+					if FlipCoin() {
 						projEn[i].dirX *= -1
 					}
-					if flipcoin() {
+					if FlipCoin() {
 						projEn[i].dirY *= -1
 					}
 					projEn[i].bounce--
@@ -22409,7 +22408,7 @@ func upprojEn() { //MARK:UP PROJ ENEMY
 	if clear {
 		for i := 0; i < len(projEn); i++ {
 			if projEn[i].off {
-				projEn = remweap(projEn, i)
+				projEn = RemoveWeapon(projEn, i)
 			}
 		}
 	}
@@ -22433,16 +22432,16 @@ func upboss() { //MARK:UP BOSS
 					countbreak := 100
 					for {
 						if boss.dirX > 0 {
-							boss.dirX = rF32(-boss.spd, -boss.spd/4)
+							boss.dirX = RandF32(-boss.spd, -boss.spd/4)
 						} else {
-							boss.dirX = rF32(boss.spd/4, boss.spd)
+							boss.dirX = RandF32(boss.spd/4, boss.spd)
 						}
 						if boss.dirY > 0 {
-							boss.dirY = rF32(-boss.spd, -boss.spd/4)
+							boss.dirY = RandF32(-boss.spd, -boss.spd/4)
 						} else {
-							boss.dirY = rF32(boss.spd/4, boss.spd)
+							boss.dirY = RandF32(boss.spd/4, boss.spd)
 						}
-						if getabs(boss.dirX) > boss.spd/2 || getabs(boss.dirY) > boss.spd/2 {
+						if Abs(boss.dirX) > boss.spd/2 || Abs(boss.dirY) > boss.spd/2 {
 							break
 						}
 						countbreak--
@@ -22468,16 +22467,16 @@ func upboss() { //MARK:UP BOSS
 						countbreak := 100
 						for {
 							if boss.dirX > 0 {
-								boss.dirX = rF32(-boss.spd, -boss.spd/4)
+								boss.dirX = RandF32(-boss.spd, -boss.spd/4)
 							} else {
-								boss.dirX = rF32(boss.spd/4, boss.spd)
+								boss.dirX = RandF32(boss.spd/4, boss.spd)
 							}
 							if boss.dirY > 0 {
-								boss.dirY = rF32(-boss.spd, -boss.spd/4)
+								boss.dirY = RandF32(-boss.spd, -boss.spd/4)
 							} else {
-								boss.dirY = rF32(boss.spd/4, boss.spd)
+								boss.dirY = RandF32(boss.spd/4, boss.spd)
 							}
-							if getabs(boss.dirX) > boss.spd/2 || getabs(boss.dirY) > boss.spd/2 {
+							if Abs(boss.dirX) > boss.spd/2 || Abs(boss.dirY) > boss.spd/2 {
 								break
 							}
 							countbreak--
@@ -22493,8 +22492,8 @@ func upboss() { //MARK:UP BOSS
 					zproj.nm = "rolloProj"
 					siz := b
 					zproj.spd = 2
-					xdiff := absdiff(boss.cnt.X, pl.cnt.X)
-					ydiff := absdiff(boss.cnt.Y, pl.cnt.Y)
+					xdiff := AbsDiff(boss.cnt.X, pl.cnt.X)
+					ydiff := AbsDiff(boss.cnt.Y, pl.cnt.Y)
 					if xdiff > ydiff {
 						zproj.dirX = zproj.spd
 						zproj.dirY = ydiff / (xdiff / zproj.dirX)
@@ -22563,9 +22562,9 @@ func upboss() { //MARK:UP BOSS
 						boss.spd = 14
 						countbreak := 100
 						for {
-							boss.dirX = rF32(-boss.spd, boss.spd)
-							boss.dirY = rF32(-boss.spd, boss.spd)
-							if getabs(boss.dirX) > boss.spd/2 || getabs(boss.dirY) > boss.spd/2 {
+							boss.dirX = RandF32(-boss.spd, boss.spd)
+							boss.dirY = RandF32(-boss.spd, boss.spd)
+							if Abs(boss.dirX) > boss.spd/2 || Abs(boss.dirY) > boss.spd/2 {
 								break
 							}
 							countbreak--
@@ -22574,14 +22573,14 @@ func upboss() { //MARK:UP BOSS
 							}
 						}
 						boss.state = 1
-						boss.moveChangeT = fps * rI32(2, 4)
+						boss.moveChangeT = fps * RandInt32(2, 4)
 					case 1:
 						boss.spd = 2
 						countbreak := 100
 						for {
-							boss.dirX = rF32(-boss.spd, boss.spd)
-							boss.dirY = rF32(-boss.spd, boss.spd)
-							if getabs(boss.dirX) > boss.spd/2 || getabs(boss.dirY) > boss.spd/2 {
+							boss.dirX = RandF32(-boss.spd, boss.spd)
+							boss.dirY = RandF32(-boss.spd, boss.spd)
+							if Abs(boss.dirX) > boss.spd/2 || Abs(boss.dirY) > boss.spd/2 {
 								break
 							}
 							countbreak--
@@ -22590,7 +22589,7 @@ func upboss() { //MARK:UP BOSS
 							}
 						}
 						boss.state = 0
-						boss.moveChangeT = fps * rI32(1, 2)
+						boss.moveChangeT = fps * RandInt32(1, 2)
 					}
 				}
 				if pl.cnt.X > boss.cnt.X {
@@ -22608,11 +22607,11 @@ func upboss() { //MARK:UP BOSS
 				} else {
 					switch boss.state {
 					case 2:
-						if flipcoin() {
+						if FlipCoin() {
 							boss.state = 0
 							boss.img.Y = anm[148].YT
-							boss.dirX = rF32(-boss.spd, boss.spd)
-							boss.dirY = rF32(-boss.spd, boss.spd)
+							boss.dirX = RandF32(-boss.spd, boss.spd)
+							boss.dirY = RandF32(-boss.spd, boss.spd)
 							if boss.lr {
 								boss.img.X = anm[149].X
 							} else {
@@ -22628,11 +22627,11 @@ func upboss() { //MARK:UP BOSS
 							}
 						}
 					case 1:
-						if flipcoin() {
+						if FlipCoin() {
 							boss.state = 0
 							boss.img.Y = anm[148].YT
-							boss.dirX = rF32(-boss.spd, boss.spd)
-							boss.dirY = rF32(-boss.spd, boss.spd)
+							boss.dirX = RandF32(-boss.spd, boss.spd)
+							boss.dirY = RandF32(-boss.spd, boss.spd)
 							if boss.lr {
 								boss.img.X = anm[149].X
 							} else {
@@ -22649,7 +22648,7 @@ func upboss() { //MARK:UP BOSS
 							}
 						}
 					case 0:
-						if flipcoin() {
+						if FlipCoin() {
 							boss.state = 1
 							boss.img.Y = anm[148].YT
 							if boss.lr {
@@ -22668,13 +22667,13 @@ func upboss() { //MARK:UP BOSS
 							}
 						}
 					}
-					boss.moveChangeT = rI32(2, 3) * fps
+					boss.moveChangeT = RandInt32(2, 3) * fps
 				}
 				if boss.state != 2 {
 					if boss.atkT > 0 {
 						boss.atkT--
 					} else {
-						if roll6() > 4 {
+						if Roll6() > 4 {
 							zproj := xweap{}
 							zproj.dmg = 2
 							zproj.below = true
@@ -22701,8 +22700,8 @@ func upboss() { //MARK:UP BOSS
 						siz := b2
 						zproj.spd = 2
 						zproj.bounce = 3
-						xdiff := absdiff(boss.cnt.X, pl.cnt.X)
-						ydiff := absdiff(boss.cnt.Y, pl.cnt.Y)
+						xdiff := AbsDiff(boss.cnt.X, pl.cnt.X)
+						ydiff := AbsDiff(boss.cnt.Y, pl.cnt.Y)
 						if xdiff > ydiff {
 							zproj.dirX = zproj.spd
 							zproj.dirY = ydiff / (xdiff / zproj.dirX)
@@ -22722,7 +22721,7 @@ func upboss() { //MARK:UP BOSS
 						} else {
 							cntr2.X += b
 						}
-						zproj.ro = angl2points(pl.cnt, boss.cnt) + 180
+						zproj.ro = AngleBetweenTwoPoints(pl.cnt, boss.cnt) + 180
 						zproj.rec = rl.NewRectangle(cntr2.X-siz/2, cntr2.Y-siz/2, siz, siz)
 						zproj.crec = zproj.rec
 						zproj.crec.X += zproj.crec.Width / 4
@@ -22769,8 +22768,8 @@ func upboss() { //MARK:UP BOSS
 							}
 						}
 					}
-					xdiff := absdiff(boss.cnt.X, pl.cnt.X)
-					ydiff := absdiff(boss.cnt.Y, pl.cnt.Y)
+					xdiff := AbsDiff(boss.cnt.X, pl.cnt.X)
+					ydiff := AbsDiff(boss.cnt.Y, pl.cnt.Y)
 					if xdiff > ydiff {
 						boss.dirX = boss.spd
 						boss.dirY = ydiff / (xdiff / boss.dirX)
@@ -22788,8 +22787,8 @@ func upboss() { //MARK:UP BOSS
 					checkrec.X += boss.dirX
 					checkrec.Y += boss.dirY
 					if rl.CheckCollisionRecs(pl.crec, checkrec) {
-						boss.dirX = rF32(-boss.spd, boss.spd)
-						boss.dirY = rF32(-boss.spd, boss.spd)
+						boss.dirX = RandF32(-boss.spd, boss.spd)
+						boss.dirY = RandF32(-boss.spd, boss.spd)
 						boss.moveChangeT = fps
 					} else {
 						if checkRecWalls(checkrec) {
@@ -22804,8 +22803,8 @@ func upboss() { //MARK:UP BOSS
 							levels[levNum].enm[0].crec = boss.crec
 							levels[levNum].enm[0].cnt = boss.cnt
 						} else {
-							boss.dirX = rF32(-boss.spd, boss.spd)
-							boss.dirY = rF32(-boss.spd, boss.spd)
+							boss.dirX = RandF32(-boss.spd, boss.spd)
+							boss.dirY = RandF32(-boss.spd, boss.spd)
 							boss.moveChangeT = fps
 						}
 					}
@@ -22836,8 +22835,8 @@ func upboss() { //MARK:UP BOSS
 					checkrec.X += boss.dirX
 					checkrec.Y += boss.dirY
 					if rl.CheckCollisionRecs(pl.crec, checkrec) {
-						boss.dirX = rF32(-boss.spd, boss.spd)
-						boss.dirY = rF32(-boss.spd, boss.spd)
+						boss.dirX = RandF32(-boss.spd, boss.spd)
+						boss.dirY = RandF32(-boss.spd, boss.spd)
 						boss.moveChangeT += fps
 					} else {
 						if checkRecWalls(checkrec) {
@@ -22852,8 +22851,8 @@ func upboss() { //MARK:UP BOSS
 							levels[levNum].enm[0].crec = boss.crec
 							levels[levNum].enm[0].cnt = boss.cnt
 						} else {
-							boss.dirX = rF32(-boss.spd, boss.spd)
-							boss.dirY = rF32(-boss.spd, boss.spd)
+							boss.dirX = RandF32(-boss.spd, boss.spd)
+							boss.dirY = RandF32(-boss.spd, boss.spd)
 							boss.moveChangeT += fps
 						}
 					}
@@ -22869,7 +22868,7 @@ func upboss() { //MARK:UP BOSS
 				} else {
 					switch boss.state {
 					case 4:
-						choose := rInt(1, 4)
+						choose := RandInt(1, 4)
 						switch choose {
 						case 3:
 							boss.img.Y = anm[143].YT
@@ -22905,7 +22904,7 @@ func upboss() { //MARK:UP BOSS
 							boss.img.X = anm[143].X
 						}
 					case 2:
-						choose := rInt(1, 4)
+						choose := RandInt(1, 4)
 						switch choose {
 						case 3:
 							boss.img.Y = anm[143].YT
@@ -22933,7 +22932,7 @@ func upboss() { //MARK:UP BOSS
 							}
 						}
 					case 1:
-						choose := rInt(1, 4)
+						choose := RandInt(1, 4)
 						switch choose {
 						case 3:
 							boss.img.Y = anm[143].YT
@@ -22961,7 +22960,7 @@ func upboss() { //MARK:UP BOSS
 							}
 						}
 					case 0:
-						choose := rInt(1, 4)
+						choose := RandInt(1, 4)
 						switch choose {
 						case 3:
 							boss.img.Y = anm[143].YT
@@ -22989,7 +22988,7 @@ func upboss() { //MARK:UP BOSS
 							}
 						}
 					}
-					boss.moveChangeT = fps * rI32(1, 2)
+					boss.moveChangeT = fps * RandInt32(1, 2)
 				}
 				switch boss.state {
 				case 4:
@@ -23048,8 +23047,8 @@ func upboss() { //MARK:UP BOSS
 					checkrec.X += boss.dirX
 					checkrec.Y += boss.dirY
 					if rl.CheckCollisionRecs(pl.crec, checkrec) {
-						boss.dirX = rF32(-boss.spd, boss.spd)
-						boss.dirY = rF32(-boss.spd, boss.spd)
+						boss.dirX = RandF32(-boss.spd, boss.spd)
+						boss.dirY = RandF32(-boss.spd, boss.spd)
 						boss.img.Y = anm[141].YT
 						boss.state = 1
 						if boss.lr {
@@ -23071,8 +23070,8 @@ func upboss() { //MARK:UP BOSS
 							levels[levNum].enm[0].crec = boss.crec
 							levels[levNum].enm[0].cnt = boss.cnt
 						} else {
-							boss.dirX = rF32(-boss.spd, boss.spd)
-							boss.dirY = rF32(-boss.spd, boss.spd)
+							boss.dirX = RandF32(-boss.spd, boss.spd)
+							boss.dirY = RandF32(-boss.spd, boss.spd)
 							boss.img.Y = anm[141].YT
 							boss.state = 1
 							if boss.lr {
@@ -23105,8 +23104,8 @@ func upboss() { //MARK:UP BOSS
 						zproj.nm = "battyProj"
 						siz := b3
 						zproj.spd = 3
-						xdiff := absdiff(boss.cnt.X, pl.cnt.X)
-						ydiff := absdiff(boss.cnt.Y, pl.cnt.Y)
+						xdiff := AbsDiff(boss.cnt.X, pl.cnt.X)
+						ydiff := AbsDiff(boss.cnt.Y, pl.cnt.Y)
 						if xdiff > ydiff {
 							zproj.dirX = zproj.spd
 							zproj.dirY = ydiff / (xdiff / zproj.dirX)
@@ -23126,7 +23125,7 @@ func upboss() { //MARK:UP BOSS
 						} else {
 							cntr2.X += b
 						}
-						zproj.ro = angl2points(pl.cnt, boss.cnt) + 180
+						zproj.ro = AngleBetweenTwoPoints(pl.cnt, boss.cnt) + 180
 						zproj.rec = rl.NewRectangle(cntr2.X-siz/2, cntr2.Y-siz/2, siz, siz)
 						zproj.crec = zproj.rec
 						zproj.crec.X += zproj.crec.Width / 4
@@ -23137,8 +23136,8 @@ func upboss() { //MARK:UP BOSS
 						projEn = append(projEn, zproj)
 						boss.atkT = fps - (fps / 3)
 					}
-					xdiff := absdiff(boss.cnt.X, pl.cnt.X)
-					ydiff := absdiff(boss.cnt.Y, pl.cnt.Y)
+					xdiff := AbsDiff(boss.cnt.X, pl.cnt.X)
+					ydiff := AbsDiff(boss.cnt.Y, pl.cnt.Y)
 					if xdiff > ydiff {
 						boss.dirX = boss.spd
 						boss.dirY = ydiff / (xdiff / boss.dirX)
@@ -23156,8 +23155,8 @@ func upboss() { //MARK:UP BOSS
 					checkrec.X += boss.dirX
 					checkrec.Y += boss.dirY
 					if rl.CheckCollisionRecs(pl.crec, checkrec) {
-						boss.dirX = rF32(-boss.spd, boss.spd)
-						boss.dirY = rF32(-boss.spd, boss.spd)
+						boss.dirX = RandF32(-boss.spd, boss.spd)
+						boss.dirY = RandF32(-boss.spd, boss.spd)
 						boss.img.Y = anm[141].YT
 						boss.state = 1
 						if boss.lr {
@@ -23179,8 +23178,8 @@ func upboss() { //MARK:UP BOSS
 							levels[levNum].enm[0].crec = boss.crec
 							levels[levNum].enm[0].cnt = boss.cnt
 						} else {
-							boss.dirX = rF32(-boss.spd, boss.spd)
-							boss.dirY = rF32(-boss.spd, boss.spd)
+							boss.dirX = RandF32(-boss.spd, boss.spd)
+							boss.dirY = RandF32(-boss.spd, boss.spd)
 							boss.img.Y = anm[141].YT
 							boss.state = 1
 							if boss.lr {
@@ -23205,8 +23204,8 @@ func upboss() { //MARK:UP BOSS
 						}
 					}
 				case 1: //FLY
-					xdiff := absdiff(boss.cnt.X, pl.cnt.X)
-					ydiff := absdiff(boss.cnt.Y, pl.cnt.Y)
+					xdiff := AbsDiff(boss.cnt.X, pl.cnt.X)
+					ydiff := AbsDiff(boss.cnt.Y, pl.cnt.Y)
 					if xdiff > ydiff {
 						boss.dirX = boss.spd
 						boss.dirY = ydiff / (xdiff / boss.dirX)
@@ -23224,8 +23223,8 @@ func upboss() { //MARK:UP BOSS
 					checkrec.X += boss.dirX
 					checkrec.Y += boss.dirY
 					if rl.CheckCollisionRecs(pl.crec, checkrec) {
-						boss.dirX = rF32(-boss.spd, boss.spd)
-						boss.dirY = rF32(-boss.spd, boss.spd)
+						boss.dirX = RandF32(-boss.spd, boss.spd)
+						boss.dirY = RandF32(-boss.spd, boss.spd)
 						boss.img.Y = anm[141].YT
 						boss.state = 3
 						if boss.lr {
@@ -23247,8 +23246,8 @@ func upboss() { //MARK:UP BOSS
 							levels[levNum].enm[0].crec = boss.crec
 							levels[levNum].enm[0].cnt = boss.cnt
 						} else {
-							boss.dirX = rF32(-boss.spd, boss.spd)
-							boss.dirY = rF32(-boss.spd, boss.spd)
+							boss.dirX = RandF32(-boss.spd, boss.spd)
+							boss.dirY = RandF32(-boss.spd, boss.spd)
 							boss.img.Y = anm[141].YT
 							boss.state = 3
 							if boss.lr {
@@ -23340,7 +23339,7 @@ func upboss() { //MARK:UP BOSS
 					zproj.crec.Y += zproj.crec.Width / 8
 					zproj.crec.Width -= zproj.crec.Width / 4
 					zproj.crec.Height -= zproj.crec.Height / 4
-					zproj.img = splat[rInt(0, len(splat))]
+					zproj.img = splat[RandInt(0, len(splat))]
 					zproj.fd = 0.7
 					projEn = append(projEn, zproj)
 					boss.atkT2 = fps
@@ -23353,8 +23352,8 @@ func upboss() { //MARK:UP BOSS
 					zproj.nm = "zomboProj"
 					siz := b
 					zproj.spd = 2
-					xdiff := absdiff(boss.cnt.X, pl.cnt.X)
-					ydiff := absdiff(boss.cnt.Y, pl.cnt.Y)
+					xdiff := AbsDiff(boss.cnt.X, pl.cnt.X)
+					ydiff := AbsDiff(boss.cnt.Y, pl.cnt.Y)
 					if xdiff > ydiff {
 						zproj.dirX = zproj.spd
 						zproj.dirY = ydiff / (xdiff / zproj.dirX)
@@ -23409,8 +23408,8 @@ func upboss() { //MARK:UP BOSS
 					checkrec.X += boss.dirX
 					checkrec.Y += boss.dirY
 					if rl.CheckCollisionRecs(pl.crec, checkrec) {
-						boss.dirX = rF32(-boss.spd, boss.spd)
-						boss.dirY = rF32(-boss.spd, boss.spd)
+						boss.dirX = RandF32(-boss.spd, boss.spd)
+						boss.dirY = RandF32(-boss.spd, boss.spd)
 						boss.moveChangeT = fps
 					} else {
 						if checkRecWalls(checkrec) {
@@ -23425,15 +23424,15 @@ func upboss() { //MARK:UP BOSS
 							levels[levNum].enm[0].crec = boss.crec
 							levels[levNum].enm[0].cnt = boss.cnt
 						} else {
-							boss.dirX = rF32(-boss.spd, boss.spd)
-							boss.dirY = rF32(-boss.spd, boss.spd)
+							boss.dirX = RandF32(-boss.spd, boss.spd)
+							boss.dirY = RandF32(-boss.spd, boss.spd)
 							boss.moveChangeT = fps
 						}
 					}
 				} else {
 					//MOVE
-					xdiff := absdiff(boss.cnt.X, pl.cnt.X)
-					ydiff := absdiff(boss.cnt.Y, pl.cnt.Y)
+					xdiff := AbsDiff(boss.cnt.X, pl.cnt.X)
+					ydiff := AbsDiff(boss.cnt.Y, pl.cnt.Y)
 					if xdiff > ydiff {
 						boss.dirX = boss.spd
 						boss.dirY = ydiff / (xdiff / boss.dirX)
@@ -23451,8 +23450,8 @@ func upboss() { //MARK:UP BOSS
 					checkrec.X += boss.dirX
 					checkrec.Y += boss.dirY
 					if rl.CheckCollisionRecs(pl.crec, checkrec) {
-						boss.dirX = rF32(-boss.spd, boss.spd)
-						boss.dirY = rF32(-boss.spd, boss.spd)
+						boss.dirX = RandF32(-boss.spd, boss.spd)
+						boss.dirY = RandF32(-boss.spd, boss.spd)
 						boss.moveChangeT = fps
 					} else {
 						if checkRecWalls(checkrec) {
@@ -23467,8 +23466,8 @@ func upboss() { //MARK:UP BOSS
 							levels[levNum].enm[0].crec = boss.crec
 							levels[levNum].enm[0].cnt = boss.cnt
 						} else {
-							boss.dirX = rF32(-boss.spd, boss.spd)
-							boss.dirY = rF32(-boss.spd, boss.spd)
+							boss.dirX = RandF32(-boss.spd, boss.spd)
+							boss.dirY = RandF32(-boss.spd, boss.spd)
 							boss.moveChangeT = fps
 						}
 					}
@@ -23544,8 +23543,8 @@ func upboss() { //MARK:UP BOSS
 					checkrec.X += boss.dirX
 					checkrec.Y += boss.dirY
 					if rl.CheckCollisionRecs(pl.crec, checkrec) {
-						boss.dirX = rF32(-boss.spd, boss.spd)
-						boss.dirY = rF32(-boss.spd, boss.spd)
+						boss.dirX = RandF32(-boss.spd, boss.spd)
+						boss.dirY = RandF32(-boss.spd, boss.spd)
 						boss.moveChangeT = fps * 2
 						boss.count++
 						if pl.burnT == 0 {
@@ -23565,16 +23564,16 @@ func upboss() { //MARK:UP BOSS
 							levels[levNum].enm[0].cnt = boss.cnt
 						} else {
 							boss.count++
-							boss.dirX = rF32(-boss.spd, boss.spd)
-							boss.dirY = rF32(-boss.spd, boss.spd)
+							boss.dirX = RandF32(-boss.spd, boss.spd)
+							boss.dirY = RandF32(-boss.spd, boss.spd)
 							boss.moveChangeT = fps * 2
 						}
 					}
 					if boss.moveChangeT == 0 {
 						boss.count++
 						boss.atkT = fps * 4
-						boss.dirX = rF32(-boss.spd, boss.spd)
-						boss.dirY = rF32(-boss.spd, boss.spd)
+						boss.dirX = RandF32(-boss.spd, boss.spd)
+						boss.dirY = RandF32(-boss.spd, boss.spd)
 					}
 				} else {
 					boss.atkT--
@@ -23592,8 +23591,8 @@ func upboss() { //MARK:UP BOSS
 						zproj.nm = "pigProj"
 						siz := b2
 						zproj.spd = 4
-						xdiff := absdiff(boss.cnt.X, pl.cnt.X)
-						ydiff := absdiff(boss.cnt.Y, pl.cnt.Y)
+						xdiff := AbsDiff(boss.cnt.X, pl.cnt.X)
+						ydiff := AbsDiff(boss.cnt.Y, pl.cnt.Y)
 						if xdiff > ydiff {
 							zproj.dirX = zproj.spd
 							zproj.dirY = ydiff / (xdiff / zproj.dirX)
@@ -23613,7 +23612,7 @@ func upboss() { //MARK:UP BOSS
 						} else {
 							cntr2.X += b
 						}
-						zproj.ro = angl2points(pl.cnt, boss.cnt) + 90
+						zproj.ro = AngleBetweenTwoPoints(pl.cnt, boss.cnt) + 90
 						zproj.rec = rl.NewRectangle(cntr2.X-siz/2, cntr2.Y-siz/2, siz, siz)
 						zproj.crec = zproj.rec
 						zproj.crec.Y += zproj.crec.Height / 4
@@ -23625,8 +23624,8 @@ func upboss() { //MARK:UP BOSS
 						boss.atkT2 = fps / 10
 					}
 					//MOVE
-					xdiff := absdiff(boss.cnt.X, pl.cnt.X)
-					ydiff := absdiff(boss.cnt.Y, pl.cnt.Y)
+					xdiff := AbsDiff(boss.cnt.X, pl.cnt.X)
+					ydiff := AbsDiff(boss.cnt.Y, pl.cnt.Y)
 					if xdiff > ydiff {
 						boss.dirX = boss.spd
 						boss.dirY = ydiff / (xdiff / boss.dirX)
@@ -23644,8 +23643,8 @@ func upboss() { //MARK:UP BOSS
 					checkrec.X += boss.dirX
 					checkrec.Y += boss.dirY
 					if rl.CheckCollisionRecs(pl.crec, checkrec) {
-						boss.dirX = rF32(-boss.spd, boss.spd)
-						boss.dirY = rF32(-boss.spd, boss.spd)
+						boss.dirX = RandF32(-boss.spd, boss.spd)
+						boss.dirY = RandF32(-boss.spd, boss.spd)
 						boss.moveChangeT = fps * 2
 					} else {
 						if checkRecWalls(checkrec) {
@@ -23660,8 +23659,8 @@ func upboss() { //MARK:UP BOSS
 							levels[levNum].enm[0].crec = boss.crec
 							levels[levNum].enm[0].cnt = boss.cnt
 						} else {
-							boss.dirX = rF32(-boss.spd, boss.spd)
-							boss.dirY = rF32(-boss.spd, boss.spd)
+							boss.dirX = RandF32(-boss.spd, boss.spd)
+							boss.dirY = RandF32(-boss.spd, boss.spd)
 							boss.moveChangeT = fps * 2
 						}
 					}
@@ -23710,11 +23709,11 @@ func upboss() { //MARK:UP BOSS
 							} else {
 								boss.img = anm[126].rec
 							}
-							boss.moveChangeT = fps * rI32(2, 4)
+							boss.moveChangeT = fps * RandInt32(2, 4)
 							boss.atkT = fps / 10
 						} else if boss.state == 1 {
 							boss.state = 0
-							boss.moveChangeT = fps * rI32(1, 2)
+							boss.moveChangeT = fps * RandInt32(1, 2)
 						}
 					}
 					if pl.cnt.X > boss.cnt.X {
@@ -23730,21 +23729,21 @@ func upboss() { //MARK:UP BOSS
 							boss.img.X -= anm[129].W
 							if boss.img.X < anm[129].X-anm[129].frames*anm[129].W {
 								boss.state = 0
-								boss.moveChangeT = fps * rI32(1, 2)
+								boss.moveChangeT = fps * RandInt32(1, 2)
 								boss.img.X = anm[125].W
 							}
 						} else {
 							boss.img.X += anm[128].W
 							if boss.img.X > anm[128].X+anm[128].frames*anm[128].W {
 								boss.state = 0
-								boss.moveChangeT = fps * rI32(1, 2)
+								boss.moveChangeT = fps * RandInt32(1, 2)
 								boss.img.X = anm[124].W
 							}
 						}
 					}
 				case 1: //ATK WALK
-					xdiff := absdiff(boss.cnt.X, pl.cnt.X)
-					ydiff := absdiff(boss.cnt.Y, pl.cnt.Y)
+					xdiff := AbsDiff(boss.cnt.X, pl.cnt.X)
+					ydiff := AbsDiff(boss.cnt.Y, pl.cnt.Y)
 					if xdiff > ydiff {
 						boss.dirX = boss.spd
 						boss.dirY = ydiff / (xdiff / boss.dirX)
@@ -23770,8 +23769,8 @@ func upboss() { //MARK:UP BOSS
 						zproj.nm = "spacemanProj"
 						siz := bq3
 						zproj.spd = 4
-						xdiff := absdiff(boss.cnt.X, pl.cnt.X)
-						ydiff := absdiff(boss.cnt.Y, pl.cnt.Y)
+						xdiff := AbsDiff(boss.cnt.X, pl.cnt.X)
+						ydiff := AbsDiff(boss.cnt.Y, pl.cnt.Y)
 						if xdiff > ydiff {
 							zproj.dirX = zproj.spd
 							zproj.dirY = ydiff / (xdiff / zproj.dirX)
@@ -23800,7 +23799,7 @@ func upboss() { //MARK:UP BOSS
 						boss.atkT = fps / 10
 					}
 					if rl.CheckCollisionRecs(pl.crec, checkrec) {
-						boss.moveChangeT = fps * rI32(1, 2)
+						boss.moveChangeT = fps * RandInt32(1, 2)
 					} else {
 						if checkRecWalls(checkrec) {
 							boss.rec.X += boss.dirX
@@ -23814,7 +23813,7 @@ func upboss() { //MARK:UP BOSS
 							levels[levNum].enm[0].crec = boss.crec
 							levels[levNum].enm[0].cnt = boss.cnt
 						} else {
-							boss.moveChangeT = fps * rI32(1, 2)
+							boss.moveChangeT = fps * RandInt32(1, 2)
 						}
 					}
 					if frames%4 == 0 {
@@ -23878,8 +23877,8 @@ func upboss() { //MARK:UP BOSS
 						zproj.nm = "spinnaProj"
 						siz := b2 + bq
 						zproj.spd = 5
-						xdiff := absdiff(boss.cnt.X, pl.cnt.X)
-						ydiff := absdiff(boss.cnt.Y, pl.cnt.Y)
+						xdiff := AbsDiff(boss.cnt.X, pl.cnt.X)
+						ydiff := AbsDiff(boss.cnt.Y, pl.cnt.Y)
 						if xdiff > ydiff {
 							zproj.dirX = zproj.spd
 							zproj.dirY = ydiff / (xdiff / zproj.dirX)
@@ -23909,7 +23908,7 @@ func upboss() { //MARK:UP BOSS
 					checkrec.X += boss.dirX
 					checkrec.Y += boss.dirY
 					if rl.CheckCollisionRecs(pl.crec, checkrec) {
-						boss.dirX = rF32(-boss.spd/2, boss.spd/2)
+						boss.dirX = RandF32(-boss.spd/2, boss.spd/2)
 						boss.dirY *= -1
 					} else {
 						if checkRecWalls(checkrec) {
@@ -23924,7 +23923,7 @@ func upboss() { //MARK:UP BOSS
 							levels[levNum].enm[0].crec = boss.crec
 							levels[levNum].enm[0].cnt = boss.cnt
 						} else {
-							boss.dirX = rF32(-boss.spd/2, boss.spd/2)
+							boss.dirX = RandF32(-boss.spd/2, boss.spd/2)
 							boss.dirY *= -1
 						}
 					}
@@ -23937,7 +23936,7 @@ func upboss() { //MARK:UP BOSS
 							boss.dirY = boss.spd
 							if pl.cnt.Y < boss.cnt.Y {
 								boss.dirY = -boss.spd
-								spdX := rF32(boss.spd/3, boss.spd)
+								spdX := RandF32(boss.spd/3, boss.spd)
 								if pl.cnt.X < boss.cnt.X {
 									spdX *= -1
 								}
@@ -24018,10 +24017,10 @@ func upboss() { //MARK:UP BOSS
 							zproj.fd = 1
 							zproj.col = rl.White
 							projEn = append(projEn, zproj)
-							if roll6() > 4 {
+							if Roll6() > 4 {
 								zproj.dirY = zproj.spd
-								if flipcoin() {
-									if flipcoin() {
+								if FlipCoin() {
+									if FlipCoin() {
 										zproj.dirX = zproj.spd / 4
 									} else {
 										zproj.dirX -= zproj.spd / 4
@@ -24029,10 +24028,10 @@ func upboss() { //MARK:UP BOSS
 								}
 								projEn = append(projEn, zproj)
 							}
-							if roll6() > 4 {
+							if Roll6() > 4 {
 								zproj.dirY = -zproj.spd
-								if flipcoin() {
-									if flipcoin() {
+								if FlipCoin() {
+									if FlipCoin() {
 										zproj.dirX = zproj.spd / 4
 									} else {
 										zproj.dirX -= zproj.spd / 4
@@ -24040,18 +24039,18 @@ func upboss() { //MARK:UP BOSS
 								}
 								projEn = append(projEn, zproj)
 							}
-							boss.atkT2 = fps / rI32(2, 3)
+							boss.atkT2 = fps / RandInt32(2, 3)
 						}
 					}
 					if boss.atkT == 1 {
-						if flipcoin() {
-							boss.idlT = fps * rI32(1, 3)
+						if FlipCoin() {
+							boss.idlT = fps * RandInt32(1, 3)
 						} else {
-							boss.walkT = fps * rI32(1, 3)
+							boss.walkT = fps * RandInt32(1, 3)
 							countbreak := 100
 							for {
-								boss.dirX = rF32(-boss.spd, boss.spd)
-								if getabs(boss.dirX) > boss.spd/3 {
+								boss.dirX = RandF32(-boss.spd, boss.spd)
+								if Abs(boss.dirX) > boss.spd/3 {
 									break
 								}
 								countbreak--
@@ -24059,7 +24058,7 @@ func upboss() { //MARK:UP BOSS
 									break
 								}
 							}
-							boss.dirY = rF32(-boss.spd/3, boss.spd/3)
+							boss.dirY = RandF32(-boss.spd/3, boss.spd/3)
 						}
 						boss.atkT = 0
 					}
@@ -24069,15 +24068,15 @@ func upboss() { //MARK:UP BOSS
 					boss.state = 0
 					boss.idlT--
 					if boss.idlT == 1 {
-						if flipcoin() {
-							boss.atkT = fps * rI32(2, 4)
-							boss.atkT2 = fps / rI32(2, 3)
+						if FlipCoin() {
+							boss.atkT = fps * RandInt32(2, 4)
+							boss.atkT2 = fps / RandInt32(2, 3)
 						} else {
-							boss.walkT = fps * rI32(1, 3)
+							boss.walkT = fps * RandInt32(1, 3)
 							countbreak := 100
 							for {
-								boss.dirX = rF32(-boss.spd, boss.spd)
-								if getabs(boss.dirX) > boss.spd/3 {
+								boss.dirX = RandF32(-boss.spd, boss.spd)
+								if Abs(boss.dirX) > boss.spd/3 {
 									break
 								}
 								countbreak--
@@ -24085,7 +24084,7 @@ func upboss() { //MARK:UP BOSS
 									break
 								}
 							}
-							boss.dirY = rF32(-boss.spd/3, boss.spd/3)
+							boss.dirY = RandF32(-boss.spd/3, boss.spd/3)
 						}
 						boss.idlT = 0
 					}
@@ -24095,11 +24094,11 @@ func upboss() { //MARK:UP BOSS
 					boss.state = 1
 					boss.walkT--
 					if boss.walkT == 1 {
-						if flipcoin() {
-							boss.atkT = fps * rI32(2, 4)
-							boss.atkT2 = fps / rI32(2, 3)
+						if FlipCoin() {
+							boss.atkT = fps * RandInt32(2, 4)
+							boss.atkT2 = fps / RandInt32(2, 3)
 						} else {
-							boss.idlT = fps * rI32(1, 3)
+							boss.idlT = fps * RandInt32(1, 3)
 						}
 						boss.walkT = 0
 					}
@@ -24183,10 +24182,10 @@ func upboss() { //MARK:UP BOSS
 					boss.idlT--
 					if boss.idlT == 1 {
 						boss.onoff = false
-						if flipcoin() {
-							boss.dirX = rF32(-boss.spd, boss.spd)
-							boss.walkT = fps * rI32(1, 2)
-							boss.ud = flipcoin()
+						if FlipCoin() {
+							boss.dirX = RandF32(-boss.spd, boss.spd)
+							boss.walkT = fps * RandInt32(1, 2)
+							boss.ud = FlipCoin()
 						} else {
 							boss.atkT = fps * 2
 						}
@@ -24278,7 +24277,7 @@ func upboss() { //MARK:UP BOSS
 						zproj.dirY = -zproj.dirX / 4
 						zproj.ro = 75
 						projEn = append(projEn, zproj)
-						if roll12() > 9 {
+						if Roll12() > 9 {
 							zproj.dirY = zproj.dirX / 2
 							zproj.ro = 120
 							projEn = append(projEn, zproj)
@@ -24296,7 +24295,7 @@ func upboss() { //MARK:UP BOSS
 						zproj.dirY = -zproj.dirX / 4
 						zproj.ro = -105
 						projEn = append(projEn, zproj)
-						if roll12() > 9 {
+						if Roll12() > 9 {
 							zproj.dirY = zproj.dirX / 2
 							zproj.ro = -60
 							projEn = append(projEn, zproj)
@@ -24310,10 +24309,10 @@ func upboss() { //MARK:UP BOSS
 					boss.atkT--
 					if boss.atkT == 1 {
 						boss.onoff = false
-						if flipcoin() {
-							boss.dirX = rF32(-boss.spd, boss.spd)
-							boss.walkT = fps * rI32(1, 2)
-							boss.ud = flipcoin()
+						if FlipCoin() {
+							boss.dirX = RandF32(-boss.spd, boss.spd)
+							boss.walkT = fps * RandInt32(1, 2)
+							boss.ud = FlipCoin()
 						} else {
 							boss.idlT = fps
 						}
@@ -24380,7 +24379,7 @@ func upboss() { //MARK:UP BOSS
 					if boss.walkT == 1 {
 						boss.onoff = false
 						boss.dirX = 0
-						if flipcoin() {
+						if FlipCoin() {
 							boss.atkT = fps * 2
 						} else {
 							boss.idlT = fps
@@ -24519,7 +24518,7 @@ func upboss() { //MARK:UP BOSS
 				currentMusic = 3
 				switch dispMusic {
 				case 0:
-					prevMusic = rInt(4, len(music))
+					prevMusic = RandInt(4, len(music))
 				case 1:
 					prevMusic = 4
 				case 2:
@@ -24571,20 +24570,20 @@ func upboss() { //MARK:UP BOSS
 
 				zchst.itm[1] = itmlist[83] //PEARL
 
-				if flipcoin() { //GOLD
+				if FlipCoin() { //GOLD
 					zchst.itm[2] = itmlist[38]
 					zchst.itm[2].numof = 100
 				} else { //PLATINUM
 					zchst.itm[2] = itmlist[42]
 					zchst.itm[2].numof = 100
 				}
-				if flipcoin() { //WEAPON CASE
+				if FlipCoin() { //WEAPON CASE
 					zchst.itm[3] = itmlist[120]
 				} else { //BACKPACK
 					zchst.itm[3] = itmlist[31]
 				}
 
-				choose2 := rInt(0, 10)
+				choose2 := RandInt(0, 10)
 				switch choose2 {
 				case 0:
 					zchst.itm[4] = itmlist[82]
@@ -24628,7 +24627,7 @@ func upboss() { //MARK:UP BOSS
 				levels[levNum].chst = append(levels[levNum].chst, zchst)
 				bosskillist = append(bosskillist, bossnum)
 				levels[levNum].enm[0].off = true
-				rem(4)
+				Remove(4)
 			}
 
 			//UP BOSS KEYS
@@ -24683,7 +24682,7 @@ func upWeapon(num, newlev int) { //MARK:UPGRADE WEAPON
 			weapUpgTXT = "+3 dmg"
 		case 5:
 			pl.wp1.dmg = pl.wp1.origDMG + 3
-			pl.wp1.spec1 = rInt(1, 12)
+			pl.wp1.spec1 = RandInt(1, 12)
 			switch pl.wp1.spec1 {
 			case 1:
 				weapUpgTXT = "+3 dmg +chain lightning"
@@ -24712,10 +24711,10 @@ func upWeapon(num, newlev int) { //MARK:UPGRADE WEAPON
 		case 6:
 			pl.wp1.dmg = pl.wp1.origDMG + 3
 			if pl.wp1.spec1 == 0 {
-				pl.wp1.spec1 = rInt(1, 12)
+				pl.wp1.spec1 = RandInt(1, 12)
 			}
 			for {
-				pl.wp1.spec2 = rInt(1, 12)
+				pl.wp1.spec2 = RandInt(1, 12)
 				if pl.wp1.spec2 != pl.wp1.spec1 {
 					break
 				}
@@ -24783,7 +24782,7 @@ func upWeapon(num, newlev int) { //MARK:UPGRADE WEAPON
 			weapUpgTXT = "+3 dmg"
 		case 5:
 			pl.wp2.dmg = pl.wp2.origDMG + 3
-			pl.wp2.spec1 = rInt(1, 12)
+			pl.wp2.spec1 = RandInt(1, 12)
 			switch pl.wp2.spec1 {
 			case 1:
 				weapUpgTXT = "+3 dmg +chain lightning"
@@ -24811,10 +24810,10 @@ func upWeapon(num, newlev int) { //MARK:UPGRADE WEAPON
 		case 6:
 			pl.wp2.dmg = pl.wp2.origDMG + 3
 			if pl.wp2.spec1 == 0 {
-				pl.wp2.spec1 = rInt(1, 12)
+				pl.wp2.spec1 = RandInt(1, 12)
 			}
 			for {
-				pl.wp2.spec2 = rInt(1, 12)
+				pl.wp2.spec2 = RandInt(1, 12)
 				if pl.wp2.spec2 != pl.wp2.spec1 {
 					break
 				}
@@ -24883,7 +24882,7 @@ func upWeapon(num, newlev int) { //MARK:UPGRADE WEAPON
 			weapUpgTXT = "+3 dmg"
 		case 5:
 			pl.weaps[0].dmg = pl.weaps[0].origDMG + 3
-			pl.weaps[0].spec1 = rInt(1, 12)
+			pl.weaps[0].spec1 = RandInt(1, 12)
 
 			switch pl.weaps[0].spec1 {
 			case 1:
@@ -24912,10 +24911,10 @@ func upWeapon(num, newlev int) { //MARK:UPGRADE WEAPON
 		case 6:
 			pl.weaps[0].dmg = pl.weaps[0].origDMG + 3
 			if pl.weaps[0].spec1 == 0 {
-				pl.weaps[0].spec1 = rInt(1, 12)
+				pl.weaps[0].spec1 = RandInt(1, 12)
 			}
 			for {
-				pl.weaps[0].spec2 = rInt(1, 12)
+				pl.weaps[0].spec2 = RandInt(1, 12)
 				if pl.weaps[0].spec2 != pl.weaps[0].spec1 {
 					break
 				}
@@ -24984,7 +24983,7 @@ func upWeapon(num, newlev int) { //MARK:UPGRADE WEAPON
 			weapUpgTXT = "+3 dmg"
 		case 5:
 			pl.weaps[1].dmg = pl.weaps[1].origDMG + 3
-			pl.weaps[1].spec1 = rInt(1, 12)
+			pl.weaps[1].spec1 = RandInt(1, 12)
 			switch pl.weaps[1].spec1 {
 			case 1:
 				weapUpgTXT = "+3 dmg +chain lightning"
@@ -25012,10 +25011,10 @@ func upWeapon(num, newlev int) { //MARK:UPGRADE WEAPON
 		case 6:
 			pl.weaps[1].dmg = pl.weaps[1].origDMG + 3
 			if pl.weaps[1].spec1 == 0 {
-				pl.weaps[1].spec1 = rInt(1, 12)
+				pl.weaps[1].spec1 = RandInt(1, 12)
 			}
 			for {
-				pl.weaps[1].spec2 = rInt(1, 12)
+				pl.weaps[1].spec2 = RandInt(1, 12)
 				if pl.weaps[1].spec2 != pl.weaps[1].spec1 {
 					break
 				}
@@ -25084,7 +25083,7 @@ func upWeapon(num, newlev int) { //MARK:UPGRADE WEAPON
 			weapUpgTXT = "+3 dmg"
 		case 5:
 			pl.weaps[2].dmg = pl.weaps[2].origDMG + 3
-			pl.weaps[2].spec1 = rInt(1, 12)
+			pl.weaps[2].spec1 = RandInt(1, 12)
 			switch pl.weaps[2].spec1 {
 			case 1:
 				weapUpgTXT = "+3 dmg +chain lightning"
@@ -25112,10 +25111,10 @@ func upWeapon(num, newlev int) { //MARK:UPGRADE WEAPON
 		case 6:
 			pl.weaps[2].dmg = pl.weaps[2].origDMG + 3
 			if pl.weaps[2].spec1 == 0 {
-				pl.weaps[2].spec1 = rInt(1, 12)
+				pl.weaps[2].spec1 = RandInt(1, 12)
 			}
 			for {
-				pl.weaps[2].spec2 = rInt(1, 12)
+				pl.weaps[2].spec2 = RandInt(1, 12)
 				if pl.weaps[2].spec2 != pl.weaps[2].spec1 {
 					break
 				}
@@ -25183,7 +25182,7 @@ func upWeapon(num, newlev int) { //MARK:UPGRADE WEAPON
 			weapUpgTXT = "+3 dmg"
 		case 5:
 			pl.weaps[3].dmg = pl.weaps[3].origDMG + 3
-			pl.weaps[3].spec1 = rInt(1, 12)
+			pl.weaps[3].spec1 = RandInt(1, 12)
 			switch pl.weaps[3].spec1 {
 			case 1:
 				weapUpgTXT = "+3 dmg +chain lightning"
@@ -25211,10 +25210,10 @@ func upWeapon(num, newlev int) { //MARK:UPGRADE WEAPON
 		case 6:
 			pl.weaps[3].dmg = pl.weaps[3].origDMG + 3
 			if pl.weaps[3].spec1 == 0 {
-				pl.weaps[3].spec1 = rInt(1, 12)
+				pl.weaps[3].spec1 = RandInt(1, 12)
 			}
 			for {
-				pl.weaps[3].spec2 = rInt(1, 12)
+				pl.weaps[3].spec2 = RandInt(1, 12)
 				if pl.weaps[3].spec2 != pl.weaps[3].spec1 {
 					break
 				}
@@ -25585,17 +25584,17 @@ func uprollo() { //MARK:UP ROLLO
 		} else {
 			for {
 				if rollocomp.dirX > 0 {
-					rollocomp.dirX = rF32(-rollocomp.spd, -rollocomp.spd/4)
+					rollocomp.dirX = RandF32(-rollocomp.spd, -rollocomp.spd/4)
 				} else {
-					rollocomp.dirX = rF32(rollocomp.spd/4, rollocomp.spd)
+					rollocomp.dirX = RandF32(rollocomp.spd/4, rollocomp.spd)
 				}
 				if rollocomp.dirY > 0 {
-					rollocomp.dirY = rF32(-rollocomp.spd, -rollocomp.spd/4)
+					rollocomp.dirY = RandF32(-rollocomp.spd, -rollocomp.spd/4)
 				} else {
-					rollocomp.dirY = rF32(rollocomp.spd/4, rollocomp.spd)
+					rollocomp.dirY = RandF32(rollocomp.spd/4, rollocomp.spd)
 				}
 
-				if getabs(rollocomp.dirY) > rollocomp.spd/3 || getabs(rollocomp.dirX) > rollocomp.spd/3 {
+				if Abs(rollocomp.dirY) > rollocomp.spd/3 || Abs(rollocomp.dirX) > rollocomp.spd/3 {
 					break
 				}
 			}
@@ -25651,17 +25650,17 @@ func uprollo() { //MARK:UP ROLLO
 		} else {
 			for {
 				if rollocomp.dirX > 0 {
-					rollocomp.dirX = rF32(-rollocomp.spd, -rollocomp.spd/4)
+					rollocomp.dirX = RandF32(-rollocomp.spd, -rollocomp.spd/4)
 				} else {
-					rollocomp.dirX = rF32(rollocomp.spd/4, rollocomp.spd)
+					rollocomp.dirX = RandF32(rollocomp.spd/4, rollocomp.spd)
 				}
 				if rollocomp.dirY > 0 {
-					rollocomp.dirY = rF32(-rollocomp.spd, -rollocomp.spd/4)
+					rollocomp.dirY = RandF32(-rollocomp.spd, -rollocomp.spd/4)
 				} else {
-					rollocomp.dirY = rF32(rollocomp.spd/4, rollocomp.spd)
+					rollocomp.dirY = RandF32(rollocomp.spd/4, rollocomp.spd)
 				}
 
-				if getabs(rollocomp.dirY) > rollocomp.spd/3 || getabs(rollocomp.dirX) > rollocomp.spd/3 {
+				if Abs(rollocomp.dirY) > rollocomp.spd/3 || Abs(rollocomp.dirX) > rollocomp.spd/3 {
 					break
 				}
 			}
@@ -25673,14 +25672,14 @@ func uprollo() { //MARK:UP ROLLO
 		}
 
 		if frames%30 == 0 {
-			if absdiff(pl.cnt.X, rollocomp.cnt.X) > b5 {
+			if AbsDiff(pl.cnt.X, rollocomp.cnt.X) > b5 {
 				if pl.cnt.X > rollocomp.cnt.X {
 					rollocomp.dirX = rollocomp.spd
 				} else {
 					rollocomp.dirX = -rollocomp.spd
 				}
 			}
-			if absdiff(pl.cnt.Y, rollocomp.cnt.Y) > b5 {
+			if AbsDiff(pl.cnt.Y, rollocomp.cnt.Y) > b5 {
 				if pl.cnt.Y > rollocomp.cnt.Y {
 					rollocomp.dirY = rollocomp.spd
 				} else {
@@ -25697,9 +25696,9 @@ func upbatty() { //MARK:UP BATTY
 		if batcomp.moveChangeT > 0 {
 			batcomp.moveChangeT--
 		} else {
-			batcomp.moveChangeT = fps * rI32(1, 4)
-			batcomp.dirX = rF32(-batcomp.spd, batcomp.spd)
-			batcomp.dirY = rF32(-batcomp.spd, batcomp.spd)
+			batcomp.moveChangeT = fps * RandInt32(1, 4)
+			batcomp.dirX = RandF32(-batcomp.spd, batcomp.spd)
+			batcomp.dirY = RandF32(-batcomp.spd, batcomp.spd)
 		}
 
 		if batcomp.dirX > 0 {
@@ -25720,8 +25719,8 @@ func upbatty() { //MARK:UP BATTY
 			batcomp.cnt.Y += batcomp.dirY + delta
 			batcomp.rec = rl.NewRectangle(batcomp.cnt.X-batcomp.rec.Width/2, batcomp.cnt.Y-batcomp.rec.Height/2, batcomp.rec.Width, batcomp.rec.Height)
 		} else {
-			batcomp.dirX = rF32(-batcomp.spd, batcomp.spd)
-			batcomp.dirY = rF32(-batcomp.spd, batcomp.spd)
+			batcomp.dirX = RandF32(-batcomp.spd, batcomp.spd)
+			batcomp.dirY = RandF32(-batcomp.spd, batcomp.spd)
 		}
 
 	} else {
@@ -25764,9 +25763,9 @@ func upbatty() { //MARK:UP BATTY
 		if batcomp.moveChangeT > 0 {
 			batcomp.moveChangeT--
 		} else {
-			batcomp.moveChangeT = fps * rI32(1, 4)
-			batcomp.dirX = rF32(-batcomp.spd, batcomp.spd)
-			batcomp.dirY = rF32(-batcomp.spd, batcomp.spd)
+			batcomp.moveChangeT = fps * RandInt32(1, 4)
+			batcomp.dirX = RandF32(-batcomp.spd, batcomp.spd)
+			batcomp.dirY = RandF32(-batcomp.spd, batcomp.spd)
 		}
 
 		if batcomp.dirX > 0 {
@@ -25790,19 +25789,19 @@ func upbatty() { //MARK:UP BATTY
 			batcomp.cnt.Y += batcomp.dirY + delta
 			batcomp.rec = rl.NewRectangle(batcomp.cnt.X-batcomp.rec.Width/2, batcomp.cnt.Y-batcomp.rec.Height/2, batcomp.rec.Width, batcomp.rec.Height)
 		} else {
-			batcomp.dirX = rF32(-batcomp.spd, batcomp.spd)
-			batcomp.dirY = rF32(-batcomp.spd, batcomp.spd)
+			batcomp.dirX = RandF32(-batcomp.spd, batcomp.spd)
+			batcomp.dirY = RandF32(-batcomp.spd, batcomp.spd)
 		}
 
 		if frames%30 == 0 {
-			if absdiff(pl.cnt.X, batcomp.cnt.X) > b5 {
+			if AbsDiff(pl.cnt.X, batcomp.cnt.X) > b5 {
 				if pl.cnt.X > batcomp.cnt.X {
 					batcomp.dirX = batcomp.spd
 				} else {
 					batcomp.dirX = -batcomp.spd
 				}
 			}
-			if absdiff(pl.cnt.Y, batcomp.cnt.Y) > b5 {
+			if AbsDiff(pl.cnt.Y, batcomp.cnt.Y) > b5 {
 				if pl.cnt.Y > batcomp.cnt.Y {
 					batcomp.dirY = batcomp.spd
 				} else {
@@ -26193,7 +26192,7 @@ func upfxclear() { //MARK:UP FX CLEAR
 	if clear {
 		for i := 0; i < len(fx); i++ {
 			if fx[i].off {
-				fx = remfx(fx, i)
+				fx = RemoveFx(fx, i)
 			}
 		}
 	}
@@ -26296,7 +26295,7 @@ func upenm() { //MARK:UP ENEMIES
 						}
 						if pl.burnT == 0 && pl.dampT == 0 && icelollyT == 0 && pl.resFireT == 0 {
 							if ovenglovenum > 0 {
-								if roll6() <= ovenglovenum {
+								if Roll6() <= ovenglovenum {
 									admsg("oven glove saves burn", rl.Green)
 								} else {
 									admsg("burning...", rl.Orange)
@@ -26353,7 +26352,7 @@ func upenm() { //MARK:UP ENEMIES
 						zproj.col = rl.White
 						zproj.fd = 1
 						zproj.spd = 4
-						if flipcoin() {
+						if FlipCoin() {
 							zproj.dirX = zproj.spd
 							projEn = append(projEn, zproj)
 							zproj.dirX = -zproj.spd
@@ -26459,15 +26458,15 @@ func upenm() { //MARK:UP ENEMIES
 							if levels[levNum].enm[i].numMax > 0 && blackdotCount < 50 {
 								levels[levNum].enm[i].numMax--
 								zenm := enmlist[10] //BLACK DOT
-								if roll6() == 6 {
-									zenm.numMax = rInt(2, 5)
+								if Roll6() == 6 {
+									zenm.numMax = RandInt(2, 5)
 									zenm.atkT = fps * 2
 								}
 								zenm.cnt = levels[levNum].enm[i].cnt
 								zenm.rec = rl.NewRectangle(zenm.cnt.X-zenm.rec.Width/2, zenm.cnt.Y-zenm.rec.Height/2, zenm.rec.Width, zenm.rec.Height)
 								zenm.crec = zenm.rec
-								zenm.dirX = rF32(-zenm.spd, zenm.spd)
-								zenm.dirY = rF32(-zenm.spd, zenm.spd)
+								zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+								zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 								levels[levNum].enm = append(levels[levNum].enm, zenm)
 								levels[levNum].enNum++
 								levels[levNum].enm[i].atkT = fps * 2
@@ -26515,7 +26514,7 @@ func upenm() { //MARK:UP ENEMIES
 							zproj.spd = b / 12
 							zproj.dirX, zproj.dirY = findSpdXY(levels[levNum].enm[i].cnt, pl.cnt, zproj.spd)
 							projEn = append(projEn, zproj)
-							levels[levNum].enm[i].atkT = fps * rI32(1, 3)
+							levels[levNum].enm[i].atkT = fps * RandInt32(1, 3)
 						case "redantenna":
 							zproj := xweap{}
 							zproj.nm = "redantbull"
@@ -26540,34 +26539,34 @@ func upenm() { //MARK:UP ENEMIES
 					switch levels[levNum].enm[i].nm {
 					case "bird":
 						levels[levNum].enm[i].follow = !levels[levNum].enm[i].follow
-						levels[levNum].enm[i].moveChangeT = fps * rI32(3, 8)
+						levels[levNum].enm[i].moveChangeT = fps * RandInt32(3, 8)
 						if !levels[levNum].enm[i].follow {
-							levels[levNum].enm[i].dirX = rF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
-							levels[levNum].enm[i].dirY = rF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
+							levels[levNum].enm[i].dirX = RandF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
+							levels[levNum].enm[i].dirY = RandF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
 						}
 					case "robot":
 						if !levels[levNum].enm[i].follow {
-							levels[levNum].enm[i].moveChangeT = fps * rI32(1, 2)
-							levels[levNum].enm[i].dirX = rF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
-							levels[levNum].enm[i].dirY = rF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
+							levels[levNum].enm[i].moveChangeT = fps * RandInt32(1, 2)
+							levels[levNum].enm[i].dirX = RandF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
+							levels[levNum].enm[i].dirY = RandF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
 						}
 					case "redblob":
-						levels[levNum].enm[i].moveChangeT = fps * rI32(1, 2)
-						levels[levNum].enm[i].dirX = rF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
-						levels[levNum].enm[i].dirY = rF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
+						levels[levNum].enm[i].moveChangeT = fps * RandInt32(1, 2)
+						levels[levNum].enm[i].dirX = RandF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
+						levels[levNum].enm[i].dirY = RandF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
 					case "yellowdino", "greenplant", "jersey", "spike":
-						levels[levNum].enm[i].moveChangeT = fps * rI32(2, 4)
-						levels[levNum].enm[i].dirX = rF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
-						levels[levNum].enm[i].dirY = rF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
+						levels[levNum].enm[i].moveChangeT = fps * RandInt32(2, 4)
+						levels[levNum].enm[i].dirX = RandF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
+						levels[levNum].enm[i].dirY = RandF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
 					case "redantenna":
-						levels[levNum].enm[i].moveChangeT = fps * rI32(1, 4)
+						levels[levNum].enm[i].moveChangeT = fps * RandInt32(1, 4)
 						levels[levNum].enm[i].dirX = 0
 						levels[levNum].enm[i].dirY = 0
-						if flipcoin() {
+						if FlipCoin() {
 							countbreak := 100
 							for {
-								levels[levNum].enm[i].dirX = rF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
-								if getabs(levels[levNum].enm[i].dirX) > 0.4 {
+								levels[levNum].enm[i].dirX = RandF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
+								if Abs(levels[levNum].enm[i].dirX) > 0.4 {
 									break
 								}
 								countbreak--
@@ -26578,8 +26577,8 @@ func upenm() { //MARK:UP ENEMIES
 						} else {
 							countbreak := 100
 							for {
-								levels[levNum].enm[i].dirY = rF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
-								if getabs(levels[levNum].enm[i].dirY) > 0.4 {
+								levels[levNum].enm[i].dirY = RandF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
+								if Abs(levels[levNum].enm[i].dirY) > 0.4 {
 									break
 								}
 								countbreak--
@@ -26599,11 +26598,11 @@ func upenm() { //MARK:UP ENEMIES
 						switch levels[levNum].enm[i].nm {
 						case "bluespike", "redeye", "redbomb", "pinkcart", "greenplant":
 							if levels[levNum].enm[i].idlon {
-								levels[levNum].enm[i].idleT = fps * rI32(1, 3)
+								levels[levNum].enm[i].idleT = fps * RandInt32(1, 3)
 							} else {
-								levels[levNum].enm[i].dirX = rF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
-								levels[levNum].enm[i].dirY = rF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
-								levels[levNum].enm[i].idleT = fps * rI32(3, 5)
+								levels[levNum].enm[i].dirX = RandF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
+								levels[levNum].enm[i].dirY = RandF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
+								levels[levNum].enm[i].idleT = fps * RandInt32(3, 5)
 							}
 						}
 					}
@@ -26644,8 +26643,8 @@ func upenm() { //MARK:UP ENEMIES
 							if rl.CheckCollisionRecs(pl.crec, levels[levNum].enm[i].carec) && pl.invisT == 0 {
 								levels[levNum].enm[i].idl = false
 								if frames%15 == 0 {
-									xdiff := absdiff(levels[levNum].enm[i].cnt.X, pl.cnt.X)
-									ydiff := absdiff(levels[levNum].enm[i].cnt.Y, pl.cnt.Y)
+									xdiff := AbsDiff(levels[levNum].enm[i].cnt.X, pl.cnt.X)
+									ydiff := AbsDiff(levels[levNum].enm[i].cnt.Y, pl.cnt.Y)
 									if xdiff > ydiff {
 										levels[levNum].enm[i].dirX = levels[levNum].enm[i].spd
 										levels[levNum].enm[i].dirY = ydiff / (xdiff / levels[levNum].enm[i].dirX)
@@ -26679,8 +26678,8 @@ func upenm() { //MARK:UP ENEMIES
 							levels[levNum].enm[i].crec.Height -= levels[levNum].enm[i].crec.Height / 4
 							if levels[levNum].enm[i].follow {
 								if frames%15 == 0 {
-									xdiff := absdiff(levels[levNum].enm[i].cnt.X, pl.cnt.X)
-									ydiff := absdiff(levels[levNum].enm[i].cnt.Y, pl.cnt.Y)
+									xdiff := AbsDiff(levels[levNum].enm[i].cnt.X, pl.cnt.X)
+									ydiff := AbsDiff(levels[levNum].enm[i].cnt.Y, pl.cnt.Y)
 									if xdiff > ydiff {
 										levels[levNum].enm[i].dirX = levels[levNum].enm[i].spd
 										levels[levNum].enm[i].dirY = ydiff / (xdiff / levels[levNum].enm[i].dirX)
@@ -26716,8 +26715,8 @@ func upenm() { //MARK:UP ENEMIES
 							if rl.CheckCollisionRecs(pl.crec, levels[levNum].enm[i].carec) && pl.invisT == 0 && pl.freezeT == 0 {
 								levels[levNum].enm[i].follow = true
 								if frames%15 == 0 {
-									xdiff := absdiff(levels[levNum].enm[i].cnt.X, pl.cnt.X)
-									ydiff := absdiff(levels[levNum].enm[i].cnt.Y, pl.cnt.Y)
+									xdiff := AbsDiff(levels[levNum].enm[i].cnt.X, pl.cnt.X)
+									ydiff := AbsDiff(levels[levNum].enm[i].cnt.Y, pl.cnt.Y)
 									if xdiff > ydiff {
 										levels[levNum].enm[i].dirX = levels[levNum].enm[i].spd
 										levels[levNum].enm[i].dirY = ydiff / (xdiff / levels[levNum].enm[i].dirX)
@@ -26747,8 +26746,8 @@ func upenm() { //MARK:UP ENEMIES
 							if rl.CheckCollisionRecs(pl.crec, levels[levNum].enm[i].carec) && pl.invisT == 0 {
 								levels[levNum].enm[i].spd = 4
 								if frames%15 == 0 {
-									xdiff := absdiff(levels[levNum].enm[i].cnt.X, pl.cnt.X)
-									ydiff := absdiff(levels[levNum].enm[i].cnt.Y, pl.cnt.Y)
+									xdiff := AbsDiff(levels[levNum].enm[i].cnt.X, pl.cnt.X)
+									ydiff := AbsDiff(levels[levNum].enm[i].cnt.Y, pl.cnt.Y)
 									if xdiff > ydiff {
 										levels[levNum].enm[i].dirX = levels[levNum].enm[i].spd
 										levels[levNum].enm[i].dirY = ydiff / (xdiff / levels[levNum].enm[i].dirX)
@@ -26810,8 +26809,8 @@ func upenm() { //MARK:UP ENEMIES
 							//COLLISION AREA REC
 							if rl.CheckCollisionRecs(pl.crec, levels[levNum].enm[i].carec) && pl.invisT == 0 {
 								if frames%15 == 0 {
-									xdiff := absdiff(levels[levNum].enm[i].cnt.X, pl.cnt.X)
-									ydiff := absdiff(levels[levNum].enm[i].cnt.Y, pl.cnt.Y)
+									xdiff := AbsDiff(levels[levNum].enm[i].cnt.X, pl.cnt.X)
+									ydiff := AbsDiff(levels[levNum].enm[i].cnt.Y, pl.cnt.Y)
 									if xdiff > ydiff {
 										levels[levNum].enm[i].dirX = levels[levNum].enm[i].spd
 										levels[levNum].enm[i].dirY = ydiff / (xdiff / levels[levNum].enm[i].dirX)
@@ -26839,8 +26838,8 @@ func upenm() { //MARK:UP ENEMIES
 							//COLLISION AREA REC
 							if rl.CheckCollisionRecs(pl.crec, levels[levNum].enm[i].carec) && pl.invisT == 0 {
 								if frames%15 == 0 {
-									xdiff := absdiff(levels[levNum].enm[i].cnt.X, pl.cnt.X)
-									ydiff := absdiff(levels[levNum].enm[i].cnt.Y, pl.cnt.Y)
+									xdiff := AbsDiff(levels[levNum].enm[i].cnt.X, pl.cnt.X)
+									ydiff := AbsDiff(levels[levNum].enm[i].cnt.Y, pl.cnt.Y)
 									if xdiff > ydiff {
 										levels[levNum].enm[i].dirX = levels[levNum].enm[i].spd
 										levels[levNum].enm[i].dirY = ydiff / (xdiff / levels[levNum].enm[i].dirX)
@@ -26870,8 +26869,8 @@ func upenm() { //MARK:UP ENEMIES
 							//COLLISION AREA REC
 							if rl.CheckCollisionRecs(pl.crec, levels[levNum].enm[i].carec) && pl.invisT == 0 {
 								if frames%15 == 0 {
-									xdiff := absdiff(levels[levNum].enm[i].cnt.X, pl.cnt.X)
-									ydiff := absdiff(levels[levNum].enm[i].cnt.Y, pl.cnt.Y)
+									xdiff := AbsDiff(levels[levNum].enm[i].cnt.X, pl.cnt.X)
+									ydiff := AbsDiff(levels[levNum].enm[i].cnt.Y, pl.cnt.Y)
 									if xdiff > ydiff {
 										levels[levNum].enm[i].dirX = levels[levNum].enm[i].spd
 										levels[levNum].enm[i].dirY = ydiff / (xdiff / levels[levNum].enm[i].dirX)
@@ -26952,8 +26951,8 @@ func upenm() { //MARK:UP ENEMIES
 							//COLLISION AREA REC
 							if rl.CheckCollisionRecs(pl.crec, levels[levNum].enm[i].carec) && pl.invisT == 0 {
 								if frames%15 == 0 {
-									xdiff := absdiff(levels[levNum].enm[i].cnt.X, pl.cnt.X)
-									ydiff := absdiff(levels[levNum].enm[i].cnt.Y, pl.cnt.Y)
+									xdiff := AbsDiff(levels[levNum].enm[i].cnt.X, pl.cnt.X)
+									ydiff := AbsDiff(levels[levNum].enm[i].cnt.Y, pl.cnt.Y)
 									if xdiff > ydiff {
 										levels[levNum].enm[i].dirX = levels[levNum].enm[i].spd
 										levels[levNum].enm[i].dirY = ydiff / (xdiff / levels[levNum].enm[i].dirX)
@@ -27069,11 +27068,11 @@ func upenm() { //MARK:UP ENEMIES
 									levels[levNum].enm[i].dirX = levels[levNum].enm[i].spd
 								}
 								levels[levNum].enm[i].dirX *= -1
-								if flipcoin() {
+								if FlipCoin() {
 									levels[levNum].enm[i].dirX *= -1
 								}
-								levels[levNum].enm[i].dirY = levels[levNum].enm[i].spd / rF32(2, 5)
-								if flipcoin() {
+								levels[levNum].enm[i].dirY = levels[levNum].enm[i].spd / RandF32(2, 5)
+								if FlipCoin() {
 									levels[levNum].enm[i].dirY = -levels[levNum].enm[i].dirY
 								}
 							case "crocodile", "worm", "redantenna":
@@ -27082,8 +27081,8 @@ func upenm() { //MARK:UP ENEMIES
 								}
 								countbreak := 100
 								for {
-									levels[levNum].enm[i].dirX = rF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
-									if getabs(levels[levNum].enm[i].dirX) > 0.4 {
+									levels[levNum].enm[i].dirX = RandF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
+									if Abs(levels[levNum].enm[i].dirX) > 0.4 {
 										break
 									}
 									countbreak--
@@ -27093,33 +27092,33 @@ func upenm() { //MARK:UP ENEMIES
 								}
 							case "ghost", "balloon", "blackdot", "fly", "yellowdino", "flamehead", "orange", "skeleton", "redblob", "carrot", "robot", "greenpig", "bush", "bird", "jersey", "spike":
 								if levels[levNum].enm[i].dirX > 0 {
-									levels[levNum].enm[i].dirX = rF32(-levels[levNum].enm[i].spd, 0)
+									levels[levNum].enm[i].dirX = RandF32(-levels[levNum].enm[i].spd, 0)
 								} else {
-									levels[levNum].enm[i].dirX = rF32(0, levels[levNum].enm[i].spd)
+									levels[levNum].enm[i].dirX = RandF32(0, levels[levNum].enm[i].spd)
 								}
 								if levels[levNum].enm[i].dirY > 0 {
-									levels[levNum].enm[i].dirY = rF32(-levels[levNum].enm[i].spd, 0)
+									levels[levNum].enm[i].dirY = RandF32(-levels[levNum].enm[i].spd, 0)
 								} else {
-									levels[levNum].enm[i].dirY = rF32(0, levels[levNum].enm[i].spd)
+									levels[levNum].enm[i].dirY = RandF32(0, levels[levNum].enm[i].spd)
 								}
 							case "bluespike", "redeye", "redbomb", "pinkcart", "greenplant":
 								levels[levNum].enm[i].idlon = true
-								levels[levNum].enm[i].idleT = fps * rI32(1, 3)
+								levels[levNum].enm[i].idleT = fps * RandInt32(1, 3)
 								if levels[levNum].enm[i].dirX > 0 {
-									levels[levNum].enm[i].dirX = rF32(-levels[levNum].enm[i].spd, 0)
+									levels[levNum].enm[i].dirX = RandF32(-levels[levNum].enm[i].spd, 0)
 								} else {
-									levels[levNum].enm[i].dirX = rF32(0, levels[levNum].enm[i].spd)
+									levels[levNum].enm[i].dirX = RandF32(0, levels[levNum].enm[i].spd)
 								}
 								if levels[levNum].enm[i].dirY > 0 {
-									levels[levNum].enm[i].dirY = rF32(-levels[levNum].enm[i].spd, 0)
+									levels[levNum].enm[i].dirY = RandF32(-levels[levNum].enm[i].spd, 0)
 								} else {
-									levels[levNum].enm[i].dirY = rF32(0, levels[levNum].enm[i].spd)
+									levels[levNum].enm[i].dirY = RandF32(0, levels[levNum].enm[i].spd)
 								}
 								countbreak := 100
 								for {
-									levels[levNum].enm[i].dirX = rF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
-									levels[levNum].enm[i].dirY = rF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
-									if getabs(levels[levNum].enm[i].dirX) > 0.4 && getabs(levels[levNum].enm[i].dirY) > 0.4 {
+									levels[levNum].enm[i].dirX = RandF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
+									levels[levNum].enm[i].dirY = RandF32(-levels[levNum].enm[i].spd, levels[levNum].enm[i].spd)
+									if Abs(levels[levNum].enm[i].dirX) > 0.4 && Abs(levels[levNum].enm[i].dirY) > 0.4 {
 										break
 									}
 									countbreak--
@@ -27892,10 +27891,10 @@ func makeitems(lev x1scr) x1scr { //MARK:MAKE ITEMS
 	*/
 
 	//INVIS
-	num := rInt(1, 4)
+	num := RandInt(1, 4)
 	for num > 0 {
 		zitm := xitm{}
-		zitm = invisItm[rInt(0, len(invisItm))]
+		zitm = invisItm[RandInt(0, len(invisItm))]
 		zitm.invis = true
 		countbreak := 100
 		for {
@@ -30144,10 +30143,10 @@ func makeplProjSpecial(weapNum, spec1or2 int) { //MARK:MAKE PLAYER PROJ SPECIAL
 			zproj.img = etc[211]
 			zproj.col = rl.White
 			zproj.fd = 1
-			choose := rInt(0, len(levels[levNum].enm))
-			zproj.ro = angl2points(pl.cnt, levels[levNum].enm[choose].cnt) + 90
-			xdiff := absdiff(pl.cnt.X, levels[levNum].enm[choose].cnt.X)
-			ydiff := absdiff(pl.cnt.Y, levels[levNum].enm[choose].cnt.Y)
+			choose := RandInt(0, len(levels[levNum].enm))
+			zproj.ro = AngleBetweenTwoPoints(pl.cnt, levels[levNum].enm[choose].cnt) + 90
+			xdiff := AbsDiff(pl.cnt.X, levels[levNum].enm[choose].cnt.X)
+			ydiff := AbsDiff(pl.cnt.Y, levels[levNum].enm[choose].cnt.Y)
 			if xdiff > ydiff {
 				zproj.dirX = zproj.spd
 				zproj.dirY = ydiff / (xdiff / zproj.dirX)
@@ -30184,7 +30183,7 @@ func makeplProjSpecial(weapNum, spec1or2 int) { //MARK:MAKE PLAYER PROJ SPECIAL
 		zproj.fd = 1
 		zproj.dmg = 1
 		origRec := zproj.rec
-		side := rInt(1, 5)
+		side := RandInt(1, 5)
 		switch side {
 		case 1: //UP
 			zproj.dirY = -zproj.spd
@@ -30404,7 +30403,7 @@ func makeplproj(num int) { //MARK:MAKE PLAYER PROJ
 	}
 	if num == 1 {
 		if pl.wp1.spec1 == 1 || pl.wp1.spec2 == 1 {
-			if roll6() > 4 {
+			if Roll6() > 4 {
 				zproj.lightning = true
 			}
 		}
@@ -30431,7 +30430,7 @@ func makeplproj(num int) { //MARK:MAKE PLAYER PROJ
 		}
 	} else if num == 2 {
 		if pl.wp2.spec1 == 1 || pl.wp2.spec2 == 1 {
-			if roll6() > 4 {
+			if Roll6() > 4 {
 				zproj.lightning = true
 			}
 		}
@@ -30457,8 +30456,8 @@ func makeplproj(num int) { //MARK:MAKE PLAYER PROJ
 			zproj.sludgegeyser = true
 		}
 	}
-	xdiff := absdiff(atkCNT.X, atkV2.X)
-	ydiff := absdiff(atkCNT.Y, atkV2.Y)
+	xdiff := AbsDiff(atkCNT.X, atkV2.X)
+	ydiff := AbsDiff(atkCNT.Y, atkV2.Y)
 	if xdiff > ydiff {
 		zproj.dirX = zproj.spd
 		zproj.dirY = ydiff / (xdiff / zproj.dirX)
@@ -30480,7 +30479,7 @@ func makeplproj(num int) { //MARK:MAKE PLAYER PROJ
 	switch weapName {
 	case "guitar":
 		zproj.img = etc[175]
-		zproj.ro = angl2points(atkCNT, atkV2)
+		zproj.ro = AngleBetweenTwoPoints(atkCNT, atkV2)
 		if pl.direc {
 			zproj.ro += 180
 		}
@@ -30584,7 +30583,7 @@ func makeplproj(num int) { //MARK:MAKE PLAYER PROJ
 		zproj.rec.Y -= 4
 		zproj.rec.Width += 8
 		zproj.rec.Height += 8
-		zproj.ro = angl2points(atkCNT, atkV2) + 45
+		zproj.ro = AngleBetweenTwoPoints(atkCNT, atkV2) + 45
 		projPL = append(projPL, zproj)
 		zprojORIG := zproj
 		if mirror && !twin { //MIRROR
@@ -30594,15 +30593,15 @@ func makeplproj(num int) { //MARK:MAKE PLAYER PROJ
 			} else {
 				zproj.rec.X -= pl.rec.Width
 			}
-			zproj.ro = mirrorAngl(zproj.ro) + 90
+			zproj.ro = MirrorAngle(zproj.ro) + 90
 			projPL = append(projPL, zproj)
-			if getabs(zproj.dirY) > getabs(zproj.dirX) {
+			if Abs(zproj.dirY) > Abs(zproj.dirX) {
 				zproj.rec.X -= zproj.rec.Width / 2
 			} else {
 				zproj.rec.Y -= zproj.rec.Width / 2
 			}
 			projPL = append(projPL, zproj)
-			if getabs(zproj.dirY) > getabs(zproj.dirX) {
+			if Abs(zproj.dirY) > Abs(zproj.dirX) {
 				zproj.rec.X += zproj.rec.Width
 			} else {
 				zproj.rec.Y += zproj.rec.Width
@@ -30613,13 +30612,13 @@ func makeplproj(num int) { //MARK:MAKE PLAYER PROJ
 			zproj.dirY *= -1
 			zproj.ro += 180
 			projPL = append(projPL, zproj)
-			if getabs(zproj.dirY) > getabs(zproj.dirX) {
+			if Abs(zproj.dirY) > Abs(zproj.dirX) {
 				zproj.rec.X -= zproj.rec.Width / 2
 			} else {
 				zproj.rec.Y -= zproj.rec.Width / 2
 			}
 			projPL = append(projPL, zproj)
-			if getabs(zproj.dirY) > getabs(zproj.dirX) {
+			if Abs(zproj.dirY) > Abs(zproj.dirX) {
 				zproj.rec.X += zproj.rec.Width
 			} else {
 				zproj.rec.Y += zproj.rec.Width
@@ -30632,15 +30631,15 @@ func makeplproj(num int) { //MARK:MAKE PLAYER PROJ
 			} else {
 				zproj.rec.X -= pl.rec.Width
 			}
-			zproj.ro = mirrorAngl(zproj.ro) + 90
+			zproj.ro = MirrorAngle(zproj.ro) + 90
 			projPL = append(projPL, zproj)
-			if getabs(zproj.dirY) > getabs(zproj.dirX) {
+			if Abs(zproj.dirY) > Abs(zproj.dirX) {
 				zproj.rec.X -= zproj.rec.Width / 2
 			} else {
 				zproj.rec.Y -= zproj.rec.Width / 2
 			}
 			projPL = append(projPL, zproj)
-			if getabs(zproj.dirY) > getabs(zproj.dirX) {
+			if Abs(zproj.dirY) > Abs(zproj.dirX) {
 				zproj.rec.X += zproj.rec.Width
 			} else {
 				zproj.rec.Y += zproj.rec.Width
@@ -30651,13 +30650,13 @@ func makeplproj(num int) { //MARK:MAKE PLAYER PROJ
 			zproj.dirY *= -1
 			zproj.ro += 180
 			projPL = append(projPL, zproj)
-			if getabs(zproj.dirY) > getabs(zproj.dirX) {
+			if Abs(zproj.dirY) > Abs(zproj.dirX) {
 				zproj.rec.X -= zproj.rec.Width / 2
 			} else {
 				zproj.rec.Y -= zproj.rec.Width / 2
 			}
 			projPL = append(projPL, zproj)
-			if getabs(zproj.dirY) > getabs(zproj.dirX) {
+			if Abs(zproj.dirY) > Abs(zproj.dirX) {
 				zproj.rec.X += zproj.rec.Width
 			} else {
 				zproj.rec.Y += zproj.rec.Width
@@ -30669,13 +30668,13 @@ func makeplproj(num int) { //MARK:MAKE PLAYER PROJ
 			zproj.dirY *= -1
 			zproj.ro += 180
 			projPL = append(projPL, zproj)
-			if getabs(zproj.dirY) > getabs(zproj.dirX) {
+			if Abs(zproj.dirY) > Abs(zproj.dirX) {
 				zproj.rec.X -= zproj.rec.Width / 2
 			} else {
 				zproj.rec.Y -= zproj.rec.Width / 2
 			}
 			projPL = append(projPL, zproj)
-			if getabs(zproj.dirY) > getabs(zproj.dirX) {
+			if Abs(zproj.dirY) > Abs(zproj.dirX) {
 				zproj.rec.X += zproj.rec.Width
 			} else {
 				zproj.rec.Y += zproj.rec.Width
@@ -30683,13 +30682,13 @@ func makeplproj(num int) { //MARK:MAKE PLAYER PROJ
 			projPL = append(projPL, zproj)
 		}
 		zproj = zprojORIG
-		if getabs(zproj.dirY) > getabs(zproj.dirX) {
+		if Abs(zproj.dirY) > Abs(zproj.dirX) {
 			zproj.rec.X -= zproj.rec.Width / 2
 		} else {
 			zproj.rec.Y -= zproj.rec.Width / 2
 		}
 		projPL = append(projPL, zproj)
-		if getabs(zproj.dirY) > getabs(zproj.dirX) {
+		if Abs(zproj.dirY) > Abs(zproj.dirX) {
 			zproj.rec.X += zproj.rec.Width
 		} else {
 			zproj.rec.Y += zproj.rec.Width
@@ -30737,7 +30736,7 @@ func makeplproj(num int) { //MARK:MAKE PLAYER PROJ
 		zproj.rec.Y -= 4
 		zproj.rec.Width += 8
 		zproj.rec.Height += 8
-		zproj.img = splat[rInt(0, len(splat))]
+		zproj.img = splat[RandInt(0, len(splat))]
 		projPL = append(projPL, zproj)
 		zprojORIG := zproj
 		if mirror && !twin { //MIRROR
@@ -30774,14 +30773,14 @@ func makeplproj(num int) { //MARK:MAKE PLAYER PROJ
 			projPL = append(projPL, zproj)
 		}
 		zproj = zprojORIG
-		diff := rF32(-4, 4)
+		diff := RandF32(-4, 4)
 		zproj.rec.X -= diff
 		zproj.rec.Y -= diff
 		zproj.rec.Width += diff * 2
 		zproj.rec.Height += diff * 2
-		zproj.dirX += rF32(-2, 2)
-		zproj.dirY += rF32(-2, 2)
-		zproj.img = splat[rInt(0, len(splat))]
+		zproj.dirX += RandF32(-2, 2)
+		zproj.dirY += RandF32(-2, 2)
+		zproj.img = splat[RandInt(0, len(splat))]
 		projPL = append(projPL, zproj)
 		if mirror && !twin { //MIRROR
 			zproj.dirX *= -1
@@ -30817,14 +30816,14 @@ func makeplproj(num int) { //MARK:MAKE PLAYER PROJ
 			projPL = append(projPL, zproj)
 		}
 		zproj = zprojORIG
-		diff = rF32(-4, 4)
+		diff = RandF32(-4, 4)
 		zproj.rec.X -= diff
 		zproj.rec.Y -= diff
 		zproj.rec.Width += diff * 2
 		zproj.rec.Height += diff * 2
-		zproj.dirX += rF32(-2, 2)
-		zproj.dirY += rF32(-2, 2)
-		zproj.img = splat[rInt(0, len(splat))]
+		zproj.dirX += RandF32(-2, 2)
+		zproj.dirY += RandF32(-2, 2)
+		zproj.img = splat[RandInt(0, len(splat))]
 		projPL = append(projPL, zproj)
 		if mirror && !twin { //MIRROR
 			zproj.dirX *= -1
@@ -30934,7 +30933,7 @@ func makeplproj(num int) { //MARK:MAKE PLAYER PROJ
 		zproj.rec.Y -= 2
 		zproj.rec.Width += 4
 		zproj.rec.Height += 4
-		zproj.ro = angl2points(atkCNT, atkV2) - 90
+		zproj.ro = AngleBetweenTwoPoints(atkCNT, atkV2) - 90
 		projPL = append(projPL, zproj)
 		zprojORIG := zproj
 		if mirror && !twin { //MIRROR
@@ -30972,10 +30971,10 @@ func makeplproj(num int) { //MARK:MAKE PLAYER PROJ
 		}
 		zproj = zprojORIG
 		atkV3 := atkV2
-		atkV3.X += rF32(20, 41)
-		atkV3.Y += rF32(20, 41)
-		xdiff = absdiff(atkCNT.X, atkV3.X)
-		ydiff = absdiff(atkCNT.Y, atkV3.Y)
+		atkV3.X += RandF32(20, 41)
+		atkV3.Y += RandF32(20, 41)
+		xdiff = AbsDiff(atkCNT.X, atkV3.X)
+		ydiff = AbsDiff(atkCNT.Y, atkV3.Y)
 		if xdiff > ydiff {
 			zproj.dirX = zproj.spd
 			zproj.dirY = ydiff / (xdiff / zproj.dirX)
@@ -30989,7 +30988,7 @@ func makeplproj(num int) { //MARK:MAKE PLAYER PROJ
 		if atkCNT.Y > atkV3.Y {
 			zproj.dirY = -zproj.dirY
 		}
-		zproj.ro = angl2points(atkCNT, atkV3) - 90
+		zproj.ro = AngleBetweenTwoPoints(atkCNT, atkV3) - 90
 		zproj.rec = rl.NewRectangle(atkCNT.X-zproj.rec.Width/2, atkCNT.Y-zproj.rec.Height/2, zproj.rec.Width, zproj.rec.Height)
 		projPL = append(projPL, zproj)
 		if mirror && !twin { //MIRROR
@@ -31026,10 +31025,10 @@ func makeplproj(num int) { //MARK:MAKE PLAYER PROJ
 			projPL = append(projPL, zproj)
 		}
 		atkV3 = atkV2
-		atkV3.X -= rF32(20, 41)
-		atkV3.Y -= rF32(20, 41)
-		xdiff = absdiff(atkCNT.X, atkV3.X)
-		ydiff = absdiff(atkCNT.Y, atkV3.Y)
+		atkV3.X -= RandF32(20, 41)
+		atkV3.Y -= RandF32(20, 41)
+		xdiff = AbsDiff(atkCNT.X, atkV3.X)
+		ydiff = AbsDiff(atkCNT.Y, atkV3.Y)
 		if xdiff > ydiff {
 			zproj.dirX = zproj.spd
 			zproj.dirY = ydiff / (xdiff / zproj.dirX)
@@ -31043,7 +31042,7 @@ func makeplproj(num int) { //MARK:MAKE PLAYER PROJ
 		if atkCNT.Y > atkV3.Y {
 			zproj.dirY = -zproj.dirY
 		}
-		zproj.ro = angl2points(atkCNT, atkV3) - 90
+		zproj.ro = AngleBetweenTwoPoints(atkCNT, atkV3) - 90
 		zproj.rec = rl.NewRectangle(atkCNT.X-zproj.rec.Width/2, atkCNT.Y-zproj.rec.Height/2, zproj.rec.Width, zproj.rec.Height)
 		projPL = append(projPL, zproj)
 		if mirror && !twin { //MIRROR
@@ -31081,11 +31080,11 @@ func makeplproj(num int) { //MARK:MAKE PLAYER PROJ
 		}
 	case "kitchen knife", "frying pan", "rolling pin", "mint ice cream", "lighter", "magnifying glass", "raspberry", "chilli", "emoji", "french fries", "hot soup", "drawing pin":
 		if zproj.nm == "drawing pin" {
-			zproj.ro = angl2points(atkCNT, atkV2) + 45
+			zproj.ro = AngleBetweenTwoPoints(atkCNT, atkV2) + 45
 		}
 		if zproj.nm == "french fries" {
 			zproj.img = etc[178]
-			zproj.ro = angl2points(atkCNT, atkV2) - 90
+			zproj.ro = AngleBetweenTwoPoints(atkCNT, atkV2) - 90
 		}
 		if zproj.nm == "raspberry" {
 			zproj.bounce += 4
@@ -31120,7 +31119,7 @@ func makeplproj(num int) { //MARK:MAKE PLAYER PROJ
 				zproj.rec.X -= pl.rec.Width
 			}
 			if zproj.nm == "french fries" || zproj.nm == "drawing pin" {
-				zproj.ro = mirrorAngl(zproj.ro) + 90
+				zproj.ro = MirrorAngle(zproj.ro) + 90
 			}
 			projPL = append(projPL, zproj)
 		} else if !mirror && twin { //TWIN
@@ -31139,7 +31138,7 @@ func makeplproj(num int) { //MARK:MAKE PLAYER PROJ
 				zproj.rec.X -= pl.rec.Width
 			}
 			if zproj.nm == "french fries" || zproj.nm == "drawing pin" {
-				zproj.ro = mirrorAngl(zproj.ro) + 90
+				zproj.ro = MirrorAngle(zproj.ro) + 90
 			}
 			projPL = append(projPL, zproj)
 			zproj.dirX *= -1
@@ -31162,39 +31161,39 @@ func makeplproj(num int) { //MARK:MAKE PLAYER PROJ
 	//SPECIAL RANDOM BONUS
 	if num == 1 {
 		if pl.wp1.spec1 == 2 {
-			if roll12() > 9 {
+			if Roll12() > 9 {
 				makeplProjSpecial(1, 1)
 			}
 		} else if pl.wp1.spec1 == 6 {
-			if roll12() > 10 {
+			if Roll12() > 10 {
 				makeplProjSpecial(1, 1)
 			}
 		}
 		if pl.wp1.spec2 == 2 {
-			if roll12() > 9 {
+			if Roll12() > 9 {
 				makeplProjSpecial(1, 2)
 			}
 		} else if pl.wp1.spec2 == 6 {
-			if roll12() > 10 {
+			if Roll12() > 10 {
 				makeplProjSpecial(1, 2)
 			}
 		}
 	} else {
 		if pl.wp2.spec1 == 2 {
-			if roll12() > 9 {
+			if Roll12() > 9 {
 				makeplProjSpecial(2, 1)
 			}
 		} else if pl.wp2.spec1 == 6 {
-			if roll12() > 10 {
+			if Roll12() > 10 {
 				makeplProjSpecial(2, 1)
 			}
 		}
 		if pl.wp2.spec2 == 2 {
-			if roll12() > 9 {
+			if Roll12() > 9 {
 				makeplProjSpecial(2, 2)
 			}
 		} else if pl.wp2.spec2 == 6 {
-			if roll12() > 10 {
+			if Roll12() > 10 {
 				makeplProjSpecial(2, 2)
 			}
 		}
@@ -31249,15 +31248,15 @@ func makebase() { //MARK:MAKE BASE
 	mushroomTimer = 0
 
 	base.mouse.img = anm[182].rec
-	if flipcoin() {
+	if FlipCoin() {
 		base.mouse.img = anm[183].rec
 		base.mouse.onoff = true
 	}
 	siz2 := be5
 	base.mouse.rec = rl.NewRectangle(cnt.X-siz2/2, cnt.Y-siz2/2, siz2, siz2)
 	base.mouse.spd = 2
-	base.mouse.dirX = -rF32(-base.mouse.spd, base.mouse.spd)
-	base.mouse.dirY = -rF32(-base.mouse.spd, base.mouse.spd)
+	base.mouse.dirX = -RandF32(-base.mouse.spd, base.mouse.spd)
+	base.mouse.dirY = -RandF32(-base.mouse.spd, base.mouse.spd)
 	base.mouse.crec = base.mouse.rec
 
 	W := float32(1280)
@@ -31542,8 +31541,8 @@ func makebase() { //MARK:MAKE BASE
 		zbgi := xbgi{}
 		zbgi.rec = rl.NewRectangle(x, y, siz, siz)
 		zbgi.img = etc[34]
-		if roll6() == 6 {
-			choose := rInt(1, 5)
+		if Roll6() == 6 {
+			choose := RandInt(1, 5)
 			switch choose {
 			case 1:
 				zbgi.img = etc[35]
@@ -31569,7 +31568,7 @@ func makebase() { //MARK:MAKE BASE
 func makechest(lev x1scr) x1scr { //MARK:MAKE CHEST
 	siz := b2
 	zchst := xchst{}
-	zchst.slots = rInt(2, 5)
+	zchst.slots = RandInt(2, 5)
 	for i := 0; i < zchst.slots; i++ {
 		zchst.itm = append(zchst.itm, xitm{})
 	}
@@ -31578,12 +31577,12 @@ func makechest(lev x1scr) x1scr { //MARK:MAKE CHEST
 	countbreak := 100
 	found := false
 	for {
-		choose2 := rInt(0, len(lev.recs))
+		choose2 := RandInt(0, len(lev.recs))
 		choose := lev.recs[choose2]
 		x := choose.X + b
 		y := choose.Y + b
-		x += rF32(0, choose.Width-b2-siz)
-		y += rF32(0, choose.Height-b2-siz)
+		x += RandF32(0, choose.Width-b2-siz)
+		y += RandF32(0, choose.Height-b2-siz)
 		zchst.rec = rl.NewRectangle(x, y, siz, siz)
 		canadd := checkaddtilerecInner(zchst.rec, lev)
 		if canadd {
@@ -31607,7 +31606,7 @@ func makechest(lev x1scr) x1scr { //MARK:MAKE CHEST
 		zchst.crec.Y -= 4
 		zchst.crec.Width = zchst.crec.Width / 2
 		zchst.crec.Height = (zchst.crec.Height / 9) * 4
-		choose := rInt(0, 30)
+		choose := RandInt(0, 30)
 		switch choose {
 		case 0:
 			zchst.itm[0] = itmlist[48]
@@ -31701,7 +31700,7 @@ func makechest(lev x1scr) x1scr { //MARK:MAKE CHEST
 			zchst.itm[0].noChestMove = true
 		}
 
-		if roll6() == 6 {
+		if Roll6() == 6 {
 			zchst.itm[1] = itmlist[104]
 			zchst.itm[1].noChestMove = true
 		}
@@ -31717,7 +31716,7 @@ func makeboss() { //MARK:MAKE BOSS
 	if len(bosskillist) > 0 {
 		for {
 			canadd := true
-			bossnum = rInt(1, 10)
+			bossnum = RandInt(1, 10)
 			for i := 0; i < len(bosskillist); i++ {
 				if bosskillist[i] == bossnum {
 					canadd = false
@@ -31728,7 +31727,7 @@ func makeboss() { //MARK:MAKE BOSS
 			}
 		}
 	} else {
-		bossnum = rInt(1, 10)
+		bossnum = RandInt(1, 10)
 	}
 	zboss.xp = 500
 	//bossnum = 9
@@ -31748,9 +31747,9 @@ func makeboss() { //MARK:MAKE BOSS
 		zboss.spd = 3
 		countbreak := 100
 		for {
-			zboss.dirX = rF32(-zboss.spd, zboss.spd)
-			zboss.dirY = rF32(-zboss.spd, zboss.spd)
-			if getabs(zboss.dirX) > zboss.spd/2 || getabs(zboss.dirY) > zboss.spd/2 {
+			zboss.dirX = RandF32(-zboss.spd, zboss.spd)
+			zboss.dirY = RandF32(-zboss.spd, zboss.spd)
+			if Abs(zboss.dirX) > zboss.spd/2 || Abs(zboss.dirY) > zboss.spd/2 {
 				break
 			}
 			countbreak--
@@ -31776,8 +31775,8 @@ func makeboss() { //MARK:MAKE BOSS
 		zboss.img = anm[148].rec
 		zboss.nm = "mushee"
 		zboss.spd = 2
-		zboss.dirX = rF32(-zboss.spd, zboss.spd)
-		zboss.dirY = rF32(-zboss.spd, zboss.spd)
+		zboss.dirX = RandF32(-zboss.spd, zboss.spd)
+		zboss.dirY = RandF32(-zboss.spd, zboss.spd)
 	case 7: //RED BAT
 		siz := b6
 		zboss.moveChangeT = fps
@@ -31795,8 +31794,8 @@ func makeboss() { //MARK:MAKE BOSS
 		zboss.img = anm[145].rec
 		zboss.nm = "batty"
 		zboss.spd = 2
-		zboss.dirX = rF32(-zboss.spd, zboss.spd)
-		zboss.dirY = rF32(-zboss.spd, zboss.spd)
+		zboss.dirX = RandF32(-zboss.spd, zboss.spd)
+		zboss.dirY = RandF32(-zboss.spd, zboss.spd)
 	case 6: //ZOMBO
 		siz := b5
 		zboss.atkT2 = fps
@@ -31816,8 +31815,8 @@ func makeboss() { //MARK:MAKE BOSS
 		zboss.img = anm[138].rec
 		zboss.nm = "zombo"
 		zboss.spd = 1
-		zboss.dirX = rF32(-zboss.spd, zboss.spd)
-		zboss.dirY = rF32(-zboss.spd, zboss.spd)
+		zboss.dirX = RandF32(-zboss.spd, zboss.spd)
+		zboss.dirY = RandF32(-zboss.spd, zboss.spd)
 	case 5: //PYRO PIG
 		siz := b7
 		zboss.atkT = fps * 4
@@ -31837,8 +31836,8 @@ func makeboss() { //MARK:MAKE BOSS
 		zboss.img = anm[133].rec
 		zboss.nm = "pyro pig"
 		zboss.spd = 4
-		zboss.dirX = rF32(-zboss.spd, zboss.spd)
-		zboss.dirY = rF32(-zboss.spd, zboss.spd)
+		zboss.dirX = RandF32(-zboss.spd, zboss.spd)
+		zboss.dirY = RandF32(-zboss.spd, zboss.spd)
 	case 4: //SPACEMAN
 		siz := b5
 		zboss.moveChangeT = fps
@@ -31873,7 +31872,7 @@ func makeboss() { //MARK:MAKE BOSS
 		zboss.nm = "spinna"
 		zboss.spd = 7
 		zboss.dirY = zboss.spd
-		if flipcoin() {
+		if FlipCoin() {
 			zboss.dirY -= zboss.spd
 		}
 	case 2: //MR FRISBEE
@@ -31899,8 +31898,8 @@ func makeboss() { //MARK:MAKE BOSS
 		zboss.spd = 3
 		countbreak := 100
 		for {
-			zboss.dirX = rF32(-zboss.spd, zboss.spd)
-			if getabs(zboss.dirX) > zboss.spd/3 {
+			zboss.dirX = RandF32(-zboss.spd, zboss.spd)
+			if Abs(zboss.dirX) > zboss.spd/3 {
 				break
 			}
 			countbreak--
@@ -31908,7 +31907,7 @@ func makeboss() { //MARK:MAKE BOSS
 				break
 			}
 		}
-		zboss.dirY = rF32(-zboss.spd/3, zboss.spd/3)
+		zboss.dirY = RandF32(-zboss.spd/3, zboss.spd/3)
 		zboss.img = anm[110].rec
 	case 1: //ICEMAN
 		zboss.atkT2 = fps / 2
@@ -31969,8 +31968,8 @@ func makeboss() { //MARK:MAKE BOSS
 
 func makebosslev() { //MARK:MAKE BOSS LEVEL
 	//WALLS FLOOR
-	floortile = floortiles[rInt(0, len(floortiles))]
-	walltile = walltiles[rInt(0, len(walltiles))]
+	floortile = floortiles[RandInt(0, len(floortiles))]
+	walltile = walltiles[RandInt(0, len(walltiles))]
 	W3 := float32(3840)
 	H3 := float32(2160)
 	bossBordRec = rl.NewRectangle(cnt.X-W3/2, cnt.Y-H3/2, W3, H3)
@@ -31981,9 +31980,9 @@ func makebosslev() { //MARK:MAKE BOSS LEVEL
 	zboss := x1scr{}
 	//CENTER REC
 	min, max := 17, 25
-	numW := rInt(min, max)
+	numW := RandInt(min, max)
 	min, max = 12, 19
-	numH := rInt(min, max)
+	numH := RandInt(min, max)
 	W, H := float32(numW)*b, float32(numH)*b
 	rec := rl.NewRectangle(cnt.X-W/2, cnt.Y-H/2, W, H)
 	zboss.recs = append(zboss.recs, rec)
@@ -31991,51 +31990,51 @@ func makebosslev() { //MARK:MAKE BOSS LEVEL
 	numHo := numH
 	//OTHER RECS
 	countbreak := 100
-	num := rInt(5, 11)
+	num := RandInt(5, 11)
 	for num > 0 {
-		side := rInt(1, 5)
+		side := RandInt(1, 5)
 		switch side {
 		case 1:
 			min, max := 5, 9
-			numW = rInt(min, max)
+			numW = RandInt(min, max)
 			min, max = 3, 8
-			numH = rInt(min, max)
+			numH = RandInt(min, max)
 			W, H = float32(numW)*b, float32(numH)*b
 			diff := numWo - numW
-			change := float32(rInt(0, diff))
+			change := float32(RandInt(0, diff))
 			x := zboss.recs[0].X + (change * b)
 			y := zboss.recs[0].Y - H
 			rec = rl.NewRectangle(x, y, W, H)
 		case 2:
 			min, max := 3, 8
-			numW = rInt(min, max)
+			numW = RandInt(min, max)
 			min, max = 5, 9
-			numH = rInt(min, max)
+			numH = RandInt(min, max)
 			W, H = float32(numW)*b, float32(numH)*b
 			diff := numHo - numH
-			change := float32(rInt(0, diff))
+			change := float32(RandInt(0, diff))
 			x := zboss.recs[0].X + zboss.recs[0].Width
 			y := zboss.recs[0].Y + (change * b)
 			rec = rl.NewRectangle(x, y, W, H)
 		case 3:
 			min, max := 5, 9
-			numW = rInt(min, max)
+			numW = RandInt(min, max)
 			min, max = 3, 8
-			numH = rInt(min, max)
+			numH = RandInt(min, max)
 			W, H = float32(numW)*b, float32(numH)*b
 			diff := numWo - numW
-			change := float32(rInt(0, diff))
+			change := float32(RandInt(0, diff))
 			x := zboss.recs[0].X + (change * b)
 			y := zboss.recs[0].Y + zboss.recs[0].Height
 			rec = rl.NewRectangle(x, y, W, H)
 		case 4:
 			min, max := 3, 8
-			numW = rInt(min, max)
+			numW = RandInt(min, max)
 			min, max = 5, 9
-			numH = rInt(min, max)
+			numH = RandInt(min, max)
 			W, H = float32(numW)*b, float32(numH)*b
 			diff := numHo - numH
-			change := float32(rInt(0, diff))
+			change := float32(RandInt(0, diff))
 			x := zboss.recs[0].X - W
 			y := zboss.recs[0].Y + (change * b)
 			rec = rl.NewRectangle(x, y, W, H)
@@ -32114,9 +32113,9 @@ func makebosslev() { //MARK:MAKE BOSS LEVEL
 				ztile := xtile{}
 				ztile.rec = rec
 				ztile.img = wallBoss
-				ztile.fade = rF32(0.4, 0.7)
+				ztile.fade = RandF32(0.4, 0.7)
 				ztile.color = rl.White
-				ztile.col2 = ranCol()
+				ztile.col2 = RandColor()
 				ztile.solid = true
 				zboss.walls = append(zboss.walls, ztile)
 			}
@@ -32138,9 +32137,9 @@ func makebosslev() { //MARK:MAKE BOSS LEVEL
 				ztile := xtile{}
 				ztile.rec = rec
 				ztile.img = wallBoss
-				ztile.fade = rF32(0.3, 0.9)
+				ztile.fade = RandF32(0.3, 0.9)
 				ztile.color = rl.White
-				ztile.col2 = ranCol()
+				ztile.col2 = RandColor()
 				ztile.solid = true
 				zboss.walls = append(zboss.walls, ztile)
 			}
@@ -32169,9 +32168,9 @@ func makebosslev() { //MARK:MAKE BOSS LEVEL
 				ztile := xtile{}
 				ztile.rec = rec
 				ztile.img = wallBoss
-				ztile.fade = rF32(0.4, 0.7)
+				ztile.fade = RandF32(0.4, 0.7)
 				ztile.color = rl.White
-				ztile.col2 = ranCol()
+				ztile.col2 = RandColor()
 				ztile.solid = true
 				zboss.walls = append(zboss.walls, ztile)
 			}
@@ -32193,9 +32192,9 @@ func makebosslev() { //MARK:MAKE BOSS LEVEL
 				ztile := xtile{}
 				ztile.rec = rec
 				ztile.img = wallBoss
-				ztile.fade = rF32(0.4, 0.7)
+				ztile.fade = RandF32(0.4, 0.7)
 				ztile.color = rl.White
-				ztile.col2 = ranCol()
+				ztile.col2 = RandColor()
 				ztile.solid = true
 				zboss.walls = append(zboss.walls, ztile)
 			}
@@ -32213,8 +32212,8 @@ func makebosslev() { //MARK:MAKE BOSS LEVEL
 			ztile.rec = rec
 			ztile.img = floorBoss
 			ztile.color = rl.White
-			ztile.col2 = ranCol()
-			ztile.fade = rF32(0.04, 0.08)
+			ztile.col2 = RandColor()
+			ztile.fade = RandF32(0.04, 0.08)
 			zboss.floors = append(zboss.floors, ztile)
 			x += siz
 			if x >= zboss.recs[i].X+zboss.recs[i].Width {
@@ -32226,7 +32225,7 @@ func makebosslev() { //MARK:MAKE BOSS LEVEL
 	size := b
 	for i := 0; i < len(zboss.recs); i++ {
 		//WATER
-		if roll12() > 10 {
+		if Roll12() > 10 {
 			x := zboss.recs[i].X + size
 			y := zboss.recs[i].Y + size
 			x2 := x + zboss.recs[i].Width - size*3
@@ -32235,9 +32234,9 @@ func makebosslev() { //MARK:MAKE BOSS LEVEL
 			ztile.nm = "water"
 			ztile.img = anm[0].rec
 			ztile.color = rl.DarkBlue
-			ztile.fade = rF32(0.2, 0.5)
-			ztile.rec = rl.NewRectangle(rF32(x, x2), rF32(y, y2), size, size)
-			ztile.img2 = splat[rInt(0, len(splat))]
+			ztile.fade = RandF32(0.2, 0.5)
+			ztile.rec = rl.NewRectangle(RandF32(x, x2), RandF32(y, y2), size, size)
+			ztile.img2 = splat[RandInt(0, len(splat))]
 			ztile.rec2 = ztile.rec
 			ztile.rec2.X -= b / 2
 			ztile.rec2.Y -= b / 2
@@ -32249,7 +32248,7 @@ func makebosslev() { //MARK:MAKE BOSS LEVEL
 			}
 		}
 		//SPIKE TRAPS
-		if roll12() > 10 {
+		if Roll12() > 10 {
 			x := zboss.recs[i].X
 			y := zboss.recs[i].Y
 			x2 := x + zboss.recs[i].Width - size
@@ -32258,16 +32257,16 @@ func makebosslev() { //MARK:MAKE BOSS LEVEL
 			ztile.nm = "spiketrap"
 			ztile.img = anm[1].rec
 			ztile.color = rl.White
-			ztile.col2 = ranCol()
+			ztile.col2 = RandColor()
 			ztile.fade = 1
-			ztile.rec = rl.NewRectangle(rF32(x, x2), rF32(y, y2), size, size)
+			ztile.rec = rl.NewRectangle(RandF32(x, x2), RandF32(y, y2), size, size)
 			if checkaddtilerecInner(ztile.rec, zboss) && checkaddetc(ztile.rec, zboss) {
 				ztile.cnt = makecnt(ztile.rec)
 				zboss.etc = append(zboss.etc, ztile)
 			}
 		}
 		//FLAME TRAPS
-		if roll12() > 10 {
+		if Roll12() > 10 {
 			x := zboss.recs[i].X
 			y := zboss.recs[i].Y
 			x2 := x + zboss.recs[i].Width - size
@@ -32277,7 +32276,7 @@ func makebosslev() { //MARK:MAKE BOSS LEVEL
 			ztile.img = anm[2].rec
 			ztile.color = rl.White
 			ztile.fade = 1
-			ztile.rec = rl.NewRectangle(rF32(x, x2), rF32(y, y2), size, size)
+			ztile.rec = rl.NewRectangle(RandF32(x, x2), RandF32(y, y2), size, size)
 			if checkaddtilerecInner(ztile.rec, zboss) && checkaddetc(ztile.rec, zboss) {
 				ztile.rec2 = ztile.rec
 				ztile.rec2.Height = 32
@@ -32289,24 +32288,24 @@ func makebosslev() { //MARK:MAKE BOSS LEVEL
 	}
 	levels = append(levels, zboss)
 	//BGI
-	siz := rF32(b2, b4)
+	siz := RandF32(b2, b4)
 	x := levels[levNum].recs[0].X + b/2
-	x += rF32(0, levels[levNum].recs[0].Width-(siz+b))
+	x += RandF32(0, levels[levNum].recs[0].Width-(siz+b))
 	y := levels[levNum].recs[0].Y + b/2
-	y += rF32(0, levels[levNum].recs[0].Height-(siz+b))
+	y += RandF32(0, levels[levNum].recs[0].Height-(siz+b))
 	rec = rl.NewRectangle(x, y, siz, siz)
-	zbgi := bgilist[rInt(0, len(bgilist))]
+	zbgi := bgilist[RandInt(0, len(bgilist))]
 	zbgi.rec = rec
 	zbgi.fd = 1
 	levels[levNum].bgi = append(levels[levNum].bgi, zbgi)
 	//FLOWERS
-	num = rInt(2, 9)
+	num = RandInt(2, 9)
 	for num > 0 {
 		cntr := findRanCnt()
-		siz := rF32(be3, b/2)
+		siz := RandF32(be3, b/2)
 		zbgi := xbgi{}
 		zbgi.rec = rl.NewRectangle(cntr.X-siz/2, cntr.Y-siz/2, siz, siz)
-		zbgi.img = flowers[rInt(0, len(flowers))]
+		zbgi.img = flowers[RandInt(0, len(flowers))]
 		levels[levNum].flowers = append(levels[levNum].flowers, zbgi)
 		num--
 	}
@@ -32705,8 +32704,8 @@ func makePotion(num int) string { //MARK:MAKE POTION
 }
 func maketreasureroom() { //MARK:MAKE TREASURE ROOM
 	//WALLS FLOOR
-	floortile = floortiles[rInt(0, len(floortiles))]
-	walltile = walltiles[rInt(0, len(walltiles))]
+	floortile = floortiles[RandInt(0, len(floortiles))]
+	walltile = walltiles[RandInt(0, len(walltiles))]
 	W3 := float32(3840)
 	H3 := float32(2160)
 	bossBordRec = rl.NewRectangle(cnt.X-W3/2, cnt.Y-H3/2, W3, H3)
@@ -32717,9 +32716,9 @@ func maketreasureroom() { //MARK:MAKE TREASURE ROOM
 	zboss := x1scr{}
 	//CENTER REC
 	min, max := 20, 29
-	numW := rInt(min, max)
+	numW := RandInt(min, max)
 	min, max = 15, 23
-	numH := rInt(min, max)
+	numH := RandInt(min, max)
 	W, H := float32(numW)*b, float32(numH)*b
 	rec := rl.NewRectangle(cnt.X-W/2, cnt.Y-H/2, W, H)
 	zboss.recs = append(zboss.recs, rec)
@@ -32727,51 +32726,51 @@ func maketreasureroom() { //MARK:MAKE TREASURE ROOM
 	numHo := numH
 	//OTHER RECS
 	countbreak := 100
-	num := rInt(5, 11)
+	num := RandInt(5, 11)
 	for num > 0 {
-		side := rInt(1, 5)
+		side := RandInt(1, 5)
 		switch side {
 		case 1:
 			min, max := 3, 6
-			numW = rInt(min, max)
+			numW = RandInt(min, max)
 			min, max = 2, 5
-			numH = rInt(min, max)
+			numH = RandInt(min, max)
 			W, H = float32(numW)*b, float32(numH)*b
 			diff := numWo - numW
-			change := float32(rInt(0, diff))
+			change := float32(RandInt(0, diff))
 			x := zboss.recs[0].X + (change * b)
 			y := zboss.recs[0].Y - H
 			rec = rl.NewRectangle(x, y, W, H)
 		case 2:
 			min, max := 2, 5
-			numW = rInt(min, max)
+			numW = RandInt(min, max)
 			min, max = 3, 6
-			numH = rInt(min, max)
+			numH = RandInt(min, max)
 			W, H = float32(numW)*b, float32(numH)*b
 			diff := numHo - numH
-			change := float32(rInt(0, diff))
+			change := float32(RandInt(0, diff))
 			x := zboss.recs[0].X + zboss.recs[0].Width
 			y := zboss.recs[0].Y + (change * b)
 			rec = rl.NewRectangle(x, y, W, H)
 		case 3:
 			min, max := 3, 6
-			numW = rInt(min, max)
+			numW = RandInt(min, max)
 			min, max = 2, 5
-			numH = rInt(min, max)
+			numH = RandInt(min, max)
 			W, H = float32(numW)*b, float32(numH)*b
 			diff := numWo - numW
-			change := float32(rInt(0, diff))
+			change := float32(RandInt(0, diff))
 			x := zboss.recs[0].X + (change * b)
 			y := zboss.recs[0].Y + zboss.recs[0].Height
 			rec = rl.NewRectangle(x, y, W, H)
 		case 4:
 			min, max := 2, 5
-			numW = rInt(min, max)
+			numW = RandInt(min, max)
 			min, max = 3, 6
-			numH = rInt(min, max)
+			numH = RandInt(min, max)
 			W, H = float32(numW)*b, float32(numH)*b
 			diff := numHo - numH
-			change := float32(rInt(0, diff))
+			change := float32(RandInt(0, diff))
 			x := zboss.recs[0].X - W
 			y := zboss.recs[0].Y + (change * b)
 			rec = rl.NewRectangle(x, y, W, H)
@@ -32850,9 +32849,9 @@ func maketreasureroom() { //MARK:MAKE TREASURE ROOM
 				ztile := xtile{}
 				ztile.rec = rec
 				ztile.img = wallBoss
-				ztile.fade = rF32(0.4, 0.7)
+				ztile.fade = RandF32(0.4, 0.7)
 				ztile.color = rl.White
-				ztile.col2 = ranCol()
+				ztile.col2 = RandColor()
 				ztile.solid = true
 				zboss.walls = append(zboss.walls, ztile)
 			}
@@ -32874,9 +32873,9 @@ func maketreasureroom() { //MARK:MAKE TREASURE ROOM
 				ztile := xtile{}
 				ztile.rec = rec
 				ztile.img = wallBoss
-				ztile.fade = rF32(0.3, 0.9)
+				ztile.fade = RandF32(0.3, 0.9)
 				ztile.color = rl.White
-				ztile.col2 = ranCol()
+				ztile.col2 = RandColor()
 				ztile.solid = true
 				zboss.walls = append(zboss.walls, ztile)
 			}
@@ -32905,9 +32904,9 @@ func maketreasureroom() { //MARK:MAKE TREASURE ROOM
 				ztile := xtile{}
 				ztile.rec = rec
 				ztile.img = wallBoss
-				ztile.fade = rF32(0.4, 0.7)
+				ztile.fade = RandF32(0.4, 0.7)
 				ztile.color = rl.White
-				ztile.col2 = ranCol()
+				ztile.col2 = RandColor()
 				ztile.solid = true
 				zboss.walls = append(zboss.walls, ztile)
 			}
@@ -32929,9 +32928,9 @@ func maketreasureroom() { //MARK:MAKE TREASURE ROOM
 				ztile := xtile{}
 				ztile.rec = rec
 				ztile.img = wallBoss
-				ztile.fade = rF32(0.4, 0.7)
+				ztile.fade = RandF32(0.4, 0.7)
 				ztile.color = rl.White
-				ztile.col2 = ranCol()
+				ztile.col2 = RandColor()
 				ztile.solid = true
 				zboss.walls = append(zboss.walls, ztile)
 			}
@@ -32949,8 +32948,8 @@ func maketreasureroom() { //MARK:MAKE TREASURE ROOM
 			ztile.rec = rec
 			ztile.img = floorBoss
 			ztile.color = rl.White
-			ztile.col2 = ranCol()
-			ztile.fade = rF32(0.04, 0.08)
+			ztile.col2 = RandColor()
+			ztile.fade = RandF32(0.04, 0.08)
 			zboss.floors = append(zboss.floors, ztile)
 			x += siz
 			if x >= zboss.recs[i].X+zboss.recs[i].Width {
@@ -32965,21 +32964,21 @@ func maketreasureroom() { //MARK:MAKE TREASURE ROOM
 	upplayerrec()
 
 	//ROOM TYPE
-	choose := rInt(1, 9)
+	choose := RandInt(1, 9)
 	switch choose {
 	case 8:
 
 		countbreak := 100
-		num := rInt(10, 21)
+		num := RandInt(10, 21)
 
 		size := b
 		for num > 0 {
-			i := rInt(0, len(zboss.recs))
-			if roll6() > 2 {
+			i := RandInt(0, len(zboss.recs))
+			if Roll6() > 2 {
 				i = 0
 			}
 			//SPIKE TRAPS
-			if flipcoin() {
+			if FlipCoin() {
 				x := zboss.recs[i].X
 				y := zboss.recs[i].Y
 				x2 := x + zboss.recs[i].Width - size
@@ -32988,9 +32987,9 @@ func maketreasureroom() { //MARK:MAKE TREASURE ROOM
 				ztile.nm = "spiketrap"
 				ztile.img = anm[1].rec
 				ztile.color = rl.White
-				ztile.col2 = ranCol()
+				ztile.col2 = RandColor()
 				ztile.fade = 1
-				ztile.rec = rl.NewRectangle(rF32(x, x2), rF32(y, y2), size, size)
+				ztile.rec = rl.NewRectangle(RandF32(x, x2), RandF32(y, y2), size, size)
 				if checkaddtilerecInner(ztile.rec, zboss) && checkaddetc(ztile.rec, zboss) {
 					ztile.cnt = makecnt(ztile.rec)
 					zboss.etc = append(zboss.etc, ztile)
@@ -32998,7 +32997,7 @@ func maketreasureroom() { //MARK:MAKE TREASURE ROOM
 				}
 			}
 			//FLAME TRAPS
-			if flipcoin() {
+			if FlipCoin() {
 				x := zboss.recs[i].X
 				y := zboss.recs[i].Y
 				x2 := x + zboss.recs[i].Width - size
@@ -33008,7 +33007,7 @@ func maketreasureroom() { //MARK:MAKE TREASURE ROOM
 				ztile.img = anm[2].rec
 				ztile.color = rl.White
 				ztile.fade = 1
-				ztile.rec = rl.NewRectangle(rF32(x, x2), rF32(y, y2), size, size)
+				ztile.rec = rl.NewRectangle(RandF32(x, x2), RandF32(y, y2), size, size)
 				if checkaddtilerecInner(ztile.rec, zboss) && checkaddetc(ztile.rec, zboss) {
 					ztile.rec2 = ztile.rec
 					ztile.rec2.Height = 32
@@ -33025,23 +33024,23 @@ func maketreasureroom() { //MARK:MAKE TREASURE ROOM
 		}
 
 		countbreak = 100
-		num = rInt(3, 8)
+		num = RandInt(3, 8)
 		for num > 0 {
-			size := rF32(b, b3)
+			size := RandF32(b, b3)
 			x := zboss.recs[0].X + size
 			y := zboss.recs[0].Y + size
 			x2 := x + zboss.recs[0].Width - size*3
 			y2 := y + zboss.recs[0].Height - size*3
 			ztile := xtile{}
 			ztile.img = walltile
-			ztile.col2 = ranCol()
+			ztile.col2 = RandColor()
 			ztile.color = rl.White
-			ztile.fade = rF32(0.3, 0.9)
-			ztile.rec = rl.NewRectangle(rF32(x, x2), rF32(y, y2), size, size)
+			ztile.fade = RandF32(0.3, 0.9)
+			ztile.rec = rl.NewRectangle(RandF32(x, x2), RandF32(y, y2), size, size)
 			ztile.spikes = true
 			if ztile.spikes {
 				for j := 0; j < 4; j++ {
-					ztile.col2 = ranCol()
+					ztile.col2 = RandColor()
 					rec2 := ztile.rec
 					rec2.X += ztile.rec.Width / 4
 					rec2.Y += ztile.rec.Height / 4
@@ -33051,15 +33050,15 @@ func maketreasureroom() { //MARK:MAKE TREASURE ROOM
 				}
 			}
 			if checkaddtilerecInner(ztile.rec, zboss) && checkRecPlayer(ztile.rec) {
-				ztile.spd = rF32(b/12, b/7)
-				if flipcoin() {
+				ztile.spd = RandF32(b/12, b/7)
+				if FlipCoin() {
 					ztile.dirX = ztile.spd
-					if flipcoin() {
+					if FlipCoin() {
 						ztile.dirX = -ztile.dirX
 					}
 				} else {
 					ztile.dirY = ztile.spd
-					if flipcoin() {
+					if FlipCoin() {
 						ztile.dirY = -ztile.dirY
 					}
 				}
@@ -33073,12 +33072,12 @@ func maketreasureroom() { //MARK:MAKE TREASURE ROOM
 
 		}
 
-		num = rInt(10, 16) //FLAME HEAD
+		num = RandInt(10, 16) //FLAME HEAD
 		for num > 0 {
 			zenm := xenm{}
 			zenm = enmlist[13]
-			zenm.dirX = rF32(-zenm.spd, zenm.spd)
-			zenm.dirY = rF32(-zenm.spd, zenm.spd)
+			zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+			zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 			zenm.cnt = findRanCntLevTreasureRoom(zboss)
 			zenm.rec = rl.NewRectangle(zenm.cnt.X-zenm.rec.Width/2, zenm.cnt.Y-zenm.rec.Height/2, zenm.rec.Width, zenm.rec.Height)
 			zboss.enm = append(zboss.enm, zenm)
@@ -33088,36 +33087,36 @@ func maketreasureroom() { //MARK:MAKE TREASURE ROOM
 
 	case 7:
 		zboss = makeswitchesTreasureRoom(zboss, 0)
-		num := rInt(5, 9) //ROTATING SPIKES
+		num := RandInt(5, 9) //ROTATING SPIKES
 		for num > 0 {
 			zenm := xenm{}
 			zenm = enmlist[24]
-			zenm.dirX = rF32(-zenm.spd, zenm.spd)
-			zenm.dirY = rF32(-zenm.spd, zenm.spd)
+			zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+			zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 			zenm.cnt = findRanCntLevTreasureRoom(zboss)
 			zenm.rec = rl.NewRectangle(zenm.cnt.X-zenm.rec.Width/2, zenm.cnt.Y-zenm.rec.Height/2, zenm.rec.Width, zenm.rec.Height)
 			zboss.enm = append(zboss.enm, zenm)
 			zboss.enNum++
 			num--
 		}
-		num = rInt(5, 9) //ROBOT
+		num = RandInt(5, 9) //ROBOT
 		for num > 0 {
 			zenm := xenm{}
 			zenm = enmlist[18]
-			zenm.dirX = rF32(-zenm.spd, zenm.spd)
-			zenm.dirY = rF32(-zenm.spd, zenm.spd)
+			zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+			zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 			zenm.cnt = findRanCntLevTreasureRoom(zboss)
 			zenm.rec = rl.NewRectangle(zenm.cnt.X-zenm.rec.Width/2, zenm.cnt.Y-zenm.rec.Height/2, zenm.rec.Width, zenm.rec.Height)
 			zboss.enm = append(zboss.enm, zenm)
 			zboss.enNum++
 			num--
 		}
-		num = rInt(5, 9) //ROCK
+		num = RandInt(5, 9) //ROCK
 		for num > 0 {
 			zenm := xenm{}
 			zenm = enmlist[21]
-			zenm.dirX = rF32(-zenm.spd, zenm.spd)
-			zenm.dirY = rF32(-zenm.spd, zenm.spd)
+			zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+			zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 			zenm.cnt = findRanCntLevTreasureRoom(zboss)
 			zenm.rec = rl.NewRectangle(zenm.cnt.X-zenm.rec.Width/2, zenm.cnt.Y-zenm.rec.Height/2, zenm.rec.Width, zenm.rec.Height)
 			zboss.enm = append(zboss.enm, zenm)
@@ -33126,27 +33125,27 @@ func maketreasureroom() { //MARK:MAKE TREASURE ROOM
 		}
 	case 6:
 		zboss = makeswitchesTreasureRoom(zboss, 0)
-		num := rInt(5, 9) //RED ANTENNA
+		num := RandInt(5, 9) //RED ANTENNA
 		for num > 0 {
 			zenm := xenm{}
 			zenm = enmlist[4]
-			zenm.dirX = rF32(-zenm.spd, zenm.spd)
-			zenm.dirY = rF32(-zenm.spd, zenm.spd)
+			zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+			zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 			zenm.cnt = findRanCntLevTreasureRoom(zboss)
 			zenm.rec = rl.NewRectangle(zenm.cnt.X-zenm.rec.Width/2, zenm.cnt.Y-zenm.rec.Height/2, zenm.rec.Width, zenm.rec.Height)
-			zenm.atkT = rI32(1, 5) * fps
+			zenm.atkT = RandInt32(1, 5) * fps
 			zboss.enm = append(zboss.enm, zenm)
 			zboss.enNum++
 			num--
 		}
 	case 5:
 		zboss = makeswitchesTreasureRoom(zboss, 0)
-		num := rInt(20, 31) //FLY
+		num := RandInt(20, 31) //FLY
 		for num > 0 {
 			zenm := xenm{}
 			zenm = enmlist[12]
-			zenm.dirX = rF32(-zenm.spd, zenm.spd)
-			zenm.dirY = rF32(-zenm.spd, zenm.spd)
+			zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+			zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 			zenm.cnt = findRanCntLevTreasureRoom(zboss)
 			zenm.rec = rl.NewRectangle(zenm.cnt.X-zenm.rec.Width/2, zenm.cnt.Y-zenm.rec.Height/2, zenm.rec.Width, zenm.rec.Height)
 			zboss.enm = append(zboss.enm, zenm)
@@ -33154,12 +33153,12 @@ func maketreasureroom() { //MARK:MAKE TREASURE ROOM
 			num--
 		}
 	case 4:
-		num := rInt(40, 61) //RED BOMB
+		num := RandInt(40, 61) //RED BOMB
 		for num > 0 {
 			zenm := xenm{}
 			zenm = enmlist[2]
-			zenm.dirX = rF32(-zenm.spd, zenm.spd)
-			zenm.dirY = rF32(-zenm.spd, zenm.spd)
+			zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+			zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 			zenm.cnt = findRanCntLevTreasureRoom(zboss)
 			zenm.rec = rl.NewRectangle(zenm.cnt.X-zenm.rec.Width/2, zenm.cnt.Y-zenm.rec.Height/2, zenm.rec.Width, zenm.rec.Height)
 			zboss.enm = append(zboss.enm, zenm)
@@ -33168,12 +33167,12 @@ func maketreasureroom() { //MARK:MAKE TREASURE ROOM
 		}
 	case 3:
 		zboss = makeswitchesTreasureRoom(zboss, 1)
-		num := rInt(25, 36) //CARROT
+		num := RandInt(25, 36) //CARROT
 		for num > 0 {
 			zenm := xenm{}
 			zenm = enmlist[17]
-			zenm.dirX = rF32(-zenm.spd, zenm.spd)
-			zenm.dirY = rF32(-zenm.spd, zenm.spd)
+			zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+			zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 			zenm.cnt = findRanCntLevTreasureRoom(zboss)
 			zenm.rec = rl.NewRectangle(zenm.cnt.X-zenm.rec.Width/2, zenm.cnt.Y-zenm.rec.Height/2, zenm.rec.Width, zenm.rec.Height)
 			zboss.enm = append(zboss.enm, zenm)
@@ -33181,12 +33180,12 @@ func maketreasureroom() { //MARK:MAKE TREASURE ROOM
 			num--
 		}
 	case 2:
-		num := rInt(70, 91) //BALLOON
+		num := RandInt(70, 91) //BALLOON
 		for num > 0 {
 			zenm := xenm{}
 			zenm = enmlist[5]
-			zenm.dirX = rF32(-zenm.spd, zenm.spd)
-			zenm.dirY = rF32(-zenm.spd, zenm.spd)
+			zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+			zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 			zenm.cnt = findRanCntLevTreasureRoom(zboss)
 			zenm.rec = rl.NewRectangle(zenm.cnt.X-zenm.rec.Width/2, zenm.cnt.Y-zenm.rec.Height/2, zenm.rec.Width, zenm.rec.Height)
 			zboss.enm = append(zboss.enm, zenm)
@@ -33194,12 +33193,12 @@ func maketreasureroom() { //MARK:MAKE TREASURE ROOM
 			num--
 		}
 	case 1:
-		num := rInt(25, 36) //FLAME HEAD
+		num := RandInt(25, 36) //FLAME HEAD
 		for num > 0 {
 			zenm := xenm{}
 			zenm = enmlist[13]
-			zenm.dirX = rF32(-zenm.spd, zenm.spd)
-			zenm.dirY = rF32(-zenm.spd, zenm.spd)
+			zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+			zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 			zenm.cnt = findRanCntLevTreasureRoom(zboss)
 			zenm.rec = rl.NewRectangle(zenm.cnt.X-zenm.rec.Width/2, zenm.cnt.Y-zenm.rec.Height/2, zenm.rec.Width, zenm.rec.Height)
 			zboss.enm = append(zboss.enm, zenm)
@@ -33224,12 +33223,12 @@ func maketreasureroom() { //MARK:MAKE TREASURE ROOM
 	}
 	count := 0
 	for zchst.itm[3].nm == "" {
-		zchst.itm[count] = itmlist[unloknums[rInt(0, len(unloknums))]]
+		zchst.itm[count] = itmlist[unloknums[RandInt(0, len(unloknums))]]
 
 		if zchst.itm[count].nm == "gold" || zchst.itm[count].nm == "silver" || zchst.itm[count].nm == "platinum" || zchst.itm[count].nm == "bronze" || zchst.itm[count].nm == "lead" {
-			zchst.itm[count].numof = rInt(40, 71)
+			zchst.itm[count].numof = RandInt(40, 71)
 		} else if zchst.itm[count].nm == "hp potion full" || zchst.itm[count].nm == "mana potion full" || zchst.itm[count].nm == "beetroot" || zchst.itm[count].nm == "honeycomb" || zchst.itm[count].nm == "bomb" || zchst.itm[count].nm == "soda" || zchst.itm[count].nm == "jar of gas" || zchst.itm[count].nm == "jar of blood" || zchst.itm[count].nm == "pistol" || zchst.itm[count].nm == "popcorn" || zchst.itm[count].nm == "ladybug" {
-			zchst.itm[count].numof = rInt(1, 11)
+			zchst.itm[count].numof = RandInt(1, 11)
 		}
 
 		count++
@@ -33252,24 +33251,24 @@ func maketreasureroom() { //MARK:MAKE TREASURE ROOM
 
 	levels = append(levels, zboss)
 	//BGI
-	siz = rF32(b2, b4)
+	siz = RandF32(b2, b4)
 	x := levels[levNum].recs[0].X + b/2
-	x += rF32(0, levels[levNum].recs[0].Width-(siz+b))
+	x += RandF32(0, levels[levNum].recs[0].Width-(siz+b))
 	y := levels[levNum].recs[0].Y + b/2
-	y += rF32(0, levels[levNum].recs[0].Height-(siz+b))
+	y += RandF32(0, levels[levNum].recs[0].Height-(siz+b))
 	rec = rl.NewRectangle(x, y, siz, siz)
-	zbgi := bgilist[rInt(0, len(bgilist))]
+	zbgi := bgilist[RandInt(0, len(bgilist))]
 	zbgi.rec = rec
 	zbgi.fd = 1
 	levels[levNum].bgi = append(levels[levNum].bgi, zbgi)
 	//FLOWERS
-	num = rInt(2, 9)
+	num = RandInt(2, 9)
 	for num > 0 {
 		cntr := findRanCnt()
-		siz := rF32(be3, b/2)
+		siz := RandF32(be3, b/2)
 		zbgi := xbgi{}
 		zbgi.rec = rl.NewRectangle(cntr.X-siz/2, cntr.Y-siz/2, siz, siz)
-		zbgi.img = flowers[rInt(0, len(flowers))]
+		zbgi.img = flowers[RandInt(0, len(flowers))]
 		levels[levNum].flowers = append(levels[levNum].flowers, zbgi)
 		num--
 	}
@@ -33289,34 +33288,34 @@ func makeenemies() { //MARK:MAKE ENEMIES
 
 	switch levNumDis {
 	case 1:
-		num = rInt(10, 16)
+		num = RandInt(10, 16)
 	case 2:
-		num = rInt(10, 16)
+		num = RandInt(10, 16)
 	case 3:
-		num = rInt(10, 16)
+		num = RandInt(10, 16)
 	case 4:
-		num = rInt(15, 21)
+		num = RandInt(15, 21)
 	case 5:
-		num = rInt(15, 21)
+		num = RandInt(15, 21)
 	case 6:
-		num = rInt(15, 21)
+		num = RandInt(15, 21)
 	case 7:
-		num = rInt(20, 26)
+		num = RandInt(20, 26)
 	case 8:
-		num = rInt(20, 26)
+		num = RandInt(20, 26)
 	case 9:
-		num = rInt(20, 26)
+		num = RandInt(20, 26)
 	case 10:
-		num = rInt(30, 36)
+		num = RandInt(30, 36)
 	default:
-		num = rInt(10, 16)
+		num = RandInt(10, 16)
 	}
 
 	if bosskey2 {
-		num += rInt(1, 4)
+		num += RandInt(1, 4)
 	}
 	if bosskey3 {
-		num += rInt(1, 4)
+		num += RandInt(1, 4)
 	}
 
 	countbreak := 500
@@ -33326,95 +33325,95 @@ func makeenemies() { //MARK:MAKE ENEMIES
 
 		switch levNumDis {
 		case 1:
-			choose = rInt(0, 3)
+			choose = RandInt(0, 3)
 			if bosskey1 || bosskey2 {
-				choose = rInt(0, 4)
+				choose = RandInt(0, 4)
 			}
 		case 2:
-			choose = rInt(0, 5)
+			choose = RandInt(0, 5)
 			if bosskey1 || bosskey2 {
-				choose = rInt(0, 6)
+				choose = RandInt(0, 6)
 			}
 		case 3:
-			choose = rInt(0, 6)
+			choose = RandInt(0, 6)
 			if bosskey1 || bosskey2 {
-				choose = rInt(0, 7)
+				choose = RandInt(0, 7)
 			}
 		case 4:
-			choose = rInt(0, 9)
+			choose = RandInt(0, 9)
 			if bosskey1 || bosskey2 {
-				choose = rInt(0, 11)
+				choose = RandInt(0, 11)
 			}
 		case 5:
-			choose = rInt(0, 12)
+			choose = RandInt(0, 12)
 			if bosskey1 || bosskey2 {
-				choose = rInt(0, 13)
+				choose = RandInt(0, 13)
 			}
 		case 6:
-			choose = rInt(0, 13)
+			choose = RandInt(0, 13)
 			if bosskey1 || bosskey2 {
-				choose = rInt(0, 15)
+				choose = RandInt(0, 15)
 			}
 		case 7:
-			choose = rInt(0, 15)
+			choose = RandInt(0, 15)
 			if bosskey1 || bosskey2 {
-				choose = rInt(0, 17)
+				choose = RandInt(0, 17)
 			}
 		case 8:
-			choose = rInt(0, 17)
+			choose = RandInt(0, 17)
 			if bosskey1 || bosskey2 {
-				choose = rInt(0, 19)
+				choose = RandInt(0, 19)
 			}
 		case 9:
-			choose = rInt(0, 20)
+			choose = RandInt(0, 20)
 			if bosskey2 {
-				choose = rInt(0, 25)
+				choose = RandInt(0, 25)
 			} else if bosskey1 {
-				choose = rInt(0, 23)
+				choose = RandInt(0, 23)
 			}
 
 		case 10:
-			choose = rInt(0, 21)
+			choose = RandInt(0, 21)
 			if bosskey2 {
-				choose = rInt(0, 25)
+				choose = RandInt(0, 25)
 			} else if bosskey1 {
-				choose = rInt(0, 24)
+				choose = RandInt(0, 24)
 			}
 		}
 
 		switch choose {
 		case 0:
 			zenm = enmlist[0] //BLUE SPIKE
-			zenm.dirX = rF32(-zenm.spd, zenm.spd)
-			zenm.dirY = rF32(-zenm.spd, zenm.spd)
+			zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+			zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 		case 1:
 			zenm = enmlist[1] //RED EYE
-			zenm.dirX = rF32(-zenm.spd, zenm.spd)
-			zenm.dirY = rF32(-zenm.spd, zenm.spd)
+			zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+			zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 		case 2:
 			zenm = enmlist[11] //WORM
 			countbreak := 100
 			for {
-				zenm.dirX = rF32(-zenm.spd, zenm.spd)
+				zenm.dirX = RandF32(-zenm.spd, zenm.spd)
 				countbreak--
-				if countbreak == 0 || getabs(zenm.dirX) > zenm.spd/2 {
+				if countbreak == 0 || Abs(zenm.dirX) > zenm.spd/2 {
 					break
 				}
 			}
 		case 3:
 			zenm = enmlist[13] //FLAME HEAD
-			zenm.dirX = rF32(-zenm.spd, zenm.spd)
-			zenm.dirY = rF32(-zenm.spd, zenm.spd)
+			zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+			zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 		case 4:
 			zenm = enmlist[2] //RED BOMB
-			zenm.dirX = rF32(-zenm.spd, zenm.spd)
-			zenm.dirY = rF32(-zenm.spd, zenm.spd)
+			zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+			zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 		case 5:
 			zenm = enmlist[4] //RED ANTENNA
 			countbreak := 100
 			for {
-				zenm.dirX = rF32(-zenm.spd, zenm.spd)
-				if getabs(zenm.dirX) > 0.4 {
+				zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+				if Abs(zenm.dirX) > 0.4 {
 					break
 				}
 				countbreak--
@@ -33422,59 +33421,59 @@ func makeenemies() { //MARK:MAKE ENEMIES
 					break
 				}
 			}
-			zenm.atkT = rI32(1, 5) * fps
+			zenm.atkT = RandInt32(1, 5) * fps
 		case 6:
 			zenm = enmlist[5] //BALLOON
-			zenm.dirX = rF32(-zenm.spd, zenm.spd)
-			zenm.dirY = rF32(-zenm.spd, zenm.spd)
+			zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+			zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 		case 7:
 			zenm = enmlist[12] //FLY
-			zenm.dirX = rF32(-zenm.spd, zenm.spd)
-			zenm.dirY = rF32(-zenm.spd, zenm.spd)
+			zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+			zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 		case 8:
 			zenm = enmlist[14] //ORANGE
-			zenm.dirX = rF32(-zenm.spd, zenm.spd)
-			zenm.dirY = rF32(-zenm.spd, zenm.spd)
+			zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+			zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 		case 9:
 			zenm = enmlist[9] //YELLOW DINO
-			zenm.dirX = rF32(-zenm.spd, zenm.spd)
-			zenm.dirY = rF32(-zenm.spd, zenm.spd)
+			zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+			zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 		case 10:
 			zenm = enmlist[3] //GHOST
-			zenm.dirX = rF32(-zenm.spd, zenm.spd)
-			zenm.dirY = rF32(-zenm.spd, zenm.spd)
+			zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+			zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 		case 11:
 			zenm = enmlist[6] //CROCODILE
-			zenm.dirX = rF32(-zenm.spd, zenm.spd)
+			zenm.dirX = RandF32(-zenm.spd, zenm.spd)
 		case 12:
 			zenm = enmlist[7] //PINK CART WHEEL
-			zenm.dirX = rF32(-zenm.spd, zenm.spd)
-			zenm.dirY = rF32(-zenm.spd, zenm.spd)
-			zenm.atkT = fps * rI32(1, 3)
+			zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+			zenm.dirY = RandF32(-zenm.spd, zenm.spd)
+			zenm.atkT = fps * RandInt32(1, 3)
 		case 13:
 			zenm = enmlist[8] //GREEN PLANT
-			zenm.dirX = rF32(-zenm.spd, zenm.spd)
-			zenm.dirY = rF32(-zenm.spd, zenm.spd)
-			zenm.moveChangeT = fps * rI32(2, 5)
+			zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+			zenm.dirY = RandF32(-zenm.spd, zenm.spd)
+			zenm.moveChangeT = fps * RandInt32(2, 5)
 			zenm.atkT = fps / 4
 		case 14:
 			zenm = enmlist[10] //BLACK DOT
-			zenm.numMax = rInt(4, 11)
+			zenm.numMax = RandInt(4, 11)
 			zenm.atkT = fps
-			zenm.dirX = rF32(-zenm.spd, zenm.spd)
-			zenm.dirY = rF32(-zenm.spd, zenm.spd)
+			zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+			zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 		case 15:
 			zenm = enmlist[15] //SKELETON
-			zenm.dirX = rF32(-zenm.spd, zenm.spd)
-			zenm.dirY = rF32(-zenm.spd, zenm.spd)
+			zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+			zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 		case 16:
 			zenm = enmlist[16] //RED BLOB
-			zenm.dirX = rF32(-zenm.spd, zenm.spd)
-			zenm.dirY = rF32(-zenm.spd, zenm.spd)
+			zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+			zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 		case 17:
 			zenm = enmlist[17] //CARROT
-			zenm.dirX = rF32(-zenm.spd, zenm.spd)
-			zenm.dirY = rF32(-zenm.spd, zenm.spd)
+			zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+			zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 		case 18:
 			zenm = enmlist[20] //RED DEVIL
 		case 19:
@@ -33487,8 +33486,8 @@ func makeenemies() { //MARK:MAKE ENEMIES
 			zenm = enmlist[24] //ROTATING SPIKES
 		case 22:
 			zenm = enmlist[19] //GREEN PIG
-			zenm.dirX = rF32(-zenm.spd, zenm.spd)
-			zenm.dirY = rF32(-zenm.spd, zenm.spd)
+			zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+			zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 		case 23:
 			zenm = enmlist[23] //JERSEY
 		case 24:
@@ -33843,7 +33842,7 @@ func makeenemiesINITIAL() { //MARK:MAKE ENEMIES INITIAL
 	zenm.img = anm[23].rec
 	zenm.spd = b / 16
 	zenm.idl = true
-	zenm.idleT = fps * rI32(5, 9)
+	zenm.idleT = fps * RandInt32(5, 9)
 	enmlist = append(enmlist, zenm)
 	//RED EYE 1
 	zenm = xenm{}
@@ -33859,7 +33858,7 @@ func makeenemiesINITIAL() { //MARK:MAKE ENEMIES INITIAL
 	zenm.img = anm[26].rec
 	zenm.spd = b / 16
 	zenm.idl = true
-	zenm.idleT = fps * rI32(5, 9)
+	zenm.idleT = fps * RandInt32(5, 9)
 	enmlist = append(enmlist, zenm)
 	//RED BOMB 2
 	zenm = xenm{}
@@ -33875,7 +33874,7 @@ func makeenemiesINITIAL() { //MARK:MAKE ENEMIES INITIAL
 	zenm.img = anm[29].rec
 	zenm.spd = b / 16
 	zenm.idl = true
-	zenm.idleT = fps * rI32(5, 9)
+	zenm.idleT = fps * RandInt32(5, 9)
 	enmlist = append(enmlist, zenm)
 	//GHOST 3
 	siz = b
@@ -33913,10 +33912,10 @@ func makeenemiesINITIAL() { //MARK:MAKE ENEMIES INITIAL
 	zenm.crec.Width -= zenm.crec.Width / 3
 	zenm.img = anm[34].rec
 	zenm.spd = b / 14
-	zenm.moveChangeT = fps * rI32(1, 4)
+	zenm.moveChangeT = fps * RandInt32(1, 4)
 	zenm.hitImgR = rl.NewRectangle(955, 84, 22, 22)
 	zenm.hitImgL = rl.NewRectangle(977, 84, 22, 22)
-	zenm.atkT = fps * rI32(1, 5)
+	zenm.atkT = fps * RandInt32(1, 5)
 	enmlist = append(enmlist, zenm)
 	//BALLOON 5
 	siz = b + b/2
@@ -33937,7 +33936,7 @@ func makeenemiesINITIAL() { //MARK:MAKE ENEMIES INITIAL
 	zenm.spd = b / 24
 	zenm.hitImgR = rl.NewRectangle(955, 84, 22, 22)
 	zenm.hitImgL = rl.NewRectangle(977, 84, 22, 22)
-	zenm.animFrameT = rI32(10, 25)
+	zenm.animFrameT = RandInt32(10, 25)
 	enmlist = append(enmlist, zenm)
 	//CROCODILE 6
 	siz = b + b/2
@@ -33973,8 +33972,8 @@ func makeenemiesINITIAL() { //MARK:MAKE ENEMIES INITIAL
 	zenm.img = anm[40].rec
 	zenm.spd = b / 20
 	zenm.idl = true
-	zenm.idleT = fps * rI32(5, 9)
-	zenm.atkT = fps * rI32(1, 3)
+	zenm.idleT = fps * RandInt32(5, 9)
+	zenm.atkT = fps * RandInt32(1, 3)
 	enmlist = append(enmlist, zenm)
 	//GREEN PLANT 8
 	siz = b + bq
@@ -33993,8 +33992,8 @@ func makeenemiesINITIAL() { //MARK:MAKE ENEMIES INITIAL
 	zenm.img = anm[43].rec
 	zenm.spd = b / 14
 	zenm.idl = true
-	zenm.idleT = fps * rI32(5, 9)
-	zenm.moveChangeT = fps * rI32(2, 5)
+	zenm.idleT = fps * RandInt32(5, 9)
+	zenm.moveChangeT = fps * RandInt32(2, 5)
 	enmlist = append(enmlist, zenm)
 	//YELLOW DINO 9
 	siz = b + bq
@@ -34012,8 +34011,8 @@ func makeenemiesINITIAL() { //MARK:MAKE ENEMIES INITIAL
 	zenm.crec.Height = (zenm.crec.Height / 3) * 2
 	zenm.img = anm[46].rec
 	zenm.spd = b / 16
-	zenm.moveChangeT = fps * rI32(2, 4)
-	zenm.atkT = fps * rI32(1, 5)
+	zenm.moveChangeT = fps * RandInt32(2, 4)
+	zenm.atkT = fps * RandInt32(1, 5)
 	enmlist = append(enmlist, zenm)
 	//BLACK DOT 10
 	siz = b / 2
@@ -34102,7 +34101,7 @@ func makeenemiesINITIAL() { //MARK:MAKE ENEMIES INITIAL
 	zenm.crec = zenm.rec
 	zenm.img = anm[67].rec
 	zenm.spd = b / 16
-	zenm.atkT = fps * rI32(1, 5)
+	zenm.atkT = fps * RandInt32(1, 5)
 	enmlist = append(enmlist, zenm)
 	//RED BLOB 16
 	siz = b
@@ -34116,8 +34115,8 @@ func makeenemiesINITIAL() { //MARK:MAKE ENEMIES INITIAL
 	zenm.crec = zenm.rec
 	zenm.img = anm[69].rec
 	zenm.spd = b / 30
-	zenm.moveChangeT = fps * rI32(1, 3)
-	zenm.atkT = fps * rI32(1, 5)
+	zenm.moveChangeT = fps * RandInt32(1, 3)
+	zenm.atkT = fps * RandInt32(1, 5)
 	enmlist = append(enmlist, zenm)
 	//CARROT 17
 	siz = bq3
@@ -34152,8 +34151,8 @@ func makeenemiesINITIAL() { //MARK:MAKE ENEMIES INITIAL
 	zenm.crec.Width = zenm.crec.Width / 2
 	zenm.img = anm[160].rec
 	zenm.spd = 1
-	zenm.moveChangeT = fps * rI32(1, 3)
-	zenm.atkT = int32(rInt(int(fps), int(fps*3)))
+	zenm.moveChangeT = fps * RandInt32(1, 3)
+	zenm.atkT = int32(RandInt(int(fps), int(fps*3)))
 	enmlist = append(enmlist, zenm)
 	//GREEN PIG 19
 	siz = b2
@@ -34171,7 +34170,7 @@ func makeenemiesINITIAL() { //MARK:MAKE ENEMIES INITIAL
 	zenm.crec.Width = zenm.crec.Width / 2
 	zenm.img = anm[158].rec
 	zenm.spd = 2
-	zenm.moveChangeT = fps * rI32(1, 3)
+	zenm.moveChangeT = fps * RandInt32(1, 3)
 	zenm.atkT = fps * 2
 	enmlist = append(enmlist, zenm)
 	//RED DEVIL 20
@@ -34190,11 +34189,11 @@ func makeenemiesINITIAL() { //MARK:MAKE ENEMIES INITIAL
 	zenm.img = anm[162].rec
 	zenm.spd = 5
 	zenm.dirX = zenm.spd
-	if flipcoin() {
+	if FlipCoin() {
 		zenm.dirX = -zenm.dirX
 	}
-	zenm.dirY = zenm.spd / rF32(2, 9)
-	if flipcoin() {
+	zenm.dirY = zenm.spd / RandF32(2, 9)
+	if FlipCoin() {
 		zenm.dirY = -zenm.dirY
 	}
 	zenm.atkT = fps / 2
@@ -34232,8 +34231,8 @@ func makeenemiesINITIAL() { //MARK:MAKE ENEMIES INITIAL
 	zenm.img = anm[164].rec
 	zenm.spd = 2
 	zenm.moveChangeT = fps * 2
-	zenm.dirX = rF32(-zenm.spd, zenm.spd)
-	zenm.dirY = rF32(-zenm.spd, zenm.spd)
+	zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+	zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 	enmlist = append(enmlist, zenm)
 	//GREEN JERSEY 23
 	siz = b + be
@@ -34251,8 +34250,8 @@ func makeenemiesINITIAL() { //MARK:MAKE ENEMIES INITIAL
 	zenm.img = anm[166].rec
 	zenm.spd = 3
 	zenm.moveChangeT = fps * 2
-	zenm.dirX = rF32(-zenm.spd, zenm.spd)
-	zenm.dirY = rF32(-zenm.spd, zenm.spd)
+	zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+	zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 	zenm.atkT = fps * 2
 	enmlist = append(enmlist, zenm)
 	//MOVING SPIKE 24
@@ -34268,8 +34267,8 @@ func makeenemiesINITIAL() { //MARK:MAKE ENEMIES INITIAL
 	zenm.img = anm[184].rec
 	zenm.spd = 2
 	zenm.moveChangeT = fps * 2
-	zenm.dirX = rF32(-zenm.spd, zenm.spd)
-	zenm.dirY = rF32(-zenm.spd, zenm.spd)
+	zenm.dirX = RandF32(-zenm.spd, zenm.spd)
+	zenm.dirY = RandF32(-zenm.spd, zenm.spd)
 	enmlist = append(enmlist, zenm)
 }
 
@@ -34407,7 +34406,7 @@ func makedarts(tile xtile) { //MARK:MAKE DARTS
 	xr := levels[levNum].recs[tile.room].X + levels[levNum].recs[tile.room].Width
 	yt := levels[levNum].recs[tile.room].Y
 	yb := levels[levNum].recs[tile.room].Y + levels[levNum].recs[tile.room].Height
-	side := rInt(1, 5)
+	side := RandInt(1, 5)
 	switch side {
 	case 1:
 		//TOP WALL
@@ -34491,7 +34490,7 @@ func makeEnDeathFx(enNum int) { //MARK:MAKE ENEMY DEATH FX
 	levels[levNum].enNum--
 	//MUG
 	if mugnum > 0 {
-		if roll6() <= mugnum {
+		if Roll6() <= mugnum {
 			zitm := itmlist[43]
 			zitm.rec = rl.NewRectangle(levels[levNum].enm[enNum].cnt.X-zitm.rec.Width/2, levels[levNum].enm[enNum].cnt.Y-zitm.rec.Height/2, zitm.rec.Width, zitm.rec.Height)
 			levels[levNum].itm = append(levels[levNum].itm, zitm)
@@ -34518,9 +34517,9 @@ func makeEnDeathFx(enNum int) { //MARK:MAKE ENEMY DEATH FX
 			zfx.spd = 5
 			countbreak := 100
 			for {
-				zfx.dirX = rF32(-zfx.spd, zfx.spd)
-				zfx.dirY = rF32(-zfx.spd, zfx.spd)
-				if getabs(zfx.dirX) > 2 || getabs(zfx.dirY) > 2 {
+				zfx.dirX = RandF32(-zfx.spd, zfx.spd)
+				zfx.dirY = RandF32(-zfx.spd, zfx.spd)
+				if Abs(zfx.dirX) > 2 || Abs(zfx.dirY) > 2 {
 					break
 				}
 				countbreak--
@@ -34544,8 +34543,8 @@ func makeEnDeathFx(enNum int) { //MARK:MAKE ENEMY DEATH FX
 			num := 20
 			countbreak := 100
 			for num > 0 {
-				x2 := rF32(-b5, b5)
-				y2 := rF32(-b5, b5)
+				x2 := RandF32(-b5, b5)
+				y2 := RandF32(-b5, b5)
 				v2 := rl.NewVector2(pl.cnt.X+x2, pl.cnt.Y+y2)
 				if checkV2inRooms(v2) {
 					siz := b2
@@ -34584,7 +34583,7 @@ func makeEnDeathFx(enNum int) { //MARK:MAKE ENEMY DEATH FX
 	}
 	//GARLIC
 	if garlicnum > 0 {
-		if roll12() <= garlicnum {
+		if Roll12() <= garlicnum {
 			if pl.hp < pl.hpmax {
 				pl.hp++
 				admsg("garlic +1 hp", rl.Green)
@@ -34623,12 +34622,12 @@ func makeEnDeathFx(enNum int) { //MARK:MAKE ENEMY DEATH FX
 		zenm.cnt = levels[levNum].enm[enNum].cnt
 		levels[levNum].enm = append(levels[levNum].enm, zenm)
 		countbreak := 100
-		num := rInt(4, 8)
+		num := RandInt(4, 8)
 		for num > 0 {
 			siz2 := b3
 			cntr := zenm.cnt
-			cntr.X += rF32(-siz2, siz2)
-			cntr.Y += rF32(-siz2, siz2)
+			cntr.X += RandF32(-siz2, siz2)
+			cntr.Y += RandF32(-siz2, siz2)
 			if checkV2Walls(cntr) && checkV2inRooms(cntr) && checkV2water(cntr) && checkV2chest(cntr) {
 				zenm.rec = rl.NewRectangle(cntr.X-siz/2, cntr.Y-(siz), siz, siz)
 				zenm.crec = zenm.rec
@@ -34653,7 +34652,7 @@ func makeEnDeathFx(enNum int) { //MARK:MAKE ENEMY DEATH FX
 		siz := be3
 		zproj.rec = rl.NewRectangle(levels[levNum].enm[enNum].cnt.X-siz/2, levels[levNum].enm[enNum].cnt.Y-siz/2, siz, siz)
 		zproj.crec = zproj.rec
-		zproj.col = ranRed()
+		zproj.col = RandRed()
 		zproj.fd = 1
 		zproj.spd = b / 8
 		zproj.ro = 90
@@ -34715,33 +34714,33 @@ func makeEnDeathFx(enNum int) { //MARK:MAKE ENEMY DEATH FX
 		zfx := xfx{}
 		zfx.nm = "enm"
 		zfx.T = fps
-		num := rInt(40, 55)
+		num := RandInt(40, 55)
 		for num > 0 {
 			zcirc := xcirc{}
 			zcirc.cnt = levels[levNum].enm[enNum].cnt
-			zcirc.rad = rF32(b/8, b/2)
-			zcirc.col = ranRed()
+			zcirc.rad = RandF32(b/8, b/2)
+			zcirc.col = RandRed()
 			switch levels[levNum].enm[enNum].nm {
 			case "bluespike", "robot":
-				zcirc.col = ranBlue()
+				zcirc.col = RandBlue()
 			case "redbomb", "orange", "flamehead", "carrot":
-				zcirc.col = ranOrange()
+				zcirc.col = RandOrange()
 			case "ghost", "skeleton":
-				zcirc.col = ranGrey()
+				zcirc.col = RandGrey()
 			case "pinkcart":
-				zcirc.col = ranPink()
+				zcirc.col = RandPink()
 			case "blackdot", "bird":
 				zcirc.col = rl.Black
 			case "crocodile", "greenplant", "greenpig", "bush":
-				zcirc.col = ranGreen()
+				zcirc.col = RandGreen()
 			}
-			zcirc.fd = rF32(0.5, 0.8)
+			zcirc.fd = RandF32(0.5, 0.8)
 			zcirc.spd = b / 2
 			countbreak := 100
 			for {
-				zcirc.dirX = rF32(-zcirc.spd, zcirc.spd)
-				zcirc.dirY = rF32(-zcirc.spd, zcirc.spd)
-				if getabs(zcirc.dirX) > 0.5 && getabs(zcirc.dirY) > 0.5 {
+				zcirc.dirX = RandF32(-zcirc.spd, zcirc.spd)
+				zcirc.dirY = RandF32(-zcirc.spd, zcirc.spd)
+				if Abs(zcirc.dirX) > 0.5 && Abs(zcirc.dirY) > 0.5 {
 					break
 				}
 				countbreak--
@@ -34755,7 +34754,7 @@ func makeEnDeathFx(enNum int) { //MARK:MAKE ENEMY DEATH FX
 		fx = append(fx, zfx)
 	}
 	if gascannum > 0 {
-		if roll6() <= gascannum {
+		if Roll6() <= gascannum {
 			siz := b7
 			cntr := levels[levNum].enm[enNum].cnt
 			zfx := xfx{}
@@ -34766,7 +34765,7 @@ func makeEnDeathFx(enNum int) { //MARK:MAKE ENEMY DEATH FX
 		}
 	}
 
-	choose := rInt(1, 4)
+	choose := RandInt(1, 4)
 	switch choose {
 	case 1:
 		rl.PlaySound(audfx[9])
@@ -34779,37 +34778,37 @@ func makeEnDeathFx(enNum int) { //MARK:MAKE ENEMY DEATH FX
 func makebgi() { //MARK:MAKE BACKGROUND IMG
 	for i := 0; i < len(levels[levNum].recs); i++ {
 		//BGI
-		if roll6() > 3 {
-			siz := rF32(b+b/2, b2)
+		if Roll6() > 3 {
+			siz := RandF32(b+b/2, b2)
 			x := levels[levNum].recs[i].X + b/2
-			x += rF32(0, levels[levNum].recs[i].Width-(siz+b))
+			x += RandF32(0, levels[levNum].recs[i].Width-(siz+b))
 			y := levels[levNum].recs[i].Y + b/2
-			y += rF32(0, levels[levNum].recs[i].Height-(siz+b))
+			y += RandF32(0, levels[levNum].recs[i].Height-(siz+b))
 			rec := rl.NewRectangle(x, y, siz, siz)
-			zbgi := bgilist[rInt(0, len(bgilist))]
+			zbgi := bgilist[RandInt(0, len(bgilist))]
 			zbgi.rec = rec
 			zbgi.fd = 1
 			levels[levNum].bgi = append(levels[levNum].bgi, zbgi)
 		}
 		//BGI 2
-		num := rInt(1, 5)
+		num := RandInt(1, 5)
 		countbreak := 100
 		for {
-			siz := rF32(be5, b+be3)
-			side := rInt(1, 5)
-			zbgi := bgilist2[rInt(0, len(bgilist2))]
+			siz := RandF32(be5, b+be3)
+			side := RandInt(1, 5)
+			zbgi := bgilist2[RandInt(0, len(bgilist2))]
 			zbgi.fd = 1
 			switch side {
 			case 4: //LEFT
 				x := levels[levNum].recs[i].X - 2
 				y := levels[levNum].recs[i].Y + b/4
-				y += rF32(0, levels[levNum].recs[i].Height-(siz+b/2))
+				y += RandF32(0, levels[levNum].recs[i].Height-(siz+b/2))
 				rec := rl.NewRectangle(x, y, siz, siz)
 				zbgi.rec = rec
 				zbgi.ro = 270
 			case 3: //BOTTOM
 				x := levels[levNum].recs[i].X + b/4
-				x += rF32(0, levels[levNum].recs[i].Width-(siz+b/2))
+				x += RandF32(0, levels[levNum].recs[i].Width-(siz+b/2))
 				y := levels[levNum].recs[i].Y + levels[levNum].recs[i].Height - siz + 2
 				rec := rl.NewRectangle(x, y, siz, siz)
 				zbgi.rec = rec
@@ -34817,13 +34816,13 @@ func makebgi() { //MARK:MAKE BACKGROUND IMG
 			case 2: //RIGHT
 				x := levels[levNum].recs[i].X + levels[levNum].recs[i].Width - siz + 2
 				y := levels[levNum].recs[i].Y + b/4
-				y += rF32(0, levels[levNum].recs[i].Height-(siz+b/2))
+				y += RandF32(0, levels[levNum].recs[i].Height-(siz+b/2))
 				rec := rl.NewRectangle(x, y, siz, siz)
 				zbgi.rec = rec
 				zbgi.ro = 90
 			case 1: //TOP
 				x := levels[levNum].recs[i].X + b/4
-				x += rF32(0, levels[levNum].recs[i].Width-(siz+b/2))
+				x += RandF32(0, levels[levNum].recs[i].Width-(siz+b/2))
 				y := levels[levNum].recs[i].Y - 2
 				rec := rl.NewRectangle(x, y, siz, siz)
 				zbgi.rec = rec
@@ -34847,13 +34846,13 @@ func makebgi() { //MARK:MAKE BACKGROUND IMG
 		}
 	}
 	//FLOWERS
-	num := rInt(5, 11)
+	num := RandInt(5, 11)
 	for num > 0 {
 		cntr := findRanCnt()
-		siz := rF32(be3, b/2)
+		siz := RandF32(be3, b/2)
 		zbgi := xbgi{}
 		zbgi.rec = rl.NewRectangle(cntr.X-siz/2, cntr.Y-siz/2, siz, siz)
-		zbgi.img = flowers[rInt(0, len(flowers))]
+		zbgi.img = flowers[RandInt(0, len(flowers))]
 		levels[levNum].flowers = append(levels[levNum].flowers, zbgi)
 		num--
 	}
@@ -34871,9 +34870,9 @@ func makeinnerbloksetc(lev x1scr) x1scr { //MARK:MAKE INNER BLOKS ETC
 			ztile := xtile{}
 			ztile.img = walltile
 			ztile.color = rl.White
-			ztile.col2 = ranCol()
-			ztile.fade = rF32(0.3, 0.9)
-			choose := rInt(1, 5)
+			ztile.col2 = RandColor()
+			ztile.fade = RandF32(0.3, 0.9)
+			choose := RandInt(1, 5)
 			//choose =4
 			switch choose {
 			case 4: //FOUR BLOKS
@@ -34881,138 +34880,138 @@ func makeinnerbloksetc(lev x1scr) x1scr { //MARK:MAKE INNER BLOKS ETC
 				y := lev.recs[i].Y + b3
 				x2 := x + lev.recs[i].Width - b6
 				y2 := y + lev.recs[i].Height - b6
-				ztile.col2 = ranCol()
-				ztile.rec = rl.NewRectangle(rF32(x, x2), rF32(y, y2), size, size)
+				ztile.col2 = RandColor()
+				ztile.rec = rl.NewRectangle(RandF32(x, x2), RandF32(y, y2), size, size)
 				if checkaddtilerecInner(ztile.rec, lev) {
 					lev.walls = append(lev.walls, ztile)
 				}
-				choose2 := rInt(1, 5)
+				choose2 := RandInt(1, 5)
 				switch choose2 {
 				case 1:
 					ztile.rec.Y -= size
 					if checkaddtilerecInner(ztile.rec, lev) {
-						ztile.col2 = ranCol()
+						ztile.col2 = RandColor()
 						lev.walls = append(lev.walls, ztile)
 					}
-					if flipcoin() {
+					if FlipCoin() {
 						ztile.rec.X += size
 						if checkaddtilerecInner(ztile.rec, lev) {
-							ztile.col2 = ranCol()
+							ztile.col2 = RandColor()
 							lev.walls = append(lev.walls, ztile)
 						}
 					} else {
 						ztile.rec.X -= size
 						if checkaddtilerecInner(ztile.rec, lev) {
-							ztile.col2 = ranCol()
+							ztile.col2 = RandColor()
 							lev.walls = append(lev.walls, ztile)
 						}
 					}
-					if flipcoin() {
+					if FlipCoin() {
 						ztile.rec.Y += size
 						if checkaddtilerecInner(ztile.rec, lev) {
-							ztile.col2 = ranCol()
+							ztile.col2 = RandColor()
 							lev.walls = append(lev.walls, ztile)
 						}
 					} else {
 						ztile.rec.Y -= size
 						if checkaddtilerecInner(ztile.rec, lev) {
-							ztile.col2 = ranCol()
+							ztile.col2 = RandColor()
 							lev.walls = append(lev.walls, ztile)
 						}
 					}
 				case 2:
 					ztile.rec.X += size
 					if checkaddtilerecInner(ztile.rec, lev) {
-						ztile.col2 = ranCol()
+						ztile.col2 = RandColor()
 						lev.walls = append(lev.walls, ztile)
 					}
-					if flipcoin() {
+					if FlipCoin() {
 						ztile.rec.Y += size
 						if checkaddtilerecInner(ztile.rec, lev) {
-							ztile.col2 = ranCol()
+							ztile.col2 = RandColor()
 							lev.walls = append(lev.walls, ztile)
 						}
 					} else {
 						ztile.rec.Y -= size
 						if checkaddtilerecInner(ztile.rec, lev) {
-							ztile.col2 = ranCol()
+							ztile.col2 = RandColor()
 							lev.walls = append(lev.walls, ztile)
 						}
 					}
-					if flipcoin() {
+					if FlipCoin() {
 						ztile.rec.X += size
 						if checkaddtilerecInner(ztile.rec, lev) {
-							ztile.col2 = ranCol()
+							ztile.col2 = RandColor()
 							lev.walls = append(lev.walls, ztile)
 						}
 					} else {
 						ztile.rec.X -= size
 						if checkaddtilerecInner(ztile.rec, lev) {
-							ztile.col2 = ranCol()
+							ztile.col2 = RandColor()
 							lev.walls = append(lev.walls, ztile)
 						}
 					}
 				case 3:
 					ztile.rec.Y += size
 					if checkaddtilerecInner(ztile.rec, lev) {
-						ztile.col2 = ranCol()
+						ztile.col2 = RandColor()
 						lev.walls = append(lev.walls, ztile)
 					}
-					if flipcoin() {
+					if FlipCoin() {
 						ztile.rec.X += size
 						if checkaddtilerecInner(ztile.rec, lev) {
-							ztile.col2 = ranCol()
+							ztile.col2 = RandColor()
 							lev.walls = append(lev.walls, ztile)
 						}
 					} else {
 						ztile.rec.X -= size
 						if checkaddtilerecInner(ztile.rec, lev) {
-							ztile.col2 = ranCol()
+							ztile.col2 = RandColor()
 							lev.walls = append(lev.walls, ztile)
 						}
 					}
-					if flipcoin() {
+					if FlipCoin() {
 						ztile.rec.Y += size
 						if checkaddtilerecInner(ztile.rec, lev) {
-							ztile.col2 = ranCol()
+							ztile.col2 = RandColor()
 							lev.walls = append(lev.walls, ztile)
 						}
 					} else {
 						ztile.rec.Y -= size
 						if checkaddtilerecInner(ztile.rec, lev) {
-							ztile.col2 = ranCol()
+							ztile.col2 = RandColor()
 							lev.walls = append(lev.walls, ztile)
 						}
 					}
 				case 4:
 					ztile.rec.X -= size
 					if checkaddtilerecInner(ztile.rec, lev) {
-						ztile.col2 = ranCol()
+						ztile.col2 = RandColor()
 						lev.walls = append(lev.walls, ztile)
 					}
-					if flipcoin() {
+					if FlipCoin() {
 						ztile.rec.Y += size
 						if checkaddtilerecInner(ztile.rec, lev) {
-							ztile.col2 = ranCol()
+							ztile.col2 = RandColor()
 							lev.walls = append(lev.walls, ztile)
 						}
 					} else {
 						ztile.rec.Y -= size
 						if checkaddtilerecInner(ztile.rec, lev) {
-							ztile.col2 = ranCol()
+							ztile.col2 = RandColor()
 							lev.walls = append(lev.walls, ztile)
 						}
 					}
-					if flipcoin() {
+					if FlipCoin() {
 						ztile.rec.X += size
 						if checkaddtilerecInner(ztile.rec, lev) {
-							ztile.col2 = ranCol()
+							ztile.col2 = RandColor()
 							lev.walls = append(lev.walls, ztile)
 						}
 					} else {
 						ztile.rec.X -= size
 						if checkaddtilerecInner(ztile.rec, lev) {
-							ztile.col2 = ranCol()
+							ztile.col2 = RandColor()
 							lev.walls = append(lev.walls, ztile)
 						}
 					}
@@ -35022,86 +35021,86 @@ func makeinnerbloksetc(lev x1scr) x1scr { //MARK:MAKE INNER BLOKS ETC
 				y := lev.recs[i].Y + b3
 				x2 := x + lev.recs[i].Width - b6
 				y2 := y + lev.recs[i].Height - b6
-				ztile.col2 = ranCol()
-				ztile.rec = rl.NewRectangle(rF32(x, x2), rF32(y, y2), size, size)
+				ztile.col2 = RandColor()
+				ztile.rec = rl.NewRectangle(RandF32(x, x2), RandF32(y, y2), size, size)
 				if checkaddtilerecInner(ztile.rec, lev) {
 					lev.walls = append(lev.walls, ztile)
 				}
-				choose2 := rInt(1, 5)
+				choose2 := RandInt(1, 5)
 				switch choose2 {
 				case 1:
 					ztile.rec.Y -= size
 					if checkaddtilerecInner(ztile.rec, lev) {
-						ztile.col2 = ranCol()
+						ztile.col2 = RandColor()
 						lev.walls = append(lev.walls, ztile)
 					}
-					if flipcoin() {
+					if FlipCoin() {
 						ztile.rec.X += size
 						if checkaddtilerecInner(ztile.rec, lev) {
-							ztile.col2 = ranCol()
+							ztile.col2 = RandColor()
 							lev.walls = append(lev.walls, ztile)
 						}
 					} else {
 						ztile.rec.X -= size
 						if checkaddtilerecInner(ztile.rec, lev) {
-							ztile.col2 = ranCol()
+							ztile.col2 = RandColor()
 							lev.walls = append(lev.walls, ztile)
 						}
 					}
 				case 2:
 					ztile.rec.X += size
 					if checkaddtilerecInner(ztile.rec, lev) {
-						ztile.col2 = ranCol()
+						ztile.col2 = RandColor()
 						lev.walls = append(lev.walls, ztile)
 					}
-					if flipcoin() {
+					if FlipCoin() {
 						ztile.rec.Y += size
 						if checkaddtilerecInner(ztile.rec, lev) {
-							ztile.col2 = ranCol()
+							ztile.col2 = RandColor()
 							lev.walls = append(lev.walls, ztile)
 						}
 					} else {
 						ztile.rec.Y -= size
 						if checkaddtilerecInner(ztile.rec, lev) {
-							ztile.col2 = ranCol()
+							ztile.col2 = RandColor()
 							lev.walls = append(lev.walls, ztile)
 						}
 					}
 				case 3:
 					ztile.rec.Y += size
 					if checkaddtilerecInner(ztile.rec, lev) {
-						ztile.col2 = ranCol()
+						ztile.col2 = RandColor()
 						lev.walls = append(lev.walls, ztile)
 					}
-					if flipcoin() {
+					if FlipCoin() {
 						ztile.rec.X += size
 						if checkaddtilerecInner(ztile.rec, lev) {
-							ztile.col2 = ranCol()
+							ztile.col2 = RandColor()
 							lev.walls = append(lev.walls, ztile)
 						}
 					} else {
 						ztile.rec.X -= size
 						if checkaddtilerecInner(ztile.rec, lev) {
-							ztile.col2 = ranCol()
+							ztile.col2 = RandColor()
 							lev.walls = append(lev.walls, ztile)
 						}
 					}
 				case 4:
 					ztile.rec.X -= size
 					if checkaddtilerecInner(ztile.rec, lev) {
-						ztile.col2 = ranCol()
+						ztile.col2 = RandColor()
 						lev.walls = append(lev.walls, ztile)
 					}
-					if flipcoin() {
+					if FlipCoin() {
 						ztile.rec.Y += size
 						if checkaddtilerecInner(ztile.rec, lev) {
-							ztile.col2 = ranCol()
+							ztile.col2 = RandColor()
 							lev.walls = append(lev.walls, ztile)
 						}
 					} else {
 						ztile.rec.Y -= size
 						if checkaddtilerecInner(ztile.rec, lev) {
-							ztile.col2 = ranCol()
+							ztile.col2 = RandColor()
 							lev.walls = append(lev.walls, ztile)
 						}
 					}
@@ -35111,12 +35110,12 @@ func makeinnerbloksetc(lev x1scr) x1scr { //MARK:MAKE INNER BLOKS ETC
 				y := lev.recs[i].Y + b3
 				x2 := x + lev.recs[i].Width - b6
 				y2 := y + lev.recs[i].Height - b6
-				ztile.col2 = ranCol()
-				ztile.rec = rl.NewRectangle(rF32(x, x2), rF32(y, y2), size, size)
+				ztile.col2 = RandColor()
+				ztile.rec = rl.NewRectangle(RandF32(x, x2), RandF32(y, y2), size, size)
 				if checkaddtilerecInner(ztile.rec, lev) {
 					lev.walls = append(lev.walls, ztile)
 				}
-				choose2 := rInt(1, 5)
+				choose2 := RandInt(1, 5)
 				switch choose2 {
 				case 1:
 					ztile.rec.Y -= size
@@ -35144,29 +35143,29 @@ func makeinnerbloksetc(lev x1scr) x1scr { //MARK:MAKE INNER BLOKS ETC
 				y := lev.recs[i].Y + b2
 				x2 := x + lev.recs[i].Width - b4
 				y2 := y + lev.recs[i].Height - b4
-				ztile.col2 = ranCol()
-				ztile.rec = rl.NewRectangle(rF32(x, x2), rF32(y, y2), size, size)
+				ztile.col2 = RandColor()
+				ztile.rec = rl.NewRectangle(RandF32(x, x2), RandF32(y, y2), size, size)
 				if checkaddtilerecInner(ztile.rec, lev) {
 					lev.walls = append(lev.walls, ztile)
 				}
 			}
 		}
 		//MOVING BLOKS
-		if roll6() > 4 {
+		if Roll6() > 4 {
 			x := lev.recs[i].X + size
 			y := lev.recs[i].Y + size
 			x2 := x + lev.recs[i].Width - size*2
 			y2 := y + lev.recs[i].Height - size*2
 			ztile := xtile{}
 			ztile.img = walltile
-			ztile.col2 = ranCol()
+			ztile.col2 = RandColor()
 			ztile.color = rl.White
-			ztile.fade = rF32(0.3, 0.9)
-			ztile.rec = rl.NewRectangle(rF32(x, x2), rF32(y, y2), size, size)
-			ztile.spikes = flipcoin()
+			ztile.fade = RandF32(0.3, 0.9)
+			ztile.rec = rl.NewRectangle(RandF32(x, x2), RandF32(y, y2), size, size)
+			ztile.spikes = FlipCoin()
 			if ztile.spikes {
 				for j := 0; j < 4; j++ {
-					ztile.col2 = ranCol()
+					ztile.col2 = RandColor()
 					rec2 := ztile.rec
 					rec2.X += ztile.rec.Width / 4
 					rec2.Y += ztile.rec.Height / 4
@@ -35176,15 +35175,15 @@ func makeinnerbloksetc(lev x1scr) x1scr { //MARK:MAKE INNER BLOKS ETC
 				}
 			}
 			if checkaddtilerecInner(ztile.rec, lev) && checkRecPlayer(ztile.rec) {
-				ztile.spd = rF32(b/12, b/7)
-				if flipcoin() {
+				ztile.spd = RandF32(b/12, b/7)
+				if FlipCoin() {
 					ztile.dirX = ztile.spd
-					if flipcoin() {
+					if FlipCoin() {
 						ztile.dirX = -ztile.dirX
 					}
 				} else {
 					ztile.dirY = ztile.spd
-					if flipcoin() {
+					if FlipCoin() {
 						ztile.dirY = -ztile.dirY
 					}
 				}
@@ -35199,7 +35198,7 @@ func makeinnerbloksetc(lev x1scr) x1scr { //MARK:MAKE INNER BLOKS ETC
 		y2 := y + lev.recs[i].Height - size
 		ztile := xtile{}
 		ztile.nm = "crate"
-		choose := rInt(1, 5)
+		choose := RandInt(1, 5)
 		switch choose {
 		case 1:
 			ztile.hp = 3
@@ -35214,13 +35213,13 @@ func makeinnerbloksetc(lev x1scr) x1scr { //MARK:MAKE INNER BLOKS ETC
 		ztile.solid = true
 		ztile.color = rl.White
 		ztile.fade = 1
-		ztile.rec = rl.NewRectangle(rF32(x, x2), rF32(y, y2), be7, be7)
+		ztile.rec = rl.NewRectangle(RandF32(x, x2), RandF32(y, y2), be7, be7)
 		if checkaddtilerecInner(ztile.rec, lev) && checkaddetc(ztile.rec, lev) {
 			ztile.cnt = makecnt(ztile.rec)
 			lev.etc = append(lev.etc, ztile)
 		}
 		//WATER
-		if roll6() == 6 {
+		if Roll6() == 6 {
 			x := lev.recs[i].X + size
 			y := lev.recs[i].Y + size
 			x2 := x + lev.recs[i].Width - size*3
@@ -35229,9 +35228,9 @@ func makeinnerbloksetc(lev x1scr) x1scr { //MARK:MAKE INNER BLOKS ETC
 			ztile.nm = "water"
 			ztile.img = anm[0].rec
 			ztile.color = rl.DarkBlue
-			ztile.fade = rF32(0.2, 0.5)
-			ztile.rec = rl.NewRectangle(rF32(x, x2), rF32(y, y2), size, size)
-			ztile.img2 = splat[rInt(0, len(splat))]
+			ztile.fade = RandF32(0.2, 0.5)
+			ztile.rec = rl.NewRectangle(RandF32(x, x2), RandF32(y, y2), size, size)
+			ztile.img2 = splat[RandInt(0, len(splat))]
 			ztile.rec2 = ztile.rec
 			ztile.rec2.X -= b / 2
 			ztile.rec2.Y -= b / 2
@@ -35243,7 +35242,7 @@ func makeinnerbloksetc(lev x1scr) x1scr { //MARK:MAKE INNER BLOKS ETC
 			}
 		}
 		//SPIKE TRAPS
-		if roll6() == 6 {
+		if Roll6() == 6 {
 			x := lev.recs[i].X + b/2
 			y := lev.recs[i].Y + b/2
 			x2 := x + lev.recs[i].Width - (size + b)
@@ -35253,14 +35252,14 @@ func makeinnerbloksetc(lev x1scr) x1scr { //MARK:MAKE INNER BLOKS ETC
 			ztile.img = anm[1].rec
 			ztile.color = rl.White
 			ztile.fade = 1
-			ztile.rec = rl.NewRectangle(rF32(x, x2), rF32(y, y2), size, size)
+			ztile.rec = rl.NewRectangle(RandF32(x, x2), RandF32(y, y2), size, size)
 			if checkaddtilerecInner(ztile.rec, lev) && checkaddetc(ztile.rec, lev) {
 				ztile.cnt = makecnt(ztile.rec)
 				lev.etc = append(lev.etc, ztile)
 			}
 		}
 		//FLAME TRAPS
-		if roll6() == 6 {
+		if Roll6() == 6 {
 			x := lev.recs[i].X + b/2
 			y := lev.recs[i].Y + b/2
 			x2 := x + lev.recs[i].Width - (size + b)
@@ -35270,7 +35269,7 @@ func makeinnerbloksetc(lev x1scr) x1scr { //MARK:MAKE INNER BLOKS ETC
 			ztile.img = anm[2].rec
 			ztile.color = rl.White
 			ztile.fade = 1
-			ztile.rec = rl.NewRectangle(rF32(x, x2), rF32(y, y2), size, size)
+			ztile.rec = rl.NewRectangle(RandF32(x, x2), RandF32(y, y2), size, size)
 			if checkaddtilerecInner(ztile.rec, lev) && checkaddetc(ztile.rec, lev) {
 				ztile.rec2 = ztile.rec
 				ztile.rec2.Height = 32
@@ -35282,15 +35281,15 @@ func makeinnerbloksetc(lev x1scr) x1scr { //MARK:MAKE INNER BLOKS ETC
 	}
 	countbreak := 100
 	for {
-		choose := rInt(1, len(lev.recs))
+		choose := RandInt(1, len(lev.recs))
 		siz := b2 + b/2
 		ztile := xtile{}
 		ztile.nm = "teleporter"
 		ztile.img = anm[88].rec
 		x := lev.recs[choose].X + b
 		y := lev.recs[choose].Y + b
-		x += rF32(0, lev.recs[choose].Width-b-siz)
-		y += rF32(0, lev.recs[choose].Height-b-siz)
+		x += RandF32(0, lev.recs[choose].Width-b-siz)
+		y += RandF32(0, lev.recs[choose].Height-b-siz)
 		ztile.rec = rl.NewRectangle(x, y, siz, siz)
 		canadd := checkaddtilerecInner(ztile.rec, lev)
 		if canadd {
@@ -35430,11 +35429,11 @@ func makelevel() { //MARK:MAKE LEVEL
 	} else if treasureroom {
 		maketreasureroom()
 	} else {
-		floortile = floortiles[rInt(0, len(floortiles))]
-		walltile = walltiles[rInt(0, len(walltiles))]
+		floortile = floortiles[RandInt(0, len(floortiles))]
+		walltile = walltiles[RandInt(0, len(walltiles))]
 		admsg("", rl.White)
 		admsg("entering level "+fmt.Sprint(levNumDis), rl.White)
-		admsg(fmt.Sprint(welcome[rInt(0, len(welcome))]), rl.White)
+		admsg(fmt.Sprint(welcome[RandInt(0, len(welcome))]), rl.White)
 		if xpadded {
 			admsg("+100 xp cleared all enemies", rl.Green)
 			xpadded = false
@@ -35442,7 +35441,7 @@ func makelevel() { //MARK:MAKE LEVEL
 		//CENTER ROOM
 		zlev := x1scr{}
 		min, max := 5, 15
-		numW, numH := rInt(min, max), rInt(min, max)
+		numW, numH := RandInt(min, max), RandInt(min, max)
 		numWo := numW
 		numHo := numH
 		W, H := float32(numW)*b, float32(numH)*b
@@ -35457,45 +35456,45 @@ func makelevel() { //MARK:MAKE LEVEL
 		zlev.inf = append(zlev.inf, zinf)
 		zlev.dbg = append(zlev.dbg, zdbg)
 		//OTHER ROOMS
-		num := rInt(11, 25)
+		num := RandInt(11, 25)
 		numTotal := 1
 		countbreak := 100
 		for {
 			choose := 0
 			if len(zlev.recs) > 1 {
-				choose = rInt(0, len(zlev.recs))
+				choose = RandInt(0, len(zlev.recs))
 				numWo = int(zlev.recs[choose].Width / b)
 				numHo = int(zlev.recs[choose].Height / b)
 			}
 			x := zlev.recs[choose].X
 			y := zlev.recs[choose].Y
-			numW, numH = rInt(min, max), rInt(min, max)
+			numW, numH = RandInt(min, max), RandInt(min, max)
 			W, H = float32(numW)*b, float32(numH)*b
-			side := rInt(1, 5)
+			side := RandInt(1, 5)
 			//side = 3
 			canadd := true
 			switch side {
 			case 1: //UP
 				y -= float32(numH) * b
-				change := rInt(-(numW - 2), numWo-2)
+				change := RandInt(-(numW - 2), numWo-2)
 				x += float32(change) * b
 				rec = rl.NewRectangle(x, y, W, H)
 				canadd = checkrecaddto1scr(rec, zlev.recs)
 			case 2: //RIGHT
 				x += float32(numWo) * b
-				change := rInt(-(numH - 2), numHo-2)
+				change := RandInt(-(numH - 2), numHo-2)
 				y += float32(change) * b
 				rec = rl.NewRectangle(x, y, W, H)
 				canadd = checkrecaddto1scr(rec, zlev.recs)
 			case 3: //DOWN
 				y += float32(numHo) * b
-				change := rInt(-(numW - 2), numWo-2)
+				change := RandInt(-(numW - 2), numWo-2)
 				x += float32(change) * b
 				rec = rl.NewRectangle(x, y, W, H)
 				canadd = checkrecaddto1scr(rec, zlev.recs)
 			case 4: //LEFT
 				x -= float32(numW) * b
-				change := rInt(-(numH - 2), numHo-2)
+				change := RandInt(-(numH - 2), numHo-2)
 				y += float32(change) * b
 				rec = rl.NewRectangle(x, y, W, H)
 				canadd = checkrecaddto1scr(rec, zlev.recs)
@@ -35548,7 +35547,7 @@ func makelevel() { //MARK:MAKE LEVEL
 	levSecs = 0
 
 	if levNumDis > 3 && !treasureroom {
-		if roll12() > 8 {
+		if Roll12() > 8 {
 			makeweaponcrate()
 			rl.PlaySound(audfx[117])
 		}
@@ -35563,7 +35562,7 @@ func makelevel() { //MARK:MAKE LEVEL
 
 	if !bosson && dispMusic == 0 {
 		rl.StopMusicStream(music[currentMusic])
-		currentMusic = rInt(4, len(music))
+		currentMusic = RandInt(4, len(music))
 		rl.PlayMusicStream(music[currentMusic])
 	}
 
@@ -35585,14 +35584,14 @@ func makelevel() { //MARK:MAKE LEVEL
 		rollocomp.rec = rl.NewRectangle(rollocomp.cnt.X-siz2/2, rollocomp.cnt.Y-siz2/2, siz2, siz2)
 		rollocomp.spd = 4
 		for {
-			rollocomp.dirX = rF32(-rollocomp.spd, rollocomp.spd)
-			if getabs(rollocomp.dirX) > rollocomp.spd/3 {
+			rollocomp.dirX = RandF32(-rollocomp.spd, rollocomp.spd)
+			if Abs(rollocomp.dirX) > rollocomp.spd/3 {
 				break
 			}
 		}
 		for {
-			rollocomp.dirY = rF32(-rollocomp.spd, rollocomp.spd)
-			if getabs(rollocomp.dirY) > rollocomp.spd/3 {
+			rollocomp.dirY = RandF32(-rollocomp.spd, rollocomp.spd)
+			if Abs(rollocomp.dirY) > rollocomp.spd/3 {
 				break
 			}
 		}
@@ -35603,7 +35602,7 @@ func makelevel() { //MARK:MAKE LEVEL
 func makeweaponcrate() { //MARK:MAKE WEAPON CRATE
 
 	levels[levNum].weapcrate = xweapcrate{}
-	levels[levNum].weapcrate.weapnum = rInt(1, len(weap))
+	levels[levNum].weapcrate.weapnum = RandInt(1, len(weap))
 	levels[levNum].weapcrate.i.img = etc[179]
 	levels[levNum].weapcrate.i.rec = pl.rec
 	levels[levNum].weapcrate.i.rec.X -= 10
@@ -35623,7 +35622,7 @@ func makeexit() bool { //MARK:MAKE EXIT
 	for {
 		siz := b
 		ztile := xtile{}
-		num := rInt(1, len(levels[levNum].recs))
+		num := RandInt(1, len(levels[levNum].recs))
 		choose := levels[levNum].recs[num]
 		cntr := makecnt(choose)
 		ztile.rec = rl.NewRectangle(cntr.X-siz/2, cntr.Y-siz/2, siz, siz)
@@ -35652,12 +35651,12 @@ func makeexit() bool { //MARK:MAKE EXIT
 }
 func makemushroomsink() { //MARK:MAKE MUSHROOMS PAPER INK
 	//MUSHROOMS
-	num := rInt(2, 8)
+	num := RandInt(2, 8)
 	countbreak := 100
 	for num > 0 {
 		siz := b / 2
 		zitm := xitm{}
-		choose := rInt(1, 7)
+		choose := RandInt(1, 7)
 		switch choose {
 		case 1:
 			zitm = itmlist[105]
@@ -35692,12 +35691,12 @@ func makemushroomsink() { //MARK:MAKE MUSHROOMS PAPER INK
 		}
 	}
 	//PAPER INK
-	num = rInt(1, 5)
+	num = RandInt(1, 5)
 	countbreak = 100
 	for num > 0 {
 		siz := b / 2
 		zitm := xitm{}
-		choose := rInt(1, 3)
+		choose := RandInt(1, 3)
 		switch choose {
 		case 1:
 			zitm = itmlist[111]
@@ -35726,14 +35725,14 @@ func makemushroomsink() { //MARK:MAKE MUSHROOMS PAPER INK
 }
 func makerocks() { //MARK:MAKE ROCKS
 	for i := 0; i < len(levels[levNum].recs); i++ {
-		if roll6() > 5 {
+		if Roll6() > 5 {
 			countbreak := 100
 			for {
-				siz := rF32(be7, b+bq3)
+				siz := RandF32(be7, b+bq3)
 				x := levels[levNum].recs[i].X + b/2
 				y := levels[levNum].recs[i].Y + b/2
-				x += rF32(0, levels[levNum].recs[i].Width-siz-b)
-				y += rF32(0, levels[levNum].recs[i].Height-siz-b)
+				x += RandF32(0, levels[levNum].recs[i].Width-siz-b)
+				y += RandF32(0, levels[levNum].recs[i].Height-siz-b)
 				rec := rl.NewRectangle(x, y, siz, siz)
 				canadd := checkRecWalls(rec)
 				if canadd {
@@ -35744,7 +35743,7 @@ func makerocks() { //MARK:MAKE ROCKS
 				}
 				if canadd {
 					ztile := xtile{}
-					ztile.img = rocksI[rInt(0, len(rocksI))]
+					ztile.img = rocksI[RandInt(0, len(rocksI))]
 					ztile.rec = rec
 					ztile.color = rl.White
 					ztile.fade = 1
@@ -35761,7 +35760,7 @@ func makerocks() { //MARK:MAKE ROCKS
 	}
 }
 func makeswitches(lev x1scr) x1scr { //MARK:MAKE SWITCHES
-	num := rInt(1, 5)
+	num := RandInt(1, 5)
 	countbreak := 100
 	siz := b / 2
 	ztile := xtile{}
@@ -35770,23 +35769,23 @@ func makeswitches(lev x1scr) x1scr { //MARK:MAKE SWITCHES
 	ztile.fade = 1
 	ztile.T = fps * 3
 	for num > 0 {
-		ztile.numType = rInt(1, 7)
+		ztile.numType = RandInt(1, 7)
 		if ztile.numType == 4 {
 			ztile.T = fps * 30
 		}
-		chooseImg := rInt(1, 3)
+		chooseImg := RandInt(1, 3)
 		switch chooseImg {
 		case 1:
 			ztile.img = etc[132]
 		case 2:
 			ztile.img = etc[134]
 		}
-		choose := rInt(0, len(lev.recs))
+		choose := RandInt(0, len(lev.recs))
 		rec2 := lev.recs[choose]
 		x := rec2.X + b + b/2
 		y := rec2.Y + b + b/2
-		x += rF32(0, rec2.Width-b3-siz)
-		y += rF32(0, rec2.Height-b3-siz)
+		x += RandF32(0, rec2.Width-b3-siz)
+		y += RandF32(0, rec2.Height-b3-siz)
 		ztile.rec = rl.NewRectangle(x, y, siz, siz)
 		canadd := checkaddtilerecInner(ztile.rec, lev)
 		if canadd {
@@ -35806,9 +35805,9 @@ func makeswitches(lev x1scr) x1scr { //MARK:MAKE SWITCHES
 	return lev
 }
 func makeswitchesTreasureRoom(lev x1scr, num2 int) x1scr { //MARK:MAKE SWITCHES TREASURE ROOM
-	num := rInt(30, 41)
+	num := RandInt(30, 41)
 	if num2 == 1 {
-		num = rInt(15, 21)
+		num = RandInt(15, 21)
 	}
 	countbreak := 500
 	siz := b / 2
@@ -35818,26 +35817,26 @@ func makeswitchesTreasureRoom(lev x1scr, num2 int) x1scr { //MARK:MAKE SWITCHES 
 	ztile.fade = 1
 	ztile.T = fps * 3
 	for num > 0 {
-		ztile.numType = rInt(1, 7)
+		ztile.numType = RandInt(1, 7)
 		if ztile.numType == 4 {
 			ztile.T = fps * 30
 		}
-		chooseImg := rInt(1, 3)
+		chooseImg := RandInt(1, 3)
 		switch chooseImg {
 		case 1:
 			ztile.img = etc[132]
 		case 2:
 			ztile.img = etc[134]
 		}
-		choose := rInt(0, len(lev.recs))
-		if roll6() > 3 {
+		choose := RandInt(0, len(lev.recs))
+		if Roll6() > 3 {
 			choose = 0
 		}
 		rec2 := lev.recs[choose]
 		x := rec2.X + b + b/2
 		y := rec2.Y + b + b/2
-		x += rF32(0, rec2.Width-b3-siz)
-		y += rF32(0, rec2.Height-b3-siz)
+		x += RandF32(0, rec2.Width-b3-siz)
+		y += RandF32(0, rec2.Height-b3-siz)
 		ztile.rec = rl.NewRectangle(x, y, siz, siz)
 		canadd := checkaddtilerecInner(ztile.rec, lev)
 		if canadd {
@@ -35871,8 +35870,8 @@ func makeleveltiles(lev x1scr) x1scr { //MARK:MAKE LEVEL TILES
 		ztile.fade = 0.1
 		ztile.color = rl.White
 		for {
-			ztile.fade = rF32(0.04, 0.08)
-			ztile.col2 = ranCol()
+			ztile.fade = RandF32(0.04, 0.08)
+			ztile.col2 = RandColor()
 			ztile.rec = rl.NewRectangle(x, y, size, size)
 			lev.floors = append(lev.floors, ztile)
 			x += size
@@ -35893,14 +35892,14 @@ func makeleveltiles(lev x1scr) x1scr { //MARK:MAKE LEVEL TILES
 		x := lev.recs[i].X
 		y := lev.recs[i].Y - size
 		for x < lev.recs[i].X+lev.recs[i].Width {
-			ztile.fade = rF32(0.3, 0.9)
-			ztile.col2 = ranCol()
+			ztile.fade = RandF32(0.3, 0.9)
+			ztile.col2 = RandColor()
 			ztile.rec = rl.NewRectangle(x, y, size, size)
 			if checkaddtilerec(ztile.rec, lev) {
 				lev.walls = append(lev.walls, ztile)
 			}
-			ztile.fade = rF32(0.3, 0.9)
-			ztile.col2 = ranCol()
+			ztile.fade = RandF32(0.3, 0.9)
+			ztile.col2 = RandColor()
 			ztile.rec.Y += lev.recs[i].Height + size
 			if checkaddtilerec(ztile.rec, lev) {
 				lev.walls = append(lev.walls, ztile)
@@ -35911,14 +35910,14 @@ func makeleveltiles(lev x1scr) x1scr { //MARK:MAKE LEVEL TILES
 		x = lev.recs[i].X - size
 		y = lev.recs[i].Y - size
 		for y <= lev.recs[i].Y+lev.recs[i].Height {
-			ztile.fade = rF32(0.3, 0.9)
-			ztile.col2 = ranCol()
+			ztile.fade = RandF32(0.3, 0.9)
+			ztile.col2 = RandColor()
 			ztile.rec = rl.NewRectangle(x, y, size, size)
 			if checkaddtilerec(ztile.rec, lev) {
 				lev.walls = append(lev.walls, ztile)
 			}
-			ztile.fade = rF32(0.3, 0.9)
-			ztile.col2 = ranCol()
+			ztile.fade = RandF32(0.3, 0.9)
+			ztile.col2 = RandColor()
 			ztile.rec.X += lev.recs[i].Width + size
 			if checkaddtilerec(ztile.rec, lev) {
 				lev.walls = append(lev.walls, ztile)
@@ -35938,12 +35937,12 @@ func makeleveltiles(lev x1scr) x1scr { //MARK:MAKE LEVEL TILES
 	//REMOVE TWICE SEEMS TO MISS SOME WHEN ONLY ONCE
 	for i := 0; i < len(lev.walls); i++ {
 		if lev.walls[i].off {
-			lev.walls = remtile(lev.walls, i)
+			lev.walls = RemoveTile(lev.walls, i)
 		}
 	}
 	for i := 0; i < len(lev.walls); i++ {
 		if lev.walls[i].off {
-			lev.walls = remtile(lev.walls, i)
+			lev.walls = RemoveTile(lev.walls, i)
 		}
 	}
 	//REMOVE DOUBLE WALL BLOCKS
@@ -35963,7 +35962,7 @@ func makedoor(side int, preRec, rec rl.Rectangle) rl.Rectangle { //MARK:MAKE DOO
 				x2 = preRec.X + preRec.Width
 			}
 			numbloks := int((x2-x)/b) - 1
-			x += float32(rInt(0, numbloks)) * b
+			x += float32(RandInt(0, numbloks)) * b
 			door = rl.NewRectangle(x, preRec.Y-siz*2, siz*2, siz*3)
 		} else {
 			x := preRec.X
@@ -35972,7 +35971,7 @@ func makedoor(side int, preRec, rec rl.Rectangle) rl.Rectangle { //MARK:MAKE DOO
 				x2 = preRec.X + preRec.Width
 			}
 			numbloks := int((x2-x)/b) - 1
-			x += float32(rInt(0, numbloks)) * b
+			x += float32(RandInt(0, numbloks)) * b
 			door = rl.NewRectangle(x, preRec.Y-siz*2, siz*2, siz*3)
 		}
 	case 2: //RIGHT
@@ -35983,7 +35982,7 @@ func makedoor(side int, preRec, rec rl.Rectangle) rl.Rectangle { //MARK:MAKE DOO
 				y2 = preRec.Y + preRec.Height
 			}
 			numbloks := int((y2-y)/b) - 1
-			y += float32(rInt(0, numbloks)) * b
+			y += float32(RandInt(0, numbloks)) * b
 			door = rl.NewRectangle(rec.X-siz, y, siz*3, siz*2)
 		} else {
 			y := preRec.Y
@@ -35992,7 +35991,7 @@ func makedoor(side int, preRec, rec rl.Rectangle) rl.Rectangle { //MARK:MAKE DOO
 				y2 = preRec.Y + preRec.Height
 			}
 			numbloks := int((y2-y)/b) - 1
-			y += float32(rInt(0, numbloks)) * b
+			y += float32(RandInt(0, numbloks)) * b
 			door = rl.NewRectangle(rec.X-siz, y, siz*3, siz*2)
 		}
 	case 3: //DOWN
@@ -36003,7 +36002,7 @@ func makedoor(side int, preRec, rec rl.Rectangle) rl.Rectangle { //MARK:MAKE DOO
 				x2 = preRec.X + preRec.Width
 			}
 			numbloks := int((x2-x)/b) - 1
-			x += float32(rInt(0, numbloks)) * b
+			x += float32(RandInt(0, numbloks)) * b
 			door = rl.NewRectangle(x, preRec.Y+preRec.Height-siz, siz*2, siz*3)
 		} else {
 			x := preRec.X
@@ -36012,7 +36011,7 @@ func makedoor(side int, preRec, rec rl.Rectangle) rl.Rectangle { //MARK:MAKE DOO
 				x2 = preRec.X + preRec.Width
 			}
 			numbloks := int((x2-x)/b) - 1
-			x += float32(rInt(0, numbloks)) * b
+			x += float32(RandInt(0, numbloks)) * b
 			door = rl.NewRectangle(x, preRec.Y+preRec.Height-siz, siz*2, siz*3)
 		}
 	case 4: //LEFT
@@ -36023,7 +36022,7 @@ func makedoor(side int, preRec, rec rl.Rectangle) rl.Rectangle { //MARK:MAKE DOO
 				y2 = preRec.Y + preRec.Height
 			}
 			numbloks := int((y2-y)/b) - 1
-			y += float32(rInt(0, numbloks)) * b
+			y += float32(RandInt(0, numbloks)) * b
 			door = rl.NewRectangle(preRec.X-siz*2, y, siz*3, siz*2)
 		} else {
 			y := preRec.Y
@@ -36032,7 +36031,7 @@ func makedoor(side int, preRec, rec rl.Rectangle) rl.Rectangle { //MARK:MAKE DOO
 				y2 = preRec.Y + preRec.Height
 			}
 			numbloks := int((y2-y)/b) - 1
-			y += float32(rInt(0, numbloks)) * b
+			y += float32(RandInt(0, numbloks)) * b
 			door = rl.NewRectangle(preRec.X-siz*2, y, siz*3, siz*2)
 		}
 	}
@@ -36042,17 +36041,17 @@ func makebgpix() { //MARK:MAKE BG PIX
 
 	bgpix = nil
 	spd := b / 2
-	dirX := rF32(-spd, spd)
-	dirY := rF32(-spd, spd)
+	dirX := RandF32(-spd, spd)
+	dirY := RandF32(-spd, spd)
 	num := 100
 	for num > 0 {
 		z := xbgpix{}
-		z.col = ranCol()
-		z.siz = rF32(2, 5)
+		z.col = RandColor()
+		z.siz = RandF32(2, 5)
 		z.dirX = dirX
 		z.dirY = dirY
-		z.fd = rF32(0.5, 1)
-		z.v2 = rl.NewVector2(rF32(0, scrWF32), rF32(0, scrHF32))
+		z.fd = RandF32(0.5, 1)
+		z.v2 = rl.NewVector2(RandF32(0, scrWF32), RandF32(0, scrHF32))
 		bgpix = append(bgpix, z)
 		num--
 	}
@@ -36080,23 +36079,23 @@ func makescan() { //MARK:MAKE SCAN LINES
 func makeintroexitbg() { //MARK:MAKE INTRO EXIT BACKGROUND
 
 	introbg = nil
-	introbgimgnum = rInt(1, 5)
+	introbgimgnum = RandInt(1, 5)
 	num := 20
 	for num > 0 {
 		zbg := xbgpix{}
 		zbg.fd = 0.15
 		zbg.spd = 2
 		zbg.dirX = zbg.spd
-		if flipcoin() {
+		if FlipCoin() {
 			zbg.dirX *= -1
 		}
 		zbg.dirY = zbg.spd
-		if flipcoin() {
+		if FlipCoin() {
 			zbg.dirY *= -1
 		}
-		zbg.col = brightPink()
+		zbg.col = BrightPink()
 		zbg.siz = b4
-		zbg.v2 = rl.NewVector2(rF32(0, scrWF32), rF32(0, scrHF32))
+		zbg.v2 = rl.NewVector2(RandF32(0, scrWF32), RandF32(0, scrHF32))
 		introbg = append(introbg, zbg)
 		num--
 	}
@@ -36133,14 +36132,14 @@ func makeinitial() { //MARK:MAKE INITIAL
 	rollocomp.rec = rl.NewRectangle(rollocomp.cnt.X-siz2/2, rollocomp.cnt.Y-siz2/2, siz2, siz2)
 	rollocomp.spd = 4
 	for {
-		rollocomp.dirX = rF32(-rollocomp.spd, rollocomp.spd)
-		if getabs(rollocomp.dirX) > rollocomp.spd/3 {
+		rollocomp.dirX = RandF32(-rollocomp.spd, rollocomp.spd)
+		if Abs(rollocomp.dirX) > rollocomp.spd/3 {
 			break
 		}
 	}
 	for {
-		rollocomp.dirY = rF32(-rollocomp.spd, rollocomp.spd)
-		if getabs(rollocomp.dirY) > rollocomp.spd/3 {
+		rollocomp.dirY = RandF32(-rollocomp.spd, rollocomp.spd)
+		if Abs(rollocomp.dirY) > rollocomp.spd/3 {
 			break
 		}
 	}
@@ -36153,8 +36152,8 @@ func makeinitial() { //MARK:MAKE INITIAL
 	batcomp.rec = rl.NewRectangle(batcomp.cnt.X-siz2/2, batcomp.cnt.Y-siz2/2, siz2, siz2)
 	batcomp.moveChangeT = fps * 3
 	batcomp.spd = 2
-	batcomp.dirX = rF32(-batcomp.spd, batcomp.spd)
-	batcomp.dirY = rF32(-batcomp.spd, batcomp.spd)
+	batcomp.dirX = RandF32(-batcomp.spd, batcomp.spd)
+	batcomp.dirY = RandF32(-batcomp.spd, batcomp.spd)
 	batcomp.atkT = fps * 7
 
 	//RESOLUTION LISTS
@@ -38270,7 +38269,7 @@ func inp() { //MARK:INP
 		}
 		mouseoff = true
 		change := rl.GetGamepadAxisMovement(0, 2)
-		if getabs(change) > deadZ {
+		if Abs(change) > deadZ {
 			change *= 100
 			change *= stickMov
 			gameCursor.X += change + delta
@@ -38290,7 +38289,7 @@ func inp() { //MARK:INP
 		}
 		mouseoff = true
 		change := rl.GetGamepadAxisMovement(0, 3)
-		if getabs(change) > deadZ {
+		if Abs(change) > deadZ {
 			change *= 100
 			change *= stickMov
 			gameCursor.Y += change + delta
@@ -38555,10 +38554,10 @@ func timers() { //MARK:TIMERS
 				zproj.fd = 1
 				zproj.col = rl.White
 				projPL = append(projPL, zproj)
-				if roll6() > 2 {
+				if Roll6() > 2 {
 					zproj.dirY = zproj.spd
-					if flipcoin() {
-						if flipcoin() {
+					if FlipCoin() {
+						if FlipCoin() {
 							zproj.dirX = zproj.spd / 4
 						} else {
 							zproj.dirX -= zproj.spd / 4
@@ -38566,10 +38565,10 @@ func timers() { //MARK:TIMERS
 					}
 					projPL = append(projPL, zproj)
 				}
-				if roll6() > 2 {
+				if Roll6() > 2 {
 					zproj.dirY = -zproj.spd
-					if flipcoin() {
-						if flipcoin() {
+					if FlipCoin() {
+						if FlipCoin() {
 							zproj.dirX = zproj.spd / 4
 						} else {
 							zproj.dirX -= zproj.spd / 4
@@ -38597,7 +38596,7 @@ func timers() { //MARK:TIMERS
 		if fartT > 0 {
 			fartT--
 			if fartT%30 == 0 {
-				choose := rInt(1, 5)
+				choose := RandInt(1, 5)
 				switch choose {
 				case 1:
 					rl.PlaySound(audfx[98])
@@ -38616,9 +38615,9 @@ func timers() { //MARK:TIMERS
 				zproj.col = rl.White
 				zproj.fd = 1
 				zproj.spd = 4
-				zproj.ro = angl2points(pl.cnt, cursorV2cam) + 180
-				xdiff := absdiff(pl.cnt.X, cursorV2cam.X)
-				ydiff := absdiff(pl.cnt.Y, cursorV2cam.Y)
+				zproj.ro = AngleBetweenTwoPoints(pl.cnt, cursorV2cam) + 180
+				xdiff := AbsDiff(pl.cnt.X, cursorV2cam.X)
+				ydiff := AbsDiff(pl.cnt.Y, cursorV2cam.Y)
 				if xdiff > ydiff {
 					zproj.dirX = zproj.spd
 					zproj.dirY = ydiff / (xdiff / zproj.dirX)
@@ -38681,14 +38680,14 @@ func timers() { //MARK:TIMERS
 				zproj.cnt = makecnt(zproj.rec)
 				zproj.fd = 1
 				zproj.col = rl.White
-				zproj.rospd = rF32(2, 4)
-				if flipcoin() {
+				zproj.rospd = RandF32(2, 4)
+				if FlipCoin() {
 					zproj.rospd = -zproj.rospd
 				}
 				zproj.dmg = 1
 				zproj.spd = 4
-				zproj.dirX = rF32(-zproj.spd, zproj.spd)
-				zproj.dirY = rF32(-zproj.spd, zproj.spd)
+				zproj.dirX = RandF32(-zproj.spd, zproj.spd)
+				zproj.dirY = RandF32(-zproj.spd, zproj.spd)
 				zproj.nm = "poisongas"
 				projPL = append(projPL, zproj)
 				gasmaskT = fps*8 - (gasmasknum * fps)
@@ -38832,7 +38831,7 @@ func timers() { //MARK:TIMERS
 		if toxic {
 			if frames%int(fps*3) == 0 {
 				zfx := xfx{}
-				zfx.img = splat[rInt(0, len(splat))]
+				zfx.img = splat[RandInt(0, len(splat))]
 				zfx.nm = "toxic"
 				zfx.rec = pl.rec
 				zfx.rec.X -= b
@@ -39059,7 +39058,7 @@ func initialWindow() { //MARK:INITIAL WINDOW
 	makelevel()
 	makePotionList()
 	makeScrollList()
-	readsaves()
+	ReadSaves()
 
 	if rl.IsGamepadAvailable(0) {
 		controllerINITIAL = true
@@ -39073,7 +39072,7 @@ func initialWindow() { //MARK:INITIAL WINDOW
 	musicon = true
 	//rl.SetMasterVolume(0)
 
-	exitmsg = exitTxt[rInt(0, len(exitTxt))]
+	exitmsg = exitTxt[RandInt(0, len(exitTxt))]
 
 	scanlines = true
 	pixels = true
@@ -39270,192 +39269,4 @@ func main() { //MARK:MAIN
 	unload() //UNLOAD
 	rl.CloseAudioDevice()
 	rl.CloseWindow()
-}
-
-// HELPERS
-func dist2points(v1, v2 rl.Vector2) float32 { //DISTANCE LINE LENGTH BETWEN TWO POINTS
-	dx := v2.X - v1.X
-	dy := v2.Y - v1.Y
-	return float32(math.Sqrt(float64(dx*dx + dy*dy)))
-}
-func pointonLine(v1, v2 rl.Vector2, dist float32) rl.Vector2 {
-	directionVector := rl.NewVector2(v2.X-v1.X, v2.Y-v1.Y)
-	length := math.Sqrt(float64(directionVector.X*directionVector.X + directionVector.Y*directionVector.Y))
-	normalizedVector := rl.NewVector2(directionVector.X/float32(length), directionVector.Y/float32(length))
-	v3 := rl.NewVector2(v1.X+normalizedVector.X*dist, v1.Y+normalizedVector.X*dist)
-	return v3
-}
-func mirrorAngl(angle float32) float32 { //ADD +90 +45 ETC TO CORRECT
-	mirroredAngle := 180 - angle
-	if mirroredAngle < 0 {
-		mirroredAngle += 360
-	}
-	return mirroredAngle
-}
-func pointOnCirc(radius, angl float32, cntr rl.Vector2) rl.Vector2 {
-	angleInRadians := float64(angl * math.Pi / 180.0)
-	x := float32(float64(radius)*math.Cos(angleInRadians) + float64(cntr.X))
-	y := float32(float64(radius)*math.Sin(angleInRadians) + float64(cntr.Y))
-	return rl.NewVector2(x, y)
-}
-func findRadius(cntr, v2 rl.Vector2) float32 {
-	x := v2.X - cntr.X
-	y := v2.Y - cntr.Y
-	radius := math.Sqrt(float64(x*x) + float64(y*y))
-	return float32(radius)
-}
-func angl2points(v1, v2 rl.Vector2) float32 {
-	deltaX := float64(v2.X) - float64(v1.X)
-	deltaY := float64(v2.Y) - float64(v1.Y)
-	radians := math.Atan2(deltaY, deltaX)
-	degrees := (radians * 180) / math.Pi
-	for degrees >= 360 {
-		degrees -= 360
-	}
-	for degrees < 0 {
-		degrees += 360
-	}
-	return float32(degrees)
-}
-func absdiff(num1, num2 float32) float32 {
-	num := float32(0)
-	if num1 == num2 {
-		num = 0
-	} else {
-		if num1 <= 0 && num2 <= 0 {
-			num1 = getabs(num1)
-			num2 = getabs(num2)
-			if num1 > num2 {
-				num = num1 - num2
-			} else {
-				num = num2 - num1
-			}
-		} else if num1 <= 0 && num2 >= 0 {
-			num = num2 + getabs(num1)
-		} else if num2 <= 0 && num1 >= 0 {
-			num = num1 + getabs(num2)
-		} else if num2 >= 0 && num1 >= 0 {
-			if num1 > num2 {
-				num = num1 - num2
-			} else {
-				num = num2 - num1
-			}
-		}
-	}
-	return num
-}
-func getabs(value float32) float32 {
-	value2 := float64(value)
-	value = float32(math.Abs(value2))
-	return value
-}
-func remitm(slice []xitm, s int) []xitm {
-	return append(slice[:s], slice[s+1:]...)
-}
-func remweap(slice []xweap, s int) []xweap {
-	return append(slice[:s], slice[s+1:]...)
-}
-func remtile(slice []xtile, s int) []xtile {
-	return append(slice[:s], slice[s+1:]...)
-}
-func remfx(slice []xfx, s int) []xfx {
-	return append(slice[:s], slice[s+1:]...)
-}
-func remenm(slice []xenm, s int) []xenm {
-	return append(slice[:s], slice[s+1:]...)
-}
-func remrec(slice []rl.Rectangle, s int) []rl.Rectangle {
-	return append(slice[:s], slice[s+1:]...)
-}
-func flipcoin() bool {
-	onoff := false
-	choose := rInt(0, 100001)
-	if choose > 50000 {
-		onoff = true
-	}
-	return onoff
-}
-func roll6() int {
-	return rInt(1, 7)
-}
-func roll12() int {
-	return rInt(1, 13)
-}
-func roll18() int {
-	return rInt(1, 19)
-}
-func roll24() int {
-	return rInt(1, 25)
-}
-func roll30() int {
-	return rInt(1, 31)
-}
-func roll36() int {
-	return rInt(1, 37)
-}
-func rInt(min, max int) int {
-	return min + rand.Intn(max-min)
-}
-func rI32(min, max int) int32 {
-	return int32(min + rand.Intn(max-min))
-}
-func rF32(min, max float32) float32 {
-	min2 := float64(min)
-	max2 := float64(max)
-	return float32(min2 + rand.Float64()*(max2-min2))
-}
-
-func brightPink() rl.Color {
-	return rl.NewColor(uint8(255), uint8(0), uint8(130), 255)
-}
-func red1() rl.Color {
-	return rl.NewColor(uint8(237), uint8(29), uint8(36), 255)
-}
-func brightYellow() rl.Color {
-	return rl.NewColor(uint8(255), uint8(240), uint8(31), 255)
-}
-func ranCol() rl.Color {
-	return rl.NewColor(uint8(rInt(0, 256)), uint8(rInt(0, 256)), uint8(rInt(0, 256)), 255)
-}
-func ranDarkGreen() rl.Color {
-	return rl.NewColor(uint8(rInt(0, 30)), uint8(rInt(40, 90)), uint8(rInt(0, 40)), 255)
-}
-func ranGreen() rl.Color {
-	return rl.NewColor(uint8(rInt(0, 60)), uint8(rInt(140, 256)), uint8(rInt(0, 60)), 255)
-}
-func ranRed() rl.Color {
-	return rl.NewColor(uint8(rInt(140, 256)), uint8(rInt(0, 60)), uint8(rInt(0, 60)), 255)
-}
-func ranPink() rl.Color {
-	return rl.NewColor(uint8(rInt(200, 256)), uint8(rInt(10, 110)), uint8(rInt(130, 180)), 255)
-}
-func ranBlue() rl.Color {
-	return rl.NewColor(uint8(rInt(0, 180)), uint8(rInt(0, 180)), uint8(rInt(140, 256)), 255)
-}
-func ranDarkBlue() rl.Color {
-	return rl.NewColor(uint8(rInt(0, 20)), uint8(rInt(0, 20)), uint8(rInt(100, 160)), 255)
-}
-func ranCyan() rl.Color {
-	return rl.NewColor(uint8(rInt(0, 120)), uint8(rInt(200, 256)), uint8(rInt(150, 256)), 255)
-}
-func ranYellow() rl.Color {
-	return rl.NewColor(uint8(rInt(245, 256)), uint8(rInt(200, 256)), uint8(rInt(0, 100)), 255)
-}
-func ranOrange() rl.Color {
-	return rl.NewColor(uint8(255), uint8(rInt(70, 170)), uint8(rInt(0, 50)), 255)
-}
-func ranBrown() rl.Color {
-	return rl.NewColor(uint8(rInt(100, 150)), uint8(rInt(50, 120)), uint8(rInt(30, 90)), 255)
-}
-func ranGrey() rl.Color {
-	return rl.NewColor(uint8(rInt(170, 220)), uint8(rInt(170, 220)), uint8(rInt(170, 220)), 255)
-}
-func ranDarkGrey() rl.Color {
-	return rl.NewColor(uint8(rInt(90, 120)), uint8(rInt(90, 120)), uint8(rInt(90, 120)), 255)
-}
-func darkRed() rl.Color {
-	return rl.NewColor(uint8(139), uint8(0), uint8(0), 255)
-}
-func darkRed2() rl.Color {
-	return rl.NewColor(uint8(105), uint8(0), uint8(0), 255)
 }
