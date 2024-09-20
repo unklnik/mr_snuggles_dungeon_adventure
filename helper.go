@@ -92,23 +92,28 @@ func RandF32(min, max float32) float32 {
 // Remove functions
 // =========================================================================================================
 
-func RemoveItem(slice []xitm, s int) []xitm {
-	return append(slice[:s], slice[s+1:]...)
+func RemoveItem(items []Item, index int) []Item {
+	return append(items[:index], items[index+1:]...)
 }
-func RemoveWeapon(slice []xweap, s int) []xweap {
-	return append(slice[:s], slice[s+1:]...)
+
+func RemoveWeapon(weapons []Weapon, index int) []Weapon {
+	return append(weapons[:index], weapons[index+1:]...)
 }
-func RemoveTile(slice []xtile, s int) []xtile {
-	return append(slice[:s], slice[s+1:]...)
+
+func RemoveTile(tiles []Tile, index int) []Tile {
+	return append(tiles[:index], tiles[index+1:]...)
 }
-func RemoveFx(slice []xfx, s int) []xfx {
-	return append(slice[:s], slice[s+1:]...)
+
+func RemoveEffects(effects []Effect, index int) []Effect {
+	return append(effects[:index], effects[index+1:]...)
 }
-func RemoveEnemy(slice []xenm, s int) []xenm {
-	return append(slice[:s], slice[s+1:]...)
+
+func RemoveEnemy(enemies []Enemy, index int) []Enemy {
+	return append(enemies[:index], enemies[index+1:]...)
 }
-func RemoveRectangle(slice []rl.Rectangle, s int) []rl.Rectangle {
-	return append(slice[:s], slice[s+1:]...)
+
+func RemoveRectangle(rectangles []rl.Rectangle, index int) []rl.Rectangle {
+	return append(rectangles[:index], rectangles[index+1:]...)
 }
 
 //=========================================================================================================
@@ -225,4 +230,8 @@ func DarkRed() rl.Color {
 
 func DarkRed2() rl.Color {
 	return rl.NewColor(105, 0, 0, 255)
+}
+
+func ShadowColor() rl.Color {
+	return rl.Fade(rl.Black, 0.7)
 }
